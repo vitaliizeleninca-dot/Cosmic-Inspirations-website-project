@@ -18,8 +18,36 @@ export const handleOpenSeaCollection: RequestHandler = async (req, res) => {
       fullUrl = `https://${url}`;
     }
 
+    // Determine platform and handle accordingly
+    const isOpenSea = fullUrl.includes("opensea.io");
+    const isObjkt = fullUrl.includes("objkt.com");
+
+    if (!isOpenSea && !isObjkt) {
+      res.status(400).json({
+        success: false,
+        error: "URL must be from OpenSea (opensea.io) or Objkt (objkt.com)",
+      });
+      return;
+    }
+
+    if (isOpenSea) {
+      await handleOpenSeaUrl(fullUrl, res);
+    } else if (isObjkt) {
+      await handleObjktUrl(fullUrl, res);
+    }
+  } catch (error) {
+    console.error("Error in collection endpoint:", error);
+    res.status(500).json({
+      success: false,
+      error:
+        error instanceof Error ? error.message : "Internal server error",
+    });
+  }
+};
+
+async function handleOpenSeaUrl(fullUrl: string, res: any): Promise<void> {
+  try {
     // Extract collection slug from OpenSea URL
-    // Example: https://opensea.io/collection/cosmic-inspirations-master-study-sketches
     const collectionMatch = fullUrl.match(/opensea\.io\/collection\/([a-z0-9\-]+)/i);
     if (!collectionMatch) {
       res.status(400).json({
@@ -41,64 +69,142 @@ export const handleOpenSeaCollection: RequestHandler = async (req, res) => {
         },
       });
 
-      if (!response.ok) {
-        // If OpenSea API fails, try fetching og:image from the URL directly
-        const pageResponse = await fetch(fullUrl, {
-          headers: {
-            "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
-          },
+      if (response.ok) {
+        const data = await response.json();
+        const imageUrl = data.image_url || data.imageUrl || null;
+
+        if (imageUrl) {
+          res.json({
+            success: true,
+            imageUrl,
+            collectionUrl: fullUrl,
+            collectionName: data.name || collectionSlug,
+          });
+          return;
+        }
+      }
+    } catch (apiErr) {
+      console.warn("OpenSea API not available, trying og:image fallback:", apiErr);
+    }
+
+    // Fallback: try fetching og:image from the URL directly
+    const pageResponse = await fetch(fullUrl, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
+      },
+    });
+
+    if (pageResponse.ok) {
+      const html = await pageResponse.text();
+      const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
+      
+      if (ogImageMatch && ogImageMatch[1]) {
+        res.json({
+          success: true,
+          imageUrl: ogImageMatch[1],
+          collectionUrl: fullUrl,
         });
+        return;
+      }
+    }
 
-        if (pageResponse.ok) {
-          const html = await pageResponse.text();
-          const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
+    res.status(404).json({
+      success: false,
+      error: "Could not retrieve image from OpenSea collection",
+    });
+  } catch (error) {
+    console.error("Error fetching OpenSea data:", error);
+    res.status(500).json({
+      success: false,
+      error:
+        error instanceof Error ? error.message : "Failed to fetch OpenSea collection image",
+    });
+  }
+}
 
-          if (ogImageMatch && ogImageMatch[1]) {
+async function handleObjktUrl(fullUrl: string, res: any): Promise<void> {
+  try {
+    // Extract contract address from Objkt URL
+    // Example: https://objkt.com/collections/KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ
+    const contractMatch = fullUrl.match(/objkt\.com\/collections\/([a-zA-Z0-9]+)/i);
+    if (!contractMatch) {
+      res.status(400).json({
+        success: false,
+        error: "Invalid Objkt collection URL format",
+      });
+      return;
+    }
+
+    const contractAddress = contractMatch[1];
+
+    try {
+      // Try Objkt API first
+      const apiUrl = `https://api.objkt.com/v3/tokens?contract=${contractAddress}&limit=1`;
+
+      const response = await fetch(apiUrl, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const tokens = Array.isArray(data) ? data : data.tokens || [];
+
+        if (tokens.length > 0) {
+          const token = tokens[0];
+          let imageUrl = token.display_uri || token.thumbnail_uri;
+
+          if (imageUrl) {
+            if (imageUrl.startsWith("ipfs://")) {
+              imageUrl = `https://ipfs.io/ipfs/${imageUrl.replace("ipfs://", "")}`;
+            }
+
             res.json({
               success: true,
-              imageUrl: ogImageMatch[1],
+              imageUrl,
               collectionUrl: fullUrl,
+              collectionName: token.name || contractAddress,
             });
             return;
           }
         }
-
-        throw new Error("Could not retrieve image from OpenSea");
       }
+    } catch (apiErr) {
+      console.warn("Objkt API not available, trying og:image fallback:", apiErr);
+    }
 
-      const data = await response.json();
+    // Fallback: try fetching og:image from the Objkt page
+    const pageResponse = await fetch(fullUrl, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
+      },
+    });
 
-      // Extract image URL from OpenSea API response
-      const imageUrl = data.image_url || data.imageUrl || null;
-
-      if (!imageUrl) {
-        res.status(404).json({
-          success: false,
-          error: "No image found for this collection",
+    if (pageResponse.ok) {
+      const html = await pageResponse.text();
+      const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
+      
+      if (ogImageMatch && ogImageMatch[1]) {
+        res.json({
+          success: true,
+          imageUrl: ogImageMatch[1],
+          collectionUrl: fullUrl,
         });
         return;
       }
-
-      res.json({
-        success: true,
-        imageUrl,
-        collectionUrl: fullUrl,
-        collectionName: data.name || collectionSlug,
-      });
-    } catch (fetchError) {
-      console.error("Error fetching OpenSea data:", fetchError);
-      res.status(500).json({
-        success: false,
-        error:
-          fetchError instanceof Error ? fetchError.message : "Failed to fetch collection image",
-      });
     }
+
+    res.status(404).json({
+      success: false,
+      error: "Could not retrieve image from Objkt collection",
+    });
   } catch (error) {
-    console.error("Error in OpenSea collection endpoint:", error);
+    console.error("Error fetching Objkt data:", error);
     res.status(500).json({
       success: false,
       error:
-        error instanceof Error ? error.message : "Internal server error",
+        error instanceof Error ? error.message : "Failed to fetch Objkt collection image",
     });
   }
-};
+}
