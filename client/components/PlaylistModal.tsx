@@ -196,9 +196,6 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                 </button>
               </div>
 
-              <p className="text-xs text-gray-400 text-center">
-                💡 Button 1: Repeat One ↔ Repeat All | Button 2: Order ↔ Shuffle
-              </p>
             </div>
           ) : (
             <p className="text-gray-400 text-sm">Select a track from the playlist</p>
