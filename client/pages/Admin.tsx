@@ -58,8 +58,10 @@ export default function Admin() {
   const [newAmbientTitle, setNewAmbientTitle] = useState("");
   const [newAmbientUrl, setNewAmbientUrl] = useState("");
 
-  const [playlistLinks, setPlaylistLinks] = useState(["", ""]);
-  const [ambientLinks, setAmbientLinks] = useState(["", ""]);
+  const [cosmicVideos, setCosmicVideos] = useState<string[]>(() => {
+    const saved = localStorage.getItem("cosmic-videos");
+    return saved ? JSON.parse(saved) : ["", "", "", ""];
+  });
 
   // Load tracks from localStorage on mount
   useEffect(() => {
