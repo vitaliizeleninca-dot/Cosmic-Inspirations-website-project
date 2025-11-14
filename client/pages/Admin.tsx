@@ -125,9 +125,9 @@ export default function Admin() {
     return saved ? JSON.parse(saved) : true;
   });
 
-  const [activeFeelCosmosVideos, setActiveFeelCosmosVideos] = useState<boolean>(() => {
-    const saved = localStorage.getItem("feel-cosmos-videos-active");
-    return saved ? JSON.parse(saved) : true;
+  const [activeFeelCosmosVideosList, setActiveFeelCosmosVideosList] = useState<boolean[]>(() => {
+    const saved = localStorage.getItem("feel-cosmos-videos-list-active");
+    return saved ? JSON.parse(saved) : [true, true, true, true];
   });
 
   const [activeFeelCosmosSongs, setActiveFeelCosmosSongs] = useState<boolean>(() => {
