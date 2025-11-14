@@ -44,9 +44,15 @@ export default function Index() {
               NFT Collections
             </a>
           </nav>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <div className="w-px h-6 bg-cosmic-purple/20" />
-            <BackgroundArtSelector />
+            <button
+              onClick={() => setIsBackgroundModalOpen(true)}
+              className="hidden sm:inline-flex px-4 py-2 rounded-lg text-sm font-semibold text-cosmic-dark bg-gradient-to-r from-cosmic-purple to-cosmic-violet hover:from-cosmic-violet hover:to-cosmic-purple transition-all duration-300 hover:cosmic-glow"
+              aria-label="Select cosmic background"
+            >
+              Select Cosmic Background
+            </button>
           </div>
         </div>
       </header>
