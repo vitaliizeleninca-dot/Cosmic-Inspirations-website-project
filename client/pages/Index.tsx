@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Play, Pause, SkipForward, Music, Podcast, Sparkles, Zap } from "lucide-react";
 import Footer from "@/components/Footer";
+import BackgroundArtSelector from "@/components/BackgroundArtSelector";
 
 export default function Index() {
   const [isPlaying, setIsPlaying] = useState(false);
