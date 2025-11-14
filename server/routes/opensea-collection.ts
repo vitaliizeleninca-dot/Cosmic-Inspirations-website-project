@@ -134,7 +134,7 @@ async function handleObjktUrl(fullUrl: string, res: any): Promise<void> {
     let imageUrl: string | null = null;
 
     try {
-      const apiUrl = `https://api.objkt.com/v3/tokens?contract=${contractAddress}&limit=1`;
+      const apiUrl = `https://api.objkt.com/v3/tokens?contract=${contractAddress}&limit=10&offset=0`;
 
       const response = await fetch(apiUrl, {
         headers: {
@@ -147,17 +147,48 @@ async function handleObjktUrl(fullUrl: string, res: any): Promise<void> {
         const data = await response.json();
         const tokens = Array.isArray(data) ? data : data.tokens || [];
 
-        if (tokens.length > 0) {
-          const token = tokens[0];
-          imageUrl = token.display_uri || token.thumbnail_uri;
+        for (const token of tokens) {
+          let url = token.display_uri || token.thumbnail_uri;
 
-          if (imageUrl && imageUrl.startsWith("ipfs://")) {
-            imageUrl = `https://ipfs.io/ipfs/${imageUrl.replace("ipfs://", "")}`;
+          if (url) {
+            if (url.startsWith("ipfs://")) {
+              url = `https://ipfs.io/ipfs/${url.replace("ipfs://", "")}`;
+            }
+            imageUrl = url;
+            break;
           }
         }
       }
     } catch (apiErr) {
-      console.warn("Objkt API not available:", apiErr);
+      console.warn("Objkt API v3 not available, trying v2:", apiErr);
+
+      try {
+        const apiUrl = `https://api.objkt.com/v2/tokens?contract=${contractAddress}&limit=10`;
+        const response = await fetch(apiUrl, {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.result && data.result.length > 0) {
+            for (const token of data.result) {
+              let url = token.display_uri || token.display_thumbnail || token.thumbnail_uri;
+
+              if (url) {
+                if (url.startsWith("ipfs://")) {
+                  url = `https://ipfs.io/ipfs/${url.replace("ipfs://", "")}`;
+                }
+                imageUrl = url;
+                break;
+              }
+            }
+          }
+        }
+      } catch (apiErr2) {
+        console.warn("Objkt API v2 also failed:", apiErr2);
+      }
     }
 
     if (!imageUrl) {
@@ -166,12 +197,13 @@ async function handleObjktUrl(fullUrl: string, res: any): Promise<void> {
           headers: {
             "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
           },
+          timeout: 10000,
         });
 
         if (pageResponse.ok) {
           const html = await pageResponse.text();
           const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
-          
+
           if (ogImageMatch && ogImageMatch[1]) {
             imageUrl = ogImageMatch[1];
           }
