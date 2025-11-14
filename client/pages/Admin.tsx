@@ -467,6 +467,20 @@ export default function Admin() {
     localStorage.setItem("nft-collections", JSON.stringify(updated));
   };
 
+  const saveNftCollectionCustomImage = (index: number, imageUrl: string) => {
+    const updated = [...nftCollectionCustomImages];
+    updated[index] = imageUrl;
+    setNftCollectionCustomImages(updated);
+    localStorage.setItem("nft-collection-custom-images", JSON.stringify(updated));
+  };
+
+  const toggleNftCollectionActive = (index: number, isActive: boolean) => {
+    const updated = [...activeNftCollectionsList];
+    updated[index] = isActive;
+    setActiveNftCollectionsList(updated);
+    localStorage.setItem("nft-collections-list-active", JSON.stringify(updated));
+  };
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
