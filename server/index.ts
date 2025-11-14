@@ -23,6 +23,7 @@ export function createServer() {
   app.get("/api/demo", handleDemo);
   app.get("/api/nft-collection", handleNFTCollection);
   app.get("/api/youtube-duration", handleYouTubeDuration);
+  app.get("/api/opensea-collection", handleOpenSeaCollection);
 
   return app;
 }
