@@ -456,15 +456,6 @@ export default function Admin() {
           </TabsList>
 
           <TabsContent value="ambient" className="mt-8 space-y-8">
-            {/* AI Art Podcast Info */}
-            <div>
-              <h2 className="text-2xl font-bold mb-2 text-cosmic-purple">AI Art Podcast</h2>
-              <p className="text-cosmic-purple text-lg font-semibold mb-4">Legendary Avatars</p>
-              <p className="text-gray-300 mb-6">
-                Dive into conversations with AI-generated legendary avatars from across the cosmos. Explore storytelling, philosophy, and creativity through the eyes of artificial intelligences shaped by the universe.
-              </p>
-            </div>
-
             {/* Podcast Videos Section */}
             <div>
               <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Podcast Episodes Videos</h2>
