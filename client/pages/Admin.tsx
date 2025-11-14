@@ -703,6 +703,7 @@ export default function Admin() {
             {/* NFT Collections Grid Section */}
             <div>
               <h2 className="text-xl font-bold mb-4 text-cosmic-purple">NFT Collections Grid (6 items)</h2>
+              <p className="text-gray-400 text-sm mb-4">Add OpenSea collection links. Images will be fetched automatically from the collection preview.</p>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                 {nftCollections.map((url, index) => (
                   <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
@@ -711,7 +712,7 @@ export default function Admin() {
                       type="text"
                       value={url}
                       onChange={(e) => saveNftCollection(index, e.target.value)}
-                      placeholder="Image URL (e.g., https://example.com/image.jpg)"
+                      placeholder="opensea.io/collection/your-collection-name"
                       className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono"
                     />
                   </div>
