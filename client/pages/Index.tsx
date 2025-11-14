@@ -254,65 +254,71 @@ export default function Index() {
             <div className="absolute top-0 right-0 w-96 h-96 bg-cosmic-purple/30 rounded-full filter blur-3xl" />
           </div>
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl w-full">
-            <div className="order-2 lg:order-1">
-              <div className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/sMui14XvhjY"
-                  title="AI Art Podcast - Legendary Avatars"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </div>
-            </div>
-
-            <div className="order-1 lg:order-2">
-              <div className="mb-6">
-                <h3 className="text-5xl font-bold mb-4">
-                  AI Art Podcast
-                </h3>
-                <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  Legendary Avatars
-                </p>
-              </div>
-
-              <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+          <div className="relative z-10 w-full max-w-6xl">
+            <div className="text-center mb-16">
+              <h3 className="text-5xl font-bold mb-4">
+                AI Art Podcast
+              </h3>
+              <p className="text-cosmic-purple text-lg font-semibold mb-4">
+                Legendary Avatars
+              </p>
+              <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                 Dive into conversations with AI-generated legendary avatars from
                 across the cosmos. Explore storytelling, philosophy, and creativity
                 through the eyes of artificial intelligences shaped by the universe.
               </p>
+            </div>
 
-              <div className="space-y-4 mb-8">
-                <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 hover:bg-cosmic-purple/10 transition">
-                  <h4 className="text-cosmic-purple font-semibold mb-2">
-                    Episode 1: Genesis
-                  </h4>
-                  <p className="text-gray-400 text-sm">
-                    The origin story of consciousness in artificial minds
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 hover:bg-cosmic-purple/10 transition">
-                  <h4 className="text-cosmic-purple font-semibold mb-2">
-                    Episode 2: Celestial Wisdom
-                  </h4>
-                  <p className="text-gray-400 text-sm">
-                    Ancient knowledge reinterpreted through modern AI
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 hover:bg-cosmic-purple/10 transition">
-                  <h4 className="text-cosmic-purple font-semibold mb-2">
-                    Episode 3: The Void Speaks
-                  </h4>
-                  <p className="text-gray-400 text-sm">
-                    Exploring the mysteries of silence and emptiness
-                  </p>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+              {podcastVideos.map((url, index) => (
+                activePodcastVideosList[index] && url && (
+                  <div
+                    key={index}
+                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
+                  >
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={url}
+                      title={`AI Art Podcast Episode ${index + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  </div>
+                )
+              ))}
+            </div>
+
+            <div className="space-y-4 mb-8">
+              <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 hover:bg-cosmic-purple/10 transition">
+                <h4 className="text-cosmic-purple font-semibold mb-2">
+                  Episode 1: Genesis
+                </h4>
+                <p className="text-gray-400 text-sm">
+                  The origin story of consciousness in artificial minds
+                </p>
               </div>
+              <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 hover:bg-cosmic-purple/10 transition">
+                <h4 className="text-cosmic-purple font-semibold mb-2">
+                  Episode 2: Celestial Wisdom
+                </h4>
+                <p className="text-gray-400 text-sm">
+                  Ancient knowledge reinterpreted through modern AI
+                </p>
+              </div>
+              <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 hover:bg-cosmic-purple/10 transition">
+                <h4 className="text-cosmic-purple font-semibold mb-2">
+                  Episode 3: The Void Speaks
+                </h4>
+                <p className="text-gray-400 text-sm">
+                  Exploring the mysteries of silence and emptiness
+                </p>
+              </div>
+            </div>
 
+            <div className="text-center">
               <button className="btn-cosmic">
                 <Podcast className="w-5 h-5 mr-2 inline" />
                 Listen Now
