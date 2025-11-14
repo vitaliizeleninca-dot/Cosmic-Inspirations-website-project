@@ -86,7 +86,7 @@ export default function Admin() {
 
     saveTracks([...tracks, ...newTracks]);
     setBulkTracks(Array(10).fill(null).map(() => ({ title: "", url: "" })));
-    alert(`Добавлено ${newTracks.length} треков!`);
+    alert(`Added ${newTracks.length} tracks!`);
   };
 
   const updateBulkTrack = (index: number, field: "title" | "url", value: string) => {
@@ -135,7 +135,7 @@ export default function Admin() {
             <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
               Admin Panel
             </h1>
-            <p className="text-gray-400">Управление треками плейлиста</p>
+            <p className="text-gray-400">Manage playlist tracks</p>
           </div>
           <Link
             to="/"
@@ -143,17 +143,17 @@ export default function Admin() {
             title="Вернуться на главную"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span>На главную</span>
+            <span>Back to Home</span>
           </Link>
         </div>
 
         {/* Add 10 Tracks Form */}
         <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 mb-8">
           <h2 className="text-xl font-bold mb-2 text-cosmic-purple">
-            Добавить до 10 треков за раз
+            Add up to 10 tracks at once
           </h2>
           <p className="text-sm text-gray-400 mb-4">
-            Добавьте названия треков и YouTube ссылки. Пустые поля будут пропущены.
+            Add track titles and YouTube links. Empty fields will be skipped.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -164,7 +164,7 @@ export default function Admin() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-400 mb-2">
-                    Название
+                    Title
                   </label>
                   <input
                     type="text"
@@ -176,7 +176,7 @@ export default function Admin() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-400 mb-2">
-                    YouTube ссылка
+                    YouTube Link
                   </label>
                   <input
                     type="text"
@@ -195,19 +195,19 @@ export default function Admin() {
             className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:opacity-90 transition"
           >
             <Plus className="w-5 h-5" />
-            Добавить все заполненные треки
+            Add All Filled Tracks
           </button>
         </div>
 
         {/* Tracks List */}
         <div>
           <h2 className="text-xl font-bold mb-4 text-cosmic-purple">
-            Текущие треки ({tracks.length})
+            Current Tracks ({tracks.length})
           </h2>
           <div className="space-y-3">
             {tracks.length === 0 ? (
               <p className="text-gray-500 text-center py-8">
-                Нет добавленных треков. Добавьте первый трек выше.
+                No tracks added yet. Add your first track above.
               </p>
             ) : (
               tracks.map((track) => (
@@ -229,14 +229,14 @@ export default function Admin() {
                           className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded bg-green-600/20 border border-green-600/50 text-green-400 hover:bg-green-600/30 transition text-sm"
                         >
                           <Save className="w-4 h-4" />
-                          Сохранить
+                          Save
                         </button>
                         <button
                           onClick={cancelEdit}
                           className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded bg-gray-600/20 border border-gray-600/50 text-gray-400 hover:bg-gray-600/30 transition text-sm"
                         >
                           <X className="w-4 h-4" />
-                          Отмена
+                          Cancel
                         </button>
                       </div>
                     </div>
@@ -254,14 +254,14 @@ export default function Admin() {
                         <button
                           onClick={() => startEdit(track)}
                           className="p-2 rounded hover:bg-cosmic-purple/20 text-cosmic-purple transition"
-                          title="Редактировать"
+                          title="Edit"
                         >
                           <Edit2 className="w-5 h-5" />
                         </button>
                         <button
                           onClick={() => deleteTrack(track.id)}
                           className="p-2 rounded hover:bg-red-600/20 text-red-400 transition"
-                          title="Удалить"
+                          title="Delete"
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
@@ -277,12 +277,12 @@ export default function Admin() {
         {/* Info */}
         <div className="mt-8 p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
           <p className="text-sm text-gray-400">
-            💡 <strong>Совет:</strong> Все изменения сохраняются автоматически в вашем браузере.
+            💡 <strong>Tip:</strong> All changes are saved automatically in your browser.
           </p>
           <p className="text-xs text-gray-500">
-            • Используйте YouTube ссылки (youtube.com/watch?v=... или youtu.be/...)<br/>
-            • Плеер будет показывать только управление, видео скрыто для экономии трафика<br/>
-            • Звук будет воспроизводиться с полным управлением громкостью
+            • Use YouTube links (youtube.com/watch?v=... or youtu.be/...)<br/>
+            • Player will show only controls, video is hidden to save bandwidth<br/>
+            • Audio will play with full volume control
           </p>
         </div>
       </div>
