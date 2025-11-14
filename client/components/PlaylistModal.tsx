@@ -46,43 +46,46 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     }
   }, []);
 
-  // Track video duration when iframe loads
+  // Fetch video duration from server
   useEffect(() => {
-    if (!isOpen || !currentTrack || !iframeRef.current) return;
+    if (!isOpen || !currentTrack) return;
 
-    // Clear previous timeout
-    if (durationCheckRef.current) clearTimeout(durationCheckRef.current);
+    const videoId = currentTrack.youtubeUrl.match(/\/embed\/([a-zA-Z0-9_-]{11})/)?.[1];
+    if (!videoId) return;
 
-    // Try to get video duration from iframe
-    const checkDuration = () => {
-      const iframe = iframeRef.current;
-      if (!iframe) return;
-
+    const fetchDuration = async () => {
       try {
-        // Try to access duration from iframe's window
-        const duration = (iframe as any).duration;
-        if (duration && duration > 0) {
-          setVideoDuration(Math.ceil(duration));
-          return;
+        const response = await fetch(`/api/youtube-duration?videoId=${videoId}`);
+        const data = await response.json();
+
+        if (data.success && data.duration) {
+          setVideoDuration(data.duration);
+
+          // Also update the track duration in localStorage if it's still 0:00
+          if (currentTrack.duration === "0:00" || !currentTrack.duration) {
+            const updatedTrack = { ...currentTrack, duration: data.formattedDuration };
+            setCurrentTrack(updatedTrack);
+
+            // Update in localStorage
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+              const allTracks = JSON.parse(saved);
+              const index = allTracks.findIndex((t: PlaylistTrack) => t.id === currentTrack.id);
+              if (index >= 0) {
+                allTracks[index] = updatedTrack;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(allTracks));
+              }
+            }
+          }
         }
-      } catch (e) {
-        // CORS error expected, proceed with fallback
+      } catch (error) {
+        console.error("Failed to fetch YouTube duration:", error);
+        // Fallback to default 5 minutes
+        setVideoDuration(300);
       }
-
-      // If still 0 or error, check again after 500ms (video might still be loading)
-      durationCheckRef.current = setTimeout(() => {
-        checkDuration();
-      }, 500);
     };
 
-    // Start checking after a short delay to let iframe load
-    durationCheckRef.current = setTimeout(() => {
-      checkDuration();
-    }, 1000);
-
-    return () => {
-      if (durationCheckRef.current) clearTimeout(durationCheckRef.current);
-    };
+    fetchDuration();
   }, [currentTrack, isOpen]);
 
   // Load tracks from localStorage on mount and when modal opens
