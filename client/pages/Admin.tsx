@@ -509,24 +509,6 @@ export default function Admin() {
               </button>
             </div>
 
-            {/* Playlist Tracks Videos Section */}
-            <div>
-              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Playlist Tracks Videos</h2>
-              <div className="grid grid-cols-2 gap-6">
-                {playlistVideos.map((url, index) => (
-                  <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
-                    <h3 className="text-sm font-semibold text-cosmic-purple mb-3">Video {index + 1}</h3>
-                    <textarea
-                      value={url}
-                      onChange={(e) => savePlaylistVideo(index, e.target.value)}
-                      placeholder="youtube.com/watch?v=xxx или youtu.be/yyy"
-                      className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* Info */}
             <div className="p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
               <p className="text-sm text-gray-400">
@@ -534,7 +516,7 @@ export default function Admin() {
               </p>
               <p className="text-xs text-gray-500">
                 • Cosmic Ambient Videos появляются в секции Music<br/>
-                • Audio Playlist появляется в модально�� окне на главной<br/>
+                • Audio Playlist появляется в модальном окне на главной<br/>
                 • Playlist Tracks Videos появляются в отдельной секции
               </p>
             </div>
