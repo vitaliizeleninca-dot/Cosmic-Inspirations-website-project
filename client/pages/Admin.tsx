@@ -632,20 +632,8 @@ export default function Admin() {
             </div>
 
             {/* Feel the Cosmos Songs Section */}
-            <div className={activeFeelCosmosSongs ? "" : "opacity-50"}>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-cosmic-purple">Feel the Cosmos Playlist (up to 10 songs)</h2>
-                <button
-                  onClick={() => toggleFeelCosmosSongsActive(!activeFeelCosmosSongs)}
-                  className={`px-4 py-2 rounded-lg font-semibold transition ${
-                    activeFeelCosmosSongs
-                      ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
-                      : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
-                  }`}
-                >
-                  {activeFeelCosmosSongs ? "Active" : "Inactive"}
-                </button>
-              </div>
+            <div>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Feel the Cosmos Playlist (up to 10 songs)</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {feelCosmosSongs.map((song, index) => (
                   <div key={index} className="space-y-3 p-4 rounded-lg bg-cosmic-dark/50 border border-cosmic-purple/20">
