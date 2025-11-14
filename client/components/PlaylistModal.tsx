@@ -1,10 +1,11 @@
-import { X } from "lucide-react";
+import { X, Play } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface PlaylistTrack {
   id: string;
   title: string;
-  duration: string;
-  artist: string;
+  youtubeUrl: string;
+  duration?: string;
 }
 
 interface PlaylistModalProps {
@@ -12,59 +13,62 @@ interface PlaylistModalProps {
   onClose: () => void;
 }
 
-const PLAYLIST_TRACKS: PlaylistTrack[] = [
+const DEFAULT_TRACKS: PlaylistTrack[] = [
   {
     id: "1",
     title: "Nebula Dreams",
+    youtubeUrl: "https://www.youtube.com/embed/jgpJVI3tDT0",
     duration: "7:45",
-    artist: "Cosmic Ambient",
   },
   {
     id: "2",
     title: "Void Echo",
+    youtubeUrl: "https://www.youtube.com/embed/1La4QzGeaaQ",
     duration: "6:32",
-    artist: "Cosmic Ambient",
   },
   {
     id: "3",
     title: "Cosmic Drift",
+    youtubeUrl: "https://www.youtube.com/embed/TqOneWeDtFI",
     duration: "8:12",
-    artist: "Cosmic Ambient",
   },
   {
     id: "4",
     title: "Star Light",
+    youtubeUrl: "https://www.youtube.com/embed/lFcSrYw-ARY",
     duration: "5:48",
-    artist: "Cosmic Ambient",
-  },
-  {
-    id: "5",
-    title: "Celestial Waves",
-    duration: "9:15",
-    artist: "Cosmic Ambient",
-  },
-  {
-    id: "6",
-    title: "Galactic Silence",
-    duration: "7:02",
-    artist: "Cosmic Ambient",
-  },
-  {
-    id: "7",
-    title: "Infinite Space",
-    duration: "10:24",
-    artist: "Cosmic Ambient",
-  },
-  {
-    id: "8",
-    title: "Stellar Journey",
-    duration: "6:58",
-    artist: "Cosmic Ambient",
   },
 ];
 
+const STORAGE_KEY = "cosmic-playlist-tracks";
+
 export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
+  const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
+  const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
+
+  // Load tracks from localStorage on mount and when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          const loadedTracks = JSON.parse(saved);
+          setTracks(loadedTracks.length > 0 ? loadedTracks : DEFAULT_TRACKS);
+        } catch (e) {
+          console.error("Failed to load tracks:", e);
+          setTracks(DEFAULT_TRACKS);
+        }
+      } else {
+        setTracks(DEFAULT_TRACKS);
+      }
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
+
+  const playTrack = (track: PlaylistTrack) => {
+    setCurrentTrack(track);
+  };
 
   return (
     <>
