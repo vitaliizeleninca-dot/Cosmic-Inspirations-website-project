@@ -1,4 +1,4 @@
-import { X, Play } from "lucide-react";
+import { X, Play, Pause, SkipBack, SkipForward, Volume2 } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface PlaylistTrack {
