@@ -12,6 +12,37 @@ interface Track {
 
 const STORAGE_KEY = "cosmic-playlist-tracks";
 
+interface AmbientTrack {
+  id: string;
+  title: string;
+  youtubeUrl: string;
+}
+
+const DEFAULT_AMBIENT_TRACKS: AmbientTrack[] = [
+  {
+    id: "1",
+    title: "Deep Space Ambient",
+    youtubeUrl: "https://www.youtube.com/embed/jgpJVI3tDT0"
+  },
+  {
+    id: "2",
+    title: "Cosmic Meditation",
+    youtubeUrl: "https://www.youtube.com/embed/1La4QzGeaaQ"
+  },
+  {
+    id: "3",
+    title: "Stellar Soundscape",
+    youtubeUrl: "https://www.youtube.com/embed/TqOneWeDtFI"
+  },
+  {
+    id: "4",
+    title: "Nebula Dreams",
+    youtubeUrl: "https://www.youtube.com/embed/lFcSrYw-ARY"
+  }
+];
+
+const AMBIENT_STORAGE_KEY = "cosmic-ambient-tracks";
+
 export default function Admin() {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [bulkTracks, setBulkTracks] = useState<Array<{ title: string; url: string }>>(
@@ -20,6 +51,12 @@ export default function Admin() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [editUrl, setEditUrl] = useState("");
+
+  const [ambientTracks, setAmbientTracks] = useState<AmbientTrack[]>(DEFAULT_AMBIENT_TRACKS);
+  const [currentAmbientTrack, setCurrentAmbientTrack] = useState<AmbientTrack | null>(DEFAULT_AMBIENT_TRACKS[0]);
+  const [ambientVolume, setAmbientVolume] = useState(70);
+  const [newAmbientTitle, setNewAmbientTitle] = useState("");
+  const [newAmbientUrl, setNewAmbientUrl] = useState("");
 
   // Load tracks from localStorage on mount
   useEffect(() => {
@@ -171,7 +208,7 @@ export default function Admin() {
                     type="text"
                     value={track.title}
                     onChange={(e) => updateBulkTrack(index, "title", e.target.value)}
-                    placeholder="Например: Nebula Dreams"
+                    placeholder="Наприме��: Nebula Dreams"
                     className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
                   />
                 </div>
