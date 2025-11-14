@@ -81,7 +81,7 @@ export default function Admin() {
     }
 
     if (errorCount > 0) {
-      alert(`${errorCount} ссылок были пропущены - проверьте формат YouTube ссылок`);
+      alert(`${errorCount} ссылок были пропу��ены - проверьте формат YouTube ссылок`);
     }
 
     saveTracks([...tracks, ...newTracks]);
@@ -153,7 +153,7 @@ export default function Admin() {
             Добавить до 10 треков за раз
           </h2>
           <p className="text-sm text-gray-400 mb-4">
-            Добавьте названия треков и прямые ссылки на аудиофайлы (MP3, WAV и т.д.). Пустые поля будут пропущены.
+            Добавьте названия треков и YouTube ссылки. Пустые поля будут пропущены.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
