@@ -142,22 +142,6 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
             )}
           </div>
         </div>
-
-        {/* Footer */}
-        <div className="p-6 border-t border-cosmic-purple/20 flex gap-3">
-          <button
-            onClick={onClose}
-            className="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:cosmic-glow transition"
-          >
-            Close
-          </button>
-          <a
-            href="/admin"
-            className="flex-1 px-4 py-2 rounded-lg border border-cosmic-purple/50 text-cosmic-purple font-semibold hover:border-cosmic-purple hover:cosmic-glow transition text-center"
-          >
-            Manage
-          </a>
-        </div>
       </div>
     </>
   );
