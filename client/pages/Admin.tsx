@@ -198,7 +198,7 @@ export default function Admin() {
 
     const videoId = extractVideoId(newAmbientUrl);
     if (!videoId) {
-      alert("Непра��ильная ссылка н�� YouTube");
+      alert("Непра��ильная ссылка на YouTube");
       return;
     }
 
@@ -222,8 +222,9 @@ export default function Admin() {
     }
   };
 
-  const addQuickLinks = () => {
-    const links = quickLinksText.split('\n').map(line => line.trim()).filter(line => line);
+  const addQuickLinksFromPanel = (panelIndex: number) => {
+    const panel = quickLinksPanels[panelIndex];
+    const links = panel.text.split('\n').map(line => line.trim()).filter(line => line);
 
     if (links.length === 0) {
       alert("Пожалуйста, вставьте хотя бы одну ссылку");
@@ -233,7 +234,7 @@ export default function Admin() {
     let successCount = 0;
     let errorCount = 0;
 
-    if (quickLinksType === "ambient") {
+    if (panel.type === "ambient") {
       const newTracks: AmbientTrack[] = [];
 
       links.forEach((line) => {
@@ -276,13 +277,28 @@ export default function Admin() {
       }
     }
 
-    setQuickLinksText("");
+    // Clear the panel
+    const updated = [...quickLinksPanels];
+    updated[panelIndex] = { ...updated[panelIndex], text: "" };
+    setQuickLinksPanels(updated);
 
     if (errorCount > 0) {
       alert(`Добавлено: ${successCount}, ошибок: ${errorCount}`);
     } else {
       alert(`Успешно добавлено ${successCount} треков!`);
     }
+  };
+
+  const updatePanelText = (panelIndex: number, text: string) => {
+    const updated = [...quickLinksPanels];
+    updated[panelIndex] = { ...updated[panelIndex], text };
+    setQuickLinksPanels(updated);
+  };
+
+  const updatePanelType = (panelIndex: number, type: "playlist" | "ambient") => {
+    const updated = [...quickLinksPanels];
+    updated[panelIndex] = { ...updated[panelIndex], type };
+    setQuickLinksPanels(updated);
   };
 
   return (
