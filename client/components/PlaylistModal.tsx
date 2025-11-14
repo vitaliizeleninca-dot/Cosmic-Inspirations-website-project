@@ -23,14 +23,11 @@ let YT: any = null;
 export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
   const playerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const youtubePlayerRef = useRef<any>(null);
   const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
   const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
   const [videoDuration, setVideoDuration] = useState(0);
   const [repeatMode, setRepeatMode] = useState<"one" | "all">("all");
   const [isShuffle, setIsShuffle] = useState(false);
-  const checkIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const durationCheckRef = useRef<NodeJS.Timeout | null>(null);
 
   // Load YouTube API and setup player
   useEffect(() => {
