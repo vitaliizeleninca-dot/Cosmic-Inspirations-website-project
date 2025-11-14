@@ -79,7 +79,7 @@ export default function Admin() {
     });
 
     if (newTracks.length === 0) {
-      alert("Заполните хотя бы одно поле с названием и корректной ссылкой на аудиофайл (MP3, WAV и т.д.)");
+      alert("Заполните хотя бы одно поле с названием и корректной ссылко�� на аудиофайл (MP3, WAV и т.д.)");
       return;
     }
 
@@ -156,7 +156,7 @@ export default function Admin() {
             Добавить до 10 треков за раз
           </h2>
           <p className="text-sm text-gray-400 mb-4">
-            Заполните названия и YouTube ссылки. Пустые поля будут пропущены.
+            Добавьте названия треков и прямые ссылки на аудиофайлы (MP3, WAV и т.д.). Пустые поля будут пропущены.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
