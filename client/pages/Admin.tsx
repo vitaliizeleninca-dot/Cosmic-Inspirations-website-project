@@ -213,7 +213,7 @@ export default function Admin() {
 
   const addAmbientTrack = () => {
     if (!newAmbientTitle.trim() || !newAmbientUrl.trim()) {
-      alert("Пожалуйста, заполните название и ссылку");
+      alert("Пожалуйста, заполните наз��ание и ссылку");
       return;
     }
 
@@ -261,34 +261,28 @@ export default function Admin() {
     const updated = [...playlistSongs];
     updated[index] = { ...updated[index], [field]: value };
     setPlaylistSongs(updated);
-  };
 
-  const savePlaylistSongs = () => {
+    // Auto-save to localStorage
     const newTracks: Track[] = [];
-    let savedCount = 0;
-
-    playlistSongs.forEach((song, index) => {
+    updated.forEach((song, idx) => {
       if (!song.title.trim() || !song.url.trim()) {
         return;
       }
 
       const videoId = extractVideoId(song.url);
       if (!videoId) {
-        console.warn(`Invalid YouTube URL for song: ${song.title}`);
         return;
       }
 
       newTracks.push({
-        id: Date.now().toString() + index,
+        id: Date.now().toString() + idx,
         title: song.title,
         youtubeUrl: `https://www.youtube.com/embed/${videoId}`,
         duration: "0:00",
       });
-      savedCount++;
     });
 
     saveTracks(newTracks);
-    alert(`Playlist saved! ${savedCount} songs added.`);
   };
 
   return (
