@@ -19,6 +19,7 @@ export default function Index() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
+  const [playlistType, setPlaylistType] = useState<"cosmic" | "feelCosmos">("cosmic");
   const [cosmicVideos, setCosmicVideos] = useState<string[]>(DEFAULT_COSMIC_VIDEOS);
   const [playlistVideos, setPlaylistVideos] = useState<string[]>(DEFAULT_PLAYLIST_VIDEOS);
   const [feelCosmosVideos, setFeelCosmosVideos] = useState<string[]>(DEFAULT_PLAYLIST_VIDEOS);
