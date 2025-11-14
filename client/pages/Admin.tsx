@@ -38,21 +38,17 @@ export default function Admin() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newTracks));
   };
 
-  const isValidAudioUrl = (url: string): boolean => {
-    try {
-      const urlObj = new URL(url);
-      const pathname = urlObj.pathname.toLowerCase();
-      return (
-        pathname.endsWith(".mp3") ||
-        pathname.endsWith(".wav") ||
-        pathname.endsWith(".ogg") ||
-        pathname.endsWith(".m4a") ||
-        url.includes("audio") ||
-        url.includes("stream")
-      );
-    } catch {
-      return false;
+  const extractVideoId = (url: string): string => {
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+      /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
+    ];
+
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) return match[1];
     }
+    return "";
   };
 
   const addBulkTracks = () => {
@@ -64,27 +60,28 @@ export default function Admin() {
         return;
       }
 
-      if (!isValidAudioUrl(track.url)) {
+      const videoId = extractVideoId(track.url);
+      if (!videoId) {
         errorCount++;
-        console.warn(`Invalid audio URL for track: ${track.title}`);
+        console.warn(`Invalid YouTube URL for track: ${track.title}`);
         return;
       }
 
       newTracks.push({
         id: Date.now().toString() + index,
         title: track.title,
-        audioUrl: track.url,
+        youtubeUrl: `https://www.youtube.com/embed/${videoId}`,
         duration: "0:00",
       });
     });
 
     if (newTracks.length === 0) {
-      alert("Заполните хотя бы одно поле с названием и корректной ссылкой на аудиофайл (MP3, WAV и т.д.)");
+      alert("Заполните хотя бы одно поле с названием и корректной YouTube ссылкой");
       return;
     }
 
     if (errorCount > 0) {
-      alert(`${errorCount} ссылок были пропущены - проверьте что это прямые ссылки на аудиофайлы`);
+      alert(`${errorCount} ссылок были пропущены - проверьте формат YouTube ссылок`);
     }
 
     saveTracks([...tracks, ...newTracks]);
@@ -138,7 +135,7 @@ export default function Admin() {
             <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
               Admin Panel
             </h1>
-            <p className="text-gray-400">��правление треками плейлиста</p>
+            <p className="text-gray-400">Управление треками плейлиста</p>
           </div>
           <Link
             to="/"
