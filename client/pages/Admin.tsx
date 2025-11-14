@@ -129,11 +129,21 @@ export default function Admin() {
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
-            Admin Panel
-          </h1>
-          <p className="text-gray-400">Управление треками плейлиста</p>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
+              Admin Panel
+            </h1>
+            <p className="text-gray-400">Управление треками плейлиста</p>
+          </div>
+          <Link
+            to="/"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:bg-cosmic-purple/10 transition"
+            title="Вернуться на главную"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span>На главную</span>
+          </Link>
         </div>
 
         {/* Add 10 Tracks Form */}
