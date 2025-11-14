@@ -302,13 +302,16 @@ export default function Admin() {
         </div>
 
         <Tabs defaultValue="playlist" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-lg p-1">
+          <TabsList className="grid w-full grid-cols-3 bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-lg p-1">
             <TabsTrigger value="playlist" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Playlist Tracks
             </TabsTrigger>
             <TabsTrigger value="ambient" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               <Music className="w-4 h-4 mr-2" />
               Ambient Music
+            </TabsTrigger>
+            <TabsTrigger value="links" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
+              Add Links
             </TabsTrigger>
           </TabsList>
 
