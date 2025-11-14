@@ -555,6 +555,64 @@ export default function Admin() {
               </div>
             </div>
           </TabsContent>
+
+          <TabsContent value="cosmos" className="mt-8 space-y-8">
+            {/* Feel the Cosmos Videos Section */}
+            <div>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Feel the Cosmos Videos</h2>
+              <div className="grid grid-cols-2 gap-6">
+                {feelCosmosVideos.map((url, index) => (
+                  <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
+                    <h3 className="text-sm font-semibold text-cosmic-purple mb-3">Video {index + 1}</h3>
+                    <textarea
+                      value={url}
+                      onChange={(e) => saveFeelCosmosVideo(index, e.target.value)}
+                      placeholder="youtube.com/watch?v=xxx or youtu.be/yyy"
+                      className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Feel the Cosmos Songs Section */}
+            <div>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Feel the Cosmos Playlist (up to 10 songs)</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {feelCosmosSongs.map((song, index) => (
+                  <div key={index} className="space-y-3 p-4 rounded-lg bg-cosmic-dark/50 border border-cosmic-purple/20">
+                    <div className="text-xs font-semibold text-cosmic-purple mb-2">
+                      Song #{index + 1}
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-400 mb-2">
+                        Title
+                      </label>
+                      <input
+                        type="text"
+                        value={song.title}
+                        onChange={(e) => updateFeelCosmosSong(index, "title", e.target.value)}
+                        placeholder="e.g., Cosmic Meditation"
+                        className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-400 mb-2">
+                        YouTube Link
+                      </label>
+                      <input
+                        type="text"
+                        value={song.url}
+                        onChange={(e) => updateFeelCosmosSong(index, "url", e.target.value)}
+                        placeholder="youtube.com/watch?v=... or youtu.be/..."
+                        className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
