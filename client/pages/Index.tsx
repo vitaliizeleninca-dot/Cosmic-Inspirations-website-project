@@ -79,6 +79,31 @@ export default function Index() {
         setFeelCosmosSongs([]);
       }
     }
+
+    const savedCosmicVideosActive = localStorage.getItem("cosmic-videos-active");
+    if (savedCosmicVideosActive) {
+      setActiveCosmicVideos(JSON.parse(savedCosmicVideosActive));
+    }
+
+    const savedPlaylistVideosActive = localStorage.getItem("playlist-videos-active");
+    if (savedPlaylistVideosActive) {
+      setActivePlaylistVideos(JSON.parse(savedPlaylistVideosActive));
+    }
+
+    const savedPlaylistSongsActive = localStorage.getItem("playlist-songs-active");
+    if (savedPlaylistSongsActive) {
+      setActivePlaylistSongs(JSON.parse(savedPlaylistSongsActive));
+    }
+
+    const savedFeelCosmosVideosActive = localStorage.getItem("feel-cosmos-videos-active");
+    if (savedFeelCosmosVideosActive) {
+      setActiveFeelCosmosVideos(JSON.parse(savedFeelCosmosVideosActive));
+    }
+
+    const savedFeelCosmosSongsActive = localStorage.getItem("feel-cosmos-songs-active");
+    if (savedFeelCosmosSongsActive) {
+      setActiveFeelCosmosSongs(JSON.parse(savedFeelCosmosSongsActive));
+    }
   }, []);
 
   const convertToEmbedUrl = (url: string): string => {
