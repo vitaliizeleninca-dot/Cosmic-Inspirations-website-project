@@ -58,6 +58,9 @@ export default function Admin() {
   const [newAmbientTitle, setNewAmbientTitle] = useState("");
   const [newAmbientUrl, setNewAmbientUrl] = useState("");
 
+  const [quickLinksText, setQuickLinksText] = useState("");
+  const [quickLinksType, setQuickLinksType] = useState<"playlist" | "ambient">("ambient");
+
   // Load tracks from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -270,7 +273,7 @@ export default function Admin() {
                     type="text"
                     value={track.title}
                     onChange={(e) => updateBulkTrack(index, "title", e.target.value)}
-                    placeholder="Например: Nebula Dreams"
+                    placeholder="Н��пример: Nebula Dreams"
                     className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
                   />
                 </div>
