@@ -51,6 +51,29 @@ export default function Index() {
         setPlaylistVideos(DEFAULT_PLAYLIST_VIDEOS);
       }
     }
+
+    const savedFeelCosmosVideos = localStorage.getItem("feel-cosmos-videos");
+    if (savedFeelCosmosVideos) {
+      try {
+        const parsed = JSON.parse(savedFeelCosmosVideos);
+        const videos = parsed.map((url: string) =>
+          url.trim() ? convertToEmbedUrl(url) : ""
+        ).filter((url: string) => url);
+        setFeelCosmosVideos(videos);
+      } catch (e) {
+        setFeelCosmosVideos(DEFAULT_PLAYLIST_VIDEOS);
+      }
+    }
+
+    const savedFeelCosmosSongs = localStorage.getItem("feel-cosmos-songs");
+    if (savedFeelCosmosSongs) {
+      try {
+        const parsed = JSON.parse(savedFeelCosmosSongs);
+        setFeelCosmosSongs(parsed);
+      } catch (e) {
+        setFeelCosmosSongs([]);
+      }
+    }
   }, []);
 
   const convertToEmbedUrl = (url: string): string => {
