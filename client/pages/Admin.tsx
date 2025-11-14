@@ -603,6 +603,30 @@ export default function Admin() {
               <div className="grid grid-cols-2 gap-6">
                 {quickLinksPanels.map((panel, panelIndex) => (
                   <div key={panelIndex} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
+                    {/* Type Toggle Buttons */}
+                    <div className="flex gap-2 mb-3">
+                      <button
+                        onClick={() => updatePanelType(panelIndex, "playlist")}
+                        className={`flex-1 py-1 px-2 text-xs rounded font-semibold transition ${
+                          panel.type === "playlist"
+                            ? "bg-cosmic-purple text-cosmic-dark"
+                            : "bg-cosmic-purple/20 text-gray-400 hover:bg-cosmic-purple/40"
+                        }`}
+                      >
+                        Playlist
+                      </button>
+                      <button
+                        onClick={() => updatePanelType(panelIndex, "ambient")}
+                        className={`flex-1 py-1 px-2 text-xs rounded font-semibold transition ${
+                          panel.type === "ambient"
+                            ? "bg-cosmic-purple text-cosmic-dark"
+                            : "bg-cosmic-purple/20 text-gray-400 hover:bg-cosmic-purple/40"
+                        }`}
+                      >
+                        Ambient
+                      </button>
+                    </div>
+
                     {/* Textarea for links */}
                     <textarea
                       value={panel.text}
