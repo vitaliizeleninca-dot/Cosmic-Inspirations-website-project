@@ -16,12 +16,16 @@ export default function Index() {
       {/* Header/Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-cosmic-purple/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <button
+            onClick={() => navigate("/admin")}
+            className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition"
+            aria-label="Go to admin panel"
+          >
             <Sparkles className="w-8 h-8 text-cosmic-purple animate-pulse" />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
               Cosmic Hub
             </h1>
-          </div>
+          </button>
           <nav className="hidden sm:flex items-center gap-8">
             <a
               href="#podcast"
