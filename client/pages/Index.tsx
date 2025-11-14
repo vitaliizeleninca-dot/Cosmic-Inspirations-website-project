@@ -352,7 +352,7 @@ export default function Index() {
                   onClick={() => setIsPlaylistModalOpen(true)}
                   className="btn-cosmic"
                 >
-                  View Full Audio Playlist
+                  View Full Playlist
                 </button>
               </div>
             </div>
