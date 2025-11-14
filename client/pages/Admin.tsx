@@ -110,9 +110,9 @@ export default function Admin() {
   });
 
   // Activation state for sections
-  const [activeCosmicVideos, setActiveCosmicVideos] = useState<boolean>(() => {
-    const saved = localStorage.getItem("cosmic-videos-active");
-    return saved ? JSON.parse(saved) : true;
+  const [activeCosmicVideosList, setActiveCosmicVideosList] = useState<boolean[]>(() => {
+    const saved = localStorage.getItem("cosmic-videos-list-active");
+    return saved ? JSON.parse(saved) : [true, true, true, true];
   });
 
   const [activePlaylistVideos, setActivePlaylistVideos] = useState<boolean>(() => {
