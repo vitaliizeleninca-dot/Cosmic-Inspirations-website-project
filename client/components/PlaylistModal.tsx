@@ -112,15 +112,6 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     checkProgress();
   }, [currentTrack, isOpen, handleTrackEnd]);
 
-  const parseDuration = (duration: string): number => {
-    if (!duration) return 300; // Default 5 minutes
-    const parts = duration.split(":");
-    if (parts.length === 2) {
-      return parseInt(parts[0]) * 60 + parseInt(parts[1]);
-    }
-    return 300;
-  };
-
   if (!isOpen) return null;
 
   const playTrack = (track: PlaylistTrack) => {
