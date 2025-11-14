@@ -564,7 +564,6 @@ export default function Admin() {
                       onChange={(e) => saveCosmicVideo(index, e.target.value)}
                       placeholder="youtube.com/watch?v=xxx or youtu.be/yyy"
                       className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
-                      disabled={!activeCosmicVideos}
                     />
                   </div>
                 ))}
