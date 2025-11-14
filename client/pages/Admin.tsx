@@ -271,6 +271,41 @@ export default function Admin() {
     localStorage.setItem("playlist-videos", JSON.stringify(updated));
   };
 
+  const saveFeelCosmosVideo = (index: number, url: string) => {
+    const updated = [...feelCosmosVideos];
+    updated[index] = url;
+    setFeelCosmosVideos(updated);
+    localStorage.setItem("feel-cosmos-videos", JSON.stringify(updated));
+  };
+
+  const updateFeelCosmosSong = (index: number, field: "title" | "url", value: string) => {
+    const updated = [...feelCosmosSongs];
+    updated[index] = { ...updated[index], [field]: value };
+    setFeelCosmosSongs(updated);
+
+    // Auto-save to localStorage
+    const newTracks: Track[] = [];
+    updated.forEach((song, idx) => {
+      if (!song.title.trim() || !song.url.trim()) {
+        return;
+      }
+
+      const videoId = extractVideoId(song.url);
+      if (!videoId) {
+        return;
+      }
+
+      newTracks.push({
+        id: Date.now().toString() + idx,
+        title: song.title,
+        youtubeUrl: `https://www.youtube.com/embed/${videoId}`,
+        duration: "0:00",
+      });
+    });
+
+    localStorage.setItem("feel-cosmos-songs", JSON.stringify(newTracks));
+  };
+
   const saveAmbientTracks = (newTracks: AmbientTrack[]) => {
     setAmbientTracks(newTracks);
     localStorage.setItem(AMBIENT_STORAGE_KEY, JSON.stringify(newTracks));
