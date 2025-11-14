@@ -1,15 +1,58 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Play, Pause, SkipForward, Music, Podcast, Sparkles, Zap } from "lucide-react";
 import Footer from "@/components/Footer";
 import BackgroundModal from "@/components/BackgroundModal";
 import PlaylistModal from "@/components/PlaylistModal";
 
+const DEFAULT_COSMIC_VIDEOS = [
+  "https://www.youtube.com/embed/jgpJVI3tDT0",
+  "https://www.youtube.com/embed/1La4QzGeaaQ",
+  "https://www.youtube.com/embed/TqOneWeDtFI",
+  "https://www.youtube.com/embed/lFcSrYw-ARY"
+];
+
 export default function Index() {
   const navigate = useNavigate();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
+  const [cosmicVideos, setCosmicVideos] = useState<string[]>(DEFAULT_COSMIC_VIDEOS);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("cosmic-videos");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        // Only use non-empty URLs, fallback to defaults for empty ones
+        const videos = parsed.map((url: string, index: number) =>
+          url.trim() ? convertToEmbedUrl(url) : DEFAULT_COSMIC_VIDEOS[index]
+        );
+        setCosmicVideos(videos);
+      } catch (e) {
+        setCosmicVideos(DEFAULT_COSMIC_VIDEOS);
+      }
+    }
+  }, []);
+
+  const convertToEmbedUrl = (url: string): string => {
+    if (!url) return "";
+
+    // Extract video ID from various YouTube URL formats
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{10,12})/,
+      /youtube\.com\/embed\/([a-zA-Z0-9_-]{10,12})/,
+    ];
+
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) {
+        return `https://www.youtube.com/embed/${match[1]}`;
+      }
+    }
+
+    return url;
+  };
 
   return (
     <div className="min-h-screen overflow-x-hidden">
