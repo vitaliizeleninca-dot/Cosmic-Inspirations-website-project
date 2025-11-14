@@ -128,6 +128,11 @@ export default function Admin() {
     return saved ? JSON.parse(saved) : [true, true, true, true];
   });
 
+  const [nftCollections, setNftCollections] = useState<string[]>(() => {
+    const saved = localStorage.getItem("nft-collections");
+    return saved ? JSON.parse(saved) : ["", "", "", "", "", ""];
+  });
+
   // Activation state for sections
   const [activeCosmicVideosList, setActiveCosmicVideosList] = useState<boolean[]>(() => {
     const saved = localStorage.getItem("cosmic-videos-list-active");
