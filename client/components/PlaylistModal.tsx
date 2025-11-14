@@ -1,11 +1,12 @@
-import { X, Play, Pause, SkipBack, SkipForward, Volume2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { X, Play, Pause, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
 interface PlaylistTrack {
   id: string;
   title: string;
   youtubeUrl: string;
   duration?: string;
+  audioUrl?: string;
 }
 
 interface PlaylistModalProps {
