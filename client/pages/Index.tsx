@@ -189,80 +189,82 @@ export default function Index() {
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
           </div>
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl w-full">
-            <div>
+          <div className="relative z-10 w-full max-w-6xl">
+            <div className="text-center mb-16">
               <h3 className="text-5xl font-bold mb-4">
                 Cosmic Ambient
               </h3>
               <p className="text-cosmic-purple text-lg font-semibold mb-4">
                 Music Player
               </p>
-
-              <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+              <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                 Immerse yourself in ethereal soundscapes designed to elevate your
                 consciousness. Our AI-curated ambient music draws inspiration from
                 the vastness of space, creating an otherworldly listening experience.
               </p>
+            </div>
 
-              <div className="bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-2xl p-8 cosmic-glow mb-8">
-                <div className="text-center mb-6">
-                  <h4 className="text-2xl font-bold text-cosmic-purple mb-2">
-                    Now Playing
-                  </h4>
-                  <p className="text-gray-300">Nebula Dreams</p>
-                  <p className="text-gray-500 text-sm">3:24 / 7:45</p>
-                </div>
-
-                <div className="w-full h-2 bg-cosmic-dark rounded-full mb-6 overflow-hidden">
-                  <div className="w-1/3 h-full bg-gradient-to-r from-cosmic-purple to-cosmic-violet" />
-                </div>
-
-                <div className="flex items-center justify-center gap-4">
-                  <button className="p-3 rounded-full border border-cosmic-purple/50 hover:border-cosmic-purple hover:cosmic-glow transition">
-                    <SkipForward className="w-6 h-6 text-cosmic-purple rotate-180" />
-                  </button>
-                  <button
-                    onClick={() => setIsPlaying(!isPlaying)}
-                    className="p-4 rounded-full bg-gradient-cosmic hover:cosmic-glow-lg transition transform hover:-translate-y-1"
-                  >
-                    {isPlaying ? (
-                      <Pause className="w-6 h-6 text-cosmic-dark" />
-                    ) : (
-                      <Play className="w-6 h-6 text-cosmic-dark ml-1" />
-                    )}
-                  </button>
-                  <button className="p-3 rounded-full border border-cosmic-purple/50 hover:border-cosmic-purple hover:cosmic-glow transition">
-                    <SkipForward className="w-6 h-6 text-cosmic-purple" />
-                  </button>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+              <div className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/jgpJVI3tDT0"
+                  title="Cosmic Ambient Visualization 1"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
-                <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 text-center hover:bg-cosmic-purple/10 cursor-pointer transition">
-                  <Music className="w-5 h-5 text-cosmic-purple mx-auto mb-2" />
-                  <p className="text-sm font-semibold text-gray-300">
-                    Cosmic Drift
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 text-center hover:bg-cosmic-purple/10 cursor-pointer transition">
-                  <Music className="w-5 h-5 text-cosmic-purple mx-auto mb-2" />
-                  <p className="text-sm font-semibold text-gray-300">
-                    Void Echo
-                  </p>
-                </div>
-                <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 text-center hover:bg-cosmic-purple/10 cursor-pointer transition">
-                  <Music className="w-5 h-5 text-cosmic-purple mx-auto mb-2" />
-                  <p className="text-sm font-semibold text-gray-300">
-                    Star Light
-                  </p>
-                </div>
+              <div className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/1La4QzGeaaQ"
+                  title="Cosmic Ambient Visualization 2"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+
+              <div className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/TqOneWeDtFI"
+                  title="Cosmic Ambient Visualization 3"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+
+              <div className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/lFcSrYw-ARY"
+                  title="Cosmic Ambient Visualization 4"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
               </div>
             </div>
 
-            <div className="relative aspect-square rounded-2xl overflow-hidden cosmic-glow">
-              <div className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/40 to-cosmic-violet/40 flex items-center justify-center">
-                <Music className="w-24 h-24 text-cosmic-purple opacity-50" />
-              </div>
+            <div className="text-center">
+              <button
+                onClick={() => setIsPlaylistModalOpen(true)}
+                className="btn-cosmic"
+              >
+                View Full Audio Playlist
+              </button>
             </div>
           </div>
         </section>
