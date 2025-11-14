@@ -33,6 +33,7 @@ export default function Index() {
   const [activePodcastVideosList, setActivePodcastVideosList] = useState<boolean[]>([true, true, true, true]);
   const [nftVideos, setNftVideos] = useState<string[]>(["", "", "", ""]);
   const [activeNftVideosList, setActiveNftVideosList] = useState<boolean[]>([true, true, true, true]);
+  const [nftCollections, setNftCollections] = useState<string[]>(["", "", "", "", "", ""]);
 
   useEffect(() => {
     const saved = localStorage.getItem("cosmic-videos");
