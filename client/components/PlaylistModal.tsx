@@ -189,7 +189,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                       ? "border-cosmic-purple bg-cosmic-purple/20 text-cosmic-purple"
                       : "border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:bg-cosmic-purple/10"
                   }`}
-                  title="Режим перемешивани��"
+                  title="Shuffle mode"
                 >
                   <Shuffle className="w-4 h-4" />
                   <span>{isShuffle ? "Shuffle" : "Order"}</span>
