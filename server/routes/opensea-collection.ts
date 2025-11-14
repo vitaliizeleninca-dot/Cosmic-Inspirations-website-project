@@ -12,9 +12,15 @@ export const handleOpenSeaCollection: RequestHandler = async (req, res) => {
       return;
     }
 
+    // Ensure URL has protocol
+    let fullUrl = url;
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      fullUrl = `https://${url}`;
+    }
+
     // Extract collection slug from OpenSea URL
     // Example: https://opensea.io/collection/cosmic-inspirations-master-study-sketches
-    const collectionMatch = url.match(/opensea\.io\/collection\/([a-z0-9\-]+)/i);
+    const collectionMatch = fullUrl.match(/opensea\.io\/collection\/([a-z0-9\-]+)/i);
     if (!collectionMatch) {
       res.status(400).json({
         success: false,
@@ -37,7 +43,7 @@ export const handleOpenSeaCollection: RequestHandler = async (req, res) => {
 
       if (!response.ok) {
         // If OpenSea API fails, try fetching og:image from the URL directly
-        const pageResponse = await fetch(url, {
+        const pageResponse = await fetch(fullUrl, {
           headers: {
             "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
           },
@@ -46,12 +52,12 @@ export const handleOpenSeaCollection: RequestHandler = async (req, res) => {
         if (pageResponse.ok) {
           const html = await pageResponse.text();
           const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
-          
+
           if (ogImageMatch && ogImageMatch[1]) {
             res.json({
               success: true,
               imageUrl: ogImageMatch[1],
-              collectionUrl: url,
+              collectionUrl: fullUrl,
             });
             return;
           }
@@ -76,7 +82,7 @@ export const handleOpenSeaCollection: RequestHandler = async (req, res) => {
       res.json({
         success: true,
         imageUrl,
-        collectionUrl: url,
+        collectionUrl: fullUrl,
         collectionName: data.name || collectionSlug,
       });
     } catch (fetchError) {
