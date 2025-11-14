@@ -450,6 +450,13 @@ export default function Admin() {
     localStorage.setItem("nft-videos-list-active", JSON.stringify(updated));
   };
 
+  const saveNftCollection = (index: number, url: string) => {
+    const updated = [...nftCollections];
+    updated[index] = url;
+    setNftCollections(updated);
+    localStorage.setItem("nft-collections", JSON.stringify(updated));
+  };
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
