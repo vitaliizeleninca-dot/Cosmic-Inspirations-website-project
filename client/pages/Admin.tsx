@@ -110,7 +110,7 @@ export default function Admin() {
 
   const saveEdit = () => {
     if (!editTitle.trim()) {
-      alert("Введите название трека");
+      alert("Введите название ��река");
       return;
     }
 
@@ -278,9 +278,14 @@ export default function Admin() {
         </div>
 
         {/* Info */}
-        <div className="mt-8 p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30">
+        <div className="mt-8 p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
           <p className="text-sm text-gray-400">
-            💡 <strong>Совет:</strong> Все изменения сохраняются автоматически в вашем браузере. Используйте YouTube ссылки в форме youtube.com/watch?v=... или youtu.be/...
+            💡 <strong>Совет:</strong> Все изменения сохраняют��я автоматически в вашем браузере.
+          </p>
+          <p className="text-xs text-gray-500">
+            • Используйте прямые ссылки на аудиофайлы (MP3, WAV и т.д.)<br/>
+            • Пример: https://example.com/music/song.mp3<br/>
+            • Ссылки должны позволять прямую загрузку аудио
           </p>
         </div>
       </div>
