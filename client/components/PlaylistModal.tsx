@@ -57,10 +57,29 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
   };
 
   const nextTrack = () => {
-    if (!currentTrack) return;
+    if (!currentTrack || tracks.length === 0) return;
+
     const currentIndex = tracks.findIndex((t) => t.id === currentTrack.id);
-    if (currentIndex < tracks.length - 1) {
-      playTrack(tracks[currentIndex + 1]);
+
+    if (playbackMode === "repeat-one") {
+      // Повторять текущий трек
+      playTrack(currentTrack);
+    } else if (playbackMode === "shuffle") {
+      // Случайный трек
+      const randomIndex = Math.floor(Math.random() * tracks.length);
+      playTrack(tracks[randomIndex]);
+    } else if (playbackMode === "repeat-all") {
+      // Повторять всё - зациклить плейлист
+      if (currentIndex < tracks.length - 1) {
+        playTrack(tracks[currentIndex + 1]);
+      } else {
+        playTrack(tracks[0]);
+      }
+    } else {
+      // sequential - просто следующий или стоп
+      if (currentIndex < tracks.length - 1) {
+        playTrack(tracks[currentIndex + 1]);
+      }
     }
   };
 
@@ -69,7 +88,17 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     const currentIndex = tracks.findIndex((t) => t.id === currentTrack.id);
     if (currentIndex > 0) {
       playTrack(tracks[currentIndex - 1]);
+    } else if (playbackMode === "repeat-all") {
+      // В режиме repeat-all, на предыдущий в конце плейлиста переходим в начало
+      playTrack(tracks[tracks.length - 1]);
     }
+  };
+
+  const cyclePlaybackMode = () => {
+    const modes: PlaybackMode[] = ["sequential", "repeat-all", "repeat-one", "shuffle"];
+    const currentIndex = modes.indexOf(playbackMode);
+    const nextMode = modes[(currentIndex + 1) % modes.length];
+    setPlaybackMode(nextMode);
   };
 
   return (
@@ -129,7 +158,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                   onClick={prevTrack}
                   disabled={!currentTrack || tracks.findIndex((t) => t.id === currentTrack.id) === 0}
                   className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple disabled:opacity-50 disabled:cursor-not-allowed transition"
-                  title="Предыдущий ��рек"
+                  title="Предыдущий трек"
                 >
                   <SkipBack className="w-5 h-5" />
                 </button>
