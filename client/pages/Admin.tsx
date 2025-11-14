@@ -431,6 +431,20 @@ export default function Admin() {
     localStorage.setItem("podcast-videos-list-active", JSON.stringify(updated));
   };
 
+  const saveNftVideo = (index: number, url: string) => {
+    const updated = [...nftVideos];
+    updated[index] = url;
+    setNftVideos(updated);
+    localStorage.setItem("nft-videos", JSON.stringify(updated));
+  };
+
+  const toggleNftVideoActive = (index: number, isActive: boolean) => {
+    const updated = [...activeNftVideosList];
+    updated[index] = isActive;
+    setActiveNftVideosList(updated);
+    localStorage.setItem("nft-videos-list-active", JSON.stringify(updated));
+  };
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
