@@ -58,12 +58,8 @@ export default function Admin() {
   const [newAmbientTitle, setNewAmbientTitle] = useState("");
   const [newAmbientUrl, setNewAmbientUrl] = useState("");
 
-  const [quickLinksPanels, setQuickLinksPanels] = useState<Array<{ text: string; type: "playlist" | "ambient" }>>([
-    { text: "", type: "ambient" },
-    { text: "", type: "ambient" },
-    { text: "", type: "ambient" },
-    { text: "", type: "ambient" }
-  ]);
+  const [playlistLinks, setPlaylistLinks] = useState(["", ""]);
+  const [ambientLinks, setAmbientLinks] = useState(["", ""]);
 
   // Load tracks from localStorage on mount
   useEffect(() => {
