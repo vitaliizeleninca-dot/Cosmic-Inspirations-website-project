@@ -16,137 +16,32 @@ export default function BackgroundArtSelector() {
   const [error, setError] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Fetch NFTs from Objkt collection
+  // Fetch NFTs from Objkt collection via server endpoint
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // Try multiple API endpoints
-        let fetchedNFTs: NFTItem[] = [];
+        // Call our server endpoint which proxies the Objkt API
+        const response = await fetch("/api/nft-collection");
 
-        try {
-          // First attempt: Try the OBJKT REST API
-          const params = new URLSearchParams({
-            contract: "KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ",
-            limit: "100",
-          });
-
-          const response = await fetch(
-            `https://api.objkt.com/v3/tokens?${params.toString()}`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-
-          if (response.ok) {
-            const data = await response.json();
-            const tokens = Array.isArray(data) ? data : data.tokens || [];
-
-            fetchedNFTs = tokens
-              .filter(
-                (token: any) =>
-                  token.display_uri &&
-                  (token.display_uri.startsWith("http") ||
-                    token.display_uri.startsWith("ipfs://"))
-              )
-              .map((token: any, index: number) => ({
-                id: `${token.token_id || index}-${token.contract}`,
-                tokenId: token.token_id?.toString() || "",
-                name:
-                  token.name || token.title || `Token #${token.token_id}`,
-                imageUrl: token.display_uri.startsWith("ipfs://")
-                  ? `https://ipfs.io/ipfs/${token.display_uri.replace("ipfs://", "")}`
-                  : token.display_uri,
-                thumbnailUrl: token.thumbnail_uri
-                  ? token.thumbnail_uri.startsWith("ipfs://")
-                    ? `https://ipfs.io/ipfs/${token.thumbnail_uri.replace("ipfs://", "")}`
-                    : token.thumbnail_uri
-                  : token.display_uri.startsWith("ipfs://")
-                    ? `https://ipfs.io/ipfs/${token.display_uri.replace("ipfs://", "")}`
-                    : token.display_uri,
-              }));
-          }
-        } catch (apiErr) {
-          console.warn("REST API attempt failed:", apiErr);
+        if (!response.ok) {
+          throw new Error(`Server error: ${response.status}`);
         }
 
-        // If REST API failed, try GraphQL with CORS proxy
-        if (fetchedNFTs.length === 0) {
-          try {
-            const gqlResponse = await fetch("https://api.objkt.com/graphql", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                query: `
-                  query {
-                    tokens(
-                      where: {
-                        contract: "KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ"
-                      }
-                      limit: 100
-                    ) {
-                      id
-                      tokenId
-                      name
-                      displayUri
-                      thumbnailUri
-                    }
-                  }
-                `,
-              }),
-            });
+        const data = await response.json();
 
-            if (gqlResponse.ok) {
-              const gqlData = await gqlResponse.json();
-
-              if (!gqlData.errors) {
-                fetchedNFTs = (gqlData.data?.tokens || [])
-                  .filter(
-                    (token: any) =>
-                      token.displayUri &&
-                      (token.displayUri.startsWith("http") ||
-                        token.displayUri.startsWith("ipfs://"))
-                  )
-                  .map((token: any, index: number) => ({
-                    id: `${token.id}-${index}`,
-                    tokenId: token.tokenId || "",
-                    name: token.name || `Token #${token.tokenId}`,
-                    imageUrl: token.displayUri.startsWith("ipfs://")
-                      ? `https://ipfs.io/ipfs/${token.displayUri.replace("ipfs://", "")}`
-                      : token.displayUri,
-                    thumbnailUrl: token.thumbnailUri
-                      ? token.thumbnailUri.startsWith("ipfs://")
-                        ? `https://ipfs.io/ipfs/${token.thumbnailUri.replace("ipfs://", "")}`
-                        : token.thumbnailUri
-                      : token.displayUri.startsWith("ipfs://")
-                        ? `https://ipfs.io/ipfs/${token.displayUri.replace("ipfs://", "")}`
-                        : token.displayUri,
-                  }));
-              }
-            }
-          } catch (gqlErr) {
-            console.warn("GraphQL attempt failed:", gqlErr);
-          }
+        if (!data.success || !data.tokens || data.tokens.length === 0) {
+          throw new Error(data.error || "No NFTs found in collection");
         }
 
-        if (fetchedNFTs.length === 0) {
-          throw new Error(
-            "Could not fetch NFT collection from Objkt API. The API may be temporarily unavailable or have CORS restrictions."
-          );
-        }
-
-        setNfts(fetchedNFTs);
+        setNfts(data.tokens);
 
         // Set first NFT as default
-        if (fetchedNFTs.length > 0) {
-          setSelectedNFT(fetchedNFTs[0]);
-          updatePageBackground(fetchedNFTs[0].imageUrl);
+        if (data.tokens.length > 0) {
+          setSelectedNFT(data.tokens[0]);
+          updatePageBackground(data.tokens[0].imageUrl);
         }
       } catch (err) {
         console.error("Failed to fetch NFTs:", err);
