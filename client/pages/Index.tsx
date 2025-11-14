@@ -205,7 +205,12 @@ export default function Index() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              <div className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+              <a
+                href="https://youtu.be/-NV3FIc7024"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block cursor-pointer hover:opacity-90 transition-opacity"
+              >
                 <iframe
                   width="100%"
                   height="100%"
@@ -216,9 +221,14 @@ export default function Index() {
                   allowFullScreen
                   className="w-full h-full"
                 />
-              </div>
+              </a>
 
-              <div className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+              <a
+                href="https://youtu.be/2GcTZP27IeM"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block cursor-pointer hover:opacity-90 transition-opacity"
+              >
                 <iframe
                   width="100%"
                   height="100%"
@@ -229,9 +239,14 @@ export default function Index() {
                   allowFullScreen
                   className="w-full h-full"
                 />
-              </div>
+              </a>
 
-              <div className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+              <a
+                href="https://youtu.be/djwdPu3X3H0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block cursor-pointer hover:opacity-90 transition-opacity"
+              >
                 <iframe
                   width="100%"
                   height="100%"
@@ -242,9 +257,14 @@ export default function Index() {
                   allowFullScreen
                   className="w-full h-full"
                 />
-              </div>
+              </a>
 
-              <div className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+              <a
+                href="https://youtu.be/EVfd34fKZYo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block cursor-pointer hover:opacity-90 transition-opacity"
+              >
                 <iframe
                   width="100%"
                   height="100%"
@@ -255,7 +275,7 @@ export default function Index() {
                   allowFullScreen
                   className="w-full h-full"
                 />
-              </div>
+              </a>
             </div>
 
             <div className="text-center">
