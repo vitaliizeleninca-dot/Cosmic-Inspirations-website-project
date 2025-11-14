@@ -553,20 +553,8 @@ export default function Admin() {
 
           <TabsContent value="links" className="mt-8 space-y-8">
             {/* Cosmic Ambient Videos Section */}
-            <div className={activeCosmicVideos ? "" : "opacity-50"}>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-cosmic-purple">Cosmic Ambient Videos</h2>
-                <button
-                  onClick={() => toggleCosmicVideosActive(!activeCosmicVideos)}
-                  className={`px-4 py-2 rounded-lg font-semibold transition ${
-                    activeCosmicVideos
-                      ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
-                      : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
-                  }`}
-                >
-                  {activeCosmicVideos ? "Active" : "Inactive"}
-                </button>
-              </div>
+            <div>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Cosmic Ambient Videos</h2>
               <div className="grid grid-cols-2 gap-6">
                 {cosmicVideos.map((url, index) => (
                   <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
