@@ -392,7 +392,7 @@ export default function Index() {
             {/* Feel the Cosmos Videos */}
             <div className="mb-12">
               <h4 className="text-2xl font-bold text-cosmic-purple mb-6">Featured Videos</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 {feelCosmosVideos.map((url, index) => (
                   <div
                     key={index}
@@ -412,6 +412,26 @@ export default function Index() {
                 ))}
               </div>
             </div>
+
+            {/* Feel the Cosmos Playlist */}
+            {feelCosmosSongs.length > 0 && (
+              <div className="mb-12">
+                <h4 className="text-2xl font-bold text-cosmic-purple mb-6">Featured Playlist</h4>
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <div className="space-y-3">
+                    {feelCosmosSongs.map((song, index) => (
+                      <div
+                        key={index}
+                        className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-lg p-4"
+                      >
+                        <h5 className="font-semibold text-gray-100 mb-1">{song.title}</h5>
+                        <p className="text-xs text-gray-500 truncate">{song.url}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="text-center mt-12">
               <button className="btn-cosmic">
