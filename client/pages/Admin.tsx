@@ -109,6 +109,16 @@ export default function Admin() {
     return Array(10).fill(null).map(() => ({ title: "", url: "" }));
   });
 
+  const [podcastVideos, setPodcastVideos] = useState<string[]>(() => {
+    const saved = localStorage.getItem("podcast-videos");
+    return saved ? JSON.parse(saved) : ["", "", "", ""];
+  });
+
+  const [activePodcastVideosList, setActivePodcastVideosList] = useState<boolean[]>(() => {
+    const saved = localStorage.getItem("podcast-videos-list-active");
+    return saved ? JSON.parse(saved) : [true, true, true, true];
+  });
+
   // Activation state for sections
   const [activeCosmicVideosList, setActiveCosmicVideosList] = useState<boolean[]>(() => {
     const saved = localStorage.getItem("cosmic-videos-list-active");
