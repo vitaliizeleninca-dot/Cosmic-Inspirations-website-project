@@ -19,10 +19,12 @@ const STORAGE_KEY = "cosmic-playlist-tracks";
 
 export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
   const playerRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
   const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
   const [repeatMode, setRepeatMode] = useState<"one" | "all">("all");
   const [isShuffle, setIsShuffle] = useState(false);
+  const checkIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Load tracks from localStorage on mount and when modal opens
   useEffect(() => {
@@ -41,6 +43,74 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
       }
     }
   }, [isOpen]);
+
+  // Auto-play next track when current ends
+  const handleTrackEnd = useCallback(() => {
+    if (!currentTrack || tracks.length === 0) return;
+
+    const currentIndex = tracks.findIndex((t) => t.id === currentTrack.id);
+
+    if (repeatMode === "one") {
+      // Repeat current - reload iframe
+      const iframe = iframeRef.current;
+      if (iframe) {
+        const src = iframe.src.split("?")[0];
+        iframe.src = src + "?autoplay=1";
+      }
+    } else if (isShuffle) {
+      // Shuffle - random track
+      const randomIndex = Math.floor(Math.random() * tracks.length);
+      setCurrentTrack(tracks[randomIndex]);
+    } else {
+      // Sequential or repeat all
+      if (currentIndex < tracks.length - 1) {
+        setCurrentTrack(tracks[currentIndex + 1]);
+      } else if (repeatMode === "all") {
+        // Loop to beginning
+        setCurrentTrack(tracks[0]);
+      }
+    }
+  }, [currentTrack, tracks, repeatMode, isShuffle]);
+
+  // Monitor video duration and auto-advance
+  useEffect(() => {
+    if (!isOpen || !currentTrack) return;
+
+    const checkProgress = () => {
+      const iframe = iframeRef.current;
+      if (!iframe) return;
+
+      // Try to detect if video is about to end by checking elapsed time
+      // YouTube videos typically have their duration, but we can estimate based on common lengths
+      // For simplicity, we'll check every second and estimate completion
+      try {
+        // Create a hidden check - YouTube IFrame API would be ideal but requires additional setup
+        // For now, we'll use a simple duration estimate based on the track
+        const estimatedDuration = parseDuration(currentTrack.duration || "5:00");
+        const checkTime = setInterval(() => {
+          // Since we can't directly access YouTube video time via iframe,
+          // we'll use a simpler approach: check elapsed time since track start
+          handleTrackEnd();
+          clearInterval(checkTime);
+        }, (estimatedDuration - 2) * 1000); // Trigger 2 seconds before end
+
+        return () => clearInterval(checkTime);
+      } catch (e) {
+        console.error("Error monitoring track progress:", e);
+      }
+    };
+
+    checkProgress();
+  }, [currentTrack, isOpen, handleTrackEnd]);
+
+  const parseDuration = (duration: string): number => {
+    if (!duration) return 300; // Default 5 minutes
+    const parts = duration.split(":");
+    if (parts.length === 2) {
+      return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+    }
+    return 300;
+  };
 
   if (!isOpen) return null;
 
