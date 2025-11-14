@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Edit2, Save, X, ArrowLeft, Music } from "lucide-react";
+import { Plus, Trash2, Edit2, Save, X, ArrowLeft, Music, Podcast } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
@@ -75,7 +75,6 @@ export default function Admin() {
       try {
         const loaded = JSON.parse(saved);
         const songs = loaded.map((track: Track) => ({ title: track.title, url: track.youtubeUrl }));
-        // Ensure we have exactly 10 slots
         while (songs.length < 10) {
           songs.push({ title: "", url: "" });
         }
@@ -347,35 +346,6 @@ export default function Admin() {
     localStorage.setItem(AMBIENT_STORAGE_KEY, JSON.stringify(newTracks));
   };
 
-  const toggleCosmicVideoActive = (index: number, isActive: boolean) => {
-    const updated = [...activeCosmicVideosList];
-    updated[index] = isActive;
-    setActiveCosmicVideosList(updated);
-    localStorage.setItem("cosmic-videos-list-active", JSON.stringify(updated));
-  };
-
-  const togglePlaylistVideosActive = (isActive: boolean) => {
-    setActivePlaylistVideos(isActive);
-    localStorage.setItem("playlist-videos-active", JSON.stringify(isActive));
-  };
-
-  const togglePlaylistSongsActive = (isActive: boolean) => {
-    setActivePlaylistSongs(isActive);
-    localStorage.setItem("playlist-songs-active", JSON.stringify(isActive));
-  };
-
-  const toggleFeelCosmosVideoActive = (index: number, isActive: boolean) => {
-    const updated = [...activeFeelCosmosVideosList];
-    updated[index] = isActive;
-    setActiveFeelCosmosVideosList(updated);
-    localStorage.setItem("feel-cosmos-videos-list-active", JSON.stringify(updated));
-  };
-
-  const toggleFeelCosmosSongsActive = (isActive: boolean) => {
-    setActiveFeelCosmosSongs(isActive);
-    localStorage.setItem("feel-cosmos-songs-active", JSON.stringify(isActive));
-  };
-
   const addAmbientTrack = () => {
     if (!newAmbientTitle.trim() || !newAmbientUrl.trim()) {
       alert("Please fill in both title and YouTube link");
@@ -413,6 +383,35 @@ export default function Admin() {
     updated[index] = url;
     setPodcastVideos(updated);
     localStorage.setItem("podcast-videos", JSON.stringify(updated));
+  };
+
+  const toggleCosmicVideoActive = (index: number, isActive: boolean) => {
+    const updated = [...activeCosmicVideosList];
+    updated[index] = isActive;
+    setActiveCosmicVideosList(updated);
+    localStorage.setItem("cosmic-videos-list-active", JSON.stringify(updated));
+  };
+
+  const togglePlaylistVideosActive = (isActive: boolean) => {
+    setActivePlaylistVideos(isActive);
+    localStorage.setItem("playlist-videos-active", JSON.stringify(isActive));
+  };
+
+  const togglePlaylistSongsActive = (isActive: boolean) => {
+    setActivePlaylistSongs(isActive);
+    localStorage.setItem("playlist-songs-active", JSON.stringify(isActive));
+  };
+
+  const toggleFeelCosmosVideoActive = (index: number, isActive: boolean) => {
+    const updated = [...activeFeelCosmosVideosList];
+    updated[index] = isActive;
+    setActiveFeelCosmosVideosList(updated);
+    localStorage.setItem("feel-cosmos-videos-list-active", JSON.stringify(updated));
+  };
+
+  const toggleFeelCosmosSongsActive = (isActive: boolean) => {
+    setActiveFeelCosmosSongs(isActive);
+    localStorage.setItem("feel-cosmos-songs-active", JSON.stringify(isActive));
   };
 
   const togglePodcastVideoActive = (index: number, isActive: boolean) => {
@@ -456,123 +455,44 @@ export default function Admin() {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="ambient" className="mt-8">
-            {/* Ambient Music Player */}
-            <div className="space-y-6">
-              {/* Current Player */}
-              {currentAmbientTrack ? (
-                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
-                  <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Now Playing</h2>
-                  <h3 className="text-lg font-semibold text-gray-100 mb-4">{currentAmbientTrack.title}</h3>
+          <TabsContent value="ambient" className="mt-8 space-y-8">
+            {/* AI Art Podcast Info */}
+            <div>
+              <h2 className="text-2xl font-bold mb-2 text-cosmic-purple">AI Art Podcast</h2>
+              <p className="text-cosmic-purple text-lg font-semibold mb-4">Legendary Avatars</p>
+              <p className="text-gray-300 mb-6">
+                Dive into conversations with AI-generated legendary avatars from across the cosmos. Explore storytelling, philosophy, and creativity through the eyes of artificial intelligences shaped by the universe.
+              </p>
+            </div>
 
-                  <div className="rounded-lg overflow-hidden border border-cosmic-purple/30 bg-black mb-6 aspect-video">
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={currentAmbientTrack.youtubeUrl}
-                      title={currentAmbientTrack.title}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-sm text-gray-400">Volume</label>
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={ambientVolume}
-                      onChange={(e) => setAmbientVolume(Number(e.target.value))}
-                      className="w-full"
-                    />
-                    <div className="text-sm text-gray-400">{ambientVolume}%</div>
-                  </div>
-                </div>
-              ) : null}
-
-              {/* Add New Ambient Track */}
-              <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
-                <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Add Ambient Track</h2>
-                <div className="space-y-4 mb-6">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-400 mb-2">Title</label>
-                    <input
-                      type="text"
-                      value={newAmbientTitle}
-                      onChange={(e) => setNewAmbientTitle(e.target.value)}
-                      placeholder="e.g., Deep Space Ambient"
-                      className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-400 mb-2">YouTube Link</label>
-                    <input
-                      type="text"
-                      value={newAmbientUrl}
-                      onChange={(e) => setNewAmbientUrl(e.target.value)}
-                      placeholder="youtube.com/watch?v=... or youtu.be/..."
-                      className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
-                    />
-                  </div>
-                </div>
-                <button
-                  onClick={addAmbientTrack}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:opacity-90 transition"
-                >
-                  <Plus className="w-5 h-5" />
-                  Add Ambient Track
-                </button>
-              </div>
-
-              {/* Ambient Tracks List */}
-              <div>
-                <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Available Ambient Tracks ({ambientTracks.length})</h2>
-                <div className="space-y-3">
-                  {ambientTracks.length === 0 ? (
-                    <p className="text-gray-500 text-center py-8">No ambient tracks added yet.</p>
-                  ) : (
-                    ambientTracks.map((track) => (
-                      <div
-                        key={track.id}
-                        className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-lg p-4 hover:border-cosmic-purple/50 transition flex items-center justify-between"
+            {/* Podcast Videos Section */}
+            <div>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Podcast Episodes Videos</h2>
+              <div className="grid grid-cols-2 gap-6">
+                {podcastVideos.map((url, index) => (
+                  <div key={index} className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col ${activePodcastVideosList[index] ? "" : "opacity-50"}`}>
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-semibold text-cosmic-purple">Episode {index + 1}</h3>
+                      <button
+                        onClick={() => togglePodcastVideoActive(index, !activePodcastVideosList[index])}
+                        className={`px-3 py-1 rounded text-xs font-semibold transition ${
+                          activePodcastVideosList[index]
+                            ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
+                            : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
+                        }`}
                       >
-                        <button
-                          onClick={() => setCurrentAmbientTrack(track)}
-                          className="flex-1 text-left hover:text-cosmic-purple transition"
-                        >
-                          <h3 className={`font-semibold mb-1 ${
-                            currentAmbientTrack?.id === track.id ? "text-cosmic-purple" : "text-gray-100"
-                          }`}>
-                            {track.title}
-                          </h3>
-                          <p className="text-xs text-gray-500 truncate">{track.youtubeUrl}</p>
-                        </button>
-                        <button
-                          onClick={() => deleteAmbientTrack(track.id)}
-                          className="p-2 rounded hover:bg-red-600/20 text-red-400 transition ml-4"
-                          title="Delete"
-                        >
-                          <Trash2 className="w-5 h-5" />
-                        </button>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-
-              {/* Info */}
-              <div className="p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
-                <p className="text-sm text-gray-400">
-                  💡 <strong>Tip:</strong> All changes are saved automatically in your browser.
-                </p>
-                <p className="text-xs text-gray-500">
-                  ��� Use YouTube links (youtube.com/watch?v=... or youtu.be/...)<br/>
-                  • Click on a track to play it<br/>
-                  • Adjust volume with the slider
-                </p>
+                        {activePodcastVideosList[index] ? "On" : "Off"}
+                      </button>
+                    </div>
+                    <textarea
+                      value={url}
+                      onChange={(e) => savePodcastVideo(index, e.target.value)}
+                      placeholder="youtube.com/watch?v=xxx or youtu.be/yyy"
+                      className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
+                      disabled={!activePodcastVideosList[index]}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </TabsContent>
