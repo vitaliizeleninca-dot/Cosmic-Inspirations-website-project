@@ -73,7 +73,12 @@ export default function Admin() {
     if (saved) {
       try {
         const loaded = JSON.parse(saved);
-        return loaded.map((track: Track) => ({ title: track.title, url: track.youtubeUrl }));
+        const songs = loaded.map((track: Track) => ({ title: track.title, url: track.youtubeUrl }));
+        // Ensure we have exactly 10 slots
+        while (songs.length < 10) {
+          songs.push({ title: "", url: "" });
+        }
+        return songs.slice(0, 10);
       } catch (e) {
         return Array(10).fill(null).map(() => ({ title: "", url: "" }));
       }
@@ -529,7 +534,7 @@ export default function Admin() {
               </p>
               <p className="text-xs text-gray-500">
                 • Cosmic Ambient Videos появляются в секции Music<br/>
-                • Audio Playlist появляется в модальном окне на главной<br/>
+                • Audio Playlist появляется в модально�� окне на главной<br/>
                 • Playlist Tracks Videos появляются в отдельной секции
               </p>
             </div>
