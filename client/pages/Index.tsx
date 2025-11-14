@@ -398,80 +398,84 @@ export default function Index() {
         )}
 
         {/* Feel the Cosmos Interactive Experience Section */}
-        <section
-          id="experience"
-          className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
-        >
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cosmic-purple/30 rounded-full filter blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
-          </div>
-
-          <div className="relative z-10 max-w-6xl w-full">
-            <div className="text-center mb-16">
-              <h3 className="text-5xl font-bold mb-4">
-                Feel the Cosmos
-              </h3>
-              <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                Interactive Experience
-              </p>
-              <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                Engage with a dynamic, interactive universe that responds to your
-                presence. Move through dimensional spaces and discover hidden
-                connections between art, sound, and reality.
-              </p>
+        {(activeFeelCosmosVideos || activeFeelCosmosSongs) && (
+          <section
+            id="experience"
+            className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
+          >
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cosmic-purple/30 rounded-full filter blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
             </div>
 
-            {/* Feel the Cosmos Videos */}
-            <div className="mb-12">
-              <h4 className="text-2xl font-bold text-cosmic-purple mb-6">Featured Videos</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                {feelCosmosVideos.map((url, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={url}
-                      title={`Feel the Cosmos Video ${index + 1}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
-                ))}
+            <div className="relative z-10 max-w-6xl w-full">
+              <div className="text-center mb-16">
+                <h3 className="text-5xl font-bold mb-4">
+                  Feel the Cosmos
+                </h3>
+                <p className="text-cosmic-purple text-lg font-semibold mb-4">
+                  Interactive Experience
+                </p>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                  Engage with a dynamic, interactive universe that responds to your
+                  presence. Move through dimensional spaces and discover hidden
+                  connections between art, sound, and reality.
+                </p>
               </div>
-            </div>
 
-            {/* Feel the Cosmos Playlist */}
-            {feelCosmosSongs.length > 0 && (
-              <div className="mb-12">
-                <h4 className="text-2xl font-bold text-cosmic-purple mb-6">Featured Playlist</h4>
-                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
-                  <div className="space-y-3">
-                    {feelCosmosSongs.map((song, index) => (
+              {/* Feel the Cosmos Videos */}
+              {activeFeelCosmosVideos && (
+                <div className="mb-12">
+                  <h4 className="text-2xl font-bold text-cosmic-purple mb-6">Featured Videos</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    {feelCosmosVideos.map((url, index) => (
                       <div
                         key={index}
-                        className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-lg p-4"
+                        className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
                       >
-                        <h5 className="font-semibold text-gray-100 mb-1">{song.title}</h5>
-                        <p className="text-xs text-gray-500 truncate">{song.url}</p>
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={url}
+                          title={`Feel the Cosmos Video ${index + 1}`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                        />
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            <div className="text-center mt-12">
-              <button className="btn-cosmic">
-                Start Your Journey
-              </button>
+              {/* Feel the Cosmos Playlist */}
+              {activeFeelCosmosSongs && feelCosmosSongs.length > 0 && (
+                <div className="mb-12">
+                  <h4 className="text-2xl font-bold text-cosmic-purple mb-6">Featured Playlist</h4>
+                  <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                    <div className="space-y-3">
+                      {feelCosmosSongs.map((song, index) => (
+                        <div
+                          key={index}
+                          className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-lg p-4"
+                        >
+                          <h5 className="font-semibold text-gray-100 mb-1">{song.title}</h5>
+                          <p className="text-xs text-gray-500 truncate">{song.url}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="text-center mt-12">
+                <button className="btn-cosmic">
+                  Start Your Journey
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* NFT Collections Section */}
         <section
