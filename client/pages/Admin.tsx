@@ -12,8 +12,9 @@ const STORAGE_KEY = "cosmic-playlist-tracks";
 
 export default function Admin() {
   const [tracks, setTracks] = useState<Track[]>([]);
-  const [newTitle, setNewTitle] = useState("");
-  const [newUrl, setNewUrl] = useState("");
+  const [bulkTracks, setBulkTracks] = useState<Array<{ title: string; url: string }>>(
+    Array(10).fill(null).map(() => ({ title: "", url: "" }))
+  );
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [editUrl, setEditUrl] = useState("");
@@ -85,7 +86,7 @@ export default function Admin() {
 
   const saveEdit = () => {
     if (!editTitle.trim()) {
-      alert("Введите название трека");
+      alert("В��едите название трека");
       return;
     }
 
