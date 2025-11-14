@@ -68,6 +68,19 @@ export default function Admin() {
         console.error("Failed to load tracks:", e);
       }
     }
+
+    const savedAmbient = localStorage.getItem(AMBIENT_STORAGE_KEY);
+    if (savedAmbient) {
+      try {
+        const loaded = JSON.parse(savedAmbient);
+        setAmbientTracks(loaded);
+        if (loaded.length > 0) {
+          setCurrentAmbientTrack(loaded[0]);
+        }
+      } catch (e) {
+        console.error("Failed to load ambient tracks:", e);
+      }
+    }
   }, []);
 
   // Save tracks to localStorage
@@ -208,7 +221,7 @@ export default function Admin() {
                     type="text"
                     value={track.title}
                     onChange={(e) => updateBulkTrack(index, "title", e.target.value)}
-                    placeholder="Наприме��: Nebula Dreams"
+                    placeholder="Например: Nebula Dreams"
                     className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
                   />
                 </div>
