@@ -337,9 +337,11 @@ export default function Admin() {
     localStorage.setItem(AMBIENT_STORAGE_KEY, JSON.stringify(newTracks));
   };
 
-  const toggleCosmicVideosActive = (isActive: boolean) => {
-    setActiveCosmicVideos(isActive);
-    localStorage.setItem("cosmic-videos-active", JSON.stringify(isActive));
+  const toggleCosmicVideoActive = (index: number, isActive: boolean) => {
+    const updated = [...activeCosmicVideosList];
+    updated[index] = isActive;
+    setActiveCosmicVideosList(updated);
+    localStorage.setItem("cosmic-videos-list-active", JSON.stringify(updated));
   };
 
   const togglePlaylistVideosActive = (isActive: boolean) => {
