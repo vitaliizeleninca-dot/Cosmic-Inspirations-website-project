@@ -647,7 +647,6 @@ export default function Admin() {
                         onChange={(e) => updateFeelCosmosSong(index, "title", e.target.value)}
                         placeholder="e.g., Cosmic Meditation"
                         className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
-                        disabled={!activeFeelCosmosSongs}
                       />
                     </div>
                     <div>
@@ -660,7 +659,6 @@ export default function Admin() {
                         onChange={(e) => updateFeelCosmosSong(index, "url", e.target.value)}
                         placeholder="youtube.com/watch?v=... or youtu.be/..."
                         className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
-                        disabled={!activeFeelCosmosSongs}
                       />
                     </div>
                   </div>
