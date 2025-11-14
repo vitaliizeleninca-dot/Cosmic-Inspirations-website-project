@@ -636,8 +636,20 @@ export default function Admin() {
 
           <TabsContent value="cosmos" className="mt-8 space-y-8">
             {/* Feel the Cosmos Videos Section */}
-            <div>
-              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Feel the Cosmos Videos</h2>
+            <div className={activeFeelCosmosVideos ? "" : "opacity-50"}>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-cosmic-purple">Feel the Cosmos Videos</h2>
+                <button
+                  onClick={() => toggleFeelCosmosVideosActive(!activeFeelCosmosVideos)}
+                  className={`px-4 py-2 rounded-lg font-semibold transition ${
+                    activeFeelCosmosVideos
+                      ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
+                      : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
+                  }`}
+                >
+                  {activeFeelCosmosVideos ? "Active" : "Inactive"}
+                </button>
+              </div>
               <div className="grid grid-cols-2 gap-6">
                 {feelCosmosVideos.map((url, index) => (
                   <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
@@ -647,6 +659,7 @@ export default function Admin() {
                       onChange={(e) => saveFeelCosmosVideo(index, e.target.value)}
                       placeholder="youtube.com/watch?v=xxx or youtu.be/yyy"
                       className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
+                      disabled={!activeFeelCosmosVideos}
                     />
                   </div>
                 ))}
@@ -654,8 +667,20 @@ export default function Admin() {
             </div>
 
             {/* Feel the Cosmos Songs Section */}
-            <div>
-              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Feel the Cosmos Playlist (up to 10 songs)</h2>
+            <div className={activeFeelCosmosSongs ? "" : "opacity-50"}>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-cosmic-purple">Feel the Cosmos Playlist (up to 10 songs)</h2>
+                <button
+                  onClick={() => toggleFeelCosmosSongsActive(!activeFeelCosmosSongs)}
+                  className={`px-4 py-2 rounded-lg font-semibold transition ${
+                    activeFeelCosmosSongs
+                      ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
+                      : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
+                  }`}
+                >
+                  {activeFeelCosmosSongs ? "Active" : "Inactive"}
+                </button>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {feelCosmosSongs.map((song, index) => (
                   <div key={index} className="space-y-3 p-4 rounded-lg bg-cosmic-dark/50 border border-cosmic-purple/20">
@@ -672,6 +697,7 @@ export default function Admin() {
                         onChange={(e) => updateFeelCosmosSong(index, "title", e.target.value)}
                         placeholder="e.g., Cosmic Meditation"
                         className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                        disabled={!activeFeelCosmosSongs}
                       />
                     </div>
                     <div>
@@ -684,6 +710,7 @@ export default function Admin() {
                         onChange={(e) => updateFeelCosmosSong(index, "url", e.target.value)}
                         placeholder="youtube.com/watch?v=... or youtu.be/..."
                         className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                        disabled={!activeFeelCosmosSongs}
                       />
                     </div>
                   </div>
