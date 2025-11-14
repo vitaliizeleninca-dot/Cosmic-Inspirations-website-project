@@ -232,6 +232,13 @@ export default function Admin() {
     localStorage.setItem("cosmic-videos", JSON.stringify(updated));
   };
 
+  const savePlaylistVideo = (index: number, url: string) => {
+    const updated = [...playlistVideos];
+    updated[index] = url;
+    setPlaylistVideos(updated);
+    localStorage.setItem("playlist-videos", JSON.stringify(updated));
+  };
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
