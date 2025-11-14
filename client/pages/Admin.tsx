@@ -578,51 +578,33 @@ export default function Admin() {
           </TabsContent>
 
           <TabsContent value="links" className="mt-8">
-            {/* Quick Links Manager - 4 Panels */}
-            <div className="space-y-6">
+            {/* Playlist Links Section */}
+            <div className="mb-8">
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Playlist Tracks</h2>
               <div className="grid grid-cols-2 gap-6">
-                {quickLinksPanels.map((panel, panelIndex) => (
-                  <div key={panelIndex} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
-                    {/* Type Toggle Buttons */}
-                    <div className="flex gap-2 mb-3">
-                      <button
-                        onClick={() => updatePanelType(panelIndex, "playlist")}
-                        className={`flex-1 py-1 px-2 text-xs rounded font-semibold transition ${
-                          panel.type === "playlist"
-                            ? "bg-cosmic-purple text-cosmic-dark"
-                            : "bg-cosmic-purple/20 text-gray-400 hover:bg-cosmic-purple/40"
-                        }`}
-                      >
-                        Playlist
-                      </button>
-                      <button
-                        onClick={() => updatePanelType(panelIndex, "ambient")}
-                        className={`flex-1 py-1 px-2 text-xs rounded font-semibold transition ${
-                          panel.type === "ambient"
-                            ? "bg-cosmic-purple text-cosmic-dark"
-                            : "bg-cosmic-purple/20 text-gray-400 hover:bg-cosmic-purple/40"
-                        }`}
-                      >
-                        Ambient
-                      </button>
-                    </div>
-
-                    {/* Textarea for links */}
+                {playlistLinks.map((text, index) => (
+                  <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
                     <textarea
-                      value={panel.text}
-                      onChange={(e) => updatePanelText(panelIndex, e.target.value)}
+                      value={text}
+                      onChange={(e) => {
+                        const updated = [...playlistLinks];
+                        updated[index] = e.target.value;
+                        setPlaylistLinks(updated);
+                      }}
                       placeholder="youtube.com/watch?v=xxx&#10;youtu.be/yyy"
                       className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none min-h-32 mb-3"
                     />
-
-                    {/* Link counter */}
                     <p className="text-xs text-gray-500 mb-3">
-                      {panel.text.split('\n').filter(l => l.trim()).length} link(s)
+                      {text.split('\n').filter(l => l.trim()).length} link(s)
                     </p>
-
-                    {/* Add button for this panel */}
                     <button
-                      onClick={() => addQuickLinksFromPanel(panelIndex)}
+                      onClick={() => {
+                        if (addLinksFromPanel(text, "playlist")) {
+                          const updated = [...playlistLinks];
+                          updated[index] = "";
+                          setPlaylistLinks(updated);
+                        }
+                      }}
                       className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold text-sm hover:opacity-90 transition"
                     >
                       <Plus className="w-4 h-4" />
@@ -631,19 +613,55 @@ export default function Admin() {
                   </div>
                 ))}
               </div>
+            </div>
 
-              {/* Info */}
-              <div className="p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
-                <p className="text-sm text-gray-400">
-                  💡 <strong>Tip:</strong> Paste YouTube links one per line in any window
-                </p>
-                <p className="text-xs text-gray-500">
-                  • Choose Playlist or Ambient for each window<br/>
-                  • Links will be automatically converted to embed format<br/>
-                  • Each link gets an auto-generated title<br/>
-                  • All changes are saved automatically
-                </p>
+            {/* Ambient Links Section */}
+            <div>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Ambient Music</h2>
+              <div className="grid grid-cols-2 gap-6">
+                {ambientLinks.map((text, index) => (
+                  <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
+                    <textarea
+                      value={text}
+                      onChange={(e) => {
+                        const updated = [...ambientLinks];
+                        updated[index] = e.target.value;
+                        setAmbientLinks(updated);
+                      }}
+                      placeholder="youtube.com/watch?v=xxx&#10;youtu.be/yyy"
+                      className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none min-h-32 mb-3"
+                    />
+                    <p className="text-xs text-gray-500 mb-3">
+                      {text.split('\n').filter(l => l.trim()).length} link(s)
+                    </p>
+                    <button
+                      onClick={() => {
+                        if (addLinksFromPanel(text, "ambient")) {
+                          const updated = [...ambientLinks];
+                          updated[index] = "";
+                          setAmbientLinks(updated);
+                        }
+                      }}
+                      className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold text-sm hover:opacity-90 transition"
+                    >
+                      <Plus className="w-4 h-4" />
+                      Add Links
+                    </button>
+                  </div>
+                ))}
               </div>
+            </div>
+
+            {/* Info */}
+            <div className="mt-8 p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
+              <p className="text-sm text-gray-400">
+                💡 <strong>Tip:</strong> Paste YouTube links one per line
+              </p>
+              <p className="text-xs text-gray-500">
+                • Top section adds to Playlist Tracks<br/>
+                • Bottom section adds to Ambient Music<br/>
+                • Links are automatically converted to embed format
+              </p>
             </div>
           </TabsContent>
         </Tabs>
