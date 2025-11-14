@@ -12,12 +12,15 @@ const DEFAULT_COSMIC_VIDEOS = [
   "https://www.youtube.com/embed/lFcSrYw-ARY"
 ];
 
+const DEFAULT_PLAYLIST_VIDEOS = ["", "", "", ""];
+
 export default function Index() {
   const navigate = useNavigate();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
   const [cosmicVideos, setCosmicVideos] = useState<string[]>(DEFAULT_COSMIC_VIDEOS);
+  const [playlistVideos, setPlaylistVideos] = useState<string[]>(DEFAULT_PLAYLIST_VIDEOS);
 
   useEffect(() => {
     const saved = localStorage.getItem("cosmic-videos");
@@ -31,6 +34,19 @@ export default function Index() {
         setCosmicVideos(videos);
       } catch (e) {
         setCosmicVideos(DEFAULT_COSMIC_VIDEOS);
+      }
+    }
+
+    const savedPlaylist = localStorage.getItem("playlist-videos");
+    if (savedPlaylist) {
+      try {
+        const parsed = JSON.parse(savedPlaylist);
+        const videos = parsed.map((url: string) =>
+          url.trim() ? convertToEmbedUrl(url) : ""
+        ).filter((url: string) => url);
+        setPlaylistVideos(videos);
+      } catch (e) {
+        setPlaylistVideos(DEFAULT_PLAYLIST_VIDEOS);
       }
     }
   }, []);
