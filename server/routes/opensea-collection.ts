@@ -45,16 +45,79 @@ export const handleOpenSeaCollection: RequestHandler = async (req, res) => {
 
 async function handleOpenSeaUrl(fullUrl: string, res: any): Promise<void> {
   try {
+    let collectionSlug: string | null = null;
+
     const collectionMatch = fullUrl.match(/opensea\.io\/collection\/([a-z0-9\-]+)/i);
-    if (!collectionMatch) {
-      res.status(400).json({
-        success: false,
-        error: "Invalid OpenSea collection URL format",
+    if (collectionMatch) {
+      collectionSlug = collectionMatch[1];
+    }
+
+    if (!collectionSlug) {
+      const itemMatch = fullUrl.match(/opensea\.io\/(?:assets\/)?(?:[a-z-]+\/)?(?:0x[a-f0-9]+|ethereum)?\/(\d+)/i);
+      if (itemMatch) {
+        try {
+          const pageResponse = await fetch(fullUrl, {
+            headers: {
+              "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
+            },
+          });
+
+          if (pageResponse.ok) {
+            const html = await pageResponse.text();
+            const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
+
+            if (ogImageMatch && ogImageMatch[1]) {
+              res.json({
+                success: true,
+                imageUrl: ogImageMatch[1],
+                collectionUrl: fullUrl,
+              });
+              return;
+            }
+          }
+        } catch (pageErr) {
+          console.warn("Could not fetch OpenSea item page:", pageErr);
+        }
+
+        res.json({
+          success: true,
+          imageUrl: null,
+          collectionUrl: fullUrl,
+        });
+        return;
+      }
+
+      try {
+        const pageResponse = await fetch(fullUrl, {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
+          },
+        });
+
+        if (pageResponse.ok) {
+          const html = await pageResponse.text();
+          const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
+
+          if (ogImageMatch && ogImageMatch[1]) {
+            res.json({
+              success: true,
+              imageUrl: ogImageMatch[1],
+              collectionUrl: fullUrl,
+            });
+            return;
+          }
+        }
+      } catch (pageErr) {
+        console.warn("Could not fetch OpenSea page:", pageErr);
+      }
+
+      res.json({
+        success: true,
+        imageUrl: null,
+        collectionUrl: fullUrl,
       });
       return;
     }
-
-    const collectionSlug = collectionMatch[1];
 
     try {
       const apiUrl = `https://api.opensea.io/api/v2/collections/${collectionSlug}`;
@@ -92,7 +155,7 @@ async function handleOpenSeaUrl(fullUrl: string, res: any): Promise<void> {
     if (pageResponse.ok) {
       const html = await pageResponse.text();
       const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
-      
+
       if (ogImageMatch && ogImageMatch[1]) {
         res.json({
           success: true,
