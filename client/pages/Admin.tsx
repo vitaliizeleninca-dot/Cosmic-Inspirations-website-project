@@ -50,28 +50,47 @@ export default function Admin() {
     return "";
   };
 
-  const addTrack = () => {
-    if (!newTitle.trim() || !newUrl.trim()) {
-      alert("Введите название трека и YouTube ссылку");
+  const addBulkTracks = () => {
+    const newTracks: Track[] = [];
+    let errorCount = 0;
+
+    bulkTracks.forEach((track, index) => {
+      if (!track.title.trim() || !track.url.trim()) {
+        return;
+      }
+
+      const videoId = extractVideoId(track.url);
+      if (!videoId) {
+        errorCount++;
+        return;
+      }
+
+      newTracks.push({
+        id: Date.now().toString() + index,
+        title: track.title,
+        youtubeUrl: `https://www.youtube.com/embed/${videoId}`,
+        duration: "0:00",
+      });
+    });
+
+    if (newTracks.length === 0) {
+      alert("Заполните хотя бы одно поле с названием и корректной YouTube ссылкой");
       return;
     }
 
-    const videoId = extractVideoId(newUrl);
-    if (!videoId) {
-      alert("Неверная YouTube ссылка. Используйте ссылку вида: youtube.com/watch?v=... или youtu.be/...");
-      return;
+    if (errorCount > 0) {
+      alert(`${errorCount} ссылок были пропущены - проверьте формат YouTube ссылок`);
     }
 
-    const track: Track = {
-      id: Date.now().toString(),
-      title: newTitle,
-      youtubeUrl: `https://www.youtube.com/embed/${videoId}`,
-      duration: "0:00",
-    };
+    saveTracks([...tracks, ...newTracks]);
+    setBulkTracks(Array(10).fill(null).map(() => ({ title: "", url: "" })));
+    alert(`Добавлено ${newTracks.length} треков!`);
+  };
 
-    saveTracks([...tracks, track]);
-    setNewTitle("");
-    setNewUrl("");
+  const updateBulkTrack = (index: number, field: "title" | "url", value: string) => {
+    const updated = [...bulkTracks];
+    updated[index] = { ...updated[index], [field]: value };
+    setBulkTracks(updated);
   };
 
   const deleteTrack = (id: string) => {
@@ -86,7 +105,7 @@ export default function Admin() {
 
   const saveEdit = () => {
     if (!editTitle.trim()) {
-      alert("В��едите название трека");
+      alert("Введите название трека");
       return;
     }
 
