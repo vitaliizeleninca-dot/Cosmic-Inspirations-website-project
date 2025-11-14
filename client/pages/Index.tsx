@@ -257,16 +257,8 @@ export default function Index() {
           <div className="relative z-10 w-full max-w-6xl">
             <div className="text-center mb-16">
               <h3 className="text-5xl font-bold mb-4">
-                AI Art Podcast
+                AI Art Podcast Videos
               </h3>
-              <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                Legendary Avatars
-              </p>
-              <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                Dive into conversations with AI-generated legendary avatars from
-                across the cosmos. Explore storytelling, philosophy, and creativity
-                through the eyes of artificial intelligences shaped by the universe.
-              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
