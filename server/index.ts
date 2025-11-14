@@ -4,6 +4,7 @@ import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleNFTCollection } from "./routes/nft-collection";
 import { handleYouTubeDuration } from "./routes/youtube-duration";
+import { handleOpenSeaCollection } from "./routes/opensea-collection";
 
 export function createServer() {
   const app = express();
