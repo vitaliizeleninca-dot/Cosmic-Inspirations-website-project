@@ -146,6 +146,16 @@ export default function Index() {
     if (savedNftVideosListActive) {
       setActiveNftVideosList(JSON.parse(savedNftVideosListActive));
     }
+
+    const savedNftCollections = localStorage.getItem("nft-collections");
+    if (savedNftCollections) {
+      try {
+        const parsed = JSON.parse(savedNftCollections);
+        setNftCollections(parsed);
+      } catch (e) {
+        setNftCollections(["", "", "", "", "", ""]);
+      }
+    }
   }, []);
 
   const convertToEmbedUrl = (url: string): string => {
