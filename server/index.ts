@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleNFTCollection } from "./routes/nft-collection";
+import { handleYouTubeDuration } from "./routes/youtube-duration";
 
 export function createServer() {
   const app = express();
@@ -20,6 +21,7 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
   app.get("/api/nft-collection", handleNFTCollection);
+  app.get("/api/youtube-duration", handleYouTubeDuration);
 
   return app;
 }
