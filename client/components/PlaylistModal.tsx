@@ -44,28 +44,12 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
 
         if (data.success && data.duration) {
           setVideoDuration(data.duration);
-
-          // Also update the track duration in localStorage if it's still 0:00
-          if (currentTrack.duration === "0:00" || !currentTrack.duration) {
-            const updatedTrack = { ...currentTrack, duration: data.formattedDuration };
-            setCurrentTrack(updatedTrack);
-
-            // Update in localStorage
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved) {
-              const allTracks = JSON.parse(saved);
-              const index = allTracks.findIndex((t: PlaylistTrack) => t.id === currentTrack.id);
-              if (index >= 0) {
-                allTracks[index] = updatedTrack;
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(allTracks));
-              }
-            }
-          }
+        } else {
+          setVideoDuration(300); // 5 minutes fallback
         }
       } catch (error) {
         console.error("Failed to fetch YouTube duration:", error);
-        // Fallback to default 5 minutes
-        setVideoDuration(300);
+        setVideoDuration(300); // 5 minutes fallback
       }
     };
 
