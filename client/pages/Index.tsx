@@ -26,7 +26,7 @@ export default function Index() {
   const [activeCosmicVideos, setActiveCosmicVideos] = useState<boolean>(true);
   const [activePlaylistVideos, setActivePlaylistVideos] = useState<boolean>(true);
   const [activePlaylistSongs, setActivePlaylistSongs] = useState<boolean>(true);
-  const [activeFeelCosmosVideos, setActiveFeelCosmosVideos] = useState<boolean>(true);
+  const [activeFeelCosmosVideosList, setActiveFeelCosmosVideosList] = useState<boolean[]>([true, true, true, true]);
   const [activeFeelCosmosSongs, setActiveFeelCosmosSongs] = useState<boolean>(true);
 
   useEffect(() => {
