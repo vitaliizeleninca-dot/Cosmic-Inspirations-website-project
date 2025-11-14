@@ -18,15 +18,9 @@ const DEFAULT_TRACKS: PlaylistTrack[] = [];
 const STORAGE_KEY = "cosmic-playlist-tracks";
 
 export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
   const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
   const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(70);
-  const [isMuted, setIsMuted] = useState(false);
-  const [volumeBeforeMute, setVolumeBeforeMute] = useState(70);
 
   // Load tracks from localStorage on mount and when modal opens
   useEffect(() => {
