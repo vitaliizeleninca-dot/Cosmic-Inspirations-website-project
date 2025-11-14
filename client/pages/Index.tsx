@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Play, Pause, SkipForward, Music, Podcast, Sparkles, Zap } from "lucide-react";
 import Footer from "@/components/Footer";
 import BackgroundModal from "@/components/BackgroundModal";
 import PlaylistModal from "@/components/PlaylistModal";
 
 export default function Index() {
+  const navigate = useNavigate();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
