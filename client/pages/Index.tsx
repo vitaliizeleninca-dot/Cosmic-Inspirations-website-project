@@ -301,7 +301,7 @@ export default function Index() {
         </section>
 
         {/* Cosmic Ambient Music Player Section */}
-        {activeCosmicVideos && (
+        {activeCosmicVideosList.some(v => v) && (
           <section
             id="music"
             className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
@@ -327,21 +327,23 @@ export default function Index() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 {cosmicVideos.map((url, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block"
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={url}
-                      title={`Cosmic Ambient Visualization ${index + 1}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
+                  activeCosmicVideosList[index] && (
+                    <div
+                      key={index}
+                      className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block"
+                    >
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={url}
+                        title={`Cosmic Ambient Visualization ${index + 1}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                      />
+                    </div>
+                  )
                 ))}
               </div>
 
