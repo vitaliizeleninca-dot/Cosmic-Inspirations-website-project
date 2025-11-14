@@ -199,9 +199,10 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
               {/* YouTube Player - Audio Only (Video Hidden) */}
               <div ref={playerRef} className="bg-black rounded-lg border border-cosmic-purple/30 overflow-hidden">
                 <iframe
+                  ref={iframeRef}
                   width="100%"
                   height="60"
-                  src={`${currentTrack.youtubeUrl}?controls=1&modestbranding=1&fs=0`}
+                  src={`${currentTrack.youtubeUrl}?controls=1&modestbranding=1&fs=0&autoplay=1`}
                   title={currentTrack.title}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
