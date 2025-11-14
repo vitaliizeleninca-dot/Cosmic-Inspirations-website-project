@@ -363,46 +363,6 @@ export default function Index() {
           </section>
         )}
 
-        {/* Playlist Tracks Videos Section */}
-        {activePlaylistVideos && playlistVideos.length > 0 && (
-          <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative">
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute bottom-0 right-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
-            </div>
-
-            <div className="relative z-10 w-full max-w-6xl">
-              <div className="text-center mb-16">
-                <h3 className="text-5xl font-bold mb-4">
-                  Playlist Tracks
-                </h3>
-                <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  Featured Videos
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {playlistVideos.map((url, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={url}
-                      title={`Playlist Video ${index + 1}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
         {/* Feel the Cosmos Interactive Experience Section */}
         {(activeFeelCosmosVideosList.some(v => v) || activeFeelCosmosSongs) && (
           <section
