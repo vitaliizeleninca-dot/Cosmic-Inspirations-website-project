@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Play, Pause, SkipForward, Music, Podcast, Sparkles, Zap } from "lucide-react";
 import Footer from "@/components/Footer";
-import BackgroundArtSelector from "@/components/BackgroundArtSelector";
+import BackgroundModal from "@/components/BackgroundModal";
 
 export default function Index() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen overflow-x-hidden">
