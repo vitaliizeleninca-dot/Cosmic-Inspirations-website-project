@@ -254,77 +254,23 @@ export default function Index() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              <a
-                href="https://youtu.be/-NV3FIc7024"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block cursor-pointer hover:opacity-90 transition-opacity"
-              >
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/jgpJVI3tDT0"
-                  title="Cosmic Ambient Visualization 1"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </a>
-
-              <a
-                href="https://youtu.be/2GcTZP27IeM"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block cursor-pointer hover:opacity-90 transition-opacity"
-              >
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/1La4QzGeaaQ"
-                  title="Cosmic Ambient Visualization 2"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </a>
-
-              <a
-                href="https://youtu.be/djwdPu3X3H0"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block cursor-pointer hover:opacity-90 transition-opacity"
-              >
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/TqOneWeDtFI"
-                  title="Cosmic Ambient Visualization 3"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </a>
-
-              <a
-                href="https://youtu.be/EVfd34fKZYo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block cursor-pointer hover:opacity-90 transition-opacity"
-              >
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/lFcSrYw-ARY"
-                  title="Cosmic Ambient Visualization 4"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </a>
+              {cosmicVideos.map((url, index) => (
+                <div
+                  key={index}
+                  className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block"
+                >
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={url}
+                    title={`Cosmic Ambient Visualization ${index + 1}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                </div>
+              ))}
             </div>
 
             <div className="text-center">
