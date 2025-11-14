@@ -103,16 +103,11 @@ export default function BackgroundArtSelector() {
   }, []);
 
   const updatePageBackground = (imageUrl: string) => {
-    // Update body background to use the NFT image with overlay
-    document.body.style.backgroundImage = `
-      linear-gradient(rgba(25, 25, 50, 0.65), rgba(25, 25, 50, 0.65)),
-      url('${imageUrl}')
-    `;
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundPosition = "center";
-    document.body.style.backgroundAttachment = "fixed";
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.animation = "slowZoomSpace 30s ease-in-out infinite";
+    // Update using CSS custom property to maintain animation
+    document.documentElement.style.setProperty(
+      "--bg-image-url",
+      `url('${imageUrl}')`
+    );
   };
 
   const handleNFTSelect = (nft: NFTItem) => {
