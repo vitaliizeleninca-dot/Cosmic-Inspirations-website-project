@@ -118,6 +118,16 @@ export default function Admin() {
     return saved ? JSON.parse(saved) : [true, true, true, true];
   });
 
+  const [nftVideos, setNftVideos] = useState<string[]>(() => {
+    const saved = localStorage.getItem("nft-videos");
+    return saved ? JSON.parse(saved) : ["", "", "", ""];
+  });
+
+  const [activeNftVideosList, setActiveNftVideosList] = useState<boolean[]>(() => {
+    const saved = localStorage.getItem("nft-videos-list-active");
+    return saved ? JSON.parse(saved) : [true, true, true, true];
+  });
+
   // Activation state for sections
   const [activeCosmicVideosList, setActiveCosmicVideosList] = useState<boolean[]>(() => {
     const saved = localStorage.getItem("cosmic-videos-list-active");
