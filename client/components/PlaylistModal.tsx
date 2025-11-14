@@ -1,5 +1,5 @@
-import { X, Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Shuffle, Repeat, Repeat1 } from "lucide-react";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { X } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface PlaylistTrack {
   id: string;
@@ -17,44 +17,9 @@ const DEFAULT_TRACKS: PlaylistTrack[] = [];
 
 const STORAGE_KEY = "cosmic-playlist-tracks";
 
-// YouTube API loaded flag
-let YT: any = null;
-
 export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
-  const playerRef = useRef<HTMLDivElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
   const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
-  const [videoDuration, setVideoDuration] = useState(0);
-  const [repeatMode, setRepeatMode] = useState<"one" | "all">("all");
-  const [isShuffle, setIsShuffle] = useState(false);
-
-
-  // Fetch video duration from server
-  useEffect(() => {
-    if (!isOpen || !currentTrack) return;
-
-    const videoId = currentTrack.youtubeUrl.match(/\/embed\/([a-zA-Z0-9_-]{11})/)?.[1];
-    if (!videoId) return;
-
-    const fetchDuration = async () => {
-      try {
-        const response = await fetch(`/api/youtube-duration?videoId=${videoId}`);
-        const data = await response.json();
-
-        if (data.success && data.duration) {
-          setVideoDuration(data.duration);
-        } else {
-          setVideoDuration(300); // 5 minutes fallback
-        }
-      } catch (error) {
-        console.error("Failed to fetch YouTube duration:", error);
-        setVideoDuration(300); // 5 minutes fallback
-      }
-    };
-
-    fetchDuration();
-  }, [currentTrack, isOpen]);
 
   // Load tracks from localStorage on mount and when modal opens
   useEffect(() => {
@@ -64,6 +29,10 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
         try {
           const loadedTracks = JSON.parse(saved);
           setTracks(loadedTracks.length > 0 ? loadedTracks : DEFAULT_TRACKS);
+          // Set first track as current if none selected
+          if (!currentTrack && loadedTracks.length > 0) {
+            setCurrentTrack(loadedTracks[0]);
+          }
         } catch (e) {
           console.error("Failed to load tracks:", e);
           setTracks(DEFAULT_TRACKS);
@@ -74,121 +43,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     }
   }, [isOpen]);
 
-  // Auto-play next track when current ends
-  const handleTrackEnd = useCallback(() => {
-    if (!currentTrack || tracks.length === 0) return;
-
-    const currentIndex = tracks.findIndex((t) => t.id === currentTrack.id);
-
-    if (repeatMode === "one") {
-      // Repeat current - reload iframe
-      const iframe = iframeRef.current;
-      if (iframe) {
-        const videoId = currentTrack.youtubeUrl.match(/\/embed\/([a-zA-Z0-9_-]{11})/)?.[1];
-        if (videoId) {
-          iframe.src = `https://www.youtube.com/embed/${videoId}?controls=1&modestbranding=1&fs=0&autoplay=1`;
-        }
-      }
-    } else if (isShuffle) {
-      // Shuffle - random track
-      const randomIndex = Math.floor(Math.random() * tracks.length);
-      setCurrentTrack(tracks[randomIndex]);
-    } else {
-      // Sequential or repeat all
-      if (currentIndex < tracks.length - 1) {
-        setCurrentTrack(tracks[currentIndex + 1]);
-      } else if (repeatMode === "all") {
-        // Loop to beginning
-        setCurrentTrack(tracks[0]);
-      }
-    }
-  }, [currentTrack, tracks, repeatMode, isShuffle]);
-
-  // Auto-advance when video finishes
-  useEffect(() => {
-    if (!isOpen || !currentTrack) return;
-
-    const videoId = currentTrack.youtubeUrl.match(/\/embed\/([a-zA-Z0-9_-]{11})/)?.[1];
-    if (!videoId) return;
-
-    // Use video duration if available, otherwise estimate based on typical YouTube music
-    let durationToUse = videoDuration;
-
-    if (!durationToUse && currentTrack.duration && currentTrack.duration !== "0:00") {
-      durationToUse = parseDurationToSeconds(currentTrack.duration);
-    }
-
-    if (!durationToUse) {
-      durationToUse = 300; // 5 minutes default
-    }
-
-    // Auto-advance to next track when current ends
-    const timeoutId = setTimeout(() => {
-      handleTrackEnd();
-    }, durationToUse * 1000);
-
-    return () => clearTimeout(timeoutId);
-  }, [currentTrack, videoDuration, isOpen, handleTrackEnd]);
-
-  const parseDurationToSeconds = (duration: string): number => {
-    if (!duration || duration === "0:00") return 300; // Default 5 minutes
-    const parts = duration.split(":");
-    if (parts.length === 2) {
-      const mins = parseInt(parts[0]) || 0;
-      const secs = parseInt(parts[1]) || 0;
-      return mins * 60 + secs;
-    }
-    return 300;
-  };
-
   if (!isOpen) return null;
-
-  const playTrack = (track: PlaylistTrack) => {
-    setCurrentTrack(track);
-  };
-
-  const nextTrack = () => {
-    if (!currentTrack || tracks.length === 0) return;
-
-    const currentIndex = tracks.findIndex((t) => t.id === currentTrack.id);
-
-    if (repeatMode === "one") {
-      // Repeat current track
-      playTrack(currentTrack);
-    } else if (isShuffle) {
-      // Случайный трек
-      const randomIndex = Math.floor(Math.random() * tracks.length);
-      playTrack(tracks[randomIndex]);
-    } else {
-      // Repeat all or sequential
-      if (currentIndex < tracks.length - 1) {
-        playTrack(tracks[currentIndex + 1]);
-      } else if (repeatMode === "all") {
-        // Зациклить плейлист
-        playTrack(tracks[0]);
-      }
-    }
-  };
-
-  const prevTrack = () => {
-    if (!currentTrack || tracks.length === 0) return;
-    const currentIndex = tracks.findIndex((t) => t.id === currentTrack.id);
-
-    if (currentIndex > 0) {
-      playTrack(tracks[currentIndex - 1]);
-    } else if (repeatMode === "all") {
-      // В режиме repeat-all переходим в конец плейлиста
-      playTrack(tracks[tracks.length - 1]);
-    }
-  };
-
-  const toggleRepeatMode = () => {
-    setRepeatMode(repeatMode === "one" ? "all" : "one");
-  };
-
-  const toggleShuffle = () => {
-    setIsShuffle(!isShuffle);
-  };
 
   return (
     <>
@@ -203,7 +58,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-cosmic-purple/20">
           <h2 className="text-2xl font-bold text-gray-100">
-            Full Audio Playlist
+            Audio Playlist
           </h2>
           <button
             onClick={onClose}
@@ -214,109 +69,53 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
           </button>
         </div>
 
-        {/* Audio Player with YouTube */}
-        <div className="p-6 border-b border-cosmic-purple/20 bg-cosmic-purple/10">
-          <p className="text-xs text-cosmic-purple font-semibold mb-3">
-            NOW PLAYING
-          </p>
-          {currentTrack ? (
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-100 truncate">
-                {currentTrack.title}
-              </h3>
+        {/* Player Area */}
+        {currentTrack ? (
+          <div className="p-6 border-b border-cosmic-purple/20 bg-cosmic-purple/10">
+            <p className="text-xs text-cosmic-purple font-semibold mb-3">
+              NOW PLAYING
+            </p>
+            <h3 className="text-lg font-semibold text-gray-100 mb-4 truncate">
+              {currentTrack.title}
+            </h3>
 
-              {/* YouTube Player - Audio Only (Video Hidden) */}
-              <div ref={playerRef} className="bg-black rounded-lg border border-cosmic-purple/30 overflow-hidden">
-                <iframe
-                  ref={iframeRef}
-                  width="100%"
-                  height="60"
-                  src={`${currentTrack.youtubeUrl}?controls=1&modestbranding=1&fs=0&autoplay=1`}
-                  title={currentTrack.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  style={{
-                    display: "block",
-                    background: "#000"
-                  }}
-                />
-              </div>
-
-              {/* Navigation Buttons */}
-              <div className="flex items-center justify-center gap-4">
-                <button
-                  onClick={prevTrack}
-                  disabled={!currentTrack || (tracks.findIndex((t) => t.id === currentTrack.id) === 0 && repeatMode !== "all")}
-                  className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple disabled:opacity-50 disabled:cursor-not-allowed transition"
-                  title="Previous track"
-                >
-                  <SkipBack className="w-5 h-5" />
-                </button>
-
-                <span className="text-xs text-gray-400">
-                  {tracks.findIndex((t) => t.id === currentTrack.id) + 1} / {tracks.length}
-                </span>
-
-                <button
-                  onClick={nextTrack}
-                  disabled={!currentTrack || (tracks.findIndex((t) => t.id === currentTrack.id) === tracks.length - 1 && repeatMode === "one" && !isShuffle)}
-                  className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple disabled:opacity-50 disabled:cursor-not-allowed transition"
-                  title="Next track"
-                >
-                  <SkipForward className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Playback Mode Buttons */}
-              <div className="flex items-center justify-center gap-3">
-                <button
-                  onClick={toggleRepeatMode}
-                  className={`px-4 py-2 rounded-lg border font-semibold text-sm flex items-center gap-2 transition ${
-                    repeatMode === "one"
-                      ? "border-cosmic-purple bg-cosmic-purple/20 text-cosmic-purple"
-                      : "border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:bg-cosmic-purple/10"
-                  }`}
-                  title="Repeat mode"
-                >
-                  {repeatMode === "one" ? <Repeat1 className="w-4 h-4" /> : <Repeat className="w-4 h-4" />}
-                  <span>{repeatMode === "one" ? "One" : "All"}</span>
-                </button>
-
-                <button
-                  onClick={toggleShuffle}
-                  className={`px-4 py-2 rounded-lg border font-semibold text-sm flex items-center gap-2 transition ${
-                    isShuffle
-                      ? "border-cosmic-purple bg-cosmic-purple/20 text-cosmic-purple"
-                      : "border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:bg-cosmic-purple/10"
-                  }`}
-                  title="Shuffle mode"
-                >
-                  <Shuffle className="w-4 h-4" />
-                  <span>{isShuffle ? "Shuffle" : "Order"}</span>
-                </button>
-              </div>
-
+            {/* Compact YouTube Player */}
+            <div className="rounded-lg overflow-hidden border border-cosmic-purple/30 bg-black">
+              <iframe
+                width="100%"
+                height="200"
+                src={`${currentTrack.youtubeUrl}?controls=1&modestbranding=1`}
+                title={currentTrack.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                style={{
+                  display: "block",
+                  background: "#000"
+                }}
+              />
             </div>
-          ) : (
-            <p className="text-gray-400 text-sm">Select a track from the playlist</p>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="p-6 text-center text-gray-400">
+            Select a track to play
+          </div>
+        )}
 
         {/* Scrollable Playlist */}
         <div className="flex-1 overflow-y-auto p-6">
-          <p className="text-xs text-cosmic-purple font-semibold mb-3">
+          <p className="text-xs text-cosmic-purple font-semibold mb-4">
             PLAYLIST ({tracks.length})
           </p>
           <div className="space-y-2">
             {tracks.length === 0 ? (
               <p className="text-gray-500 text-center py-8">
-                Нет треков. Добавьте треки в админ-панели.
+                No tracks added. Add tracks in the admin panel.
               </p>
             ) : (
               tracks.map((track, index) => (
                 <button
                   key={track.id}
-                  onClick={() => playTrack(track)}
+                  onClick={() => setCurrentTrack(track)}
                   className={`w-full text-left p-3 rounded-lg border transition ${
                     currentTrack?.id === track.id
                       ? "border-cosmic-purple/60 bg-cosmic-purple/20"
@@ -324,20 +123,15 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    {currentTrack?.id === track.id && (
-                      <Play className="w-4 h-4 text-cosmic-purple flex-shrink-0" />
-                    )}
-                    {currentTrack?.id !== track.id && (
-                      <span className="text-xs text-cosmic-purple/60 w-4 text-center flex-shrink-0">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                    )}
+                    <span className="text-xs text-cosmic-purple/60 w-6 text-center flex-shrink-0">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-sm font-semibold text-gray-100 truncate">
                         {track.title}
                       </h3>
                     </div>
-                    {track.duration && (
+                    {track.duration && track.duration !== "0:00" && (
                       <span className="text-xs text-gray-400 font-mono flex-shrink-0">
                         {track.duration}
                       </span>
@@ -355,13 +149,13 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
             onClick={onClose}
             className="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:cosmic-glow transition"
           >
-            Закрыть
+            Close
           </button>
           <a
             href="/admin"
             className="flex-1 px-4 py-2 rounded-lg border border-cosmic-purple/50 text-cosmic-purple font-semibold hover:border-cosmic-purple hover:cosmic-glow transition text-center"
           >
-            Управление
+            Manage
           </a>
         </div>
       </div>
