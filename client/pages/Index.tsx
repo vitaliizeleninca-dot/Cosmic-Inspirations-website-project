@@ -7,6 +7,7 @@ import PlaylistModal from "@/components/PlaylistModal";
 export default function Index() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
+  const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen overflow-x-hidden">
