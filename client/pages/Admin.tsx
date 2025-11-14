@@ -81,7 +81,7 @@ export default function Admin() {
     }
 
     if (errorCount > 0) {
-      alert(`${errorCount} ссылок были пропу��ены - проверьте формат YouTube ссылок`);
+      alert(`${errorCount} ссылок были пропущены - проверьте формат YouTube ссылок`);
     }
 
     saveTracks([...tracks, ...newTracks]);
@@ -143,7 +143,7 @@ export default function Admin() {
             title="Вернуться на главную"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span>На главную</span>
+            <span>На гла��ную</span>
           </Link>
         </div>
 
@@ -176,13 +176,13 @@ export default function Admin() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-400 mb-2">
-                    Аудио ссылка (MP3/WAV)
+                    YouTube ссылка
                   </label>
                   <input
                     type="text"
                     value={track.url}
                     onChange={(e) => updateBulkTrack(index, "url", e.target.value)}
-                    placeholder="https://example.com/song.mp3"
+                    placeholder="youtube.com/watch?v=... или youtu.be/..."
                     className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
                   />
                 </div>
