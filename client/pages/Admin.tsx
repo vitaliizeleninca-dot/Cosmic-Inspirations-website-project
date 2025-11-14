@@ -195,7 +195,7 @@ export default function Admin() {
 
   const addAmbientTrack = () => {
     if (!newAmbientTitle.trim() || !newAmbientUrl.trim()) {
-      alert("Пожалуйста, ��аполните название и ссылку");
+      alert("Пожалуйста, заполните название и ссылку");
       return;
     }
 
@@ -392,30 +392,51 @@ export default function Admin() {
             </div>
           </TabsContent>
 
-          <TabsContent value="links" className="mt-8">
-            {/* Cosmic Ambient Videos - 4 Windows */}
-            <div className="grid grid-cols-2 gap-6">
-              {cosmicVideos.map((url, index) => (
-                <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
-                  <h3 className="text-sm font-semibold text-cosmic-purple mb-3">Video {index + 1}</h3>
-                  <textarea
-                    value={url}
-                    onChange={(e) => saveCosmicVideo(index, e.target.value)}
-                    placeholder="youtube.com/watch?v=xxx или youtu.be/yyy"
-                    className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
-                  />
-                </div>
-              ))}
+          <TabsContent value="links" className="mt-8 space-y-8">
+            {/* Cosmic Ambient Videos Section */}
+            <div>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Cosmic Ambient Videos</h2>
+              <div className="grid grid-cols-2 gap-6">
+                {cosmicVideos.map((url, index) => (
+                  <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
+                    <h3 className="text-sm font-semibold text-cosmic-purple mb-3">Video {index + 1}</h3>
+                    <textarea
+                      value={url}
+                      onChange={(e) => saveCosmicVideo(index, e.target.value)}
+                      placeholder="youtube.com/watch?v=xxx или youtu.be/yyy"
+                      className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Playlist Tracks Videos Section */}
+            <div>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Playlist Tracks Videos</h2>
+              <div className="grid grid-cols-2 gap-6">
+                {playlistVideos.map((url, index) => (
+                  <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
+                    <h3 className="text-sm font-semibold text-cosmic-purple mb-3">Video {index + 1}</h3>
+                    <textarea
+                      value={url}
+                      onChange={(e) => savePlaylistVideo(index, e.target.value)}
+                      placeholder="youtube.com/watch?v=xxx или youtu.be/yyy"
+                      className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Info */}
-            <div className="mt-8 p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
+            <div className="p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
               <p className="text-sm text-gray-400">
-                💡 <strong>Tip:</strong> Paste YouTube link and it will appear on the main page
+                💡 <strong>Tip:</strong> Paste YouTube links and they will appear on the main page
               </p>
               <p className="text-xs text-gray-500">
-                • One link per window<br/>
-                • Supports youtube.com/watch?v=... and youtu.be/...<br/>
+                • Cosmic Ambient Videos appear in the Music section<br/>
+                • Playlist Tracks Videos appear in a separate section<br/>
                 • Changes save automatically
               </p>
             </div>
