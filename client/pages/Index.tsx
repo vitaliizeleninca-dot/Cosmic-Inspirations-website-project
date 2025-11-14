@@ -466,6 +466,12 @@ export default function Index() {
         {/* Footer */}
         <Footer />
       </main>
+
+      {/* Background Selection Modal */}
+      <BackgroundModal
+        isOpen={isBackgroundModalOpen}
+        onClose={() => setIsBackgroundModalOpen(false)}
+      />
     </div>
   );
 }
