@@ -11,20 +11,24 @@ interface PlaylistTrack {
 interface PlaylistModalProps {
   isOpen: boolean;
   onClose: () => void;
+  playlistType?: "cosmic" | "feelCosmos";
+  playlistSongs?: Array<{ title: string; url: string }>;
 }
 
 const DEFAULT_TRACKS: PlaylistTrack[] = [];
 
 const STORAGE_KEY = "cosmic-playlist-tracks";
+const FEEL_COSMOS_STORAGE_KEY = "feel-cosmos-songs";
 
-export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
+export default function PlaylistModal({ isOpen, onClose, playlistType = "cosmic", playlistSongs = [] }: PlaylistModalProps) {
   const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
   const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
 
   // Load tracks from localStorage on mount and when modal opens
   useEffect(() => {
     if (isOpen) {
-      const saved = localStorage.getItem(STORAGE_KEY);
+      const storageKey = playlistType === "feelCosmos" ? FEEL_COSMOS_STORAGE_KEY : STORAGE_KEY;
+      const saved = localStorage.getItem(storageKey);
       if (saved) {
         try {
           const loadedTracks = JSON.parse(saved);
@@ -41,7 +45,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
         setTracks(DEFAULT_TRACKS);
       }
     }
-  }, [isOpen]);
+  }, [isOpen, playlistType]);
 
   if (!isOpen) return null;
 
