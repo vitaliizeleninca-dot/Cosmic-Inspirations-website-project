@@ -133,29 +133,31 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     }
   }, [currentTrack, tracks, repeatMode, isShuffle]);
 
-  // Monitor video and auto-advance when it ends
+  // Auto-advance when video finishes
   useEffect(() => {
-    if (!isOpen || !currentTrack || !iframeRef.current) return;
+    if (!isOpen || !currentTrack) return;
 
-    // Use YouTube postMessage API to track video state
-    const iframe = iframeRef.current;
     const videoId = currentTrack.youtubeUrl.match(/\/embed\/([a-zA-Z0-9_-]{11})/)?.[1];
-
     if (!videoId) return;
 
-    // Create a simple timer that checks if we should advance to the next track
-    // Default to 5 minutes if duration is not specified
-    const durationSeconds = currentTrack.duration
-      ? parseDurationToSeconds(currentTrack.duration)
-      : 300; // 5 minutes default
+    // Use video duration if available, otherwise estimate based on typical YouTube music
+    let durationToUse = videoDuration;
 
-    // Advance to next track after duration
+    if (!durationToUse && currentTrack.duration && currentTrack.duration !== "0:00") {
+      durationToUse = parseDurationToSeconds(currentTrack.duration);
+    }
+
+    if (!durationToUse) {
+      durationToUse = 300; // 5 minutes default
+    }
+
+    // Auto-advance to next track when current ends
     const timeoutId = setTimeout(() => {
       handleTrackEnd();
-    }, durationSeconds * 1000);
+    }, durationToUse * 1000);
 
     return () => clearTimeout(timeoutId);
-  }, [currentTrack, isOpen, handleTrackEnd]);
+  }, [currentTrack, videoDuration, isOpen, handleTrackEnd]);
 
   const parseDurationToSeconds = (duration: string): number => {
     if (!duration || duration === "0:00") return 300; // Default 5 minutes
@@ -204,7 +206,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     if (currentIndex > 0) {
       playTrack(tracks[currentIndex - 1]);
     } else if (repeatMode === "all") {
-      // В режиме repeat-all переходим в конец плейли��та
+      // В режиме repeat-all переходим в конец плейлиста
       playTrack(tracks[tracks.length - 1]);
     }
   };
