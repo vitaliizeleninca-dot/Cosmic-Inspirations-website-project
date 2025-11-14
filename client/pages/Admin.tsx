@@ -481,6 +481,18 @@ export default function Admin() {
     localStorage.setItem("nft-collections-list-active", JSON.stringify(updated));
   };
 
+  const handleNftCollectionImageUpload = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target?.result as string;
+      saveNftCollectionCustomImage(index, dataUrl);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
