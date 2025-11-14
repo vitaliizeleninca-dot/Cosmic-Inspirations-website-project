@@ -33,14 +33,8 @@ export default function Index() {
   const [activePodcastVideosList, setActivePodcastVideosList] = useState<boolean[]>([true, true, true, true]);
   const [nftVideos, setNftVideos] = useState<string[]>(["", "", "", ""]);
   const [activeNftVideosList, setActiveNftVideosList] = useState<boolean[]>([true, true, true, true]);
-  const [nftCollections, setNftCollections] = useState<string[]>([
-    "https://images.unsplash.com/photo-1618005182384-a83a8e7b9b63?w=500&h=500&fit=crop",
-    "https://images.unsplash.com/photo-1579783902614-e3fb5141b0cb?w=500&h=500&fit=crop",
-    "https://images.unsplash.com/photo-1559056199-641a0ac8b3f7?w=500&h=500&fit=crop",
-    "https://images.unsplash.com/photo-1570220914fd-d1e01d33d3c1?w=500&h=500&fit=crop",
-    "https://images.unsplash.com/photo-1625081634555-3f0bc0b5cc82?w=500&h=500&fit=crop",
-    "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=500&h=500&fit=crop"
-  ]);
+  const [nftCollections, setNftCollections] = useState<string[]>(["", "", "", "", "", ""]);
+  const [nftCollectionImages, setNftCollectionImages] = useState<(string | null)[]>([null, null, null, null, null, null]);
 
   useEffect(() => {
     const saved = localStorage.getItem("cosmic-videos");
