@@ -630,13 +630,26 @@ export default function Admin() {
               <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Feel the Cosmos Videos</h2>
               <div className="grid grid-cols-2 gap-6">
                 {feelCosmosVideos.map((url, index) => (
-                  <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
-                    <h3 className="text-sm font-semibold text-cosmic-purple mb-3">Video {index + 1}</h3>
+                  <div key={index} className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col ${activeFeelCosmosVideosList[index] ? "" : "opacity-50"}`}>
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-semibold text-cosmic-purple">Video {index + 1}</h3>
+                      <button
+                        onClick={() => toggleFeelCosmosVideoActive(index, !activeFeelCosmosVideosList[index])}
+                        className={`px-3 py-1 rounded text-xs font-semibold transition ${
+                          activeFeelCosmosVideosList[index]
+                            ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
+                            : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
+                        }`}
+                      >
+                        {activeFeelCosmosVideosList[index] ? "On" : "Off"}
+                      </button>
+                    </div>
                     <textarea
                       value={url}
                       onChange={(e) => saveFeelCosmosVideo(index, e.target.value)}
                       placeholder="youtube.com/watch?v=xxx or youtu.be/yyy"
                       className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
+                      disabled={!activeFeelCosmosVideosList[index]}
                     />
                   </div>
                 ))}
