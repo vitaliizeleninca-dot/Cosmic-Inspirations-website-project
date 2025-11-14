@@ -603,28 +603,6 @@ export default function Admin() {
               <div className="grid grid-cols-2 gap-6">
                 {quickLinksPanels.map((panel, panelIndex) => (
                   <div key={panelIndex} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
-                    {/* Type Selector for this panel */}
-                    <div className="mb-4 flex gap-4">
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          value="playlist"
-                          checked={panel.type === "playlist"}
-                          onChange={() => updatePanelType(panelIndex, "playlist")}
-                          className="w-4 h-4 cursor-pointer"
-                        />
-                      </label>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          value="ambient"
-                          checked={panel.type === "ambient"}
-                          onChange={() => updatePanelType(panelIndex, "ambient")}
-                          className="w-4 h-4 cursor-pointer"
-                        />
-                      </label>
-                    </div>
-
                     {/* Textarea for links */}
                     <textarea
                       value={panel.text}
