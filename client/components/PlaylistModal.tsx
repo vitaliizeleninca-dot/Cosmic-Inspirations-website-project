@@ -4,9 +4,8 @@ import { useState, useEffect, useRef } from "react";
 interface PlaylistTrack {
   id: string;
   title: string;
-  youtubeUrl: string;
+  audioUrl: string;
   duration?: string;
-  audioUrl?: string;
 }
 
 interface PlaylistModalProps {
@@ -14,32 +13,7 @@ interface PlaylistModalProps {
   onClose: () => void;
 }
 
-const DEFAULT_TRACKS: PlaylistTrack[] = [
-  {
-    id: "1",
-    title: "Nebula Dreams",
-    youtubeUrl: "https://www.youtube.com/embed/jgpJVI3tDT0",
-    duration: "7:45",
-  },
-  {
-    id: "2",
-    title: "Void Echo",
-    youtubeUrl: "https://www.youtube.com/embed/1La4QzGeaaQ",
-    duration: "6:32",
-  },
-  {
-    id: "3",
-    title: "Cosmic Drift",
-    youtubeUrl: "https://www.youtube.com/embed/TqOneWeDtFI",
-    duration: "8:12",
-  },
-  {
-    id: "4",
-    title: "Star Light",
-    youtubeUrl: "https://www.youtube.com/embed/lFcSrYw-ARY",
-    duration: "5:48",
-  },
-];
+const DEFAULT_TRACKS: PlaylistTrack[] = [];
 
 const STORAGE_KEY = "cosmic-playlist-tracks";
 
@@ -272,7 +246,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
 
                 {/* Info */}
                 <p className="text-xs text-gray-400 text-center">
-                  Используйте встроенные ��онтролы YouTube для управления воспроизведением и громкостью
+                  Используйте встроенные контролы YouTube для управления воспроизведением и громкостью
                 </p>
               </div>
             </div>
