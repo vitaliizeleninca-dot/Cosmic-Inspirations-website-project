@@ -576,6 +576,76 @@ export default function Admin() {
               </div>
             </div>
           </TabsContent>
+
+          <TabsContent value="links" className="mt-8">
+            {/* Quick Links Manager */}
+            <div className="space-y-6">
+              {/* Type Selector */}
+              <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Add to</h2>
+                <div className="flex gap-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      value="playlist"
+                      checked={quickLinksType === "playlist"}
+                      onChange={(e) => setQuickLinksType(e.target.value as "playlist" | "ambient")}
+                      className="w-4 h-4 cursor-pointer"
+                    />
+                    <span className="text-gray-300">Playlist Tracks</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      value="ambient"
+                      checked={quickLinksType === "ambient"}
+                      onChange={(e) => setQuickLinksType(e.target.value as "playlist" | "ambient")}
+                      className="w-4 h-4 cursor-pointer"
+                    />
+                    <span className="text-gray-300">Ambient Music</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Paste Links Area */}
+              <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Paste YouTube Links</h2>
+                <p className="text-sm text-gray-400 mb-4">
+                  Paste one link per line. Supports youtube.com/watch?v=... and youtu.be/... formats
+                </p>
+                <textarea
+                  value={quickLinksText}
+                  onChange={(e) => setQuickLinksText(e.target.value)}
+                  placeholder="youtube.com/watch?v=xxx&#10;youtu.be/yyy&#10;https://www.youtube.com/watch?v=zzz"
+                  className="w-full h-48 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
+                />
+                <p className="text-xs text-gray-500 mt-2">
+                  {quickLinksText.split('\n').filter(l => l.trim()).length} link(s) ready to add
+                </p>
+              </div>
+
+              {/* Add Button */}
+              <button
+                onClick={addQuickLinks}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:opacity-90 transition"
+              >
+                <Plus className="w-5 h-5" />
+                Add All Links
+              </button>
+
+              {/* Info */}
+              <div className="p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
+                <p className="text-sm text-gray-400">
+                  💡 <strong>Tip:</strong> Paste multiple YouTube links, one per line
+                </p>
+                <p className="text-xs text-gray-500">
+                  • Links will be automatically converted to embed format<br/>
+                  • Each link will get an auto-generated title<br/>
+                  • All changes are saved automatically
+                </p>
+              </div>
+            </div>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
