@@ -135,46 +135,56 @@ export default function Admin() {
           <p className="text-gray-400">Управление треками плейлиста</p>
         </div>
 
-        {/* Add Track Form */}
+        {/* Add 10 Tracks Form */}
         <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 mb-8">
-          <h2 className="text-xl font-bold mb-4 text-cosmic-purple">
-            Добавить новый трек
+          <h2 className="text-xl font-bold mb-2 text-cosmic-purple">
+            Добавить до 10 треков за раз
           </h2>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                Название трека
-              </label>
-              <input
-                type="text"
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                placeholder="Например: Nebula Dreams"
-                className="w-full px-4 py-2 rounded-lg bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 focus:outline-none focus:border-cosmic-purple transition"
-                onKeyPress={(e) => e.key === "Enter" && addTrack()}
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-300 mb-2">
-                YouTube ссылка
-              </label>
-              <input
-                type="text"
-                value={newUrl}
-                onChange={(e) => setNewUrl(e.target.value)}
-                placeholder="https://youtube.com/watch?v=... или https://youtu.be/..."
-                className="w-full px-4 py-2 rounded-lg bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 focus:outline-none focus:border-cosmic-purple transition"
-                onKeyPress={(e) => e.key === "Enter" && addTrack()}
-              />
-            </div>
-            <button
-              onClick={addTrack}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:opacity-90 transition"
-            >
-              <Plus className="w-5 h-5" />
-              Добавить трек
-            </button>
+          <p className="text-sm text-gray-400 mb-4">
+            Заполните названия и YouTube ссылки. Пустые поля будут пропущены.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            {bulkTracks.map((track, index) => (
+              <div key={index} className="space-y-3 p-4 rounded-lg bg-cosmic-dark/50 border border-cosmic-purple/20">
+                <div className="text-xs font-semibold text-cosmic-purple mb-2">
+                  Трек #{index + 1}
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 mb-2">
+                    Название
+                  </label>
+                  <input
+                    type="text"
+                    value={track.title}
+                    onChange={(e) => updateBulkTrack(index, "title", e.target.value)}
+                    placeholder="Например: Nebula Dreams"
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-400 mb-2">
+                    YouTube ссылка
+                  </label>
+                  <input
+                    type="text"
+                    value={track.url}
+                    onChange={(e) => updateBulkTrack(index, "url", e.target.value)}
+                    placeholder="youtu.be/... или youtube.com/watch?v=..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+              </div>
+            ))}
           </div>
+
+          <button
+            onClick={addBulkTracks}
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:opacity-90 transition"
+          >
+            <Plus className="w-5 h-5" />
+            Добавить все заполненные треки
+          </button>
         </div>
 
         {/* Tracks List */}
