@@ -109,6 +109,32 @@ export default function Admin() {
     return Array(10).fill(null).map(() => ({ title: "", url: "" }));
   });
 
+  // Activation state for sections
+  const [activeCosmicVideos, setActiveCosmicVideos] = useState<boolean>(() => {
+    const saved = localStorage.getItem("cosmic-videos-active");
+    return saved ? JSON.parse(saved) : true;
+  });
+
+  const [activePlaylistVideos, setActivePlaylistVideos] = useState<boolean>(() => {
+    const saved = localStorage.getItem("playlist-videos-active");
+    return saved ? JSON.parse(saved) : true;
+  });
+
+  const [activePlaylistSongs, setActivePlaylistSongs] = useState<boolean>(() => {
+    const saved = localStorage.getItem("playlist-songs-active");
+    return saved ? JSON.parse(saved) : true;
+  });
+
+  const [activeFeelCosmosVideos, setActiveFeelCosmosVideos] = useState<boolean>(() => {
+    const saved = localStorage.getItem("feel-cosmos-videos-active");
+    return saved ? JSON.parse(saved) : true;
+  });
+
+  const [activeFeelCosmosSongs, setActiveFeelCosmosSongs] = useState<boolean>(() => {
+    const saved = localStorage.getItem("feel-cosmos-songs-active");
+    return saved ? JSON.parse(saved) : true;
+  });
+
   // Load tracks from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
