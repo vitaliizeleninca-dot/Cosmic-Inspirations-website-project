@@ -448,46 +448,86 @@ export default function Index() {
         )}
 
         {/* NFT Collections Section */}
-        {activeNftVideosList.some(v => v) && (
-          <section
-            id="nft"
-            className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
-          >
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
-            </div>
+        <section
+          id="nft"
+          className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
+        >
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
+          </div>
 
-            <div className="relative z-10 max-w-6xl w-full">
+          <div className="relative z-10 max-w-6xl w-full">
+            {activeNftVideosList.some(v => v) && nftVideos.some(v => v) && (
+              <div className="mb-16">
+                <div className="text-center mb-12">
+                  <h3 className="text-5xl font-bold mb-4">
+                    NFT Collections Videos
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                  {nftVideos.map((url, index) => (
+                    activeNftVideosList[index] && url && (
+                      <div
+                        key={index}
+                        className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
+                      >
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={url}
+                          title={`NFT Collection Video ${index + 1}`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                        />
+                      </div>
+                    )
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div>
               <div className="text-center mb-16">
                 <h3 className="text-5xl font-bold mb-4">
-                  NFT Collections Videos
+                  NFT Collections
                 </h3>
+                <p className="text-cosmic-purple text-lg font-semibold mb-4">
+                  Legendary Digital Artifacts
+                </p>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                  Own a piece of the cosmos with our exclusive NFT collections,
+                  each representing a unique moment in the digital universe.
+                </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                {nftVideos.map((url, index) => (
-                  activeNftVideosList[index] && url && (
-                    <div
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {nftCollections.map((url, index) => (
+                  url && (
+                    <a
                       key={index}
-                      className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer"
                     >
-                      <iframe
-                        width="100%"
-                        height="100%"
+                      <img
                         src={url}
-                        title={`NFT Collection Video ${index + 1}`}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-full"
+                        alt={`NFT Collection ${index + 1}`}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
-                    </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                        <span className="text-gray-100 font-semibold">View Collection</span>
+                      </div>
+                    </a>
                   )
                 ))}
               </div>
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
         {/* Footer */}
         <Footer />
