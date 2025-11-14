@@ -143,6 +143,8 @@ export default function Admin() {
     return saved ? JSON.parse(saved) : [true, true, true, true, true, true];
   });
 
+  const [uploadError, setUploadError] = useState<string>("");
+
   // Activation state for sections
   const [activeCosmicVideosList, setActiveCosmicVideosList] = useState<boolean[]>(() => {
     const saved = localStorage.getItem("cosmic-videos-list-active");
