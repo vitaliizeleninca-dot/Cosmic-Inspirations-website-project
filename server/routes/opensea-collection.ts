@@ -136,75 +136,89 @@ async function handleObjktUrl(fullUrl: string, res: any): Promise<void> {
     }
 
     const contractAddress = contractMatch[1];
+    let imageUrl: string | null = null;
 
     try {
-      // Try Objkt API first
-      const apiUrl = `https://api.objkt.com/v3/tokens?contract=${contractAddress}&limit=1`;
+      // Try multiple endpoints for Objkt API
+      const endpoints = [
+        `https://api.objkt.com/v3/tokens?contract=${contractAddress}&limit=1`,
+        `https://objkt.com/api/v3/contracts/${contractAddress}`,
+      ];
 
-      const response = await fetch(apiUrl, {
-        headers: {
-          "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
-        },
-      });
+      for (const apiUrl of endpoints) {
+        try {
+          const response = await fetch(apiUrl, {
+            headers: {
+              "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
+              "Accept": "application/json",
+            },
+            timeout: 5000,
+          });
 
-      if (response.ok) {
-        const data = await response.json();
-        const tokens = Array.isArray(data) ? data : data.tokens || [];
+          if (response.ok) {
+            const data = await response.json();
+            const tokens = Array.isArray(data) ? data : data.tokens || [];
 
-        if (tokens.length > 0) {
-          const token = tokens[0];
-          let imageUrl = token.display_uri || token.thumbnail_uri;
+            if (tokens.length > 0) {
+              const token = tokens[0];
+              imageUrl = token.display_uri || token.thumbnail_uri || token.image_url;
 
-          if (imageUrl) {
-            if (imageUrl.startsWith("ipfs://")) {
-              imageUrl = `https://ipfs.io/ipfs/${imageUrl.replace("ipfs://", "")}`;
+              if (imageUrl) {
+                if (imageUrl.startsWith("ipfs://")) {
+                  imageUrl = `https://ipfs.io/ipfs/${imageUrl.replace("ipfs://", "")}`;
+                }
+                break;
+              }
             }
-
-            res.json({
-              success: true,
-              imageUrl,
-              collectionUrl: fullUrl,
-              collectionName: token.name || contractAddress,
-            });
-            return;
           }
+        } catch (e) {
+          // Try next endpoint
+          continue;
         }
       }
     } catch (apiErr) {
-      console.warn("Objkt API not available, trying og:image fallback:", apiErr);
+      console.warn("Objkt API endpoints not available:", apiErr);
     }
 
-    // Fallback: try fetching og:image from the Objkt page
-    const pageResponse = await fetch(fullUrl, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
-      },
-    });
-
-    if (pageResponse.ok) {
-      const html = await pageResponse.text();
-      const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
-      
-      if (ogImageMatch && ogImageMatch[1]) {
-        res.json({
-          success: true,
-          imageUrl: ogImageMatch[1],
-          collectionUrl: fullUrl,
+    // If no image from API, try og:image from the page
+    if (!imageUrl) {
+      try {
+        const pageResponse = await fetch(fullUrl, {
+          headers: {
+            "User-Agent": "Mozilla/5.0 (compatible; Cosmic-Hub/1.0)",
+          },
+          timeout: 5000,
         });
-        return;
+
+        if (pageResponse.ok) {
+          const html = await pageResponse.text();
+          const ogImageMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
+
+          if (ogImageMatch && ogImageMatch[1]) {
+            imageUrl = ogImageMatch[1];
+          }
+        }
+      } catch (pageErr) {
+        console.warn("Could not fetch Objkt page:", pageErr);
       }
     }
 
-    res.status(404).json({
-      success: false,
-      error: "Could not retrieve image from Objkt collection",
+    // Return success with or without image
+    res.json({
+      success: true,
+      imageUrl: imageUrl || null,
+      collectionUrl: fullUrl,
+      collectionName: contractAddress,
     });
   } catch (error) {
     console.error("Error fetching Objkt data:", error);
-    res.status(500).json({
-      success: false,
-      error:
-        error instanceof Error ? error.message : "Failed to fetch Objkt collection image",
+    // Even on error, return success with null image to show placeholder
+    const contractMatch = fullUrl.match(/objkt\.com\/collections\/([a-zA-Z0-9]+)/i);
+    res.json({
+      success: true,
+      imageUrl: null,
+      collectionUrl: fullUrl,
+      collectionName: contractMatch ? contractMatch[1] : "Tezos Collection",
     });
   }
 }
