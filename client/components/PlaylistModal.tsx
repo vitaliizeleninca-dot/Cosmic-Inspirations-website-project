@@ -131,11 +131,6 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                         {track.title}
                       </h3>
                     </div>
-                    {track.duration && track.duration !== "0:00" && (
-                      <span className="text-xs text-gray-400 font-mono flex-shrink-0">
-                        {track.duration}
-                      </span>
-                    )}
                   </div>
                 </button>
               ))
