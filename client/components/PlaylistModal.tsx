@@ -29,19 +29,6 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
   const [repeatMode, setRepeatMode] = useState<"one" | "all">("all");
   const [isShuffle, setIsShuffle] = useState(false);
 
-  // Load YouTube API and setup player
-  useEffect(() => {
-    window.onYouTubeIframeAPIReady = () => {
-      console.log("YouTube API ready");
-    };
-
-    if (!window.YT) {
-      const tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
-    }
-  }, []);
 
   // Fetch video duration from server
   useEffect(() => {
