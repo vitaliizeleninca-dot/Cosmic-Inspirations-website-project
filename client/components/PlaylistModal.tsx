@@ -90,7 +90,9 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     if (!audio) return;
 
     const handleTimeUpdate = () => {
-      setProgress((audio.currentTime / audio.duration) * 100);
+      if (audio.duration) {
+        setProgress((audio.currentTime / audio.duration) * 100);
+      }
     };
 
     const handleLoadedMetadata = () => {
@@ -98,7 +100,12 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     };
 
     const handleEnded = () => {
-      nextTrack();
+      if (!currentTrack) return;
+      const currentIndex = tracks.findIndex((t) => t.id === currentTrack.id);
+      if (currentIndex < tracks.length - 1) {
+        setCurrentTrack(tracks[currentIndex + 1]);
+        setIsPlaying(true);
+      }
     };
 
     audio.addEventListener("timeupdate", handleTimeUpdate);
