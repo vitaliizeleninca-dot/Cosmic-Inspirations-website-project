@@ -252,6 +252,40 @@ export default function Admin() {
     localStorage.setItem("playlist-videos", JSON.stringify(updated));
   };
 
+  const updatePlaylistSong = (index: number, field: "title" | "url", value: string) => {
+    const updated = [...playlistSongs];
+    updated[index] = { ...updated[index], [field]: value };
+    setPlaylistSongs(updated);
+  };
+
+  const savePlaylistSongs = () => {
+    const newTracks: Track[] = [];
+    let savedCount = 0;
+
+    playlistSongs.forEach((song, index) => {
+      if (!song.title.trim() || !song.url.trim()) {
+        return;
+      }
+
+      const videoId = extractVideoId(song.url);
+      if (!videoId) {
+        console.warn(`Invalid YouTube URL for song: ${song.title}`);
+        return;
+      }
+
+      newTracks.push({
+        id: Date.now().toString() + index,
+        title: song.title,
+        youtubeUrl: `https://www.youtube.com/embed/${videoId}`,
+        duration: "0:00",
+      });
+      savedCount++;
+    });
+
+    saveTracks(newTracks);
+    alert(`Playlist saved! ${savedCount} songs added.`);
+  };
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
@@ -449,7 +483,7 @@ export default function Admin() {
               </p>
               <p className="text-xs text-gray-500">
                 • Cosmic Ambient Videos appear in the Music section<br/>
-                • Playlist Tracks Videos appear in a separate section<br/>
+                ��� Playlist Tracks Videos appear in a separate section<br/>
                 • Changes save automatically
               </p>
             </div>
