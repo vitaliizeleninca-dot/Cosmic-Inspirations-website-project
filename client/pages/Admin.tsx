@@ -463,10 +463,18 @@ export default function Admin() {
   };
 
   const saveNftCollection = (index: number, url: string) => {
-    const updated = [...nftCollections];
-    updated[index] = url;
-    setNftCollections(updated);
-    localStorage.setItem("nft-collections", JSON.stringify(updated));
+    if (url && !url.startsWith("http://") && !url.startsWith("https://")) {
+      const fullUrl = `https://${url}`;
+      const updated = [...nftCollections];
+      updated[index] = fullUrl;
+      setNftCollections(updated);
+      localStorage.setItem("nft-collections", JSON.stringify(updated));
+    } else {
+      const updated = [...nftCollections];
+      updated[index] = url;
+      setNftCollections(updated);
+      localStorage.setItem("nft-collections", JSON.stringify(updated));
+    }
   };
 
   const saveNftCollectionCustomImage = (index: number, imageUrl: string) => {
