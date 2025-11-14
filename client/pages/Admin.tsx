@@ -352,9 +352,11 @@ export default function Admin() {
     localStorage.setItem("playlist-songs-active", JSON.stringify(isActive));
   };
 
-  const toggleFeelCosmosVideosActive = (isActive: boolean) => {
-    setActiveFeelCosmosVideos(isActive);
-    localStorage.setItem("feel-cosmos-videos-active", JSON.stringify(isActive));
+  const toggleFeelCosmosVideoActive = (index: number, isActive: boolean) => {
+    const updated = [...activeFeelCosmosVideosList];
+    updated[index] = isActive;
+    setActiveFeelCosmosVideosList(updated);
+    localStorage.setItem("feel-cosmos-videos-list-active", JSON.stringify(updated));
   };
 
   const toggleFeelCosmosSongsActive = (isActive: boolean) => {
