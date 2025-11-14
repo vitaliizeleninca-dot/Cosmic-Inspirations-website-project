@@ -112,6 +112,10 @@
   }
 }
 
+:root {
+  --bg-image-url: url('https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg');
+}
+
 @layer base {
   * {
     @apply border-border;
