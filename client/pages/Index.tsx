@@ -398,7 +398,7 @@ export default function Index() {
         )}
 
         {/* Feel the Cosmos Interactive Experience Section */}
-        {(activeFeelCosmosVideos || activeFeelCosmosSongs) && (
+        {(activeFeelCosmosVideosList.some(v => v) || activeFeelCosmosSongs) && (
           <section
             id="experience"
             className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
@@ -423,26 +423,28 @@ export default function Index() {
               </div>
 
               {/* Feel the Cosmos Videos */}
-              {activeFeelCosmosVideos && (
+              {activeFeelCosmosVideosList.some(v => v) && (
                 <div className="mb-12">
                   <h4 className="text-2xl font-bold text-cosmic-purple mb-6">Featured Videos</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                     {feelCosmosVideos.map((url, index) => (
-                      <div
-                        key={index}
-                        className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
-                      >
-                        <iframe
-                          width="100%"
-                          height="100%"
-                          src={url}
-                          title={`Feel the Cosmos Video ${index + 1}`}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          className="w-full h-full"
-                        />
-                      </div>
+                      activeFeelCosmosVideosList[index] && (
+                        <div
+                          key={index}
+                          className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
+                        >
+                          <iframe
+                            width="100%"
+                            height="100%"
+                            src={url}
+                            title={`Feel the Cosmos Video ${index + 1}`}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="w-full h-full"
+                          />
+                        </div>
+                      )
                     ))}
                   </div>
                 </div>
