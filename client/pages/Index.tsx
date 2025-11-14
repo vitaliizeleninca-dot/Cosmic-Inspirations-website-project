@@ -350,7 +350,10 @@ export default function Index() {
 
               <div className="text-center">
                 <button
-                  onClick={() => setIsPlaylistModalOpen(true)}
+                  onClick={() => {
+                    setPlaylistType("cosmic");
+                    setIsPlaylistModalOpen(true);
+                  }}
                   className="btn-cosmic"
                 >
                   View Full Playlist
