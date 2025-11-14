@@ -486,7 +486,7 @@ export default function Admin() {
                         type="text"
                         value={song.url}
                         onChange={(e) => updatePlaylistSong(index, "url", e.target.value)}
-                        placeholder="youtube.com/watch?v=... или youtu.be/..."
+                        placeholder="youtube.com/watch?v=... or youtu.be/..."
                         className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
                       />
                     </div>
