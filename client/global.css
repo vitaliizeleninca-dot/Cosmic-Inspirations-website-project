@@ -7,94 +7,96 @@
 
 @layer base {
   /**
-   * Tailwind CSS theme
+   * Tailwind CSS theme - Dark Cosmic theme
    * tailwind.config.ts expects the following color variables to be expressed as HSL values.
    * A different format will require also updating the theme in tailwind.config.ts.
   */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 20% 8%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 25% 12%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 25% 12%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 270 80% 55%;
+    --primary-foreground: 220 20% 8%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 30% 20%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 20% 25%;
+    --muted-foreground: 210 20% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 270 80% 55%;
+    --accent-foreground: 220 20% 8%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 20% 20%;
+    --input: 220 20% 15%;
+    --ring: 270 80% 55%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 210 40% 95%;
+    --sidebar-primary: 270 80% 55%;
+    --sidebar-primary-foreground: 220 20% 8%;
+    --sidebar-accent: 270 80% 55%;
+    --sidebar-accent-foreground: 220 20% 8%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 270 80% 55%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --cosmic-purple: 270 80% 55%;
+    --cosmic-violet: 260 60% 35%;
+    --cosmic-dark: 220 20% 8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 220 20% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 220 25% 12%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 220 25% 12%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 270 80% 55%;
+    --primary-foreground: 220 20% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 220 30% 20%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 20% 25%;
+    --muted-foreground: 210 20% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 270 80% 55%;
+    --accent-foreground: 220 20% 8%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 220 20% 20%;
+    --input: 220 20% 15%;
+    --ring: 270 80% 55%;
+
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 210 40% 95%;
+    --sidebar-primary: 270 80% 55%;
+    --sidebar-primary-foreground: 220 20% 8%;
+    --sidebar-accent: 270 80% 55%;
+    --sidebar-accent-foreground: 220 20% 8%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 270 80% 55%;
+
+    --cosmic-purple: 270 80% 55%;
+    --cosmic-violet: 260 60% 35%;
+    --cosmic-dark: 220 20% 8%;
   }
 }
 
@@ -105,6 +107,37 @@
 
   body {
     @apply bg-background text-foreground;
+    background-image: 
+      radial-gradient(2px 2px at 20% 30%, #5522ff, transparent),
+      radial-gradient(2px 2px at 60% 70%, #0052ff, transparent),
+      radial-gradient(1px 1px at 50% 50%, #5500ff, transparent),
+      radial-gradient(1px 1px at 80% 10%, #00d4ff, transparent),
+      radial-gradient(2px 2px at 90% 60%, #2200ff, transparent),
+      radial-gradient(1px 1px at 10% 80%, #5555ff, transparent),
+      radial-gradient(2px 2px at 40% 40%, #3300ff, transparent),
+      radial-gradient(1px 1px at 70% 20%, #0088ff, transparent),
+      linear-gradient(135deg, rgba(25, 25, 50, 1), rgba(40, 20, 60, 1));
+    background-size: 
+      500px 500px,
+      700px 700px,
+      400px 400px,
+      600px 600px,
+      800px 800px,
+      650px 650px,
+      550px 550px,
+      750px 750px,
+      100% 100%;
+    background-position: 
+      0% 0%,
+      40% 60%,
+      130% 270%,
+      70% 100%,
+      100% 0%,
+      0% 100%,
+      40% 40%,
+      130% 70%,
+      0% 0%;
+    background-attachment: fixed;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
@@ -116,5 +149,40 @@
   code {
     overflow-x: auto;
     white-space: pre;
+  }
+}
+
+@layer components {
+  .cosmic-glow {
+    box-shadow: 0 0 20px rgba(85, 34, 255, 0.5), 0 0 40px rgba(85, 34, 255, 0.2);
+  }
+
+  .cosmic-glow-lg {
+    box-shadow: 0 0 40px rgba(85, 34, 255, 0.6), 0 0 80px rgba(85, 34, 255, 0.3);
+  }
+
+  .neon-border {
+    border-color: hsl(var(--cosmic-purple));
+    border-width: 2px;
+  }
+
+  .gradient-cosmic {
+    background: linear-gradient(135deg, hsl(var(--cosmic-violet)), hsl(var(--cosmic-purple)));
+  }
+
+  .btn-cosmic {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    background: linear-gradient(135deg, hsl(var(--cosmic-purple)), hsl(var(--cosmic-violet)));
+    color: hsl(var(--background));
+    border: 2px solid hsl(var(--cosmic-purple));
+
+    &:hover {
+      @apply cosmic-glow-lg transform -translate-y-1;
+      background: linear-gradient(135deg, hsl(var(--cosmic-violet)), hsl(var(--cosmic-purple)));
+    }
+
+    &:active {
+      @apply transform translate-y-0;
+    }
   }
 }
