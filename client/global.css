@@ -107,37 +107,13 @@
 
   body {
     @apply bg-background text-foreground;
-    background-image: 
-      radial-gradient(2px 2px at 20% 30%, #5522ff, transparent),
-      radial-gradient(2px 2px at 60% 70%, #0052ff, transparent),
-      radial-gradient(1px 1px at 50% 50%, #5500ff, transparent),
-      radial-gradient(1px 1px at 80% 10%, #00d4ff, transparent),
-      radial-gradient(2px 2px at 90% 60%, #2200ff, transparent),
-      radial-gradient(1px 1px at 10% 80%, #5555ff, transparent),
-      radial-gradient(2px 2px at 40% 40%, #3300ff, transparent),
-      radial-gradient(1px 1px at 70% 20%, #0088ff, transparent),
-      linear-gradient(135deg, rgba(25, 25, 50, 1), rgba(40, 20, 60, 1));
-    background-size: 
-      500px 500px,
-      700px 700px,
-      400px 400px,
-      600px 600px,
-      800px 800px,
-      650px 650px,
-      550px 550px,
-      750px 750px,
-      100% 100%;
-    background-position: 
-      0% 0%,
-      40% 60%,
-      130% 270%,
-      70% 100%,
-      100% 0%,
-      0% 100%,
-      40% 40%,
-      130% 70%,
-      0% 0%;
+    background-image:
+      linear-gradient(rgba(25, 25, 50, 0.65), rgba(25, 25, 50, 0.65)),
+      url('https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg');
+    background-size: cover;
+    background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
