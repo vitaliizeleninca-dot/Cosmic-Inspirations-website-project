@@ -44,41 +44,6 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
 
   const playTrack = (track: PlaylistTrack) => {
     setCurrentTrack(track);
-    setIsPlaying(true);
-    setProgress(0);
-  };
-
-  const togglePlay = () => {
-    if (!currentTrack && tracks.length > 0) {
-      playTrack(tracks[0]);
-    } else {
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const toggleMute = () => {
-    if (isMuted) {
-      setIsMuted(false);
-      setVolume(volumeBeforeMute);
-    } else {
-      setVolumeBeforeMute(volume);
-      setIsMuted(true);
-    }
-  };
-
-  const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (audioRef.current) {
-      const newTime = (parseFloat(e.target.value) / 100) * duration;
-      audioRef.current.currentTime = newTime;
-      setProgress(parseFloat(e.target.value));
-    }
-  };
-
-  const formatTime = (seconds: number) => {
-    if (isNaN(seconds)) return "0:00";
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${String(secs).padStart(2, "0")}`;
   };
 
   const nextTrack = () => {
