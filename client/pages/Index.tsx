@@ -437,119 +437,46 @@ export default function Index() {
         )}
 
         {/* NFT Collections Section */}
-        <section
-          id="nft"
-          className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
-        >
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
-          </div>
-
-          <div className="relative z-10 max-w-6xl w-full">
-            <div className="text-center mb-16">
-              <h3 className="text-5xl font-bold mb-4">
-                NFT Collections
-              </h3>
-              <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                Legendary Digital Artifacts
-              </p>
-              <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                Own a piece of the cosmos with our exclusive NFT collections,
-                each representing a unique moment in the digital universe.
-              </p>
+        {activeNftVideosList.some(v => v) && (
+          <section
+            id="nft"
+            className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
+          >
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/20 to-cosmic-violet/20 rounded-2xl blur-xl group-hover:blur-2xl transition group-hover:scale-110 transition" />
-                <div className="relative bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-8 hover:border-cosmic-purple transition cosmic-glow h-full">
-                  <div className="aspect-square rounded-lg bg-gradient-to-br from-cosmic-purple/30 to-cosmic-violet/30 mb-6 flex items-center justify-center border border-cosmic-purple/50">
-                    <Sparkles className="w-12 h-12 text-cosmic-purple opacity-50" />
-                  </div>
-                  <h4 className="text-2xl font-bold text-gray-100 mb-2">
-                    Retro Edition
-                  </h4>
-                  <p className="text-cosmic-purple text-sm font-semibold mb-3">
-                    Limited to 500
-                  </p>
-                  <p className="text-gray-400 mb-6">
-                    Nostalgic artifacts inspired by the golden age of digital
-                    computing, blended with futuristic cosmic elements.
-                  </p>
-                  <button className="btn-cosmic w-full text-center justify-center">
-                    View Collection
-                  </button>
-                </div>
+            <div className="relative z-10 max-w-6xl w-full">
+              <div className="text-center mb-16">
+                <h3 className="text-5xl font-bold mb-4">
+                  NFT Collections Videos
+                </h3>
               </div>
 
-              <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/20 to-cosmic-violet/20 rounded-2xl blur-xl group-hover:blur-2xl transition group-hover:scale-110 transition" />
-                <div className="relative bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-8 hover:border-cosmic-purple transition cosmic-glow h-full">
-                  <div className="aspect-square rounded-lg bg-gradient-to-br from-cosmic-purple/30 to-cosmic-violet/30 mb-6 flex items-center justify-center border border-cosmic-purple/50">
-                    <Music className="w-12 h-12 text-cosmic-purple opacity-50" />
-                  </div>
-                  <h4 className="text-2xl font-bold text-gray-100 mb-2">
-                    Animated Edition
-                  </h4>
-                  <p className="text-cosmic-purple text-sm font-semibold mb-3">
-                    Limited to 250
-                  </p>
-                  <p className="text-gray-400 mb-6">
-                    Living NFTs that dance to cosmic rhythms, each piece a
-                    animated journey through the stars.
-                  </p>
-                  <button className="btn-cosmic w-full text-center justify-center">
-                    View Collection
-                  </button>
-                </div>
-              </div>
-
-              <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/20 to-cosmic-violet/20 rounded-2xl blur-xl group-hover:blur-2xl transition group-hover:scale-110 transition" />
-                <div className="relative bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-8 hover:border-cosmic-purple transition cosmic-glow h-full">
-                  <div className="aspect-square rounded-lg bg-gradient-to-br from-cosmic-purple/30 to-cosmic-violet/30 mb-6 flex items-center justify-center border border-cosmic-purple/50">
-                    <Zap className="w-12 h-12 text-cosmic-purple opacity-50" />
-                  </div>
-                  <h4 className="text-2xl font-bold text-gray-100 mb-2">
-                    Digital Echoes
-                  </h4>
-                  <p className="text-cosmic-purple text-sm font-semibold mb-3">
-                    Limited to 1000
-                  </p>
-                  <p className="text-gray-400 mb-6">
-                    Reverberations of digital consciousness captured in time,
-                    each a unique frequency from the cosmic network.
-                  </p>
-                  <button className="btn-cosmic w-full text-center justify-center">
-                    View Collection
-                  </button>
-                </div>
-              </div>
-
-              <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/20 to-cosmic-violet/20 rounded-2xl blur-xl group-hover:blur-2xl transition group-hover:scale-110 transition" />
-                <div className="relative bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-8 hover:border-cosmic-purple transition cosmic-glow h-full">
-                  <div className="aspect-square rounded-lg bg-gradient-to-br from-cosmic-purple/30 to-cosmic-violet/30 mb-6 flex items-center justify-center border border-cosmic-purple/50">
-                    <Podcast className="w-12 h-12 text-cosmic-purple opacity-50" />
-                  </div>
-                  <h4 className="text-2xl font-bold text-gray-100 mb-2">
-                    Podcast Collection 2026
-                  </h4>
-                  <p className="text-cosmic-purple text-sm font-semibold mb-3">
-                    Limited to 100
-                  </p>
-                  <p className="text-gray-400 mb-6">
-                    Exclusive artifacts commemorating the legendary avatars from
-                    our podcast journeys through space and time.
-                  </p>
-                  <button className="btn-cosmic w-full text-center justify-center">
-                    View Collection
-                  </button>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                {nftVideos.map((url, index) => (
+                  activeNftVideosList[index] && url && (
+                    <div
+                      key={index}
+                      className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
+                    >
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={url}
+                        title={`NFT Collection Video ${index + 1}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                      />
+                    </div>
+                  )
+                ))}
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Footer */}
         <Footer />
