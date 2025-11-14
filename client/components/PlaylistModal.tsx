@@ -17,14 +17,28 @@ const DEFAULT_TRACKS: PlaylistTrack[] = [];
 
 const STORAGE_KEY = "cosmic-playlist-tracks";
 
+// YouTube API loaded flag
+let YT: any = null;
+
 export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
   const playerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const youtubePlayerRef = useRef<any>(null);
   const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
   const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
   const [repeatMode, setRepeatMode] = useState<"one" | "all">("all");
   const [isShuffle, setIsShuffle] = useState(false);
   const checkIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Load YouTube API
+  useEffect(() => {
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+  }, []);
 
   // Load tracks from localStorage on mount and when modal opens
   useEffect(() => {
