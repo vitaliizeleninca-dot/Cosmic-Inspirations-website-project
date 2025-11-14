@@ -389,61 +389,27 @@ export default function Index() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/20 to-cosmic-violet/20 rounded-2xl blur-xl group-hover:blur-2xl transition" />
-                <div className="relative bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-8 hover:border-cosmic-purple transition cosmic-glow">
-                  <Zap className="w-10 h-10 text-cosmic-purple mb-4" />
-                  <h4 className="text-xl font-bold text-gray-100 mb-3">
-                    Dimensional Explorer
-                  </h4>
-                  <p className="text-gray-400">
-                    Navigate through multi-dimensional spaces and uncover cosmic
-                    secrets hidden within alternate realities.
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/20 to-cosmic-violet/20 rounded-2xl blur-xl group-hover:blur-2xl transition" />
-                <div className="relative bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-8 hover:border-cosmic-purple transition cosmic-glow">
-                  <Sparkles className="w-10 h-10 text-cosmic-purple mb-4" />
-                  <h4 className="text-xl font-bold text-gray-100 mb-3">
-                    Stellar Meditation
-                  </h4>
-                  <p className="text-gray-400">
-                    Guided journeys through visual and auditory realms designed to
-                    expand consciousness and inner peace.
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/20 to-cosmic-violet/20 rounded-2xl blur-xl group-hover:blur-2xl transition" />
-                <div className="relative bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-8 hover:border-cosmic-purple transition cosmic-glow">
-                  <Music className="w-10 h-10 text-cosmic-purple mb-4" />
-                  <h4 className="text-xl font-bold text-gray-100 mb-3">
-                    Frequency Resonance
-                  </h4>
-                  <p className="text-gray-400">
-                    Feel the vibrations of the universe as frequencies from
-                    galactic sources wash over your being.
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/20 to-cosmic-violet/20 rounded-2xl blur-xl group-hover:blur-2xl transition" />
-                <div className="relative bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-8 hover:border-cosmic-purple transition cosmic-glow">
-                  <Podcast className="w-10 h-10 text-cosmic-purple mb-4" />
-                  <h4 className="text-xl font-bold text-gray-100 mb-3">
-                    Cosmic Storytelling
-                  </h4>
-                  <p className="text-gray-400">
-                    Immerse yourself in narrative experiences crafted by both
-                    human creativity and artificial intelligence.
-                  </p>
-                </div>
+            {/* Feel the Cosmos Videos */}
+            <div className="mb-12">
+              <h4 className="text-2xl font-bold text-cosmic-purple mb-6">Featured Videos</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {feelCosmosVideos.map((url, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
+                  >
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={url}
+                      title={`Feel the Cosmos Video ${index + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 
