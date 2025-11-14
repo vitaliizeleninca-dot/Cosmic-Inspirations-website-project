@@ -26,12 +26,18 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
   const youtubePlayerRef = useRef<any>(null);
   const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
   const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
+  const [videoDuration, setVideoDuration] = useState(0);
   const [repeatMode, setRepeatMode] = useState<"one" | "all">("all");
   const [isShuffle, setIsShuffle] = useState(false);
   const checkIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const durationCheckRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Load YouTube API
+  // Load YouTube API and setup player
   useEffect(() => {
+    window.onYouTubeIframeAPIReady = () => {
+      console.log("YouTube API ready");
+    };
+
     if (!window.YT) {
       const tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
@@ -39,6 +45,45 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
       firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
     }
   }, []);
+
+  // Track video duration when iframe loads
+  useEffect(() => {
+    if (!isOpen || !currentTrack || !iframeRef.current) return;
+
+    // Clear previous timeout
+    if (durationCheckRef.current) clearTimeout(durationCheckRef.current);
+
+    // Try to get video duration from iframe
+    const checkDuration = () => {
+      const iframe = iframeRef.current;
+      if (!iframe) return;
+
+      try {
+        // Try to access duration from iframe's window
+        const duration = (iframe as any).duration;
+        if (duration && duration > 0) {
+          setVideoDuration(Math.ceil(duration));
+          return;
+        }
+      } catch (e) {
+        // CORS error expected, proceed with fallback
+      }
+
+      // If still 0 or error, check again after 500ms (video might still be loading)
+      durationCheckRef.current = setTimeout(() => {
+        checkDuration();
+      }, 500);
+    };
+
+    // Start checking after a short delay to let iframe load
+    durationCheckRef.current = setTimeout(() => {
+      checkDuration();
+    }, 1000);
+
+    return () => {
+      if (durationCheckRef.current) clearTimeout(durationCheckRef.current);
+    };
+  }, [currentTrack, isOpen]);
 
   // Load tracks from localStorage on mount and when modal opens
   useEffect(() => {
@@ -159,7 +204,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     if (currentIndex > 0) {
       playTrack(tracks[currentIndex - 1]);
     } else if (repeatMode === "all") {
-      // В режиме repeat-all переходим в конец плейлиста
+      // В режиме repeat-all переходим в конец плейли��та
       playTrack(tracks[tracks.length - 1]);
     }
   };
