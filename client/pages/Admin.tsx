@@ -63,6 +63,11 @@ export default function Admin() {
     return saved ? JSON.parse(saved) : ["", "", "", ""];
   });
 
+  const [playlistVideos, setPlaylistVideos] = useState<string[]>(() => {
+    const saved = localStorage.getItem("playlist-videos");
+    return saved ? JSON.parse(saved) : ["", "", "", ""];
+  });
+
   // Load tracks from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
