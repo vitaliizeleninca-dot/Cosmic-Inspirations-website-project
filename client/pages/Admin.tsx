@@ -79,7 +79,7 @@ export default function Admin() {
     });
 
     if (newTracks.length === 0) {
-      alert("Заполните хотя бы одно поле с названием и корректной ссылко�� на аудиофайл (MP3, WAV и т.д.)");
+      alert("Заполните хотя бы одно поле с названием и корректной ссылкой на аудиофайл (MP3, WAV и т.д.)");
       return;
     }
 
@@ -179,13 +179,13 @@ export default function Admin() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-400 mb-2">
-                    YouTube ссылка
+                    Аудио ссылка (MP3/WAV)
                   </label>
                   <input
                     type="text"
                     value={track.url}
                     onChange={(e) => updateBulkTrack(index, "url", e.target.value)}
-                    placeholder="youtu.be/... или youtube.com/watch?v=..."
+                    placeholder="https://example.com/song.mp3"
                     className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
                   />
                 </div>
