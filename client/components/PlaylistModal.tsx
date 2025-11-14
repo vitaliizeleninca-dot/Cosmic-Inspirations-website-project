@@ -44,6 +44,15 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     }
   }, [isOpen]);
 
+  const parseDuration = (duration: string): number => {
+    if (!duration) return 300; // Default 5 minutes
+    const parts = duration.split(":");
+    if (parts.length === 2) {
+      return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+    }
+    return 300;
+  };
+
   // Auto-play next track when current ends
   const handleTrackEnd = useCallback(() => {
     if (!currentTrack || tracks.length === 0) return;
