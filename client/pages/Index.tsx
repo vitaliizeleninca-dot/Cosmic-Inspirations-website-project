@@ -625,6 +625,8 @@ export default function Index() {
       <PlaylistModal
         isOpen={isPlaylistModalOpen}
         onClose={() => setIsPlaylistModalOpen(false)}
+        playlistType={playlistType}
+        playlistSongs={playlistType === "cosmic" ? [] : feelCosmosSongs}
       />
     </div>
   );
