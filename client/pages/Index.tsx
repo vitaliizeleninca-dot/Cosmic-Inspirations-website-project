@@ -127,6 +127,24 @@ export default function Index() {
     if (savedPodcastVideosListActive) {
       setActivePodcastVideosList(JSON.parse(savedPodcastVideosListActive));
     }
+
+    const savedNftVideos = localStorage.getItem("nft-videos");
+    if (savedNftVideos) {
+      try {
+        const parsed = JSON.parse(savedNftVideos);
+        const videos = parsed.map((url: string) =>
+          url.trim() ? convertToEmbedUrl(url) : ""
+        );
+        setNftVideos(videos);
+      } catch (e) {
+        setNftVideos(["", "", "", ""]);
+      }
+    }
+
+    const savedNftVideosListActive = localStorage.getItem("nft-videos-list-active");
+    if (savedNftVideosListActive) {
+      setActiveNftVideosList(JSON.parse(savedNftVideosListActive));
+    }
   }, []);
 
   const convertToEmbedUrl = (url: string): string => {
