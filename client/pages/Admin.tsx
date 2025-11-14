@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 interface Track {
   id: string;
   title: string;
-  audioUrl: string;
+  youtubeUrl: string;
   duration?: string;
 }
 
@@ -110,7 +110,7 @@ export default function Admin() {
 
   const saveEdit = () => {
     if (!editTitle.trim()) {
-      alert("Введите название ��река");
+      alert("Введите название трека");
       return;
     }
 
@@ -138,7 +138,7 @@ export default function Admin() {
             <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
               Admin Panel
             </h1>
-            <p className="text-gray-400">Управление треками плейлиста</p>
+            <p className="text-gray-400">��правление треками плейлиста</p>
           </div>
           <Link
             to="/"
@@ -280,7 +280,7 @@ export default function Admin() {
         {/* Info */}
         <div className="mt-8 p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
           <p className="text-sm text-gray-400">
-            💡 <strong>Совет:</strong> Все изменения сохраняют��я автоматически в вашем браузере.
+            💡 <strong>Совет:</strong> Все изменения сохраняются автоматически в вашем браузере.
           </p>
           <p className="text-xs text-gray-500">
             • Используйте прямые ссылки на аудиофайлы (MP3, WAV и т.д.)<br/>
