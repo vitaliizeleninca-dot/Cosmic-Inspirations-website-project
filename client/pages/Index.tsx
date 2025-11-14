@@ -538,7 +538,7 @@ export default function Index() {
 
               <div className="grid grid-cols-2 gap-8">
                 {nftCollections.map((url, index) => (
-                  url && (
+                  url && nftCollectionImages[index] && (
                     <a
                       key={index}
                       href={url}
@@ -547,7 +547,7 @@ export default function Index() {
                       className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer"
                     >
                       <img
-                        src={url}
+                        src={nftCollectionImages[index] || undefined}
                         alt={`NFT Collection ${index + 1}`}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
