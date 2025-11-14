@@ -10,8 +10,6 @@ interface Track {
   duration?: string;
 }
 
-const STORAGE_KEY = "cosmic-playlist-tracks";
-
 interface AmbientTrack {
   id: string;
   title: string;
@@ -41,7 +39,10 @@ const DEFAULT_AMBIENT_TRACKS: AmbientTrack[] = [
   }
 ];
 
+const STORAGE_KEY = "cosmic-playlist-tracks";
 const AMBIENT_STORAGE_KEY = "cosmic-ambient-tracks";
+
+interface AdminPageProps {}
 
 export default function Admin() {
   const [tracks, setTracks] = useState<Track[]>([]);
@@ -51,7 +52,7 @@ export default function Admin() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [editUrl, setEditUrl] = useState("");
-
+  
   const [ambientTracks, setAmbientTracks] = useState<AmbientTrack[]>(DEFAULT_AMBIENT_TRACKS);
   const [currentAmbientTrack, setCurrentAmbientTrack] = useState<AmbientTrack | null>(DEFAULT_AMBIENT_TRACKS[0]);
   const [ambientVolume, setAmbientVolume] = useState(70);
@@ -96,7 +97,7 @@ export default function Admin() {
         console.error("Failed to load tracks:", e);
       }
     }
-
+    
     const savedAmbient = localStorage.getItem(AMBIENT_STORAGE_KEY);
     if (savedAmbient) {
       try {
@@ -186,7 +187,7 @@ export default function Admin() {
 
   const saveEdit = () => {
     if (!editTitle.trim()) {
-      alert("Введите название трека");
+      alert("Please enter a track title");
       return;
     }
 
@@ -204,57 +205,6 @@ export default function Admin() {
     setEditingId(null);
     setEditTitle("");
     setEditUrl("");
-  };
-
-  const saveAmbientTracks = (newTracks: AmbientTrack[]) => {
-    setAmbientTracks(newTracks);
-    localStorage.setItem(AMBIENT_STORAGE_KEY, JSON.stringify(newTracks));
-  };
-
-  const addAmbientTrack = () => {
-    if (!newAmbientTitle.trim() || !newAmbientUrl.trim()) {
-      alert("Пожалуйста, заполните название и ссылку");
-      return;
-    }
-
-    const videoId = extractVideoId(newAmbientUrl);
-    if (!videoId) {
-      alert("Непра��ильная ссылка на YouTube");
-      return;
-    }
-
-    const newTrack: AmbientTrack = {
-      id: Date.now().toString(),
-      title: newAmbientTitle,
-      youtubeUrl: `https://www.youtube.com/embed/${videoId}`
-    };
-
-    saveAmbientTracks([...ambientTracks, newTrack]);
-    setNewAmbientTitle("");
-    setNewAmbientUrl("");
-    alert("Трек добавлен!");
-  };
-
-  const deleteAmbientTrack = (id: string) => {
-    const newTracks = ambientTracks.filter(t => t.id !== id);
-    saveAmbientTracks(newTracks);
-    if (currentAmbientTrack?.id === id) {
-      setCurrentAmbientTrack(newTracks[0] || null);
-    }
-  };
-
-  const saveCosmicVideo = (index: number, url: string) => {
-    const updated = [...cosmicVideos];
-    updated[index] = url;
-    setCosmicVideos(updated);
-    localStorage.setItem("cosmic-videos", JSON.stringify(updated));
-  };
-
-  const savePlaylistVideo = (index: number, url: string) => {
-    const updated = [...playlistVideos];
-    updated[index] = url;
-    setPlaylistVideos(updated);
-    localStorage.setItem("playlist-videos", JSON.stringify(updated));
   };
 
   const updatePlaylistSong = (index: number, field: "title" | "url", value: string) => {
@@ -285,6 +235,57 @@ export default function Admin() {
     saveTracks(newTracks);
   };
 
+  const saveCosmicVideo = (index: number, url: string) => {
+    const updated = [...cosmicVideos];
+    updated[index] = url;
+    setCosmicVideos(updated);
+    localStorage.setItem("cosmic-videos", JSON.stringify(updated));
+  };
+
+  const savePlaylistVideo = (index: number, url: string) => {
+    const updated = [...playlistVideos];
+    updated[index] = url;
+    setPlaylistVideos(updated);
+    localStorage.setItem("playlist-videos", JSON.stringify(updated));
+  };
+
+  const saveAmbientTracks = (newTracks: AmbientTrack[]) => {
+    setAmbientTracks(newTracks);
+    localStorage.setItem(AMBIENT_STORAGE_KEY, JSON.stringify(newTracks));
+  };
+
+  const addAmbientTrack = () => {
+    if (!newAmbientTitle.trim() || !newAmbientUrl.trim()) {
+      alert("Please fill in both title and YouTube link");
+      return;
+    }
+
+    const videoId = extractVideoId(newAmbientUrl);
+    if (!videoId) {
+      alert("Invalid YouTube link format");
+      return;
+    }
+
+    const newTrack: AmbientTrack = {
+      id: Date.now().toString(),
+      title: newAmbientTitle,
+      youtubeUrl: `https://www.youtube.com/embed/${videoId}`
+    };
+
+    saveAmbientTracks([...ambientTracks, newTrack]);
+    setNewAmbientTitle("");
+    setNewAmbientUrl("");
+    alert("Track added!");
+  };
+
+  const deleteAmbientTrack = (id: string) => {
+    const newTracks = ambientTracks.filter(t => t.id !== id);
+    saveAmbientTracks(newTracks);
+    if (currentAmbientTrack?.id === id) {
+      setCurrentAmbientTrack(newTracks[0] || null);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
@@ -298,14 +299,14 @@ export default function Admin() {
           <Link
             to="/"
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:bg-cosmic-purple/10 transition"
-            title="Вернуться на главную"
+            title="Back to home"
           >
             <ArrowLeft className="w-5 h-5" />
             <span>Back to Home</span>
           </Link>
         </div>
 
-        <Tabs defaultValue="playlist" className="w-full">
+        <Tabs defaultValue="ambient" className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-lg p-1">
             <TabsTrigger value="ambient" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               <Music className="w-4 h-4 mr-2" />
@@ -315,7 +316,6 @@ export default function Admin() {
               Cosmic Ambient
             </TabsTrigger>
           </TabsList>
-
 
           <TabsContent value="ambient" className="mt-8">
             {/* Ambient Music Player */}
@@ -374,7 +374,7 @@ export default function Admin() {
                       type="text"
                       value={newAmbientUrl}
                       onChange={(e) => setNewAmbientUrl(e.target.value)}
-                      placeholder="youtube.com/watch?v=... или youtu.be/..."
+                      placeholder="youtube.com/watch?v=... or youtu.be/..."
                       className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
                     />
                   </div>
@@ -449,7 +449,7 @@ export default function Admin() {
                     <textarea
                       value={url}
                       onChange={(e) => saveCosmicVideo(index, e.target.value)}
-                      placeholder="youtube.com/watch?v=xxx или youtu.be/yyy"
+                      placeholder="youtube.com/watch?v=xxx or youtu.be/yyy"
                       className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
                     />
                   </div>
@@ -459,7 +459,7 @@ export default function Admin() {
 
             {/* Playlist Songs Section */}
             <div>
-              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Audio Playlist (до 10 песен)</h2>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Audio Playlist (up to 10 songs)</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {playlistSongs.map((song, index) => (
                   <div key={index} className="space-y-3 p-4 rounded-lg bg-cosmic-dark/50 border border-cosmic-purple/20">
@@ -493,18 +493,6 @@ export default function Admin() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Info */}
-            <div className="mt-8 p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
-              <p className="text-sm text-gray-400">
-                💡 <strong>Tip:</strong> All changes save automatically
-              </p>
-              <p className="text-xs text-gray-500">
-                • Cosmic Ambient Videos appear in the Music section<br/>
-                • Audio Playlist (up to 10 songs) appears����ся в модальном окне плеера<br/>
-                • Just paste titles and links - they save instantly
-              </p>
             </div>
           </TabsContent>
         </Tabs>
