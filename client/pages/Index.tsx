@@ -43,6 +43,10 @@ export default function Index() {
               NFT Collections
             </a>
           </nav>
+          <div className="flex items-center gap-6">
+            <div className="w-px h-6 bg-cosmic-purple/20" />
+            <BackgroundArtSelector />
+          </div>
         </div>
       </header>
 
