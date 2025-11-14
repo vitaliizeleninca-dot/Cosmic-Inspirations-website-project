@@ -44,11 +44,15 @@ const DEFAULT_TRACKS: PlaylistTrack[] = [
 const STORAGE_KEY = "cosmic-playlist-tracks";
 
 export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
   const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(70);
+  const [isMuted, setIsMuted] = useState(false);
+  const [volumeBeforeMute, setVolumeBeforeMute] = useState(70);
 
   // Load tracks from localStorage on mount and when modal opens
   useEffect(() => {
@@ -68,6 +72,72 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     }
   }, [isOpen]);
 
+  // Handle current track change
+  useEffect(() => {
+    if (audioRef.current && currentTrack) {
+      // For demo purposes, we'll use a silent audio or placeholder
+      // In production, you would use currentTrack.audioUrl
+      audioRef.current.src = currentTrack.audioUrl || "";
+      if (isPlaying) {
+        audioRef.current.play().catch((e) => {
+          console.log(
+            "Playback failed (audio URL not configured):",
+            e
+          );
+        });
+      }
+    }
+  }, [currentTrack]);
+
+  // Handle play/pause
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.play().catch((e) => {
+        console.log("Playback failed:", e);
+        setIsPlaying(false);
+      });
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
+
+  // Handle volume
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = isMuted ? 0 : volume / 100;
+    }
+  }, [volume, isMuted]);
+
+  // Update progress
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleTimeUpdate = () => {
+      setProgress((audio.currentTime / audio.duration) * 100);
+    };
+
+    const handleLoadedMetadata = () => {
+      setDuration(audio.duration);
+    };
+
+    const handleEnded = () => {
+      nextTrack();
+    };
+
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, [currentTrack, tracks]);
+
   if (!isOpen) return null;
 
   const playTrack = (track: PlaylistTrack) => {
@@ -77,7 +147,36 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
   };
 
   const togglePlay = () => {
-    setIsPlaying(!isPlaying);
+    if (!currentTrack && tracks.length > 0) {
+      playTrack(tracks[0]);
+    } else {
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleMute = () => {
+    if (isMuted) {
+      setIsMuted(false);
+      setVolume(volumeBeforeMute);
+    } else {
+      setVolumeBeforeMute(volume);
+      setIsMuted(true);
+    }
+  };
+
+  const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (audioRef.current) {
+      const newTime = (parseFloat(e.target.value) / 100) * duration;
+      audioRef.current.currentTime = newTime;
+      setProgress(parseFloat(e.target.value));
+    }
+  };
+
+  const formatTime = (seconds: number) => {
+    if (isNaN(seconds)) return "0:00";
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${String(secs).padStart(2, "0")}`;
   };
 
   const nextTrack = () => {
