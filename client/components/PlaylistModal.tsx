@@ -119,28 +119,85 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
           </button>
         </div>
 
-        {/* Now Playing Player */}
-        {currentTrack && (
-          <div className="p-6 border-b border-cosmic-purple/20 bg-cosmic-purple/10">
-            <p className="text-xs text-cosmic-purple font-semibold mb-3">
-              NOW PLAYING
-            </p>
-            <h3 className="text-lg font-semibold text-gray-100 mb-4">
-              {currentTrack.title}
-            </h3>
-            <div className="aspect-video rounded-lg overflow-hidden border border-cosmic-purple/30 bg-black">
-              <iframe
-                width="100%"
-                height="100%"
-                src={currentTrack.youtubeUrl}
-                title={currentTrack.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+        {/* Audio Player */}
+        <div className="p-6 border-b border-cosmic-purple/20 bg-cosmic-purple/10">
+          <p className="text-xs text-cosmic-purple font-semibold mb-3">
+            NOW PLAYING
+          </p>
+          {currentTrack ? (
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-gray-100 truncate">
+                {currentTrack.title}
+              </h3>
+
+              {/* Player Controls */}
+              <div className="bg-cosmic-dark/50 rounded-xl p-6 space-y-4 border border-cosmic-purple/30">
+                {/* Progress Bar */}
+                <div className="space-y-2">
+                  <div className="w-full h-1 bg-cosmic-dark rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-cosmic-purple to-cosmic-violet transition-all"
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                  <div className="flex justify-between text-xs text-gray-400">
+                    <span>
+                      {Math.floor((progress / 100) * (parseInt(currentTrack.duration?.split(":")[0] || "0") * 60 + parseInt(currentTrack.duration?.split(":")[1] || "0")))}:{String(Math.floor((progress / 100) * (parseInt(currentTrack.duration?.split(":")[1] || "0"))) % 60).padStart(2, "0")}
+                    </span>
+                    <span>{currentTrack.duration || "0:00"}</span>
+                  </div>
+                </div>
+
+                {/* Control Buttons */}
+                <div className="flex items-center justify-center gap-4">
+                  <button
+                    onClick={prevTrack}
+                    className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple transition"
+                    title="Предыдущий трек"
+                  >
+                    <SkipBack className="w-5 h-5" />
+                  </button>
+
+                  <button
+                    onClick={togglePlay}
+                    className="p-4 rounded-full bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark hover:shadow-lg hover:shadow-cosmic-purple/50 transition transform hover:scale-105"
+                    title={isPlaying ? "Пауза" : "Играть"}
+                  >
+                    {isPlaying ? (
+                      <Pause className="w-6 h-6" />
+                    ) : (
+                      <Play className="w-6 h-6 ml-0.5" />
+                    )}
+                  </button>
+
+                  <button
+                    onClick={nextTrack}
+                    className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple transition"
+                    title="Следующий трек"
+                  >
+                    <SkipForward className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Volume Control */}
+                <div className="flex items-center gap-3">
+                  <Volume2 className="w-4 h-4 text-cosmic-purple" />
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={volume}
+                    onChange={(e) => setVolume(parseInt(e.target.value))}
+                    className="flex-1 h-1 bg-cosmic-dark rounded-full cursor-pointer accent-cosmic-purple"
+                  />
+                  <span className="text-xs text-gray-400 w-8 text-right">{volume}%</span>
+                </div>
+              </div>
             </div>
-          </div>
-        )}
+          ) : (
+            <p className="text-gray-400 text-sm">Выберите трек из плейлиста</p>
+          )}
+        </div>
 
         {/* Scrollable Playlist */}
         <div className="flex-1 overflow-y-auto p-6">
