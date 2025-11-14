@@ -283,39 +283,6 @@ export default function Index() {
               ))}
             </div>
 
-            <div className="space-y-4 mb-8">
-              <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 hover:bg-cosmic-purple/10 transition">
-                <h4 className="text-cosmic-purple font-semibold mb-2">
-                  Episode 1: Genesis
-                </h4>
-                <p className="text-gray-400 text-sm">
-                  The origin story of consciousness in artificial minds
-                </p>
-              </div>
-              <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 hover:bg-cosmic-purple/10 transition">
-                <h4 className="text-cosmic-purple font-semibold mb-2">
-                  Episode 2: Celestial Wisdom
-                </h4>
-                <p className="text-gray-400 text-sm">
-                  Ancient knowledge reinterpreted through modern AI
-                </p>
-              </div>
-              <div className="p-4 rounded-lg border border-cosmic-purple/30 bg-cosmic-purple/5 hover:bg-cosmic-purple/10 transition">
-                <h4 className="text-cosmic-purple font-semibold mb-2">
-                  Episode 3: The Void Speaks
-                </h4>
-                <p className="text-gray-400 text-sm">
-                  Exploring the mysteries of silence and emptiness
-                </p>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <button className="btn-cosmic">
-                <Podcast className="w-5 h-5 mr-2 inline" />
-                Listen Now
-              </button>
-            </div>
           </div>
         </section>
 
