@@ -156,10 +156,40 @@ export default function Index() {
           setNftCollections(parsed);
         }
       } catch (e) {
-        // Keep default test values
+        // Keep default values
       }
     }
   }, []);
+
+  useEffect(() => {
+    const fetchCollectionImages = async () => {
+      const images: (string | null)[] = [];
+
+      for (const url of nftCollections) {
+        if (!url) {
+          images.push(null);
+          continue;
+        }
+
+        try {
+          const response = await fetch(`/api/opensea-collection?url=${encodeURIComponent(url)}`);
+          if (response.ok) {
+            const data = await response.json();
+            images.push(data.imageUrl || null);
+          } else {
+            images.push(null);
+          }
+        } catch (error) {
+          console.error("Error fetching collection image:", error);
+          images.push(null);
+        }
+      }
+
+      setNftCollectionImages(images);
+    };
+
+    fetchCollectionImages();
+  }, [nftCollections]);
 
   const convertToEmbedUrl = (url: string): string => {
     if (!url) return "";
