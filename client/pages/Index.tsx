@@ -467,11 +467,6 @@ export default function Index() {
                 </div>
               )}
 
-              <div className="text-center mt-12">
-                <button className="btn-cosmic">
-                  Start Your Journey
-                </button>
-              </div>
             </div>
           </section>
         )}
