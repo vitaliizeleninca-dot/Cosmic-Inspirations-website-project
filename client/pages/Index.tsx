@@ -95,9 +95,9 @@ export default function Index() {
       setActivePlaylistSongs(JSON.parse(savedPlaylistSongsActive));
     }
 
-    const savedFeelCosmosVideosActive = localStorage.getItem("feel-cosmos-videos-active");
-    if (savedFeelCosmosVideosActive) {
-      setActiveFeelCosmosVideos(JSON.parse(savedFeelCosmosVideosActive));
+    const savedFeelCosmosVideosListActive = localStorage.getItem("feel-cosmos-videos-list-active");
+    if (savedFeelCosmosVideosListActive) {
+      setActiveFeelCosmosVideosList(JSON.parse(savedFeelCosmosVideosListActive));
     }
 
     const savedFeelCosmosSongsActive = localStorage.getItem("feel-cosmos-songs-active");
