@@ -87,6 +87,28 @@ export default function Admin() {
     return Array(10).fill(null).map(() => ({ title: "", url: "" }));
   });
 
+  const [feelCosmosVideos, setFeelCosmosVideos] = useState<string[]>(() => {
+    const saved = localStorage.getItem("feel-cosmos-videos");
+    return saved ? JSON.parse(saved) : ["", "", "", ""];
+  });
+
+  const [feelCosmosSongs, setFeelCosmosSongs] = useState<Array<{ title: string; url: string }>>(() => {
+    const saved = localStorage.getItem("feel-cosmos-songs");
+    if (saved) {
+      try {
+        const loaded = JSON.parse(saved);
+        const songs = loaded.map((track: Track) => ({ title: track.title, url: track.youtubeUrl }));
+        while (songs.length < 10) {
+          songs.push({ title: "", url: "" });
+        }
+        return songs.slice(0, 10);
+      } catch (e) {
+        return Array(10).fill(null).map(() => ({ title: "", url: "" }));
+      }
+    }
+    return Array(10).fill(null).map(() => ({ title: "", url: "" }));
+  });
+
   // Load tracks from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
