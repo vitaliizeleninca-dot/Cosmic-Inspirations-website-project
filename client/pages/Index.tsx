@@ -161,6 +161,23 @@ export default function Index() {
         // Keep default values
       }
     }
+
+    const savedNftCollectionCustomImages = localStorage.getItem("nft-collection-custom-images");
+    if (savedNftCollectionCustomImages) {
+      try {
+        const parsed = JSON.parse(savedNftCollectionCustomImages);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setNftCollectionCustomImages(parsed);
+        }
+      } catch (e) {
+        // Keep default values
+      }
+    }
+
+    const savedActiveNftCollectionsList = localStorage.getItem("nft-collections-list-active");
+    if (savedActiveNftCollectionsList) {
+      setActiveNftCollectionsList(JSON.parse(savedActiveNftCollectionsList));
+    }
   }, []);
 
   useEffect(() => {
