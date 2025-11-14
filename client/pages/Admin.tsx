@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 interface Track {
   id: string;
   title: string;
-  youtubeUrl: string;
+  audioUrl: string;
   duration?: string;
 }
 
@@ -134,7 +134,7 @@ export default function Admin() {
             <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
               Admin Panel
             </h1>
-            <p className="text-gray-400">Управление треками плейлиста</p>
+            <p className="text-gray-400">Управле��ие треками плейлиста</p>
           </div>
           <Link
             to="/"
