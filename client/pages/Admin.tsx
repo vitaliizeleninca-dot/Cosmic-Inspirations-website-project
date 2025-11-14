@@ -496,14 +496,14 @@ export default function Admin() {
             </div>
 
             {/* Info */}
-            <div className="p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
+            <div className="mt-8 p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
               <p className="text-sm text-gray-400">
-                💡 <strong>Tip:</strong> Управляйте контентом в одной вкладке
+                💡 <strong>Tip:</strong> Все изменения сохраняются автоматически
               </p>
               <p className="text-xs text-gray-500">
-                • Cosmic Ambient Videos появляются в секции Music<br/>
-                • Audio Playlist (до 10 песен) появляется в модальном окне на главной<br/>
-                • Нажимайте "Save Playlist" чтобы сохранить изменения
+                • Cosmic Ambient Videos появляются в секции Music на главной<br/>
+                • Audio Playlist (до 10 песен) появляе��ся в модальном окне плеера<br/>
+                • Просто вставляйте названия и ссылки - они сохраняются сразу
               </p>
             </div>
           </TabsContent>
