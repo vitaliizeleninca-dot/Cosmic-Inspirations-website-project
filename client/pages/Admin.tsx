@@ -91,8 +91,8 @@ export default function Admin() {
 
   const extractVideoId = (url: string): string => {
     const patterns = [
-      /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
-      /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{10,12})/,
+      /youtube\.com\/embed\/([a-zA-Z0-9_-]{10,12})/,
     ];
 
     for (const pattern of patterns) {
@@ -191,7 +191,7 @@ export default function Admin() {
 
     const videoId = extractVideoId(newAmbientUrl);
     if (!videoId) {
-      alert("Неправильная ссылка на YouTube");
+      alert("Непра��ильная ссылка на YouTube");
       return;
     }
 
