@@ -68,6 +68,19 @@ export default function Admin() {
     return saved ? JSON.parse(saved) : ["", "", "", ""];
   });
 
+  const [playlistSongs, setPlaylistSongs] = useState<Array<{ title: string; url: string }>>(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const loaded = JSON.parse(saved);
+        return loaded.map((track: Track) => ({ title: track.title, url: track.youtubeUrl }));
+      } catch (e) {
+        return Array(10).fill(null).map(() => ({ title: "", url: "" }));
+      }
+    }
+    return Array(10).fill(null).map(() => ({ title: "", url: "" }));
+  });
+
   // Load tracks from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
