@@ -76,12 +76,12 @@ export default function Admin() {
     });
 
     if (newTracks.length === 0) {
-      alert("Заполните хотя бы одно поле с названием и корректной YouTube ссылкой");
+      alert("Please fill at least one field with a track title and valid YouTube link");
       return;
     }
 
     if (errorCount > 0) {
-      alert(`${errorCount} ссылок были пропущены - проверьте формат YouTube ссылок`);
+      alert(`${errorCount} links were skipped - check the YouTube link format`);
     }
 
     saveTracks([...tracks, ...newTracks]);
