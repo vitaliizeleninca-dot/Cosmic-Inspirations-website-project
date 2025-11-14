@@ -598,69 +598,73 @@ export default function Admin() {
           </TabsContent>
 
           <TabsContent value="links" className="mt-8">
-            {/* Quick Links Manager */}
+            {/* Quick Links Manager - 4 Panels */}
             <div className="space-y-6">
-              {/* Type Selector */}
-              <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
-                <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Add to</h2>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      value="playlist"
-                      checked={quickLinksType === "playlist"}
-                      onChange={(e) => setQuickLinksType(e.target.value as "playlist" | "ambient")}
-                      className="w-4 h-4 cursor-pointer"
-                    />
-                    <span className="text-gray-300">Playlist Tracks</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      value="ambient"
-                      checked={quickLinksType === "ambient"}
-                      onChange={(e) => setQuickLinksType(e.target.value as "playlist" | "ambient")}
-                      className="w-4 h-4 cursor-pointer"
-                    />
-                    <span className="text-gray-300">Ambient Music</span>
-                  </label>
-                </div>
-              </div>
+              <div className="grid grid-cols-2 gap-6">
+                {quickLinksPanels.map((panel, panelIndex) => (
+                  <div key={panelIndex} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
+                    <h2 className="text-lg font-bold mb-3 text-cosmic-purple">
+                      Window {panelIndex + 1}
+                    </h2>
 
-              {/* Paste Links Area */}
-              <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
-                <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Paste YouTube Links</h2>
-                <p className="text-sm text-gray-400 mb-4">
-                  Paste one link per line. Supports youtube.com/watch?v=... and youtu.be/... formats
-                </p>
-                <textarea
-                  value={quickLinksText}
-                  onChange={(e) => setQuickLinksText(e.target.value)}
-                  placeholder="youtube.com/watch?v=xxx&#10;youtu.be/yyy&#10;https://www.youtube.com/watch?v=zzz"
-                  className="w-full h-48 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
-                />
-                <p className="text-xs text-gray-500 mt-2">
-                  {quickLinksText.split('\n').filter(l => l.trim()).length} link(s) ready to add
-                </p>
-              </div>
+                    {/* Type Selector for this panel */}
+                    <div className="mb-4 flex gap-3">
+                      <label className="flex items-center gap-2 cursor-pointer text-xs">
+                        <input
+                          type="radio"
+                          value="playlist"
+                          checked={panel.type === "playlist"}
+                          onChange={() => updatePanelType(panelIndex, "playlist")}
+                          className="w-3 h-3 cursor-pointer"
+                        />
+                        <span className="text-gray-300">Playlist</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer text-xs">
+                        <input
+                          type="radio"
+                          value="ambient"
+                          checked={panel.type === "ambient"}
+                          onChange={() => updatePanelType(panelIndex, "ambient")}
+                          className="w-3 h-3 cursor-pointer"
+                        />
+                        <span className="text-gray-300">Ambient</span>
+                      </label>
+                    </div>
 
-              {/* Add Button */}
-              <button
-                onClick={addQuickLinks}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:opacity-90 transition"
-              >
-                <Plus className="w-5 h-5" />
-                Add All Links
-              </button>
+                    {/* Textarea for links */}
+                    <textarea
+                      value={panel.text}
+                      onChange={(e) => updatePanelText(panelIndex, e.target.value)}
+                      placeholder="youtube.com/watch?v=xxx&#10;youtu.be/yyy"
+                      className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none min-h-32 mb-3"
+                    />
+
+                    {/* Link counter */}
+                    <p className="text-xs text-gray-500 mb-3">
+                      {panel.text.split('\n').filter(l => l.trim()).length} link(s)
+                    </p>
+
+                    {/* Add button for this panel */}
+                    <button
+                      onClick={() => addQuickLinksFromPanel(panelIndex)}
+                      className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold text-sm hover:opacity-90 transition"
+                    >
+                      <Plus className="w-4 h-4" />
+                      Add Links
+                    </button>
+                  </div>
+                ))}
+              </div>
 
               {/* Info */}
               <div className="p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
                 <p className="text-sm text-gray-400">
-                  💡 <strong>Tip:</strong> Paste multiple YouTube links, one per line
+                  💡 <strong>Tip:</strong> Paste YouTube links one per line in any window
                 </p>
                 <p className="text-xs text-gray-500">
+                  • Choose Playlist or Ambient for each window<br/>
                   • Links will be automatically converted to embed format<br/>
-                  • Each link will get an auto-generated title<br/>
+                  • Each link gets an auto-generated title<br/>
                   • All changes are saved automatically
                 </p>
               </div>
