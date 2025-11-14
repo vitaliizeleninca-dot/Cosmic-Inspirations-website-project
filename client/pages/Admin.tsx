@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Edit2, Save, X, ArrowLeft } from "lucide-react";
+import { Plus, Trash2, Edit2, Save, X, ArrowLeft, Music } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 interface Track {
   id: string;
