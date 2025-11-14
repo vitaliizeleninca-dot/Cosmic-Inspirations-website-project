@@ -498,7 +498,7 @@ export default function Admin() {
             {/* Info */}
             <div className="mt-8 p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
               <p className="text-sm text-gray-400">
-                💡 <strong>Tip:</strong> Все изменения сохраняются автоматически
+                💡 <strong>Tip:</strong> All changes save automatically
               </p>
               <p className="text-xs text-gray-500">
                 • Cosmic Ambient Videos появляются в секции Music на главной<br/>
