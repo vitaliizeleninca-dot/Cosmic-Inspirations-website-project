@@ -1,4 +1,4 @@
-import { X, Play, Pause, SkipBack, SkipForward, Volume2, VolumeX } from "lucide-react";
+import { X, Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Shuffle, Repeat, Repeat1 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 interface PlaylistTrack {
@@ -13,14 +13,24 @@ interface PlaylistModalProps {
   onClose: () => void;
 }
 
+type PlaybackMode = "sequential" | "repeat-all" | "repeat-one" | "shuffle";
+
 const DEFAULT_TRACKS: PlaylistTrack[] = [];
 
 const STORAGE_KEY = "cosmic-playlist-tracks";
+
+const PLAYBACK_MODES: Record<PlaybackMode, { label: string; icon: string }> = {
+  sequential: { label: "Все по порядку", icon: "▶" },
+  "repeat-all": { label: "Повторять всё", icon: "🔁" },
+  "repeat-one": { label: "Повторять одно", icon: "🔂" },
+  shuffle: { label: "Рандом", icon: "🔀" },
+};
 
 export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
   const playerRef = useRef<HTMLDivElement>(null);
   const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
   const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
+  const [playbackMode, setPlaybackMode] = useState<PlaybackMode>("sequential");
 
   // Load tracks from localStorage on mount and when modal opens
   useEffect(() => {
@@ -119,7 +129,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                   onClick={prevTrack}
                   disabled={!currentTrack || tracks.findIndex((t) => t.id === currentTrack.id) === 0}
                   className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple disabled:opacity-50 disabled:cursor-not-allowed transition"
-                  title="Предыдущий трек"
+                  title="Предыдущий ��рек"
                 >
                   <SkipBack className="w-5 h-5" />
                 </button>
