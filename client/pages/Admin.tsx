@@ -458,6 +458,52 @@ export default function Admin() {
               </div>
             </div>
 
+            {/* Playlist Songs Section */}
+            <div>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Audio Playlist (до 10 песен)</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                {playlistSongs.map((song, index) => (
+                  <div key={index} className="space-y-3 p-4 rounded-lg bg-cosmic-dark/50 border border-cosmic-purple/20">
+                    <div className="text-xs font-semibold text-cosmic-purple mb-2">
+                      Песня #{index + 1}
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-400 mb-2">
+                        Название
+                      </label>
+                      <input
+                        type="text"
+                        value={song.title}
+                        onChange={(e) => updatePlaylistSong(index, "title", e.target.value)}
+                        placeholder="e.g., Cosmic Meditation"
+                        className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-400 mb-2">
+                        YouTube Link
+                      </label>
+                      <input
+                        type="text"
+                        value={song.url}
+                        onChange={(e) => updatePlaylistSong(index, "url", e.target.value)}
+                        placeholder="youtube.com/watch?v=... или youtu.be/..."
+                        className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={savePlaylistSongs}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:opacity-90 transition mb-6"
+              >
+                <Plus className="w-5 h-5" />
+                Save Playlist
+              </button>
+            </div>
+
             {/* Playlist Tracks Videos Section */}
             <div>
               <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Playlist Tracks Videos</h2>
@@ -479,12 +525,12 @@ export default function Admin() {
             {/* Info */}
             <div className="p-4 rounded-lg bg-cosmic-purple/10 border border-cosmic-purple/30 space-y-2">
               <p className="text-sm text-gray-400">
-                💡 <strong>Tip:</strong> Paste YouTube links and they will appear on the main page
+                💡 <strong>Tip:</strong> Все изменения сохраняются автоматически
               </p>
               <p className="text-xs text-gray-500">
-                • Cosmic Ambient Videos appear in the Music section<br/>
-                ��� Playlist Tracks Videos appear in a separate section<br/>
-                • Changes save automatically
+                • Cosmic Ambient Videos появляются в секции Music<br/>
+                • Audio Playlist появляется в модальном окне на главной<br/>
+                • Playlist Tracks Videos появляются в отдельной секции
               </p>
             </div>
           </TabsContent>
