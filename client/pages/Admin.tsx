@@ -408,6 +408,20 @@ export default function Admin() {
     }
   };
 
+  const savePodcastVideo = (index: number, url: string) => {
+    const updated = [...podcastVideos];
+    updated[index] = url;
+    setPodcastVideos(updated);
+    localStorage.setItem("podcast-videos", JSON.stringify(updated));
+  };
+
+  const togglePodcastVideoActive = (index: number, isActive: boolean) => {
+    const updated = [...activePodcastVideosList];
+    updated[index] = isActive;
+    setActivePodcastVideosList(updated);
+    localStorage.setItem("podcast-videos-list-active", JSON.stringify(updated));
+  };
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
