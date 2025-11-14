@@ -655,6 +655,39 @@ export default function Admin() {
               </div>
             </div>
           </TabsContent>
+
+          <TabsContent value="nft" className="mt-8 space-y-8">
+            {/* NFT Collections Videos Section */}
+            <div>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">NFT Collections Videos</h2>
+              <div className="grid grid-cols-2 gap-6">
+                {nftVideos.map((url, index) => (
+                  <div key={index} className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col ${activeNftVideosList[index] ? "" : "opacity-50"}`}>
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-semibold text-cosmic-purple">Video {index + 1}</h3>
+                      <button
+                        onClick={() => toggleNftVideoActive(index, !activeNftVideosList[index])}
+                        className={`px-3 py-1 rounded text-xs font-semibold transition ${
+                          activeNftVideosList[index]
+                            ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
+                            : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
+                        }`}
+                      >
+                        {activeNftVideosList[index] ? "On" : "Off"}
+                      </button>
+                    </div>
+                    <textarea
+                      value={url}
+                      onChange={(e) => saveNftVideo(index, e.target.value)}
+                      placeholder="youtube.com/watch?v=xxx or youtu.be/yyy"
+                      className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
+                      disabled={!activeNftVideosList[index]}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
