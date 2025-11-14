@@ -221,6 +221,8 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
 
         {/* Audio Player */}
         <div className="p-6 border-b border-cosmic-purple/20 bg-cosmic-purple/10">
+          <audio ref={audioRef} crossOrigin="anonymous" />
+
           <p className="text-xs text-cosmic-purple font-semibold mb-3">
             NOW PLAYING
           </p>
@@ -234,17 +236,17 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
               <div className="bg-cosmic-dark/50 rounded-xl p-6 space-y-4 border border-cosmic-purple/30">
                 {/* Progress Bar */}
                 <div className="space-y-2">
-                  <div className="w-full h-1 bg-cosmic-dark rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-cosmic-purple to-cosmic-violet transition-all"
-                      style={{ width: `${progress}%` }}
-                    />
-                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={progress}
+                    onChange={handleProgressChange}
+                    className="w-full h-1 bg-cosmic-dark rounded-full cursor-pointer accent-cosmic-purple"
+                  />
                   <div className="flex justify-between text-xs text-gray-400">
-                    <span>
-                      {Math.floor((progress / 100) * (parseInt(currentTrack.duration?.split(":")[0] || "0") * 60 + parseInt(currentTrack.duration?.split(":")[1] || "0")))}:{String(Math.floor((progress / 100) * (parseInt(currentTrack.duration?.split(":")[1] || "0"))) % 60).padStart(2, "0")}
-                    </span>
-                    <span>{currentTrack.duration || "0:00"}</span>
+                    <span>{formatTime(audioRef.current?.currentTime || 0)}</span>
+                    <span>{currentTrack.duration || formatTime(duration)}</span>
                   </div>
                 </div>
 
@@ -252,7 +254,8 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                 <div className="flex items-center justify-center gap-4">
                   <button
                     onClick={prevTrack}
-                    className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple transition"
+                    disabled={!currentTrack || tracks.findIndex((t) => t.id === currentTrack.id) === 0}
+                    className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple disabled:opacity-50 disabled:cursor-not-allowed transition"
                     title="Предыдущий трек"
                   >
                     <SkipBack className="w-5 h-5" />
@@ -272,7 +275,8 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
 
                   <button
                     onClick={nextTrack}
-                    className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple transition"
+                    disabled={!currentTrack || tracks.findIndex((t) => t.id === currentTrack.id) === tracks.length - 1}
+                    className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple disabled:opacity-50 disabled:cursor-not-allowed transition"
                     title="Следующий трек"
                   >
                     <SkipForward className="w-5 h-5" />
@@ -281,18 +285,39 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
 
                 {/* Volume Control */}
                 <div className="flex items-center gap-3">
-                  <Volume2 className="w-4 h-4 text-cosmic-purple" />
+                  <button
+                    onClick={toggleMute}
+                    className="p-1 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple transition flex-shrink-0"
+                    title={isMuted ? "Включить звук" : "Отключить звук"}
+                  >
+                    {isMuted ? (
+                      <VolumeX className="w-5 h-5" />
+                    ) : (
+                      <Volume2 className="w-5 h-5" />
+                    )}
+                  </button>
                   <input
                     type="range"
                     min="0"
                     max="100"
-                    value={volume}
-                    onChange={(e) => setVolume(parseInt(e.target.value))}
+                    value={isMuted ? 0 : volume}
+                    onChange={(e) => {
+                      if (isMuted) setIsMuted(false);
+                      setVolume(parseInt(e.target.value));
+                    }}
                     className="flex-1 h-1 bg-cosmic-dark rounded-full cursor-pointer accent-cosmic-purple"
                   />
-                  <span className="text-xs text-gray-400 w-8 text-right">{volume}%</span>
+                  <span className="text-xs text-gray-400 w-8 text-right">
+                    {isMuted ? "0" : volume}%
+                  </span>
                 </div>
               </div>
+
+              {!currentTrack.audioUrl && (
+                <div className="text-xs text-yellow-400 bg-yellow-400/10 border border-yellow-400/30 rounded-lg p-3">
+                  💡 Примечание: для полного функционала добавьте аудиофайлы в админ-панель вместо YouTube ссылок.
+                </div>
+              )}
             </div>
           ) : (
             <p className="text-gray-400 text-sm">Выберите трек из плейлиста</p>
@@ -307,7 +332,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
           <div className="space-y-2">
             {tracks.length === 0 ? (
               <p className="text-gray-500 text-center py-8">
-                Нет треков. Добавьте треки в админ-панели.
+                ��ет треков. Добавьте треки в админ-панели.
               </p>
             ) : (
               tracks.map((track, index) => (
