@@ -218,6 +218,69 @@ export default function Admin() {
     }
   };
 
+  const addQuickLinks = () => {
+    const links = quickLinksText.split('\n').map(line => line.trim()).filter(line => line);
+
+    if (links.length === 0) {
+      alert("Пожалуйста, вставьте хотя бы одну ссылку");
+      return;
+    }
+
+    let successCount = 0;
+    let errorCount = 0;
+
+    if (quickLinksType === "ambient") {
+      const newTracks: AmbientTrack[] = [];
+
+      links.forEach((line) => {
+        const videoId = extractVideoId(line);
+        if (videoId) {
+          newTracks.push({
+            id: Date.now().toString() + Math.random(),
+            title: `Ambient Track ${ambientTracks.length + newTracks.length + 1}`,
+            youtubeUrl: `https://www.youtube.com/embed/${videoId}`
+          });
+          successCount++;
+        } else {
+          errorCount++;
+        }
+      });
+
+      if (newTracks.length > 0) {
+        saveAmbientTracks([...ambientTracks, ...newTracks]);
+      }
+    } else {
+      const newTracks: Track[] = [];
+
+      links.forEach((line, index) => {
+        const videoId = extractVideoId(line);
+        if (videoId) {
+          newTracks.push({
+            id: Date.now().toString() + index,
+            title: `Track ${tracks.length + newTracks.length + 1}`,
+            youtubeUrl: `https://www.youtube.com/embed/${videoId}`,
+            duration: "0:00"
+          });
+          successCount++;
+        } else {
+          errorCount++;
+        }
+      });
+
+      if (newTracks.length > 0) {
+        saveTracks([...tracks, ...newTracks]);
+      }
+    }
+
+    setQuickLinksText("");
+
+    if (errorCount > 0) {
+      alert(`Добавлено: ${successCount}, ошибок: ${errorCount}`);
+    } else {
+      alert(`Успешно добавлено ${successCount} треков!`);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
@@ -273,7 +336,7 @@ export default function Admin() {
                     type="text"
                     value={track.title}
                     onChange={(e) => updateBulkTrack(index, "title", e.target.value)}
-                    placeholder="Н��пример: Nebula Dreams"
+                    placeholder="Например: Nebula Dreams"
                     className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
                   />
                 </div>
