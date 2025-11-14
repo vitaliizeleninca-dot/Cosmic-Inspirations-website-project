@@ -80,9 +80,9 @@ export default function Index() {
       }
     }
 
-    const savedCosmicVideosActive = localStorage.getItem("cosmic-videos-active");
-    if (savedCosmicVideosActive) {
-      setActiveCosmicVideos(JSON.parse(savedCosmicVideosActive));
+    const savedCosmicVideosListActive = localStorage.getItem("cosmic-videos-list-active");
+    if (savedCosmicVideosListActive) {
+      setActiveCosmicVideosList(JSON.parse(savedCosmicVideosListActive));
     }
 
     const savedPlaylistVideosActive = localStorage.getItem("playlist-videos-active");
