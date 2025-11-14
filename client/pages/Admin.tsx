@@ -331,7 +331,7 @@ export default function Admin() {
               Ambient Music
             </TabsTrigger>
             <TabsTrigger value="links" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
-              Add Links
+              Cosmic Ambient
             </TabsTrigger>
           </TabsList>
 
