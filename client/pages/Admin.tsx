@@ -220,67 +220,11 @@ export default function Admin() {
     }
   };
 
-  const addLinksFromPanel = (text: string, type: "playlist" | "ambient") => {
-    const links = text.split('\n').map(line => line.trim()).filter(line => line);
-
-    if (links.length === 0) {
-      alert("Пожалуйста, вставьте хотя бы одну ссылку");
-      return false;
-    }
-
-    let successCount = 0;
-    let errorCount = 0;
-
-    if (type === "ambient") {
-      const newTracks: AmbientTrack[] = [];
-
-      links.forEach((line) => {
-        const videoId = extractVideoId(line);
-        if (videoId) {
-          newTracks.push({
-            id: Date.now().toString() + Math.random(),
-            title: `Ambient Track ${ambientTracks.length + newTracks.length + 1}`,
-            youtubeUrl: `https://www.youtube.com/embed/${videoId}`
-          });
-          successCount++;
-        } else {
-          errorCount++;
-        }
-      });
-
-      if (newTracks.length > 0) {
-        saveAmbientTracks([...ambientTracks, ...newTracks]);
-      }
-    } else {
-      const newTracks: Track[] = [];
-
-      links.forEach((line, index) => {
-        const videoId = extractVideoId(line);
-        if (videoId) {
-          newTracks.push({
-            id: Date.now().toString() + index,
-            title: `Track ${tracks.length + newTracks.length + 1}`,
-            youtubeUrl: `https://www.youtube.com/embed/${videoId}`,
-            duration: "0:00"
-          });
-          successCount++;
-        } else {
-          errorCount++;
-        }
-      });
-
-      if (newTracks.length > 0) {
-        saveTracks([...tracks, ...newTracks]);
-      }
-    }
-
-    if (errorCount > 0) {
-      alert(`Добавлено: ${successCount}, ошибок: ${errorCount}`);
-    } else {
-      alert(`Успешно добавлено ${successCount} треков!`);
-    }
-
-    return true;
+  const saveCosmicVideo = (index: number, url: string) => {
+    const updated = [...cosmicVideos];
+    updated[index] = url;
+    setCosmicVideos(updated);
+    localStorage.setItem("cosmic-videos", JSON.stringify(updated));
   };
 
   return (
