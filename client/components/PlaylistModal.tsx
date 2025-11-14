@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 interface PlaylistTrack {
   id: string;
   title: string;
-  audioUrl: string;
+  youtubeUrl: string;
   duration?: string;
 }
 
