@@ -58,15 +58,6 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     }
   }, [isOpen]);
 
-  const parseDuration = (duration: string): number => {
-    if (!duration) return 300; // Default 5 minutes
-    const parts = duration.split(":");
-    if (parts.length === 2) {
-      return parseInt(parts[0]) * 60 + parseInt(parts[1]);
-    }
-    return 300;
-  };
-
   // Auto-play next track when current ends
   const handleTrackEnd = useCallback(() => {
     if (!currentTrack || tracks.length === 0) return;
@@ -77,8 +68,10 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
       // Repeat current - reload iframe
       const iframe = iframeRef.current;
       if (iframe) {
-        const src = iframe.src.split("?")[0];
-        iframe.src = src + "?autoplay=1";
+        const videoId = currentTrack.youtubeUrl.match(/\/embed\/([a-zA-Z0-9_-]{11})/)?.[1];
+        if (videoId) {
+          iframe.src = `https://www.youtube.com/embed/${videoId}?controls=1&modestbranding=1&fs=0&autoplay=1`;
+        }
       }
     } else if (isShuffle) {
       // Shuffle - random track
@@ -95,36 +88,40 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     }
   }, [currentTrack, tracks, repeatMode, isShuffle]);
 
-  // Monitor video duration and auto-advance
+  // Monitor video and auto-advance when it ends
   useEffect(() => {
-    if (!isOpen || !currentTrack) return;
+    if (!isOpen || !currentTrack || !iframeRef.current) return;
 
-    const checkProgress = () => {
-      const iframe = iframeRef.current;
-      if (!iframe) return;
+    // Use YouTube postMessage API to track video state
+    const iframe = iframeRef.current;
+    const videoId = currentTrack.youtubeUrl.match(/\/embed\/([a-zA-Z0-9_-]{11})/)?.[1];
 
-      // Try to detect if video is about to end by checking elapsed time
-      // YouTube videos typically have their duration, but we can estimate based on common lengths
-      // For simplicity, we'll check every second and estimate completion
-      try {
-        // Create a hidden check - YouTube IFrame API would be ideal but requires additional setup
-        // For now, we'll use a simple duration estimate based on the track
-        const estimatedDuration = parseDuration(currentTrack.duration || "5:00");
-        const checkTime = setInterval(() => {
-          // Since we can't directly access YouTube video time via iframe,
-          // we'll use a simpler approach: check elapsed time since track start
-          handleTrackEnd();
-          clearInterval(checkTime);
-        }, (estimatedDuration - 2) * 1000); // Trigger 2 seconds before end
+    if (!videoId) return;
 
-        return () => clearInterval(checkTime);
-      } catch (e) {
-        console.error("Error monitoring track progress:", e);
-      }
-    };
+    // Create a simple timer that checks if we should advance to the next track
+    // Default to 5 minutes if duration is not specified
+    const durationSeconds = currentTrack.duration
+      ? parseDurationToSeconds(currentTrack.duration)
+      : 300; // 5 minutes default
 
-    checkProgress();
+    // Advance to next track after duration
+    const timeoutId = setTimeout(() => {
+      handleTrackEnd();
+    }, durationSeconds * 1000);
+
+    return () => clearTimeout(timeoutId);
   }, [currentTrack, isOpen, handleTrackEnd]);
+
+  const parseDurationToSeconds = (duration: string): number => {
+    if (!duration || duration === "0:00") return 300; // Default 5 minutes
+    const parts = duration.split(":");
+    if (parts.length === 2) {
+      const mins = parseInt(parts[0]) || 0;
+      const secs = parseInt(parts[1]) || 0;
+      return mins * 60 + secs;
+    }
+    return 300;
+  };
 
   if (!isOpen) return null;
 
