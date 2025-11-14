@@ -178,6 +178,56 @@ export default function Admin() {
     setEditUrl("");
   };
 
+  const extractVideoId = (url: string): string => {
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+      /youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
+    ];
+
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) return match[1];
+    }
+    return "";
+  };
+
+  const saveAmbientTracks = (newTracks: AmbientTrack[]) => {
+    setAmbientTracks(newTracks);
+    localStorage.setItem(AMBIENT_STORAGE_KEY, JSON.stringify(newTracks));
+  };
+
+  const addAmbientTrack = () => {
+    if (!newAmbientTitle.trim() || !newAmbientUrl.trim()) {
+      alert("Пожалуйста, заполните название и ссылку");
+      return;
+    }
+
+    const videoId = extractVideoId(newAmbientUrl);
+    if (!videoId) {
+      alert("Неправильная ссылка на YouTube");
+      return;
+    }
+
+    const newTrack: AmbientTrack = {
+      id: Date.now().toString(),
+      title: newAmbientTitle,
+      youtubeUrl: `https://www.youtube.com/embed/${videoId}`
+    };
+
+    saveAmbientTracks([...ambientTracks, newTrack]);
+    setNewAmbientTitle("");
+    setNewAmbientUrl("");
+    alert("Трек добавлен!");
+  };
+
+  const deleteAmbientTrack = (id: string) => {
+    const newTracks = ambientTracks.filter(t => t.id !== id);
+    saveAmbientTracks(newTracks);
+    if (currentAmbientTrack?.id === id) {
+      setCurrentAmbientTrack(newTracks[0] || null);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
