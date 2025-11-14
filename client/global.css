@@ -125,12 +125,12 @@
     @apply bg-background text-foreground;
     background-image:
       linear-gradient(rgba(25, 25, 50, 0.65), rgba(25, 25, 50, 0.65)),
-      url('https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg');
+      var(--bg-image-url);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    animation: slowZoomSpace 30s ease-in-out infinite !important;
+    animation: slowZoomSpace 30s ease-in-out infinite;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
