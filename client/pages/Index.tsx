@@ -21,6 +21,8 @@ export default function Index() {
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
   const [cosmicVideos, setCosmicVideos] = useState<string[]>(DEFAULT_COSMIC_VIDEOS);
   const [playlistVideos, setPlaylistVideos] = useState<string[]>(DEFAULT_PLAYLIST_VIDEOS);
+  const [feelCosmosVideos, setFeelCosmosVideos] = useState<string[]>(DEFAULT_PLAYLIST_VIDEOS);
+  const [feelCosmosSongs, setFeelCosmosSongs] = useState<Array<{ title: string; url: string }>>([]);
 
   useEffect(() => {
     const saved = localStorage.getItem("cosmic-videos");
