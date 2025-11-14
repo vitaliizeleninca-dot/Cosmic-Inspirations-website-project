@@ -158,9 +158,11 @@ export default function Index() {
     if (savedNftCollections) {
       try {
         const parsed = JSON.parse(savedNftCollections);
-        setNftCollections(parsed);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setNftCollections(parsed);
+        }
       } catch (e) {
-        setNftCollections(["", "", "", "", "", ""]);
+        // Keep default test values
       }
     }
   }, []);
