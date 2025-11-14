@@ -538,7 +538,7 @@ export default function Index() {
 
               <div className="grid grid-cols-2 gap-8">
                 {nftCollections.map((url, index) => (
-                  url && nftCollectionImages[index] && (
+                  url && (
                     <a
                       key={index}
                       href={url}
@@ -546,11 +546,17 @@ export default function Index() {
                       rel="noopener noreferrer"
                       className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer"
                     >
-                      <img
-                        src={nftCollectionImages[index] || undefined}
-                        alt={`NFT Collection ${index + 1}`}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
+                      {nftCollectionImages[index] ? (
+                        <img
+                          src={nftCollectionImages[index]}
+                          alt={`NFT Collection ${index + 1}`}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-cosmic-purple/30 to-cosmic-violet/30 flex items-center justify-center">
+                          <Sparkles className="w-12 h-12 text-cosmic-purple opacity-50" />
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                         <span className="text-gray-100 font-semibold">View Collection</span>
                       </div>
