@@ -1,51 +1,211 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight, Loader } from "lucide-react";
+
+interface NFTItem {
+  id: string;
+  tokenId: string;
+  name: string;
+  imageUrl: string;
+  thumbnailUrl: string;
+}
 
 export default function BackgroundArtSelector() {
-  const [selectedArt, setSelectedArt] = useState(0);
+  const [nfts, setNfts] = useState<NFTItem[]>([]);
+  const [selectedNFT, setSelectedNFT] = useState<NFTItem | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const artOptions = [
-    {
-      id: 0,
-      name: "Milky Way",
-      thumbnail: "linear-gradient(135deg, #6a2d7f 0%, #3d1a4a 100%)",
-    },
-    {
-      id: 1,
-      name: "Nebula Dream",
-      thumbnail: "linear-gradient(135deg, #1a0033 0%, #4d0066 100%)",
-    },
-    {
-      id: 2,
-      name: "Cosmic Void",
-      thumbnail: "linear-gradient(135deg, #0a0a1a 0%, #2a1a4a 100%)",
-    },
-  ];
+  // Fetch NFTs from Objkt collection
+  useEffect(() => {
+    const fetchNFTs = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Using the Objkt GraphQL API to fetch collection NFTs
+        const response = await fetch("https://api.objkt.com/graphql", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            query: `
+              query {
+                tokens(
+                  where: {
+                    contract: "KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ"
+                  }
+                  limit: 100
+                ) {
+                  id
+                  tokenId
+                  name
+                  displayUri
+                  thumbnailUri
+                }
+              }
+            `,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.errors) {
+          throw new Error(data.errors[0].message || "GraphQL error");
+        }
+
+        const fetchedNFTs: NFTItem[] = (data.data?.tokens || [])
+          .filter(
+            (token: any) =>
+              token.displayUri &&
+              (token.displayUri.startsWith("http") ||
+                token.displayUri.startsWith("ipfs://"))
+          )
+          .map((token: any, index: number) => ({
+            id: `${token.id}-${index}`,
+            tokenId: token.tokenId || "",
+            name: token.name || `Token #${token.tokenId}`,
+            imageUrl: token.displayUri.startsWith("ipfs://")
+              ? `https://ipfs.io/ipfs/${token.displayUri.replace("ipfs://", "")}`
+              : token.displayUri,
+            thumbnailUrl: token.thumbnailUri
+              ? token.thumbnailUri.startsWith("ipfs://")
+                ? `https://ipfs.io/ipfs/${token.thumbnailUri.replace("ipfs://", "")}`
+                : token.thumbnailUri
+              : token.displayUri.startsWith("ipfs://")
+                ? `https://ipfs.io/ipfs/${token.displayUri.replace("ipfs://", "")}`
+                : token.displayUri,
+          }));
+
+        setNfts(fetchedNFTs);
+
+        // Set first NFT as default
+        if (fetchedNFTs.length > 0) {
+          setSelectedNFT(fetchedNFTs[0]);
+          updatePageBackground(fetchedNFTs[0].imageUrl);
+        }
+      } catch (err) {
+        console.error("Failed to fetch NFTs:", err);
+        setError("Failed to load NFT collection");
+        // Fallback to default gradient
+        setNfts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNFTs();
+  }, []);
+
+  const updatePageBackground = (imageUrl: string) => {
+    // Update body background to use the NFT image with overlay
+    document.body.style.backgroundImage = `
+      linear-gradient(rgba(25, 25, 50, 0.65), rgba(25, 25, 50, 0.65)),
+      url('${imageUrl}')
+    `;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundAttachment = "fixed";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.animation = "slowZoomSpace 30s ease-in-out infinite";
+  };
+
+  const handleNFTSelect = (nft: NFTItem) => {
+    setSelectedNFT(nft);
+    updatePageBackground(nft.imageUrl);
+  };
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 400;
+      scrollContainerRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-2">
+        <Loader className="w-4 h-4 text-cosmic-purple animate-spin" />
+        <span className="text-xs text-gray-400">Loading art...</span>
+      </div>
+    );
+  }
+
+  if (error || nfts.length === 0) {
+    return (
+      <div className="flex items-center gap-2 px-3 py-2">
+        <span className="text-xs text-gray-400">Art collection unavailable</span>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-xs text-gray-400 font-medium hidden sm:inline">
-        Background
-      </span>
-      <div className="flex gap-2">
-        {artOptions.map((art) => (
+    <div className="flex items-center gap-2">
+      <button
+        onClick={() => scroll("left")}
+        className="p-1 text-cosmic-purple hover:text-cosmic-purple/80 transition hidden sm:block"
+        aria-label="Scroll left"
+      >
+        <ChevronLeft className="w-4 h-4" />
+      </button>
+
+      <div
+        ref={scrollContainerRef}
+        className="flex gap-2 overflow-x-auto scroll-smooth no-scrollbar max-w-xs sm:max-w-sm"
+        style={{
+          scrollBehavior: "smooth",
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
+        }}
+      >
+        {nfts.map((nft) => (
           <button
-            key={art.id}
-            onClick={() => setSelectedArt(art.id)}
-            title={art.name}
-            className={`w-10 h-10 rounded-lg transition-all duration-300 border-2 ${
-              selectedArt === art.id
+            key={nft.id}
+            onClick={() => handleNFTSelect(nft)}
+            title={nft.name}
+            className={`flex-shrink-0 w-10 h-10 rounded-lg transition-all duration-300 border-2 overflow-hidden relative group ${
+              selectedNFT?.id === nft.id
                 ? "border-cosmic-purple cosmic-glow scale-110"
                 : "border-cosmic-purple/40 hover:border-cosmic-purple/70 hover:scale-105"
             }`}
-            style={{
-              background: art.thumbnail,
-            }}
-            aria-label={`Select ${art.name} background`}
+            aria-label={`Select ${nft.name}`}
           >
-            <span className="sr-only">{art.name}</span>
+            <img
+              src={nft.thumbnailUrl}
+              alt={nft.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                // Fallback if image fails to load
+                (e.target as HTMLImageElement).src =
+                  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%235522ff' width='100' height='100'/%3E%3C/svg%3E";
+              }}
+            />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all" />
           </button>
         ))}
       </div>
+
+      <button
+        onClick={() => scroll("right")}
+        className="p-1 text-cosmic-purple hover:text-cosmic-purple/80 transition hidden sm:block"
+        aria-label="Scroll right"
+      >
+        <ChevronRight className="w-4 h-4" />
+      </button>
+
+      <style>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </div>
   );
 }
