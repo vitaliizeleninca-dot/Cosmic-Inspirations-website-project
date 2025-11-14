@@ -464,7 +464,7 @@ export default function Admin() {
                 {playlistSongs.map((song, index) => (
                   <div key={index} className="space-y-3 p-4 rounded-lg bg-cosmic-dark/50 border border-cosmic-purple/20">
                     <div className="text-xs font-semibold text-cosmic-purple mb-2">
-                      Песня #{index + 1}
+                      Song #{index + 1}
                     </div>
                     <div>
                       <label className="block text-xs font-semibold text-gray-400 mb-2">
