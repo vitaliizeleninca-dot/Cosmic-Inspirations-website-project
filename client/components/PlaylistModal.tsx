@@ -176,7 +176,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                       ? "border-cosmic-purple bg-cosmic-purple/20 text-cosmic-purple"
                       : "border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:bg-cosmic-purple/10"
                   }`}
-                  title="Режим повтора"
+                  title="Repeat mode"
                 >
                   {repeatMode === "one" ? <Repeat1 className="w-4 h-4" /> : <Repeat className="w-4 h-4" />}
                   <span>{repeatMode === "one" ? "One" : "All"}</span>
