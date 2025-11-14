@@ -773,17 +773,29 @@ export default function Admin() {
 
                       <div>
                         <label className="block text-xs font-semibold text-gray-400 mb-2">
-                          Custom Image URL (optional)
+                          Custom Image (Upload or URL)
                         </label>
-                        <input
-                          type="text"
-                          value={nftCollectionCustomImages[index]}
-                          onChange={(e) => saveNftCollectionCustomImage(index, e.target.value)}
-                          placeholder="https://example.com/image.jpg"
-                          className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono"
-                          disabled={!activeNftCollectionsList[index]}
-                        />
-                        <p className="text-gray-500 text-xs mt-2">If empty, image will be fetched from the collection automatically</p>
+                        <div className="flex flex-col gap-3">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => handleNftCollectionImageUpload(index, e)}
+                            className="px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 text-xs focus:outline-none focus:border-cosmic-purple transition cursor-pointer file:mr-3 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cosmic-purple/30 file:text-cosmic-purple file:cursor-pointer"
+                            disabled={!activeNftCollectionsList[index]}
+                          />
+                          <input
+                            type="text"
+                            value={nftCollectionCustomImages[index]}
+                            onChange={(e) => saveNftCollectionCustomImage(index, e.target.value)}
+                            placeholder="Or paste image URL: https://example.com/image.jpg"
+                            className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono"
+                            disabled={!activeNftCollectionsList[index]}
+                          />
+                        </div>
+                        <p className="text-gray-500 text-xs mt-2">Upload image file or paste URL. If empty, will fetch from collection automatically</p>
+                        {nftCollectionCustomImages[index] && nftCollectionCustomImages[index].length > 100 && (
+                          <p className="text-green-500/70 text-xs mt-2">✓ Image uploaded</p>
+                        )}
                       </div>
                     </div>
                   </div>
