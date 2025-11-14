@@ -458,7 +458,6 @@ export default function Admin() {
           <TabsContent value="ambient" className="mt-8 space-y-8">
             {/* Podcast Videos Section */}
             <div>
-              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Podcast Episodes Videos</h2>
               <div className="grid grid-cols-2 gap-6">
                 {podcastVideos.map((url, index) => (
                   <div key={index} className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col ${activePodcastVideosList[index] ? "" : "opacity-50"}`}>
