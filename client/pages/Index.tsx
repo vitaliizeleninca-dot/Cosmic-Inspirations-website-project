@@ -551,13 +551,16 @@ export default function Index() {
                           src={nftCollectionImages[index]}
                           alt={`NFT Collection ${index + 1}`}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                          }}
                         />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-cosmic-purple/30 to-cosmic-violet/30 flex items-center justify-center">
-                          <Sparkles className="w-12 h-12 text-cosmic-purple opacity-50" />
-                        </div>
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                      ) : null}
+                      <div className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/40 via-cosmic-violet/30 to-cosmic-dark/60 flex flex-col items-center justify-center group-hover:from-cosmic-purple/60 group-hover:via-cosmic-violet/50 group-hover:to-cosmic-dark/80 transition-all duration-300">
+                        <Sparkles className="w-12 h-12 text-cosmic-purple mb-3 group-hover:scale-125 transition-transform duration-300" />
+                        <p className="text-gray-200 text-xs text-center px-4 font-semibold">NFT Collection</p>
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                         <span className="text-gray-100 font-semibold">View Collection</span>
                       </div>
                     </a>
