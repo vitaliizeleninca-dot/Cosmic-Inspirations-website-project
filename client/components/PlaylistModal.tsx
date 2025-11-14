@@ -13,24 +13,16 @@ interface PlaylistModalProps {
   onClose: () => void;
 }
 
-type PlaybackMode = "sequential" | "repeat-all" | "repeat-one" | "shuffle";
-
 const DEFAULT_TRACKS: PlaylistTrack[] = [];
 
 const STORAGE_KEY = "cosmic-playlist-tracks";
-
-const PLAYBACK_MODES: Record<PlaybackMode, { label: string; icon: string }> = {
-  sequential: { label: "Все по порядку", icon: "▶" },
-  "repeat-all": { label: "Повторять всё", icon: "🔁" },
-  "repeat-one": { label: "Повторять одно", icon: "🔂" },
-  shuffle: { label: "Рандом", icon: "🔀" },
-};
 
 export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
   const playerRef = useRef<HTMLDivElement>(null);
   const [tracks, setTracks] = useState<PlaylistTrack[]>(DEFAULT_TRACKS);
   const [currentTrack, setCurrentTrack] = useState<PlaylistTrack | null>(null);
-  const [playbackMode, setPlaybackMode] = useState<PlaybackMode>("sequential");
+  const [repeatMode, setRepeatMode] = useState<"one" | "all">("all");
+  const [isShuffle, setIsShuffle] = useState(false);
 
   // Load tracks from localStorage on mount and when modal opens
   useEffect(() => {
@@ -193,7 +185,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
               </div>
 
               <p className="text-xs text-gray-400 text-center">
-                💡 Кликните на режим для переключения: Все по порядку → Повторят�� всё → Повторять одно → Рандом
+                💡 Кликните на режим для переключения: Все по порядку → Повторять всё → Повторять одно → Рандом
               </p>
             </div>
           ) : (
