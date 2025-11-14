@@ -100,6 +100,18 @@
   }
 }
 
+@keyframes slowZoomSpace {
+  0% {
+    background-size: 100%;
+  }
+  50% {
+    background-size: 102%;
+  }
+  100% {
+    background-size: 100%;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -114,6 +126,7 @@
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    animation: slowZoomSpace 30s ease-in-out infinite;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
