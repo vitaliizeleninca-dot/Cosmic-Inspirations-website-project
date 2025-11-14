@@ -213,7 +213,7 @@ export default function Admin() {
 
   const addAmbientTrack = () => {
     if (!newAmbientTitle.trim() || !newAmbientUrl.trim()) {
-      alert("Пожалуйста, заполните наз��ание и ссылку");
+      alert("Пожалуйста, заполните название и ссылку");
       return;
     }
 
@@ -460,7 +460,7 @@ export default function Admin() {
             {/* Playlist Songs Section */}
             <div>
               <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Audio Playlist (до 10 песен)</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {playlistSongs.map((song, index) => (
                   <div key={index} className="space-y-3 p-4 rounded-lg bg-cosmic-dark/50 border border-cosmic-purple/20">
                     <div className="text-xs font-semibold text-cosmic-purple mb-2">
@@ -493,14 +493,6 @@ export default function Admin() {
                   </div>
                 ))}
               </div>
-
-              <button
-                onClick={savePlaylistSongs}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:opacity-90 transition mb-6"
-              >
-                <Plus className="w-5 h-5" />
-                Save Playlist
-              </button>
             </div>
 
             {/* Info */}
