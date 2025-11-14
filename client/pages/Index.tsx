@@ -556,8 +556,9 @@ export default function Index() {
               </div>
 
               <div className="grid grid-cols-2 gap-8">
-                {nftCollections.map((url, index) => (
-                  url && activeNftCollectionsList[index] && (
+                {nftCollections.map((url, index) => {
+                  const isValidUrl = url && (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("/"));
+                  return isValidUrl && activeNftCollectionsList[index] ? (
                     <a
                       key={index}
                       href={url}
@@ -583,8 +584,8 @@ export default function Index() {
                         <span className="text-gray-100 font-semibold">View Collection</span>
                       </div>
                     </a>
-                  )
-                ))}
+                  ) : null;
+                })}
               </div>
             </div>
           </div>
