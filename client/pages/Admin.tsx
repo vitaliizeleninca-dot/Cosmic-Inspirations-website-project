@@ -582,8 +582,20 @@ export default function Admin() {
             </div>
 
             {/* Playlist Songs Section */}
-            <div>
-              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Audio Playlist (up to 10 songs)</h2>
+            <div className={activePlaylistSongs ? "" : "opacity-50"}>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-cosmic-purple">Audio Playlist (up to 10 songs)</h2>
+                <button
+                  onClick={() => togglePlaylistSongsActive(!activePlaylistSongs)}
+                  className={`px-4 py-2 rounded-lg font-semibold transition ${
+                    activePlaylistSongs
+                      ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
+                      : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
+                  }`}
+                >
+                  {activePlaylistSongs ? "Active" : "Inactive"}
+                </button>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {playlistSongs.map((song, index) => (
                   <div key={index} className="space-y-3 p-4 rounded-lg bg-cosmic-dark/50 border border-cosmic-purple/20">
@@ -600,6 +612,7 @@ export default function Admin() {
                         onChange={(e) => updatePlaylistSong(index, "title", e.target.value)}
                         placeholder="e.g., Cosmic Meditation"
                         className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                        disabled={!activePlaylistSongs}
                       />
                     </div>
                     <div>
@@ -612,6 +625,7 @@ export default function Admin() {
                         onChange={(e) => updatePlaylistSong(index, "url", e.target.value)}
                         placeholder="youtube.com/watch?v=... or youtu.be/..."
                         className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                        disabled={!activePlaylistSongs}
                       />
                     </div>
                   </div>
