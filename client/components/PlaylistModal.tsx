@@ -62,7 +62,7 @@ export default function PlaylistModal({ isOpen, onClose, playlistType = "cosmic"
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-cosmic-purple/20">
           <h2 className="text-2xl font-bold text-gray-100">
-            Audio Playlist
+            {playlistType === "feelCosmos" ? "Feel the Cosmos Playlist" : "Audio Playlist"}
           </h2>
           <button
             onClick={onClose}
