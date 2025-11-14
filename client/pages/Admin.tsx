@@ -58,8 +58,12 @@ export default function Admin() {
   const [newAmbientTitle, setNewAmbientTitle] = useState("");
   const [newAmbientUrl, setNewAmbientUrl] = useState("");
 
-  const [quickLinksText, setQuickLinksText] = useState("");
-  const [quickLinksType, setQuickLinksType] = useState<"playlist" | "ambient">("ambient");
+  const [quickLinksPanels, setQuickLinksPanels] = useState<Array<{ text: string; type: "playlist" | "ambient" }>>([
+    { text: "", type: "ambient" },
+    { text: "", type: "ambient" },
+    { text: "", type: "ambient" },
+    { text: "", type: "ambient" }
+  ]);
 
   // Load tracks from localStorage on mount
   useEffect(() => {
@@ -194,7 +198,7 @@ export default function Admin() {
 
     const videoId = extractVideoId(newAmbientUrl);
     if (!videoId) {
-      alert("Непра��ильная ссылка на YouTube");
+      alert("Непра��ильная ссылка н�� YouTube");
       return;
     }
 
