@@ -126,7 +126,7 @@
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    animation: slowZoomSpace 30s ease-in-out infinite;
+    animation: slowZoomSpace 30s ease-in-out infinite !important;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
