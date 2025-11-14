@@ -156,7 +156,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
               <div className="flex items-center justify-center gap-4">
                 <button
                   onClick={prevTrack}
-                  disabled={!currentTrack || tracks.findIndex((t) => t.id === currentTrack.id) === 0}
+                  disabled={!currentTrack || (tracks.findIndex((t) => t.id === currentTrack.id) === 0 && playbackMode !== "repeat-all")}
                   className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple disabled:opacity-50 disabled:cursor-not-allowed transition"
                   title="Предыдущий трек"
                 >
@@ -169,7 +169,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
 
                 <button
                   onClick={nextTrack}
-                  disabled={!currentTrack || tracks.findIndex((t) => t.id === currentTrack.id) === tracks.length - 1}
+                  disabled={!currentTrack || (tracks.findIndex((t) => t.id === currentTrack.id) === tracks.length - 1 && playbackMode === "sequential")}
                   className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple disabled:opacity-50 disabled:cursor-not-allowed transition"
                   title="Следующий трек"
                 >
@@ -177,8 +177,23 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                 </button>
               </div>
 
+              {/* Playback Mode Selector */}
+              <div className="flex items-center justify-center">
+                <button
+                  onClick={cyclePlaybackMode}
+                  className="px-4 py-2 rounded-lg border border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:bg-cosmic-purple/10 transition text-sm font-semibold flex items-center gap-2"
+                  title="Режим воспроизведения"
+                >
+                  {playbackMode === "sequential" && <Play className="w-4 h-4" />}
+                  {playbackMode === "repeat-all" && <Repeat className="w-4 h-4" />}
+                  {playbackMode === "repeat-one" && <Repeat1 className="w-4 h-4" />}
+                  {playbackMode === "shuffle" && <Shuffle className="w-4 h-4" />}
+                  <span>{PLAYBACK_MODES[playbackMode].label}</span>
+                </button>
+              </div>
+
               <p className="text-xs text-gray-400 text-center">
-                💡 Используйте управление YouTube плеера для громкости и других функций
+                💡 Кликните на режим для переключения: Все по порядку → Повторят�� всё → Повторять одно → Рандом
               </p>
             </div>
           ) : (
