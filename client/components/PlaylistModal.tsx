@@ -79,7 +79,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
       />
 
       {/* Modal */}
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md max-h-[80vh] bg-cosmic-dark border border-cosmic-purple/30 rounded-2xl shadow-2xl z-50 flex flex-col cosmic-glow">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl max-h-[90vh] bg-cosmic-dark border border-cosmic-purple/30 rounded-2xl shadow-2xl z-50 flex flex-col cosmic-glow overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-cosmic-purple/20">
           <h2 className="text-2xl font-bold text-gray-100">
@@ -94,43 +94,90 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
           </button>
         </div>
 
+        {/* Now Playing Player */}
+        {currentTrack && (
+          <div className="p-6 border-b border-cosmic-purple/20 bg-cosmic-purple/10">
+            <p className="text-xs text-cosmic-purple font-semibold mb-3">
+              NOW PLAYING
+            </p>
+            <h3 className="text-lg font-semibold text-gray-100 mb-4">
+              {currentTrack.title}
+            </h3>
+            <div className="aspect-video rounded-lg overflow-hidden border border-cosmic-purple/30 bg-black">
+              <iframe
+                width="100%"
+                height="100%"
+                src={currentTrack.youtubeUrl}
+                title={currentTrack.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        )}
+
         {/* Scrollable Playlist */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="p-6 space-y-3">
-            {PLAYLIST_TRACKS.map((track, index) => (
-              <div
-                key={track.id}
-                className="p-4 rounded-lg border border-cosmic-purple/20 bg-cosmic-purple/5 hover:border-cosmic-purple/40 hover:bg-cosmic-purple/10 transition cursor-pointer group"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-1">
-                      <span className="text-xs font-semibold text-cosmic-purple/60 w-6">
+        <div className="flex-1 overflow-y-auto p-6">
+          <p className="text-xs text-cosmic-purple font-semibold mb-3">
+            PLAYLIST ({tracks.length})
+          </p>
+          <div className="space-y-2">
+            {tracks.length === 0 ? (
+              <p className="text-gray-500 text-center py-8">
+                Нет треков. Добавьте треки в админ-панели.
+              </p>
+            ) : (
+              tracks.map((track, index) => (
+                <button
+                  key={track.id}
+                  onClick={() => playTrack(track)}
+                  className={`w-full text-left p-3 rounded-lg border transition ${
+                    currentTrack?.id === track.id
+                      ? "border-cosmic-purple/60 bg-cosmic-purple/20"
+                      : "border-cosmic-purple/20 bg-cosmic-purple/5 hover:border-cosmic-purple/40 hover:bg-cosmic-purple/10"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    {currentTrack?.id === track.id && (
+                      <Play className="w-4 h-4 text-cosmic-purple flex-shrink-0" />
+                    )}
+                    {currentTrack?.id !== track.id && (
+                      <span className="text-xs text-cosmic-purple/60 w-4 text-center flex-shrink-0">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <h3 className="text-sm font-semibold text-gray-100 group-hover:text-cosmic-purple transition">
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-semibold text-gray-100 truncate">
                         {track.title}
                       </h3>
                     </div>
-                    <p className="text-xs text-gray-500 ml-9">{track.artist}</p>
+                    {track.duration && (
+                      <span className="text-xs text-gray-400 font-mono flex-shrink-0">
+                        {track.duration}
+                      </span>
+                    )}
                   </div>
-                  <span className="text-xs text-gray-400 font-mono ml-4 flex-shrink-0">
-                    {track.duration}
-                  </span>
-                </div>
-              </div>
-            ))}
+                </button>
+              ))
+            )}
           </div>
         </div>
 
         {/* Footer */}
-        <div className="p-6 border-t border-cosmic-purple/20">
+        <div className="p-6 border-t border-cosmic-purple/20 flex gap-3">
           <button
             onClick={onClose}
-            className="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:cosmic-glow transition"
+            className="flex-1 px-4 py-2 rounded-lg bg-gradient-to-r from-cosmic-purple to-cosmic-violet text-cosmic-dark font-semibold hover:cosmic-glow transition"
           >
-            Close
+            Закрыть
           </button>
+          <a
+            href="/admin"
+            className="flex-1 px-4 py-2 rounded-lg border border-cosmic-purple/50 text-cosmic-purple font-semibold hover:border-cosmic-purple hover:cosmic-glow transition text-center"
+          >
+            Управление
+          </a>
         </div>
       </div>
     </>
