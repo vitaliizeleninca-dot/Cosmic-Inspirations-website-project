@@ -445,8 +445,8 @@ export default function Admin() {
         <Tabs defaultValue="ambient" className="w-full">
           <TabsList className="grid w-full grid-cols-3 bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-lg p-1">
             <TabsTrigger value="ambient" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
-              <Music className="w-4 h-4 mr-2" />
-              Ambient Music
+              <Podcast className="w-4 h-4 mr-2" />
+              AI Art Podcast
             </TabsTrigger>
             <TabsTrigger value="links" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Cosmic Ambient
@@ -569,7 +569,7 @@ export default function Admin() {
                   💡 <strong>Tip:</strong> All changes are saved automatically in your browser.
                 </p>
                 <p className="text-xs text-gray-500">
-                  • Use YouTube links (youtube.com/watch?v=... or youtu.be/...)<br/>
+                  ��� Use YouTube links (youtube.com/watch?v=... or youtu.be/...)<br/>
                   • Click on a track to play it<br/>
                   • Adjust volume with the slider
                 </p>
