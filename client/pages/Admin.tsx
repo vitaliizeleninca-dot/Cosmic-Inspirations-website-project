@@ -487,10 +487,35 @@ export default function Admin() {
     const file = event.target.files?.[0];
     if (!file) return;
 
+    if (file.type.startsWith("video/")) {
+      setUploadError("Video files are not supported for NFT collections. Please upload an image file (JPG, PNG, GIF, WebP) or paste an image URL. For NFT collection videos, use the 'NFT Collections Videos' section with YouTube links.");
+      setTimeout(() => setUploadError(""), 5000);
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      setUploadError("Please upload an image file (JPG, PNG, GIF, WebP)");
+      setTimeout(() => setUploadError(""), 5000);
+      return;
+    }
+
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      setUploadError("File is too large. Maximum file size is 5MB");
+      setTimeout(() => setUploadError(""), 5000);
+      return;
+    }
+
+    setUploadError("");
+
     const reader = new FileReader();
     reader.onload = (e) => {
       const dataUrl = e.target?.result as string;
       saveNftCollectionCustomImage(index, dataUrl);
+    };
+    reader.onerror = () => {
+      setUploadError("Failed to read file. Please try again.");
+      setTimeout(() => setUploadError(""), 5000);
     };
     reader.readAsDataURL(file);
   };
