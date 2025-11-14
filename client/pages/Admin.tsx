@@ -503,7 +503,7 @@ export default function Admin() {
               <p className="text-xs text-gray-500">
                 • Cosmic Ambient Videos appear in the Music section<br/>
                 • Audio Playlist (до 10 песен) появляе����ся в модальном окне плеера<br/>
-                • Просто вставляйте названия и ссылки - они сохраняются сразу
+                • Just paste titles and links - they save instantly
               </p>
             </div>
           </TabsContent>
