@@ -71,19 +71,19 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
 
         {/* Player Area */}
         {currentTrack ? (
-          <div className="p-6 border-b border-cosmic-purple/20 bg-cosmic-purple/10">
-            <p className="text-xs text-cosmic-purple font-semibold mb-3">
+          <div className="p-4 border-b border-cosmic-purple/20 bg-cosmic-purple/10">
+            <p className="text-xs text-cosmic-purple font-semibold mb-2">
               NOW PLAYING
             </p>
-            <h3 className="text-lg font-semibold text-gray-100 mb-4 truncate">
+            <h3 className="text-sm font-semibold text-gray-100 mb-2 truncate">
               {currentTrack.title}
             </h3>
 
-            {/* Compact YouTube Player */}
-            <div className="rounded-lg overflow-hidden border border-cosmic-purple/30 bg-black">
+            {/* Minimal YouTube Player */}
+            <div className="rounded-lg overflow-hidden border border-cosmic-purple/30 bg-black h-24">
               <iframe
                 width="100%"
-                height="200"
+                height="96"
                 src={`${currentTrack.youtubeUrl}?controls=1&modestbranding=1`}
                 title={currentTrack.title}
                 frameBorder="0"
@@ -96,7 +96,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
             </div>
           </div>
         ) : (
-          <div className="p-6 text-center text-gray-400">
+          <div className="p-4 text-center text-gray-400 text-sm">
             Select a track to play
           </div>
         )}
