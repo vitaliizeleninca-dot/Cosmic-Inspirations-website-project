@@ -54,14 +54,14 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
     const currentIndex = tracks.findIndex((t) => t.id === currentTrack.id);
 
     if (repeatMode === "one") {
-      // Повторять текущий трек
+      // Repeat current track
       playTrack(currentTrack);
     } else if (isShuffle) {
       // Случайный трек
       const randomIndex = Math.floor(Math.random() * tracks.length);
       playTrack(tracks[randomIndex]);
     } else {
-      // Повторять всё или по порядку
+      // Repeat all or sequential
       if (currentIndex < tracks.length - 1) {
         playTrack(tracks[currentIndex + 1]);
       } else if (repeatMode === "all") {
@@ -148,7 +148,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                   onClick={prevTrack}
                   disabled={!currentTrack || (tracks.findIndex((t) => t.id === currentTrack.id) === 0 && repeatMode !== "all")}
                   className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple disabled:opacity-50 disabled:cursor-not-allowed transition"
-                  title="Предыдущий трек"
+                  title="Previous track"
                 >
                   <SkipBack className="w-5 h-5" />
                 </button>
@@ -161,7 +161,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                   onClick={nextTrack}
                   disabled={!currentTrack || (tracks.findIndex((t) => t.id === currentTrack.id) === tracks.length - 1 && repeatMode === "one" && !isShuffle)}
                   className="p-2 rounded-lg hover:bg-cosmic-purple/20 text-cosmic-purple disabled:opacity-50 disabled:cursor-not-allowed transition"
-                  title="Следующий трек"
+                  title="Next track"
                 >
                   <SkipForward className="w-5 h-5" />
                 </button>
@@ -179,7 +179,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                   title="Режим повтора"
                 >
                   {repeatMode === "one" ? <Repeat1 className="w-4 h-4" /> : <Repeat className="w-4 h-4" />}
-                  <span>{repeatMode === "one" ? "Одно" : "Всё"}</span>
+                  <span>{repeatMode === "one" ? "One" : "All"}</span>
                 </button>
 
                 <button
@@ -189,19 +189,19 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
                       ? "border-cosmic-purple bg-cosmic-purple/20 text-cosmic-purple"
                       : "border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:bg-cosmic-purple/10"
                   }`}
-                  title="Режим перемешивания"
+                  title="Режим перемешивани��"
                 >
                   <Shuffle className="w-4 h-4" />
-                  <span>{isShuffle ? "Рандом" : "Порядок"}</span>
+                  <span>{isShuffle ? "Shuffle" : "Order"}</span>
                 </button>
               </div>
 
               <p className="text-xs text-gray-400 text-center">
-                💡 Кнопка 1: Повторять одно ↔ Повторять всё | Кнопка 2: По порядку ↔ Рандом
+                💡 Button 1: Repeat One ↔ Repeat All | Button 2: Order ↔ Shuffle
               </p>
             </div>
           ) : (
-            <p className="text-gray-400 text-sm">Выберите трек из плейлиста</p>
+            <p className="text-gray-400 text-sm">Select a track from the playlist</p>
           )}
         </div>
 
