@@ -337,6 +337,31 @@ export default function Admin() {
     localStorage.setItem(AMBIENT_STORAGE_KEY, JSON.stringify(newTracks));
   };
 
+  const toggleCosmicVideosActive = (isActive: boolean) => {
+    setActiveCosmicVideos(isActive);
+    localStorage.setItem("cosmic-videos-active", JSON.stringify(isActive));
+  };
+
+  const togglePlaylistVideosActive = (isActive: boolean) => {
+    setActivePlaylistVideos(isActive);
+    localStorage.setItem("playlist-videos-active", JSON.stringify(isActive));
+  };
+
+  const togglePlaylistSongsActive = (isActive: boolean) => {
+    setActivePlaylistSongs(isActive);
+    localStorage.setItem("playlist-songs-active", JSON.stringify(isActive));
+  };
+
+  const toggleFeelCosmosVideosActive = (isActive: boolean) => {
+    setActiveFeelCosmosVideos(isActive);
+    localStorage.setItem("feel-cosmos-videos-active", JSON.stringify(isActive));
+  };
+
+  const toggleFeelCosmosSongsActive = (isActive: boolean) => {
+    setActiveFeelCosmosSongs(isActive);
+    localStorage.setItem("feel-cosmos-songs-active", JSON.stringify(isActive));
+  };
+
   const addAmbientTrack = () => {
     if (!newAmbientTitle.trim() || !newAmbientUrl.trim()) {
       alert("Please fill in both title and YouTube link");
