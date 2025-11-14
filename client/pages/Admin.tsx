@@ -727,18 +727,53 @@ export default function Admin() {
             {/* NFT Collections Grid Section */}
             <div>
               <h2 className="text-xl font-bold mb-4 text-cosmic-purple">NFT Collections Grid (6 items)</h2>
-              <p className="text-gray-400 text-sm mb-4">Add OpenSea collection links. Images will be fetched automatically from the collection preview.</p>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 gap-6">
                 {nftCollections.map((url, index) => (
-                  <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col">
-                    <h3 className="text-sm font-semibold text-cosmic-purple mb-3">Collection {index + 1}</h3>
-                    <input
-                      type="text"
-                      value={url}
-                      onChange={(e) => saveNftCollection(index, e.target.value)}
-                      placeholder="opensea.io/collection/your-collection-name"
-                      className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono"
-                    />
+                  <div key={index} className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col ${activeNftCollectionsList[index] ? "" : "opacity-50"}`}>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-sm font-semibold text-cosmic-purple">Collection {index + 1}</h3>
+                      <button
+                        onClick={() => toggleNftCollectionActive(index, !activeNftCollectionsList[index])}
+                        className={`px-3 py-1 rounded text-xs font-semibold transition ${
+                          activeNftCollectionsList[index]
+                            ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
+                            : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
+                        }`}
+                      >
+                        {activeNftCollectionsList[index] ? "On" : "Off"}
+                      </button>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-400 mb-2">
+                          Collection URL
+                        </label>
+                        <input
+                          type="text"
+                          value={url}
+                          onChange={(e) => saveNftCollection(index, e.target.value)}
+                          placeholder="opensea.io/collection/name or objkt.com/collections/..."
+                          className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono"
+                          disabled={!activeNftCollectionsList[index]}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-400 mb-2">
+                          Custom Image URL (optional)
+                        </label>
+                        <input
+                          type="text"
+                          value={nftCollectionCustomImages[index]}
+                          onChange={(e) => saveNftCollectionCustomImage(index, e.target.value)}
+                          placeholder="https://example.com/image.jpg"
+                          className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono"
+                          disabled={!activeNftCollectionsList[index]}
+                        />
+                        <p className="text-gray-500 text-xs mt-2">If empty, image will be fetched from the collection automatically</p>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
