@@ -113,15 +113,17 @@ export default function Index() {
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl w-full">
             <div className="order-2 lg:order-1">
-              <div className="relative aspect-square rounded-2xl overflow-hidden cosmic-glow">
-                <a
-                  href="https://youtu.be/sMui14XvhjY"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 bg-gradient-to-br from-cosmic-purple/40 to-cosmic-violet/40 flex items-center justify-center cursor-pointer hover:from-cosmic-purple/50 hover:to-cosmic-violet/50 transition-all duration-300"
-                >
-                  <Podcast className="w-24 h-24 text-cosmic-purple opacity-50 hover:opacity-100 transition-opacity" />
-                </a>
+              <div className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/sMui14XvhjY"
+                  title="AI Art Podcast - Legendary Avatars"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
               </div>
             </div>
 
