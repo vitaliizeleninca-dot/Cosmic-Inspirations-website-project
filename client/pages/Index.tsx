@@ -18,6 +18,7 @@ export default function Index() {
   const navigate = useNavigate();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isContactEnabled, setIsContactEnabled] = useState(true);
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
   const [playlistType, setPlaylistType] = useState<"cosmic" | "feelCosmos">("cosmic");
   const [selectedBackground, setSelectedBackground] = useState<string>("");
