@@ -735,16 +735,10 @@ export default function Index() {
         <Footer />
       </main>
 
-      {/* Background Selection Modal */}
-      <BackgroundModal
-        isOpen={isBackgroundModalOpen}
-        onClose={() => setIsBackgroundModalOpen(false)}
-        onSelectBackground={(imageUrl) => {
-          setSelectedBackground(imageUrl);
-          if (imageUrl && !imageUrl.startsWith("blob:")) {
-            localStorage.setItem("selected-background", imageUrl);
-          }
-        }}
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
 
       {/* Playlist Modal */}
