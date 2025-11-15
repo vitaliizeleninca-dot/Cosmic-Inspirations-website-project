@@ -229,14 +229,6 @@ export default function Index() {
     return url;
   };
 
-  const handleOpenNftCollection = (url: string, name?: string) => {
-    if (url) {
-      setSelectedNftCollectionUrl(url);
-      setSelectedNftCollectionName(name || "NFT Collection");
-      setIsNftCollectionModalOpen(true);
-    }
-  };
-
   return (
     <div className="min-h-screen overflow-x-hidden">
       {/* Header/Navigation */}
