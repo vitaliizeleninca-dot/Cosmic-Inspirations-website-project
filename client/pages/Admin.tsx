@@ -600,7 +600,7 @@ export default function Admin() {
         </div>
 
         <Tabs defaultValue="ambient" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-lg p-1">
+          <TabsList className="grid w-full grid-cols-5 bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-lg p-1">
             <TabsTrigger value="ambient" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               AI Art Podcast
             </TabsTrigger>
@@ -609,6 +609,9 @@ export default function Admin() {
             </TabsTrigger>
             <TabsTrigger value="cosmos" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Feel the Cosmos
+            </TabsTrigger>
+            <TabsTrigger value="music" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
+              Cosmic Ambient Music
             </TabsTrigger>
             <TabsTrigger value="nft" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               NFT Collections
