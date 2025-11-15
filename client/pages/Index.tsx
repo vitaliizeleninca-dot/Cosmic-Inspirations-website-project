@@ -582,11 +582,13 @@ export default function Index() {
                       {nftCollectionCustomImages[index] || nftCollectionImages[index] ? (
                         (() => {
                           const src = nftCollectionCustomImages[index] || nftCollectionImages[index];
-                          const isVideo = src.startsWith("data:video/") ||
-                                         src.includes("base64") && (src.includes("video/mp4") || src.includes("video/webm") || src.includes("octet-stream")) ||
-                                         src.endsWith(".mp4") ||
-                                         src.endsWith(".webm");
-                          const isGif = src.startsWith("data:image/gif") || src.endsWith(".gif");
+                          const isVideo = src && (
+                            src.startsWith("data:video/") ||
+                            src.startsWith("data:application/octet-stream") ||
+                            src.endsWith(".mp4") ||
+                            src.endsWith(".webm")
+                          );
+                          const isGif = src && (src.startsWith("data:image/gif") || src.endsWith(".gif"));
 
                           if (isVideo) {
                             return (
@@ -596,10 +598,9 @@ export default function Index() {
                                 autoPlay
                                 muted
                                 loop
-                                controls={false}
+                                playsInline
                                 onError={(e) => {
                                   (e.target as HTMLVideoElement).style.display = 'none';
-                                  console.warn("Video failed to load for collection", index);
                                 }}
                               />
                             );
