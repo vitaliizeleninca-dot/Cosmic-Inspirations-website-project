@@ -610,11 +610,11 @@ export default function Admin() {
             <TabsTrigger value="cosmos" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Feel the Cosmos
             </TabsTrigger>
-            <TabsTrigger value="music" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
-              Cosmic Ambient Music
-            </TabsTrigger>
             <TabsTrigger value="nft" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               NFT Collections
+            </TabsTrigger>
+            <TabsTrigger value="music" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
+              Cosmic Ambient Music
             </TabsTrigger>
           </TabsList>
 
