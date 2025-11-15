@@ -337,7 +337,7 @@ export default function Index() {
               href="#music"
               className="text-sm text-gray-300 hover:text-cosmic-purple transition"
             >
-              Cosmic Ambient Music
+              My AI Tools
             </a>
           </nav>
           <div className={`flex items-center gap-4 transition-opacity duration-300 ${!isContactEnabled ? "opacity-40" : ""}`}>
