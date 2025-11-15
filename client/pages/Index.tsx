@@ -323,8 +323,8 @@ export default function Index() {
             </h2>
 
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
-              A unique fusion of AI-powered art, ambient soundscapes, interactive
-              experiences, and digital collectibles from the depths of space
+              Where artificial intelligence meets creative vision. Explore cutting-edge digital art,
+              immersive experiences, and exclusive NFT collections crafted at the frontier of technology.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
