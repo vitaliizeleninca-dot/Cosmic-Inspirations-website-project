@@ -609,16 +609,32 @@ export default function Admin() {
     }
 
     setUploadError("");
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const dataUrl = e.target?.result as string;
-      saveBackgroundImage(index, dataUrl);
-    };
-    reader.onerror = () => {
-      setUploadError("Failed to read file. Please try again.");
+    try {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const dataUrl = e.target?.result as string;
+          if (!dataUrl) {
+            throw new Error("Failed to read file");
+          }
+          saveBackgroundImage(index, dataUrl);
+        } catch (err) {
+          console.error("Error processing image:", err);
+          setUploadError("Failed to process image. Please try again.");
+          setTimeout(() => setUploadError(""), 5000);
+        }
+      };
+      reader.onerror = () => {
+        console.error("FileReader error");
+        setUploadError("Failed to read file. Please try again.");
+        setTimeout(() => setUploadError(""), 5000);
+      };
+      reader.readAsDataURL(file);
+    } catch (err) {
+      console.error("Error uploading image:", err);
+      setUploadError("Failed to upload image. Please try again.");
       setTimeout(() => setUploadError(""), 5000);
-    };
-    reader.readAsDataURL(file);
+    }
   };
 
   const handleNftCollectionImageUpload = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
