@@ -619,6 +619,14 @@ export default function Index() {
         playlistType={playlistType}
         playlistSongs={playlistType === "cosmic" ? [] : feelCosmosSongs}
       />
+
+      {/* NFT Collection Modal */}
+      <NFTCollectionModal
+        isOpen={isNftCollectionModalOpen}
+        onClose={() => setIsNftCollectionModalOpen(false)}
+        collectionUrl={selectedNftCollectionUrl}
+        collectionName={selectedNftCollectionName}
+      />
     </div>
   );
 }
