@@ -677,7 +677,7 @@ export default function Admin() {
         </div>
 
         <Tabs defaultValue="ambient" className="w-full">
-          <TabsList className="grid w-full grid-cols-6 bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-lg p-1">
+          <TabsList className="grid w-full grid-cols-7 bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-lg p-1">
             <TabsTrigger value="ambient" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               AI Art Podcast
             </TabsTrigger>
@@ -692,6 +692,9 @@ export default function Admin() {
             </TabsTrigger>
             <TabsTrigger value="music" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Cosmic Ambient Music
+            </TabsTrigger>
+            <TabsTrigger value="backgrounds" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
+              Background Images
             </TabsTrigger>
             <TabsTrigger value="social" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Social Links
