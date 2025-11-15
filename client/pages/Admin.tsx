@@ -744,7 +744,7 @@ export default function Admin() {
         </div>
 
         <Tabs defaultValue="ambient" className="w-full">
-          <TabsList className="grid w-full grid-cols-7 bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-lg p-1">
+          <TabsList className="grid w-full grid-cols-6 bg-cosmic-purple/10 border border-cosmic-purple/30 rounded-lg p-1">
             <TabsTrigger value="ambient" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               AI Art Podcast
             </TabsTrigger>
