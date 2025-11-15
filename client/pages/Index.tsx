@@ -179,6 +179,18 @@ export default function Index() {
     if (savedActiveNftCollectionsList) {
       setActiveNftCollectionsList(JSON.parse(savedActiveNftCollectionsList));
     }
+
+    const savedNftCollectionNames = localStorage.getItem("nft-collection-names");
+    if (savedNftCollectionNames) {
+      try {
+        const parsed = JSON.parse(savedNftCollectionNames);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setNftCollectionNames(parsed);
+        }
+      } catch (e) {
+        // Keep default values
+      }
+    }
   }, []);
 
   useEffect(() => {
