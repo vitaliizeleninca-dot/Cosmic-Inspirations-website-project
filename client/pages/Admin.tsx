@@ -496,6 +496,13 @@ export default function Admin() {
     localStorage.setItem("nft-collections-list-active", JSON.stringify(updated));
   };
 
+  const saveNftCollectionName = (index: number, name: string) => {
+    const updated = [...nftCollectionNames];
+    updated[index] = name;
+    setNftCollectionNames(updated);
+    localStorage.setItem("nft-collection-names", JSON.stringify(updated));
+  };
+
   const handleNftCollectionImageUpload = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
