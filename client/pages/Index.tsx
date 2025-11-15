@@ -323,8 +323,8 @@ export default function Index() {
             </h2>
 
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
-              Where artificial intelligence meets creative vision. Explore cutting-edge digital art,
-              immersive experiences, and exclusive NFT collections crafted at the frontier of technology.
+              AlphaRoss — where AI, NFTs, and media art converge. Explore cosmic digital art,
+              legendary podcasts with AI-avatars of great masters, and collector benefits that celebrate cultural innovation.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
