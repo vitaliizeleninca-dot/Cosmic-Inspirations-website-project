@@ -579,6 +579,11 @@ export default function Admin() {
     localStorage.setItem("social-links", JSON.stringify(updated));
   };
 
+  const saveContactEmail = (email: string) => {
+    setContactEmail(email);
+    localStorage.setItem("contact-email", email);
+  };
+
   const toggleActiveBackgroundImage = (index: number, active: boolean) => {
     const updated = [...activeBackgroundImages];
     updated[index] = active;
