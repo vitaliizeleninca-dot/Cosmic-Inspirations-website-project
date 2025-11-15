@@ -20,32 +20,17 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
     setIsLoading(true);
     try {
-      const contactEmail = localStorage.getItem("contact-email") || "contact@example.com";
+      const contactEmail = localStorage.getItem("contact-email") || "noreply@cosmic-hub.com";
 
-      // Send to FormSubmit.co (free email service)
+      // Send via Formspree (free email service)
       const formData = new FormData();
       formData.append("email", contactEmail);
       formData.append("message", message.trim());
       formData.append("_captcha", "false");
-      formData.append("_next", window.location.href);
 
-      const response = await fetch("https://formspree.io/f/xyzdefgh", {
+      await fetch("https://formspree.io/f/mjkqzqko", {
         method: "POST",
         body: formData,
-      }).catch(() => {
-        // Fallback: use alternative endpoint
-        return fetch("https://api.staticforms.xyz/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: "Website Visitor",
-            email: contactEmail,
-            message: message.trim(),
-            accessKey: "5b8eb1c2-1234-5678-abcd-1234567890ab", // placeholder
-          }),
-        });
       });
 
       // Save locally as backup
