@@ -23,27 +23,29 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     try {
       const contactEmail = localStorage.getItem("contact-email") || "noreply@cosmic-hub.com";
 
-      // Send via Formspree (free email service)
-      const formData = new FormData();
-      formData.append("email", contactEmail);
-      formData.append("message", message.trim());
-      formData.append("_captcha", "false");
-
-      await fetch("https://formspree.io/f/mjkqzqko", {
-        method: "POST",
-        body: formData,
-      });
-
-      // Save locally as backup
-      const savedMessages = localStorage.getItem("contact-messages");
-      const messages = savedMessages ? JSON.parse(savedMessages) : [];
-
-      messages.push({
+      const messageData = {
         message: message.trim(),
         email: contactEmail,
         timestamp: new Date().toISOString(),
-      });
+      };
 
+      // Send message (will attempt to email you)
+      try {
+        await fetch("/.netlify/functions/send-message", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(messageData),
+        });
+      } catch (err) {
+        console.log("Background email send failed, but message saved locally");
+      }
+
+      // Always save locally as backup
+      const savedMessages = localStorage.getItem("contact-messages");
+      const messages = savedMessages ? JSON.parse(savedMessages) : [];
+      messages.push(messageData);
       localStorage.setItem("contact-messages", JSON.stringify(messages));
 
       setSubmitted(true);
@@ -54,7 +56,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         onClose();
       }, 2000);
     } catch (error) {
-      console.error("Error sending message:", error);
+      console.error("Error saving message:", error);
       setSubmitted(true);
     } finally {
       setIsLoading(false);
