@@ -530,6 +530,10 @@ export default function Index() {
                   <h3 className="text-5xl font-bold mb-4">
                     NFT Collections Videos
                   </h3>
+                  <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                    Explore digital art collections and see the creative vision behind each piece.
+                    From concept to creation, witness the evolution of NFT art.
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
