@@ -569,8 +569,8 @@ export default function Index() {
                   Legendary Digital Artifacts
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  Own a piece of the cosmos with our exclusive NFT collections,
-                  each representing a unique moment in the digital universe.
+                  Discover curated collections of digital art that capture the essence of cosmic creativity.
+                  Each NFT tells a story, from cutting-edge AI artwork to hand-crafted digital masterpieces.
                 </p>
               </div>
 
