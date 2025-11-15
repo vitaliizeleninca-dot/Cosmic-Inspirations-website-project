@@ -694,7 +694,7 @@ export default function Admin() {
               Cosmic Ambient Music
             </TabsTrigger>
             <TabsTrigger value="backgrounds" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
-              Background Images
+              Background
             </TabsTrigger>
             <TabsTrigger value="social" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Social Links
