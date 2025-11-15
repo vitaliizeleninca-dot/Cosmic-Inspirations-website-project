@@ -173,10 +173,19 @@ export default function Admin() {
     };
   });
 
-  const [backgroundImages, setBackgroundImages] = useState<string[]>(() => {
-    const saved = localStorage.getItem("background-images");
-    return saved ? JSON.parse(saved) : Array(10).fill("");
+  const [backgroundImages, setBackgroundImages] = useState<(string | File)[]>(() => {
+    try {
+      const saved = localStorage.getItem("background-images-urls");
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch {
+      // Fallback to empty array if parse fails
+    }
+    return Array(10).fill("");
   });
+
+  const [backgroundImageFiles, setBackgroundImageFiles] = useState<Map<number, File>>(new Map());
 
   const [activeBackgroundImages, setActiveBackgroundImages] = useState<boolean[]>(() => {
     const saved = localStorage.getItem("background-images-active");
