@@ -249,6 +249,19 @@ export default function Index() {
     fetchCollectionImages();
   }, [nftCollections]);
 
+  useEffect(() => {
+    if (selectedBackground) {
+      document.documentElement.style.setProperty(
+        "--bg-image-url",
+        `url('${selectedBackground}')`
+      );
+      document.documentElement.style.backgroundImage = `url('${selectedBackground}')`;
+      document.documentElement.style.backgroundSize = "cover";
+      document.documentElement.style.backgroundPosition = "center";
+      document.documentElement.style.backgroundAttachment = "fixed";
+    }
+  }, [selectedBackground]);
+
   const convertToEmbedUrl = (url: string): string => {
     if (!url) return "";
 
