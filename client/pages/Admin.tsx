@@ -143,6 +143,11 @@ export default function Admin() {
     return saved ? JSON.parse(saved) : [true, true, true, true, true, true];
   });
 
+  const [nftCollectionNames, setNftCollectionNames] = useState<string[]>(() => {
+    const saved = localStorage.getItem("nft-collection-names");
+    return saved ? JSON.parse(saved) : ["", "", "", "", "", ""];
+  });
+
   const [uploadError, setUploadError] = useState<string>("");
 
   // Activation state for sections
