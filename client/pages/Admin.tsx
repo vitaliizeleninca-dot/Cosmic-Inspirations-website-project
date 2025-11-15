@@ -1084,7 +1084,7 @@ export default function Admin() {
 
                     {imageUrl && (
                       <button
-                        onClick={() => saveBackgroundImage(index, "")}
+                        onClick={() => clearBackgroundImage(index)}
                         className="text-xs text-red-400 hover:text-red-300 transition mt-2"
                       >
                         Clear Image
