@@ -1294,6 +1294,28 @@ export default function Admin() {
                 </div>
 
                 <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">LinkedIn</label>
+                  <input
+                    type="text"
+                    value={socialLinks.linkedin}
+                    onChange={(e) => saveSocialLink("linkedin", e.target.value)}
+                    placeholder="https://linkedin.com/in/..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">Contra</label>
+                  <input
+                    type="text"
+                    value={socialLinks.contra}
+                    onChange={(e) => saveSocialLink("contra", e.target.value)}
+                    placeholder="https://contra.com/..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
                   <label className="block text-sm font-semibold text-cosmic-purple mb-2">Webbie Social</label>
                   <input
                     type="text"
