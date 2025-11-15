@@ -20,6 +20,9 @@ export default function Index() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
+  const [isNftCollectionModalOpen, setIsNftCollectionModalOpen] = useState(false);
+  const [selectedNftCollectionUrl, setSelectedNftCollectionUrl] = useState("");
+  const [selectedNftCollectionName, setSelectedNftCollectionName] = useState("");
   const [playlistType, setPlaylistType] = useState<"cosmic" | "feelCosmos">("cosmic");
   const [cosmicVideos, setCosmicVideos] = useState<string[]>(DEFAULT_COSMIC_VIDEOS);
   const [playlistVideos, setPlaylistVideos] = useState<string[]>(DEFAULT_PLAYLIST_VIDEOS);
