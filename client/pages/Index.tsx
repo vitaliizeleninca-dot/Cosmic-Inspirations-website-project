@@ -20,10 +20,7 @@ export default function Index() {
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
   const [playlistType, setPlaylistType] = useState<"cosmic" | "feelCosmos">("cosmic");
-  const [selectedBackground, setSelectedBackground] = useState<string>(() => {
-    const saved = localStorage.getItem("selected-background");
-    return saved || "";
-  });
+  const [selectedBackground, setSelectedBackground] = useState<string>("");
   const [cosmicVideos, setCosmicVideos] = useState<string[]>(DEFAULT_COSMIC_VIDEOS);
   const [playlistVideos, setPlaylistVideos] = useState<string[]>(DEFAULT_PLAYLIST_VIDEOS);
   const [feelCosmosVideos, setFeelCosmosVideos] = useState<string[]>(DEFAULT_PLAYLIST_VIDEOS);
