@@ -559,6 +559,13 @@ export default function Admin() {
     localStorage.setItem("cosmic-ambient-videos-list-active", JSON.stringify(updated));
   };
 
+  const saveSocialLink = (key: string, url: string) => {
+    const updated = { ...socialLinks };
+    updated[key] = url;
+    setSocialLinks(updated);
+    localStorage.setItem("social-links", JSON.stringify(updated));
+  };
+
   const handleNftCollectionImageUpload = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
