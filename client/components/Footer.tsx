@@ -63,18 +63,36 @@ export default function Footer() {
           <div className="flex flex-wrap gap-4 justify-center items-center">
             {socialLinks.map((social) => {
               const IconComponent = social.icon;
+              const isActive = social.url !== "#";
               return (
                 <a
                   key={social.name}
                   href={social.url}
                   title={social.label}
-                  className="group relative w-12 h-12 rounded-full flex items-center justify-center bg-cosmic-purple/10 border border-cosmic-purple/30 hover:border-cosmic-purple hover:bg-cosmic-purple/20 transition-all duration-300 hover:cosmic-glow"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    isActive
+                      ? "bg-cosmic-purple/10 border border-cosmic-purple/30 hover:border-cosmic-purple hover:bg-cosmic-purple/20 hover:cosmic-glow cursor-pointer"
+                      : "bg-cosmic-purple/5 border border-cosmic-purple/20 opacity-50 cursor-not-allowed"
+                  }`}
                   aria-label={social.label}
+                  onClick={(e) => {
+                    if (!isActive) {
+                      e.preventDefault();
+                    }
+                  }}
                 >
-                  <IconComponent className="w-5 h-5 text-cosmic-purple group-hover:text-gray-100 transition-colors duration-300" />
-                  <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                    {social.label}
-                  </span>
+                  <IconComponent className={`w-5 h-5 transition-colors duration-300 ${
+                    isActive
+                      ? "text-cosmic-purple group-hover:text-gray-100"
+                      : "text-cosmic-purple/50"
+                  }`} />
+                  {isActive && (
+                    <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                      {social.label}
+                    </span>
+                  )}
                 </a>
               );
             })}
