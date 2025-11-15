@@ -405,8 +405,8 @@ export default function Index() {
                   Music Player
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  Immerse yourself in the "Feel the Cosmos" music series — ambient soundscapes crafted to elevate consciousness.
-                  Where cosmic imagination meets sonic meditation, expanding the artistic experience beyond the visual.
+                  Journey through AI-curated ambient soundscapes that evoke the vastness of space.
+                  Each composition is designed to elevate your consciousness and inspire creative flow.
                 </p>
               </div>
 
