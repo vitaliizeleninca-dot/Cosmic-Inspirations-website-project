@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { X, Send } from "lucide-react";
 
 interface ContactModalProps {
@@ -7,13 +7,7 @@ interface ContactModalProps {
 }
 
 const MAX_CHARACTERS = 500;
-
-// Initialize EmailJS (free service, no backend needed)
-declare global {
-  interface Window {
-    emailjs?: any;
-  }
-}
+const RECIPIENT_EMAIL = "vitalii.zelenin.ca@gmail.com";
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [message, setMessage] = useState("");
