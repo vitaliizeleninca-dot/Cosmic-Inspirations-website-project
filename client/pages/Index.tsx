@@ -322,10 +322,12 @@ export default function Index() {
               <span className="text-gray-100">in the Cosmos</span>
             </h2>
 
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
-              AlphaRoss — where AI, NFTs, and media art converge. Explore cosmic digital art,
-              legendary podcasts with AI-avatars of great masters, and collector benefits that celebrate cultural innovation.
-            </p>
+            <div className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
+              <p>
+                AlphaRoss — where AI, NFTs, and media art converge. Explore cosmic digital art,
+                legendary podcasts with AI-avatars of great masters, and collector benefits that celebrate cultural innovation
+              </p>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
