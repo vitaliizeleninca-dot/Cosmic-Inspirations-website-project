@@ -737,7 +737,9 @@ export default function Index() {
         onClose={() => setIsBackgroundModalOpen(false)}
         onSelectBackground={(imageUrl) => {
           setSelectedBackground(imageUrl);
-          localStorage.setItem("selected-background", imageUrl);
+          if (imageUrl && !imageUrl.startsWith("blob:")) {
+            localStorage.setItem("selected-background", imageUrl);
+          }
         }}
       />
 
