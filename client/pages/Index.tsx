@@ -589,8 +589,11 @@ export default function Index() {
                           }}
                         />
                       ) : null}
-                      <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                        <span className="text-gray-100 font-semibold">View Collection</span>
+                      <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-6 px-4">
+                        {nftCollectionNames[index] && (
+                          <p className="text-gray-100 font-semibold text-center mb-2">{nftCollectionNames[index]}</p>
+                        )}
+                        <span className="text-gray-300 text-sm">View Collection</span>
                       </div>
                     </a>
                   ) : null;
