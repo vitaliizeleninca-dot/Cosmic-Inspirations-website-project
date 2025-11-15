@@ -611,6 +611,25 @@ export default function Admin() {
     localStorage.setItem("contact-email", email);
   };
 
+  const deleteMessage = (index: number) => {
+    const updated = contactMessages.filter((_, i) => i !== index);
+    setContactMessages(updated);
+    localStorage.setItem("contact-messages", JSON.stringify(updated));
+  };
+
+  const deleteAllMessages = () => {
+    if (window.confirm("Are you sure you want to delete all messages? This cannot be undone.")) {
+      setContactMessages([]);
+      localStorage.removeItem("contact-messages");
+    }
+  };
+
+  const toggleContactEnabled = () => {
+    const newValue = !isContactEnabled;
+    setIsContactEnabled(newValue);
+    localStorage.setItem("contact-enabled", newValue.toString());
+  };
+
   const toggleActiveBackgroundImage = (index: number, active: boolean) => {
     const updated = [...activeBackgroundImages];
     updated[index] = active;
