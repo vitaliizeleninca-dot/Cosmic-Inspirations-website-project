@@ -852,7 +852,7 @@ export default function Admin() {
                         {uploadError && (
                           <p className="text-red-400 text-xs mt-2 bg-red-900/20 p-2 rounded border border-red-700/30">{uploadError}</p>
                         )}
-                        <p className="text-gray-500 text-xs mt-2">Upload image file (JPG, PNG, GIF, WebP, max 5MB) or paste image URL. If empty, will fetch from collection automatically. For videos, use the NFT Collections Videos section above with YouTube links.</p>
+                        <p className="text-gray-500 text-xs mt-2">Upload image (JPG, PNG, WebP), GIF, or video (MP4, WebM, max 20MB) or paste URL. If empty, will fetch from collection automatically.</p>
                         {nftCollectionCustomImages[index] && nftCollectionCustomImages[index].length > 100 && (
                           <p className="text-green-500/70 text-xs mt-2">✓ Image uploaded</p>
                         )}
