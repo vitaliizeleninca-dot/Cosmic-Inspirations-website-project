@@ -507,21 +507,19 @@ export default function Admin() {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    if (file.type.startsWith("video/")) {
-      setUploadError("Video files are not supported for NFT collections. Please upload an image file (JPG, PNG, GIF, WebP) or paste an image URL. For NFT collection videos, use the 'NFT Collections Videos' section with YouTube links.");
+    const isImage = file.type.startsWith("image/");
+    const isVideo = file.type.startsWith("video/") && (file.type.includes("mp4") || file.type.includes("webm"));
+    const isGif = file.type === "image/gif" || file.name.toLowerCase().endsWith(".gif");
+
+    if (!isImage && !isVideo && !isGif) {
+      setUploadError("Please upload an image (JPG, PNG, WebP), GIF, or video (MP4, WebM) file");
       setTimeout(() => setUploadError(""), 5000);
       return;
     }
 
-    if (!file.type.startsWith("image/")) {
-      setUploadError("Please upload an image file (JPG, PNG, GIF, WebP)");
-      setTimeout(() => setUploadError(""), 5000);
-      return;
-    }
-
-    const maxSize = 5 * 1024 * 1024;
+    const maxSize = 20 * 1024 * 1024;
     if (file.size > maxSize) {
-      setUploadError("File is too large. Maximum file size is 5MB");
+      setUploadError("File is too large. Maximum file size is 20MB");
       setTimeout(() => setUploadError(""), 5000);
       return;
     }
