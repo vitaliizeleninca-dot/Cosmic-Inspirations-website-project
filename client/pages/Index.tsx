@@ -261,6 +261,10 @@ export default function Index() {
       document.documentElement.style.backgroundSize = "cover";
       document.documentElement.style.backgroundPosition = "center";
       document.documentElement.style.backgroundAttachment = "fixed";
+    } else {
+      // Clear background when none selected
+      document.documentElement.style.backgroundImage = "none";
+      document.documentElement.style.setProperty("--bg-image-url", "none");
     }
   }, [selectedBackground]);
 
