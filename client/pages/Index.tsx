@@ -428,8 +428,7 @@ export default function Index() {
                 activePodcastVideosList[index] && url && (
                   <div
                     key={index}
-                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow bg-cosmic-dark"
-                    style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
                   >
                     <iframe
                       width="100%"
@@ -440,7 +439,6 @@ export default function Index() {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                       className="w-full h-full"
-                      style={{ objectFit: "cover" }}
                     />
                   </div>
                 )
