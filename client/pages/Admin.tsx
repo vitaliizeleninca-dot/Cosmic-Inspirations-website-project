@@ -1158,13 +1158,13 @@ export default function Admin() {
                   <h2 className="text-xl font-bold text-cosmic-purple">Contact Form</h2>
                   <button
                     onClick={toggleContactEnabled}
-                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
+                    className={`px-6 py-2 rounded-full text-sm font-bold transition ${
                       isContactEnabled
-                        ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50 hover:bg-cosmic-purple/40"
+                        ? "bg-green-500/30 text-green-400 border border-green-500/50 hover:bg-green-500/40"
                         : "bg-gray-700/50 text-gray-400 border border-gray-600/50 hover:bg-gray-700/70"
                     }`}
                   >
-                    {isContactEnabled ? "✓ Enabled" : "✗ Disabled"}
+                    {isContactEnabled ? "ON" : "OFF"}
                   </button>
                 </div>
                 <div className="max-w-md">
