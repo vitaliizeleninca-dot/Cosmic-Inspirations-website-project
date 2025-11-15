@@ -40,6 +40,7 @@ export default function BackgroundModal({ isOpen, onClose, onSelectBackground }:
   const handleBackgroundSelect = (imageUrl: string) => {
     if (imageUrl) {
       updatePageBackground(imageUrl);
+      onSelectBackground?.(imageUrl);
     }
   };
 
