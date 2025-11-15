@@ -793,39 +793,6 @@ export default function Admin() {
             </div>
           </TabsContent>
 
-          <TabsContent value="music" className="mt-8 space-y-8">
-            {/* Cosmic Ambient Music Videos Section */}
-            <div>
-              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Cosmic Ambient Music Videos</h2>
-              <div className="grid grid-cols-2 gap-6">
-                {cosmicAmbientVideos.map((url, index) => (
-                  <div key={index} className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col ${activeCosmicAmbientVideosList[index] ? "" : "opacity-50"}`}>
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-sm font-semibold text-cosmic-purple">Video {index + 1}</h3>
-                      <button
-                        onClick={() => toggleCosmicAmbientVideoActive(index, !activeCosmicAmbientVideosList[index])}
-                        className={`px-3 py-1 rounded text-xs font-semibold transition ${
-                          activeCosmicAmbientVideosList[index]
-                            ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
-                            : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
-                        }`}
-                      >
-                        {activeCosmicAmbientVideosList[index] ? "On" : "Off"}
-                      </button>
-                    </div>
-                    <textarea
-                      value={url}
-                      onChange={(e) => saveCosmicAmbientVideo(index, e.target.value)}
-                      placeholder="youtube.com/watch?v=xxx or youtu.be/yyy"
-                      className="flex-1 px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition font-mono resize-none"
-                      disabled={!activeCosmicAmbientVideosList[index]}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </TabsContent>
-
           <TabsContent value="nft" className="mt-8 space-y-8">
             {/* NFT Collections Videos Section */}
             <div>
