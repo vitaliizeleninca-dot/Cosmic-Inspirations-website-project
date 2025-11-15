@@ -574,13 +574,6 @@ export default function Admin() {
     localStorage.setItem("social-links", JSON.stringify(updated));
   };
 
-  const saveBackgroundImage = (index: number, imageUrl: string) => {
-    const updated = [...backgroundImages];
-    updated[index] = imageUrl;
-    setBackgroundImages(updated);
-    localStorage.setItem("background-images", JSON.stringify(updated));
-  };
-
   const toggleActiveBackgroundImage = (index: number, active: boolean) => {
     const updated = [...activeBackgroundImages];
     updated[index] = active;
@@ -599,7 +592,7 @@ export default function Admin() {
       return;
     }
 
-    const maxSize = 5 * 1024 * 1024;
+    const maxSize = 50 * 1024 * 1024;
     if (file.size > maxSize) {
       setUploadError(`File is too large (${(file.size / 1024 / 1024).toFixed(2)}MB)`);
       setTimeout(() => setUploadError(""), 5000);
@@ -608,31 +601,35 @@ export default function Admin() {
 
     setUploadError("");
     try {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        try {
-          const dataUrl = e.target?.result as string;
-          if (!dataUrl) {
-            throw new Error("Failed to read file");
-          }
-          saveBackgroundImage(index, dataUrl);
-        } catch (err) {
-          console.error("Error processing image:", err);
-          setUploadError("Failed to process image. Please try again.");
-          setTimeout(() => setUploadError(""), 5000);
-        }
-      };
-      reader.onerror = () => {
-        console.error("FileReader error");
-        setUploadError("Failed to read file. Please try again.");
-        setTimeout(() => setUploadError(""), 5000);
-      };
-      reader.readAsDataURL(file);
+      const objectUrl = URL.createObjectURL(file);
+      const updated = [...backgroundImages];
+      updated[index] = objectUrl;
+      setBackgroundImages(updated);
+
+      const updatedFiles = new Map(backgroundImageFiles);
+      updatedFiles.set(index, file);
+      setBackgroundImageFiles(updatedFiles);
     } catch (err) {
       console.error("Error uploading image:", err);
       setUploadError("Failed to upload image. Please try again.");
       setTimeout(() => setUploadError(""), 5000);
     }
+  };
+
+  const clearBackgroundImage = (index: number) => {
+    const updated = [...backgroundImages];
+    const objectUrl = updated[index];
+
+    if (objectUrl && objectUrl.startsWith("blob:")) {
+      URL.revokeObjectURL(objectUrl);
+    }
+
+    updated[index] = "";
+    setBackgroundImages(updated);
+
+    const updatedFiles = new Map(backgroundImageFiles);
+    updatedFiles.delete(index);
+    setBackgroundImageFiles(updatedFiles);
   };
 
   const handleNftCollectionImageUpload = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
