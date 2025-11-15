@@ -1110,24 +1110,44 @@ export default function Admin() {
                   <p className="text-xs text-gray-600">Messages will appear here when visitors contact you</p>
                 </div>
               ) : (
-                <div className="space-y-4 max-h-[600px] overflow-y-auto">
-                  {[...contactMessages].reverse().map((msg, index) => (
-                    <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <p className="text-sm font-semibold text-cosmic-purple mb-1">Email</p>
-                          <p className="text-xs text-gray-300 break-all">{msg.email}</p>
+                <div className="space-y-4">
+                  <button
+                    onClick={deleteAllMessages}
+                    className="text-xs text-red-400 hover:text-red-300 transition mb-4"
+                  >
+                    Delete All Messages
+                  </button>
+                  <div className="max-h-[600px] overflow-y-auto space-y-4">
+                    {[...contactMessages].reverse().map((msg, reverseIndex) => {
+                      const actualIndex = contactMessages.length - 1 - reverseIndex;
+                      return (
+                        <div key={actualIndex} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex-1">
+                              <p className="text-sm font-semibold text-cosmic-purple mb-1">Email</p>
+                              <p className="text-xs text-gray-300 break-all">{msg.email}</p>
+                            </div>
+                            <div className="flex items-center gap-3 ml-4">
+                              <p className="text-xs text-gray-500 whitespace-nowrap">
+                                {new Date(msg.timestamp).toLocaleDateString()} {new Date(msg.timestamp).toLocaleTimeString()}
+                              </p>
+                              <button
+                                onClick={() => deleteMessage(actualIndex)}
+                                className="text-red-400 hover:text-red-300 transition p-1 hover:bg-red-500/10 rounded"
+                                title="Delete message"
+                              >
+                                ×
+                              </button>
+                            </div>
+                          </div>
+                          <div className="border-t border-cosmic-purple/20 pt-3 mt-3">
+                            <p className="text-sm font-semibold text-cosmic-purple mb-2">Message</p>
+                            <p className="text-sm text-gray-300 whitespace-pre-wrap break-words">{msg.message}</p>
+                          </div>
                         </div>
-                        <p className="text-xs text-gray-500 whitespace-nowrap">
-                          {new Date(msg.timestamp).toLocaleDateString()} {new Date(msg.timestamp).toLocaleTimeString()}
-                        </p>
-                      </div>
-                      <div className="border-t border-cosmic-purple/20 pt-3 mt-3">
-                        <p className="text-sm font-semibold text-cosmic-purple mb-2">Message</p>
-                        <p className="text-sm text-gray-300 whitespace-pre-wrap break-words">{msg.message}</p>
-                      </div>
-                    </div>
-                  ))}
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
