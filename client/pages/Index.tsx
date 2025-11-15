@@ -36,6 +36,7 @@ export default function Index() {
   const [nftCollections, setNftCollections] = useState<string[]>(["", "", "", "", "", ""]);
   const [nftCollectionImages, setNftCollectionImages] = useState<(string | null)[]>([null, null, null, null, null, null]);
   const [nftCollectionCustomImages, setNftCollectionCustomImages] = useState<string[]>(["", "", "", "", "", ""]);
+  const [nftCollectionNames, setNftCollectionNames] = useState<string[]>(["", "", "", "", "", ""]);
   const [activeNftCollectionsList, setActiveNftCollectionsList] = useState<boolean[]>([true, true, true, true, true, true]);
 
   useEffect(() => {
