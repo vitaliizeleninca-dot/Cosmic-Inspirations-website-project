@@ -173,6 +173,15 @@ export default function Admin() {
     };
   });
 
+  const [contactMessages, setContactMessages] = useState<Array<{
+    message: string;
+    email: string;
+    timestamp: string;
+  }>>(() => {
+    const saved = localStorage.getItem("contact-messages");
+    return saved ? JSON.parse(saved) : [];
+  });
+
   const [contactEmail, setContactEmail] = useState<string>(() => {
     const saved = localStorage.getItem("contact-email");
     return saved || "";
