@@ -1155,21 +1155,51 @@ export default function Admin() {
 
           <TabsContent value="contact" className="mt-8 space-y-8">
             {/* Contact Section */}
-            <div>
-              <h2 className="text-xl font-bold mb-6 text-cosmic-purple">Contact Information</h2>
-              <div className="max-w-md">
-                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
-                  <label className="block">
-                    <span className="text-sm font-semibold text-cosmic-purple mb-3 block">Email Address</span>
-                    <input
-                      type="email"
-                      value={contactEmail}
-                      onChange={(e) => saveContactEmail(e.target.value)}
-                      placeholder="your@email.com"
-                      className="w-full px-4 py-3 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
-                    />
-                  </label>
-                  <p className="text-xs text-gray-400 mt-3">Your email address will be used for contact inquiries.</p>
+            <div className="space-y-6">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-bold text-cosmic-purple">Contact Form</h2>
+                  <button
+                    onClick={toggleContactEnabled}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
+                      isContactEnabled
+                        ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50 hover:bg-cosmic-purple/40"
+                        : "bg-gray-700/50 text-gray-400 border border-gray-600/50 hover:bg-gray-700/70"
+                    }`}
+                  >
+                    {isContactEnabled ? "✓ Enabled" : "✗ Disabled"}
+                  </button>
+                </div>
+                <div className="max-w-md">
+                  <div className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 ${!isContactEnabled ? "opacity-50" : ""}`}>
+                    <label className="block">
+                      <span className="text-sm font-semibold text-cosmic-purple mb-3 block">Email Address</span>
+                      <input
+                        type="email"
+                        value={contactEmail}
+                        onChange={(e) => saveContactEmail(e.target.value)}
+                        placeholder="your@email.com"
+                        className="w-full px-4 py-3 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                      />
+                    </label>
+                    <p className="text-xs text-gray-400 mt-3">Your email address will be used for contact inquiries.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-6 border-t border-cosmic-purple/20">
+                <h3 className="text-lg font-bold text-cosmic-purple mb-4">Status</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-lg p-4">
+                    <p className="text-xs font-semibold text-cosmic-purple mb-1">Contact Form</p>
+                    <p className={`text-sm font-bold ${isContactEnabled ? "text-green-400" : "text-red-400"}`}>
+                      {isContactEnabled ? "🟢 Active" : "🔴 Inactive"}
+                    </p>
+                  </div>
+                  <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-lg p-4">
+                    <p className="text-xs font-semibold text-cosmic-purple mb-1">Total Messages</p>
+                    <p className="text-sm font-bold text-cosmic-purple">{contactMessages.length}</p>
+                  </div>
                 </div>
               </div>
             </div>
