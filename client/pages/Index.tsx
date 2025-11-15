@@ -531,8 +531,8 @@ export default function Index() {
                     NFT Collections Videos
                   </h3>
                   <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                    Explore digital art collections and see the creative vision behind each piece.
-                    From concept to creation, witness the evolution of NFT art.
+                    Podcasts with AI-Avatars of Great Artists — Leonardo da Vinci, Repin, Ghirlandaio, and more reborn through AI.
+                    Unique 1/1 NFTs featuring immortal quotes and timeless wisdom from history's greatest minds.
                   </p>
                 </div>
 
