@@ -576,6 +576,51 @@ export default function Admin() {
     localStorage.setItem("social-links", JSON.stringify(updated));
   };
 
+  const saveBackgroundImage = (index: number, imageUrl: string) => {
+    const updated = [...backgroundImages];
+    updated[index] = imageUrl;
+    setBackgroundImages(updated);
+    localStorage.setItem("background-images", JSON.stringify(updated));
+  };
+
+  const toggleActiveBackgroundImage = (index: number, active: boolean) => {
+    const updated = [...activeBackgroundImages];
+    updated[index] = active;
+    setActiveBackgroundImages(updated);
+    localStorage.setItem("background-images-active", JSON.stringify(updated));
+  };
+
+  const handleBackgroundImageUpload = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const isImage = file.type.startsWith("image/");
+    if (!isImage) {
+      setUploadError("Please upload an image file (JPG, PNG, WebP, etc.)");
+      setTimeout(() => setUploadError(""), 5000);
+      return;
+    }
+
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      setUploadError(`File is too large (${(file.size / 1024 / 1024).toFixed(2)}MB)`);
+      setTimeout(() => setUploadError(""), 5000);
+      return;
+    }
+
+    setUploadError("");
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target?.result as string;
+      saveBackgroundImage(index, dataUrl);
+    };
+    reader.onerror = () => {
+      setUploadError("Failed to read file. Please try again.");
+      setTimeout(() => setUploadError(""), 5000);
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleNftCollectionImageUpload = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
