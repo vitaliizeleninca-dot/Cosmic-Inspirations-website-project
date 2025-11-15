@@ -714,11 +714,11 @@ export default function Admin() {
             <TabsTrigger value="music" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Cosmic Ambient Music
             </TabsTrigger>
-            <TabsTrigger value="contact" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
-              Contact
-            </TabsTrigger>
             <TabsTrigger value="social" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Social Links
+            </TabsTrigger>
+            <TabsTrigger value="contact" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
+              Contact
             </TabsTrigger>
           </TabsList>
 
