@@ -4,9 +4,10 @@ import { X } from "lucide-react";
 interface BackgroundModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSelectBackground?: (imageUrl: string) => void;
 }
 
-export default function BackgroundModal({ isOpen, onClose }: BackgroundModalProps) {
+export default function BackgroundModal({ isOpen, onClose, onSelectBackground }: BackgroundModalProps) {
   const [backgroundImages, setBackgroundImages] = useState<string[]>([]);
   const [activeBackgroundImages, setActiveBackgroundImages] = useState<boolean[]>([]);
   const [selectedWindowIndex, setSelectedWindowIndex] = useState(0);
