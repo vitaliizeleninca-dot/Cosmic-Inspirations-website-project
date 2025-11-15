@@ -461,7 +461,7 @@ export default function Index() {
             <div className="relative z-10 w-full max-w-6xl">
               <div className="text-center mb-16">
                 <h3 className="text-5xl font-bold mb-4">
-                  My AI Tools
+                  Cosmic Ambient
                 </h3>
                 <p className="text-cosmic-purple text-lg font-semibold mb-4">
                   Music Player
