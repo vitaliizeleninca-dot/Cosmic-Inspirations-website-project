@@ -158,6 +158,21 @@ export default function Admin() {
     return saved ? JSON.parse(saved) : [false, false, false, false];
   });
 
+  const [socialLinks, setSocialLinks] = useState<Record<string, string>>(() => {
+    const saved = localStorage.getItem("social-links");
+    return saved ? JSON.parse(saved) : {
+      twitter: "",
+      youtube: "",
+      instagram: "",
+      threads: "",
+      facebook: "",
+      telegram: "",
+      tiktok: "",
+      discord: "",
+      webbie: ""
+    };
+  });
+
   const [uploadError, setUploadError] = useState<string>("");
 
   // Activation state for sections
