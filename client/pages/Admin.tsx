@@ -530,6 +530,20 @@ export default function Admin() {
     localStorage.setItem("nft-collection-names", JSON.stringify(updated));
   };
 
+  const saveCosmicAmbientVideo = (index: number, url: string) => {
+    const updated = [...cosmicAmbientVideos];
+    updated[index] = url;
+    setCosmicAmbientVideos(updated);
+    localStorage.setItem("cosmic-ambient-videos", JSON.stringify(updated));
+  };
+
+  const toggleCosmicAmbientVideoActive = (index: number, isActive: boolean) => {
+    const updated = [...activeCosmicAmbientVideosList];
+    updated[index] = isActive;
+    setActiveCosmicAmbientVideosList(updated);
+    localStorage.setItem("cosmic-ambient-videos-list-active", JSON.stringify(updated));
+  };
+
   const handleNftCollectionImageUpload = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
