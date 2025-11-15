@@ -173,6 +173,16 @@ export default function Admin() {
     };
   });
 
+  const [backgroundImages, setBackgroundImages] = useState<string[]>(() => {
+    const saved = localStorage.getItem("background-images");
+    return saved ? JSON.parse(saved) : Array(10).fill("");
+  });
+
+  const [activeBackgroundImages, setActiveBackgroundImages] = useState<boolean[]>(() => {
+    const saved = localStorage.getItem("background-images-active");
+    return saved ? JSON.parse(saved) : Array(10).fill(false);
+  });
+
   const [uploadError, setUploadError] = useState<string>("");
 
   // Activation state for sections
