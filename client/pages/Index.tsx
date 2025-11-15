@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Play, Pause, SkipForward, Music, Podcast, Sparkles, Zap } from "lucide-react";
 import Footer from "@/components/Footer";
