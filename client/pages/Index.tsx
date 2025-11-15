@@ -660,6 +660,54 @@ export default function Index() {
           </div>
         </section>
 
+        {/* Cosmic Ambient Music Videos Section */}
+        {activeCosmicAmbientVideosList.some(v => v) && (
+          <section
+            className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
+          >
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute bottom-0 left-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
+            </div>
+
+            <div className="relative z-10 w-full max-w-6xl">
+              <div className="text-center mb-16">
+                <h3 className="text-5xl font-bold mb-4">
+                  Cosmic Ambient Music
+                </h3>
+                <p className="text-cosmic-purple text-lg font-semibold mb-4">
+                  Soundscapes & Visualizations
+                </p>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                  Journey through AI-curated ambient soundscapes that evoke the vastness of space.
+                  Each composition is designed to elevate your consciousness and inspire creative flow.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                {cosmicAmbientVideos.map((url, index) => (
+                  activeCosmicAmbientVideosList[index] && url && (
+                    <div
+                      key={index}
+                      className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block"
+                    >
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={url}
+                        title={`Cosmic Ambient Music ${index + 1}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                      />
+                    </div>
+                  )
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Footer */}
         <Footer />
       </main>
