@@ -188,6 +188,19 @@ export default function Admin() {
   });
 
   const [backgroundImages, setBackgroundImages] = useState<string[]>(Array(10).fill(""));
+
+  // Reload messages periodically to catch new ones
+  useEffect(() => {
+    const loadMessages = () => {
+      const saved = localStorage.getItem("contact-messages");
+      setContactMessages(saved ? JSON.parse(saved) : []);
+    };
+
+    loadMessages();
+    const interval = setInterval(loadMessages, 2000); // Check every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
   const [backgroundImageFiles, setBackgroundImageFiles] = useState<Map<number, File>>(new Map());
 
   const [activeBackgroundImages, setActiveBackgroundImages] = useState<boolean[]>(() => {
