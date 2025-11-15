@@ -8,6 +8,8 @@ import {
   MessageCircle,
   Music,
   Sparkles,
+  Linkedin,
+  Briefcase,
 } from "lucide-react";
 
 export default function Footer() {
