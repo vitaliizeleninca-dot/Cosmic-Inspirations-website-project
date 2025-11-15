@@ -193,6 +193,26 @@ export default function Index() {
         // Keep default values
       }
     }
+
+    const savedCosmicAmbientVideos = localStorage.getItem("cosmic-ambient-videos");
+    if (savedCosmicAmbientVideos) {
+      try {
+        const parsed = JSON.parse(savedCosmicAmbientVideos);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const videos = parsed.map((url: string) =>
+            url.trim() ? convertToEmbedUrl(url) : ""
+          );
+          setCosmicAmbientVideos(videos);
+        }
+      } catch (e) {
+        // Keep default values
+      }
+    }
+
+    const savedCosmicAmbientActiveList = localStorage.getItem("cosmic-ambient-videos-list-active");
+    if (savedCosmicAmbientActiveList) {
+      setActiveCosmicAmbientVideosList(JSON.parse(savedCosmicAmbientActiveList));
+    }
   }, []);
 
   useEffect(() => {
