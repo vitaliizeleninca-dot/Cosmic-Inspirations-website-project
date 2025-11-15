@@ -965,6 +965,113 @@ export default function Admin() {
               </div>
             </div>
           </TabsContent>
+
+          <TabsContent value="social" className="mt-8 space-y-8">
+            {/* Social Links Section */}
+            <div>
+              <h2 className="text-xl font-bold mb-6 text-cosmic-purple">Social Media Links</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">X / Twitter</label>
+                  <input
+                    type="text"
+                    value={socialLinks.twitter}
+                    onChange={(e) => saveSocialLink("twitter", e.target.value)}
+                    placeholder="https://twitter.com/..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">YouTube</label>
+                  <input
+                    type="text"
+                    value={socialLinks.youtube}
+                    onChange={(e) => saveSocialLink("youtube", e.target.value)}
+                    placeholder="https://youtube.com/@..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">Instagram</label>
+                  <input
+                    type="text"
+                    value={socialLinks.instagram}
+                    onChange={(e) => saveSocialLink("instagram", e.target.value)}
+                    placeholder="https://instagram.com/..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">Threads</label>
+                  <input
+                    type="text"
+                    value={socialLinks.threads}
+                    onChange={(e) => saveSocialLink("threads", e.target.value)}
+                    placeholder="https://threads.net/@..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">Facebook</label>
+                  <input
+                    type="text"
+                    value={socialLinks.facebook}
+                    onChange={(e) => saveSocialLink("facebook", e.target.value)}
+                    placeholder="https://facebook.com/..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">Telegram</label>
+                  <input
+                    type="text"
+                    value={socialLinks.telegram}
+                    onChange={(e) => saveSocialLink("telegram", e.target.value)}
+                    placeholder="https://t.me/..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">TikTok</label>
+                  <input
+                    type="text"
+                    value={socialLinks.tiktok}
+                    onChange={(e) => saveSocialLink("tiktok", e.target.value)}
+                    placeholder="https://tiktok.com/@..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">Discord</label>
+                  <input
+                    type="text"
+                    value={socialLinks.discord}
+                    onChange={(e) => saveSocialLink("discord", e.target.value)}
+                    placeholder="https://discord.gg/..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-2">Webbie Social</label>
+                  <input
+                    type="text"
+                    value={socialLinks.webbie}
+                    onChange={(e) => saveSocialLink("webbie", e.target.value)}
+                    placeholder="https://..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition"
+                  />
+                </div>
+              </div>
+            </div>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
