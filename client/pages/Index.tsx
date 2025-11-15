@@ -313,25 +313,31 @@ export default function Index() {
               href="#podcast"
               className="text-sm text-gray-300 hover:text-cosmic-purple transition"
             >
-              Podcast
+              AI Art Podcast
             </a>
             <a
               href="#music"
               className="text-sm text-gray-300 hover:text-cosmic-purple transition"
             >
-              Music
+              Cosmic Ambient
             </a>
             <a
               href="#experience"
               className="text-sm text-gray-300 hover:text-cosmic-purple transition"
             >
-              Experience
+              Feel the Cosmos
             </a>
             <a
               href="#nft"
               className="text-sm text-gray-300 hover:text-cosmic-purple transition"
             >
               NFT Collections
+            </a>
+            <a
+              href="#music"
+              className="text-sm text-gray-300 hover:text-cosmic-purple transition"
+            >
+              Cosmic Ambient Music
             </a>
           </nav>
           <div className={`flex items-center gap-4 transition-opacity duration-300 ${!isContactEnabled ? "opacity-40" : ""}`}>
