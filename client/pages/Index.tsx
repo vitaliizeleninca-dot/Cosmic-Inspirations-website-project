@@ -466,9 +466,8 @@ export default function Index() {
                   Interactive Experience
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  Engage with a dynamic, interactive universe that responds to your
-                  presence. Move through dimensional spaces and discover hidden
-                  connections between art, sound, and reality.
+                  Step into an interactive universe where art, sound, and technology converge.
+                  Discover immersive experiences that blur the lines between digital and physical realms.
                 </p>
               </div>
 
