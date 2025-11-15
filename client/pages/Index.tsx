@@ -569,8 +569,8 @@ export default function Index() {
                   Legendary Digital Artifacts
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  Three unique collections where AI meets artistic vision: Retro Edition (0.01 ETH), Animated Edition (0.1 ETH),
-                  and Digital Echoes — premium collectibles fueling a cultural mission. Every NFT supports educational and artistic innovation.
+                  Discover curated collections of digital art that capture the essence of cosmic creativity.
+                  Each NFT tells a story, from cutting-edge AI artwork to hand-crafted digital masterpieces.
                 </p>
               </div>
 
