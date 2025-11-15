@@ -1024,6 +1024,67 @@ export default function Admin() {
             </div>
           </TabsContent>
 
+          <TabsContent value="backgrounds" className="mt-8 space-y-8">
+            {/* Background Images Section */}
+            <div>
+              <h2 className="text-xl font-bold mb-6 text-cosmic-purple">Background Images (10 Windows)</h2>
+              {uploadError && (
+                <div className="mb-6 p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-200 text-sm">
+                  {uploadError}
+                </div>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {backgroundImages.map((imageUrl, index) => (
+                  <div key={index} className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col ${activeBackgroundImages[index] ? "" : "opacity-50"}`}>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-sm font-semibold text-cosmic-purple">Window {index + 1}</h3>
+                      <button
+                        onClick={() => toggleActiveBackgroundImage(index, !activeBackgroundImages[index])}
+                        className={`px-3 py-1 rounded text-xs font-semibold transition ${
+                          activeBackgroundImages[index]
+                            ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
+                            : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
+                        }`}
+                      >
+                        {activeBackgroundImages[index] ? "On" : "Off"}
+                      </button>
+                    </div>
+
+                    {imageUrl && (
+                      <div className="mb-4 rounded-lg overflow-hidden border border-cosmic-purple/30 aspect-video">
+                        <img
+                          src={imageUrl}
+                          alt={`Background ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+
+                    <label className="block mb-3">
+                      <span className="text-xs font-semibold text-cosmic-purple mb-2 block">Upload Image</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleBackgroundImageUpload(index, e)}
+                        className="block w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cosmic-purple/30 file:text-cosmic-purple hover:file:bg-cosmic-purple/40 transition"
+                        disabled={!activeBackgroundImages[index]}
+                      />
+                    </label>
+
+                    {imageUrl && (
+                      <button
+                        onClick={() => saveBackgroundImage(index, "")}
+                        className="text-xs text-red-400 hover:text-red-300 transition mt-2"
+                      >
+                        Clear Image
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </TabsContent>
+
           <TabsContent value="social" className="mt-8 space-y-8">
             {/* Social Links Section */}
             <div>
