@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Play, Pause, SkipForward, Music, Podcast, Sparkles, Zap } from "lucide-react";
 import Footer from "@/components/Footer";
-import BackgroundModal from "@/components/BackgroundModal";
+import ContactModal from "@/components/ContactModal";
 import PlaylistModal from "@/components/PlaylistModal";
 
 const DEFAULT_COSMIC_VIDEOS = [
