@@ -1057,6 +1057,45 @@ export default function Admin() {
             </div>
           </TabsContent>
 
+          <TabsContent value="messages" className="mt-8 space-y-8">
+            {/* Messages Section */}
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-cosmic-purple">Contact Messages</h2>
+                <span className="text-xs font-semibold bg-cosmic-purple/20 text-cosmic-purple px-3 py-1 rounded-full">
+                  {contactMessages.length}
+                </span>
+              </div>
+
+              {contactMessages.length === 0 ? (
+                <div className="text-center py-12">
+                  <p className="text-gray-400 mb-2">No messages yet</p>
+                  <p className="text-xs text-gray-600">Messages will appear here when visitors contact you</p>
+                </div>
+              ) : (
+                <div className="space-y-4 max-h-[600px] overflow-y-auto">
+                  {[...contactMessages].reverse().map((msg, index) => (
+                    <div key={index} className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <p className="text-sm font-semibold text-cosmic-purple mb-1">Email</p>
+                          <p className="text-xs text-gray-300 break-all">{msg.email}</p>
+                        </div>
+                        <p className="text-xs text-gray-500 whitespace-nowrap">
+                          {new Date(msg.timestamp).toLocaleDateString()} {new Date(msg.timestamp).toLocaleTimeString()}
+                        </p>
+                      </div>
+                      <div className="border-t border-cosmic-purple/20 pt-3 mt-3">
+                        <p className="text-sm font-semibold text-cosmic-purple mb-2">Message</p>
+                        <p className="text-sm text-gray-300 whitespace-pre-wrap break-words">{msg.message}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </TabsContent>
+
           <TabsContent value="contact" className="mt-8 space-y-8">
             {/* Contact Section */}
             <div>
