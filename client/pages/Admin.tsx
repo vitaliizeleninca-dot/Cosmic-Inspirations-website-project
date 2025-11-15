@@ -173,6 +173,11 @@ export default function Admin() {
     };
   });
 
+  const [contactEmail, setContactEmail] = useState<string>(() => {
+    const saved = localStorage.getItem("contact-email");
+    return saved || "";
+  });
+
   const [backgroundImages, setBackgroundImages] = useState<string[]>(Array(10).fill(""));
   const [backgroundImageFiles, setBackgroundImageFiles] = useState<Map<number, File>>(new Map());
 
