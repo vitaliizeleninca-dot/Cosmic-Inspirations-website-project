@@ -214,6 +214,11 @@ export default function Index() {
     if (savedCosmicAmbientActiveList) {
       setActiveCosmicAmbientVideosList(JSON.parse(savedCosmicAmbientActiveList));
     }
+
+    const savedBg = localStorage.getItem("selected-background");
+    if (savedBg) {
+      setSelectedBackground(savedBg);
+    }
   }, []);
 
   useEffect(() => {
