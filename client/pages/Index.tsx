@@ -356,8 +356,8 @@ export default function Index() {
                 AI Art Podcast Videos
               </h3>
               <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                Explore conversations at the intersection of artificial intelligence and creative expression.
-                Discover how AI is transforming the world of digital art and visual innovation.
+                "Where Art Speaks" — bringing legendary masters of the past to life through AI-powered conversations.
+                Listen as digital avatars of Leonardo da Vinci, Repin, Ghirlandaio, and other genius creators share their timeless wisdom.
               </p>
             </div>
 
