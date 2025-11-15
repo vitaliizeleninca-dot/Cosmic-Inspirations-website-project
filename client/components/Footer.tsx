@@ -34,7 +34,7 @@ export default function Footer() {
     { name: "Discord", icon: MessageCircle, url: "#", label: "Discord", storageKey: "discord", isCustom: true },
     { name: "LinkedIn", icon: Linkedin, url: "#", label: "LinkedIn", storageKey: "linkedin", isCustom: true },
     { name: "Contra", icon: Briefcase, url: "#", label: "Contra", storageKey: "contra", isCustom: true },
-    { name: "Webbie Social", icon: Sparkles, url: "#", label: "Webbie Social", storageKey: "webbie", isCustom: true },
+    { name: "Webbie Social", icon: WebbieSocialIcon, url: "#", label: "Webbie Social", storageKey: "webbie", isCustom: true },
   ]);
 
   useEffect(() => {
