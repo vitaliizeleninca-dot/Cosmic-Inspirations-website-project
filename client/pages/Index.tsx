@@ -700,7 +700,7 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Cosmic Ambient Music Videos Section */}
+        {/* My AI Tools Videos Section */}
         {activeCosmicAmbientVideosList.some(v => v) && (
           <section
             className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
