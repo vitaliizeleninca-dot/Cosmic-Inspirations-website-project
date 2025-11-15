@@ -10,62 +10,71 @@ import {
 } from "lucide-react";
 
 export default function Footer() {
+  const savedSocialLinks = (() => {
+    try {
+      const saved = localStorage.getItem("social-links");
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  })();
+
   const socialLinks = [
     {
       name: "X",
       icon: X,
-      url: "#",
+      url: savedSocialLinks.twitter || "#",
       label: "X (Twitter)",
     },
     {
       name: "YouTube",
       icon: Youtube,
-      url: "#",
+      url: savedSocialLinks.youtube || "#",
       label: "YouTube",
     },
     {
       name: "Instagram",
       icon: Instagram,
-      url: "#",
+      url: savedSocialLinks.instagram || "#",
       label: "Instagram",
     },
     {
       name: "Threads",
       icon: MessageCircle,
-      url: "#",
+      url: savedSocialLinks.threads || "#",
       label: "Threads",
       isCustom: true,
     },
     {
       name: "Facebook",
       icon: Facebook,
-      url: "#",
+      url: savedSocialLinks.facebook || "#",
       label: "Facebook",
     },
     {
       name: "Telegram",
       icon: Send,
-      url: "#",
+      url: savedSocialLinks.telegram || "#",
       label: "Telegram",
     },
     {
       name: "TikTok",
       icon: Music,
-      url: "#",
+      url: savedSocialLinks.tiktok || "#",
       label: "TikTok",
       isCustom: true,
     },
     {
       name: "Discord",
       icon: MessageCircle,
-      url: "#",
+      url: savedSocialLinks.discord || "#",
       label: "Discord",
       isCustom: true,
     },
     {
       name: "Webbie Social",
       icon: Sparkles,
-      url: "#",
+      url: savedSocialLinks.webbie || "#",
       label: "Webbie Social",
       isCustom: true,
     },
