@@ -187,6 +187,11 @@ export default function Admin() {
     return saved || "";
   });
 
+  const [isContactEnabled, setIsContactEnabled] = useState<boolean>(() => {
+    const saved = localStorage.getItem("contact-enabled");
+    return saved !== "false"; // Default is true
+  });
+
   const [backgroundImages, setBackgroundImages] = useState<string[]>(Array(10).fill(""));
 
   // Reload messages periodically to catch new ones
