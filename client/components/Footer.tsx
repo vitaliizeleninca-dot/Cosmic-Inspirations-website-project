@@ -12,15 +12,15 @@ import {
 
 export default function Footer() {
   const [socialLinks, setSocialLinks] = useState([
-    { name: "X", icon: X, url: "#", label: "X (Twitter)" },
-    { name: "YouTube", icon: Youtube, url: "#", label: "YouTube" },
-    { name: "Instagram", icon: Instagram, url: "#", label: "Instagram" },
-    { name: "Threads", icon: MessageCircle, url: "#", label: "Threads", isCustom: true },
-    { name: "Facebook", icon: Facebook, url: "#", label: "Facebook" },
-    { name: "Telegram", icon: Send, url: "#", label: "Telegram" },
-    { name: "TikTok", icon: Music, url: "#", label: "TikTok", isCustom: true },
-    { name: "Discord", icon: MessageCircle, url: "#", label: "Discord", isCustom: true },
-    { name: "Webbie Social", icon: Sparkles, url: "#", label: "Webbie Social", isCustom: true },
+    { name: "X", icon: X, url: "#", label: "X (Twitter)", storageKey: "twitter" },
+    { name: "YouTube", icon: Youtube, url: "#", label: "YouTube", storageKey: "youtube" },
+    { name: "Instagram", icon: Instagram, url: "#", label: "Instagram", storageKey: "instagram" },
+    { name: "Threads", icon: MessageCircle, url: "#", label: "Threads", storageKey: "threads", isCustom: true },
+    { name: "Facebook", icon: Facebook, url: "#", label: "Facebook", storageKey: "facebook" },
+    { name: "Telegram", icon: Send, url: "#", label: "Telegram", storageKey: "telegram" },
+    { name: "TikTok", icon: Music, url: "#", label: "TikTok", storageKey: "tiktok", isCustom: true },
+    { name: "Discord", icon: MessageCircle, url: "#", label: "Discord", storageKey: "discord", isCustom: true },
+    { name: "Webbie Social", icon: Sparkles, url: "#", label: "Webbie Social", storageKey: "webbie", isCustom: true },
   ]);
 
   useEffect(() => {
@@ -29,25 +29,10 @@ export default function Footer() {
       const savedSocialLinks = saved ? JSON.parse(saved) : {};
 
       setSocialLinks(prevLinks =>
-        prevLinks.map(link => {
-          const key = link.name.toLowerCase().replace(/\s+/g, "");
-          const urlKey =
-            key === "x" ? "twitter" :
-            key === "youtube" ? "youtube" :
-            key === "instagram" ? "instagram" :
-            key === "threads" ? "threads" :
-            key === "facebook" ? "facebook" :
-            key === "telegram" ? "telegram" :
-            key === "tiktok" ? "tiktok" :
-            key === "discord" ? "discord" :
-            key === "webbie social" ? "webbie" :
-            key;
-
-          return {
-            ...link,
-            url: savedSocialLinks[urlKey] || "#",
-          };
-        })
+        prevLinks.map(link => ({
+          ...link,
+          url: savedSocialLinks[link.storageKey] || "#",
+        }))
       );
     } catch (error) {
       console.error("Failed to load social links:", error);
