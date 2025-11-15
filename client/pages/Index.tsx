@@ -334,18 +334,21 @@ export default function Index() {
               NFT Collections
             </a>
           </nav>
-          {isContactEnabled && (
-            <div className="flex items-center gap-4">
-              <div className="w-px h-6 bg-cosmic-purple/20" />
-              <button
-                onClick={() => setIsContactModalOpen(true)}
-                className="hidden sm:inline-flex px-4 py-2 rounded-lg text-sm font-semibold text-cosmic-dark bg-gradient-to-r from-cosmic-purple to-cosmic-violet hover:from-cosmic-violet hover:to-cosmic-purple transition-all duration-300 hover:cosmic-glow"
-                aria-label="Contact me"
-              >
-                Contact Me
-              </button>
-            </div>
-          )}
+          <div className={`flex items-center gap-4 transition-opacity duration-300 ${!isContactEnabled ? "opacity-40" : ""}`}>
+            <div className="w-px h-6 bg-cosmic-purple/20" />
+            <button
+              onClick={() => isContactEnabled && setIsContactModalOpen(true)}
+              disabled={!isContactEnabled}
+              className={`hidden sm:inline-flex px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                isContactEnabled
+                  ? "text-cosmic-dark bg-gradient-to-r from-cosmic-purple to-cosmic-violet hover:from-cosmic-violet hover:to-cosmic-purple hover:cosmic-glow cursor-pointer"
+                  : "text-gray-400 bg-gray-600 cursor-not-allowed"
+              }`}
+              aria-label="Contact me"
+            >
+              Contact Me
+            </button>
+          </div>
         </div>
       </header>
 
