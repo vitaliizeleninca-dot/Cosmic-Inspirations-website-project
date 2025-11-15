@@ -148,6 +148,16 @@ export default function Admin() {
     return saved ? JSON.parse(saved) : ["", "", "", "", "", ""];
   });
 
+  const [cosmicAmbientVideos, setCosmicAmbientVideos] = useState<string[]>(() => {
+    const saved = localStorage.getItem("cosmic-ambient-videos");
+    return saved ? JSON.parse(saved) : ["", "", "", ""];
+  });
+
+  const [activeCosmicAmbientVideosList, setActiveCosmicAmbientVideosList] = useState<boolean[]>(() => {
+    const saved = localStorage.getItem("cosmic-ambient-videos-list-active");
+    return saved ? JSON.parse(saved) : [false, false, false, false];
+  });
+
   const [uploadError, setUploadError] = useState<string>("");
 
   // Activation state for sections
