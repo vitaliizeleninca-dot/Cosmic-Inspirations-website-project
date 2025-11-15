@@ -790,10 +790,22 @@ export default function Admin() {
                 {nftCollections.map((url, index) => (
                   <div key={index} className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col ${activeNftCollectionsList[index] ? "" : "opacity-50"}`}>
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-sm font-semibold text-cosmic-purple">Collection {index + 1}</h3>
+                      <div className="flex-1">
+                        <label className="block text-xs font-semibold text-gray-400 mb-2">
+                          Collection {index + 1}
+                        </label>
+                        <input
+                          type="text"
+                          value={nftCollectionNames[index]}
+                          onChange={(e) => saveNftCollectionName(index, e.target.value)}
+                          placeholder={`Collection Name ${index + 1}`}
+                          className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:border-cosmic-purple transition"
+                          disabled={!activeNftCollectionsList[index]}
+                        />
+                      </div>
                       <button
                         onClick={() => toggleNftCollectionActive(index, !activeNftCollectionsList[index])}
-                        className={`px-3 py-1 rounded text-xs font-semibold transition ${
+                        className={`ml-3 px-3 py-2 rounded text-xs font-semibold transition flex-shrink-0 ${
                           activeNftCollectionsList[index]
                             ? "bg-cosmic-purple/30 text-cosmic-purple border border-cosmic-purple/50"
                             : "bg-gray-700/50 text-gray-400 border border-gray-600/50"
