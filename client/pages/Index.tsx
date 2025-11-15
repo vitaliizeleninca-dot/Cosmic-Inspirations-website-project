@@ -334,7 +334,7 @@ export default function Index() {
               NFT Collections
             </a>
             <a
-              href="#music"
+              href="#my-ai-tools"
               className="text-sm text-gray-300 hover:text-cosmic-purple transition"
             >
               My AI Tools
