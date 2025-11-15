@@ -1,13 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { X, ChevronLeft, ChevronRight, Loader } from "lucide-react";
-
-interface NFTItem {
-  id: string;
-  tokenId: string;
-  name: string;
-  imageUrl: string;
-  thumbnailUrl: string;
-}
+import { useState, useEffect } from "react";
+import { X } from "lucide-react";
 
 interface BackgroundModalProps {
   isOpen: boolean;
@@ -15,74 +7,56 @@ interface BackgroundModalProps {
 }
 
 export default function BackgroundModal({ isOpen, onClose }: BackgroundModalProps) {
-  const [nfts, setNfts] = useState<NFTItem[]>([]);
-  const [selectedNFT, setSelectedNFT] = useState<NFTItem | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [backgroundImages, setBackgroundImages] = useState<string[]>([]);
+  const [activeBackgroundImages, setActiveBackgroundImages] = useState<boolean[]>([]);
+  const [selectedWindowIndex, setSelectedWindowIndex] = useState(0);
 
-  // Fetch NFTs from server endpoint
   useEffect(() => {
-    const fetchNFTs = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+    try {
+      const saved = localStorage.getItem("background-images");
+      const savedImages = saved ? JSON.parse(saved) : Array(10).fill("");
+      setBackgroundImages(savedImages);
 
-        const response = await fetch("/api/nft-collection");
-
-        if (!response.ok) {
-          throw new Error(`Server error: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        if (!data.success || !data.tokens || data.tokens.length === 0) {
-          throw new Error(data.error || "No NFTs found in collection");
-        }
-
-        setNfts(data.tokens);
-
-        // Set first NFT as default
-        if (data.tokens.length > 0) {
-          setSelectedNFT(data.tokens[0]);
-        }
-      } catch (err) {
-        console.error("Failed to fetch NFTs:", err);
-        setError(
-          err instanceof Error ? err.message : "Failed to load NFT collection"
-        );
-        setNfts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (isOpen) {
-      fetchNFTs();
+      const savedActive = localStorage.getItem("background-images-active");
+      const activeImages = savedActive ? JSON.parse(savedActive) : Array(10).fill(false);
+      setActiveBackgroundImages(activeImages);
+    } catch (error) {
+      console.error("Failed to load background images:", error);
+      setBackgroundImages(Array(10).fill(""));
+      setActiveBackgroundImages(Array(10).fill(false));
     }
   }, [isOpen]);
 
   const updatePageBackground = (imageUrl: string) => {
-    document.documentElement.style.setProperty(
-      "--bg-image-url",
-      `url('${imageUrl}')`
-    );
-  };
-
-  const handleNFTSelect = (nft: NFTItem) => {
-    setSelectedNFT(nft);
-    updatePageBackground(nft.imageUrl);
-  };
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 600;
-      scrollContainerRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
+    if (imageUrl) {
+      document.documentElement.style.setProperty(
+        "--bg-image-url",
+        `url('${imageUrl}')`
+      );
     }
   };
+
+  const handleBackgroundSelect = (imageUrl: string) => {
+    if (imageUrl) {
+      updatePageBackground(imageUrl);
+    }
+  };
+
+  const getActiveBackgrounds = () => {
+    return backgroundImages
+      .map((img, idx) => ({
+        index: idx,
+        image: img,
+        isActive: activeBackgroundImages[idx],
+      }))
+      .filter((bg) => bg.isActive && bg.image);
+  };
+
+  const activeBackgrounds = getActiveBackgrounds();
+  const currentBackground =
+    selectedWindowIndex < activeBackgrounds.length
+      ? activeBackgrounds[selectedWindowIndex]
+      : null;
 
   if (!isOpen) return null;
 
@@ -109,7 +83,7 @@ export default function BackgroundModal({ isOpen, onClose }: BackgroundModalProp
               id="modal-title"
               className="text-2xl font-bold text-cosmic-purple"
             >
-              Choose Your Background NFT
+              Choose Your Background
             </h2>
             <button
               onClick={onClose}
@@ -122,64 +96,70 @@ export default function BackgroundModal({ isOpen, onClose }: BackgroundModalProp
 
           {/* Content */}
           <div className="flex-1 overflow-y-auto p-6">
-            {loading ? (
-              <div className="flex items-center justify-center h-full gap-3">
-                <Loader className="w-6 h-6 text-cosmic-purple animate-spin" />
-                <span className="text-gray-300">Loading NFT collection...</span>
-              </div>
-            ) : error || nfts.length === 0 ? (
+            {activeBackgrounds.length === 0 ? (
               <div className="flex items-center justify-center h-full">
-                <span className="text-gray-300 text-center">
-                  {error || "No NFTs available"}
-                </span>
+                <div className="text-center">
+                  <p className="text-gray-300 text-lg mb-4">No backgrounds available</p>
+                  <p className="text-gray-400 text-sm">
+                    Upload background images in the admin panel to see them here.
+                  </p>
+                </div>
               </div>
             ) : (
               <div className="space-y-8">
-                {/* Gallery Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {nfts.map((nft) => (
-                    <button
-                      key={nft.id}
-                      onClick={() => handleNFTSelect(nft)}
-                      className={`group relative aspect-square rounded-lg overflow-hidden transition-all duration-300 border-2 ${
-                        selectedNFT?.id === nft.id
-                          ? "border-cosmic-purple cosmic-glow scale-105"
-                          : "border-cosmic-purple/40 hover:border-cosmic-purple/70"
-                      }`}
-                      title={nft.name}
-                      aria-label={nft.name}
-                    >
-                      <img
-                        src={nft.thumbnailUrl}
-                        alt={nft.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%235522ff' width='100' height='100'/%3E%3C/svg%3E";
+                {/* Background Windows Tabs */}
+                <div>
+                  <h3 className="text-lg font-semibold text-cosmic-purple mb-4">
+                    Background Windows ({activeBackgrounds.length})
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    {activeBackgrounds.map((bg, displayIdx) => (
+                      <button
+                        key={bg.index}
+                        onClick={() => {
+                          setSelectedWindowIndex(displayIdx);
+                          handleBackgroundSelect(bg.image);
                         }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                        <span className="text-xs font-semibold text-cosmic-purple truncate">
-                          {nft.name}
-                        </span>
-                      </div>
-                      {selectedNFT?.id === nft.id && (
-                        <div className="absolute inset-0 border-2 border-cosmic-purple animate-pulse" />
-                      )}
-                    </button>
-                  ))}
+                        className={`group relative aspect-square rounded-lg overflow-hidden transition-all duration-300 border-2 ${
+                          selectedWindowIndex === displayIdx
+                            ? "border-cosmic-purple cosmic-glow scale-105"
+                            : "border-cosmic-purple/40 hover:border-cosmic-purple/70"
+                        }`}
+                        title={`Window ${bg.index + 1}`}
+                        aria-label={`Select Window ${bg.index + 1}`}
+                      >
+                        <img
+                          src={bg.image}
+                          alt={`Window ${bg.index + 1}`}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src =
+                              "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%235522ff' width='100' height='100'/%3E%3C/svg%3E";
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                          <span className="text-xs font-semibold text-cosmic-purple">
+                            Window {bg.index + 1}
+                          </span>
+                        </div>
+                        {selectedWindowIndex === displayIdx && (
+                          <div className="absolute inset-0 border-2 border-cosmic-purple animate-pulse" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Selected Preview */}
-                {selectedNFT && (
+                {currentBackground && (
                   <div className="space-y-3">
                     <h3 className="text-lg font-semibold text-cosmic-purple">
                       Preview
                     </h3>
                     <div className="relative rounded-xl overflow-hidden border border-cosmic-purple/30 aspect-video max-h-96">
                       <img
-                        src={selectedNFT.imageUrl}
-                        alt={selectedNFT.name}
+                        src={currentBackground.image}
+                        alt={`Window ${currentBackground.index + 1}`}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src =
@@ -189,10 +169,7 @@ export default function BackgroundModal({ isOpen, onClose }: BackgroundModalProp
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                       <div className="absolute bottom-4 left-4 right-4">
                         <p className="text-cosmic-purple font-semibold text-lg">
-                          {selectedNFT.name}
-                        </p>
-                        <p className="text-gray-300 text-sm mt-1">
-                          Token ID: {selectedNFT.tokenId}
+                          Window {currentBackground.index + 1}
                         </p>
                       </div>
                     </div>
