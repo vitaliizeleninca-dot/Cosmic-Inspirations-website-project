@@ -17,7 +17,7 @@ const DEFAULT_PLAYLIST_VIDEOS = ["", "", "", ""];
 export default function Index() {
   const navigate = useNavigate();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
   const [playlistType, setPlaylistType] = useState<"cosmic" | "feelCosmos">("cosmic");
   const [selectedBackground, setSelectedBackground] = useState<string>("");
