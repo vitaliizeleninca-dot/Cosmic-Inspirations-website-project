@@ -483,10 +483,27 @@ export default function Admin() {
   };
 
   const saveNftCollectionCustomImage = (index: number, imageUrl: string) => {
-    const updated = [...nftCollectionCustomImages];
-    updated[index] = imageUrl;
-    setNftCollectionCustomImages(updated);
-    localStorage.setItem("nft-collection-custom-images", JSON.stringify(updated));
+    try {
+      const updated = [...nftCollectionCustomImages];
+      updated[index] = imageUrl;
+
+      const jsonStr = JSON.stringify(updated);
+      const sizeInMB = new Blob([jsonStr]).size / (1024 * 1024);
+
+      if (sizeInMB > 4) {
+        setUploadError(`Media too large for storage. Current size: ${sizeInMB.toFixed(2)}MB. Max: 4MB`);
+        setTimeout(() => setUploadError(""), 5000);
+        return;
+      }
+
+      setNftCollectionCustomImages(updated);
+      localStorage.setItem("nft-collection-custom-images", JSON.stringify(updated));
+      setUploadError("");
+    } catch (e) {
+      setUploadError("Failed to save media. File might be too large for browser storage.");
+      setTimeout(() => setUploadError(""), 5000);
+      console.error("Storage error:", e);
+    }
   };
 
   const toggleNftCollectionActive = (index: number, isActive: boolean) => {
