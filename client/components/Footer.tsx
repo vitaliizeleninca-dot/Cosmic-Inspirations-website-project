@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   X,
   Youtube,
@@ -10,75 +11,48 @@ import {
 } from "lucide-react";
 
 export default function Footer() {
-  const savedSocialLinks = (() => {
+  const [socialLinks, setSocialLinks] = useState([
+    { name: "X", icon: X, url: "#", label: "X (Twitter)" },
+    { name: "YouTube", icon: Youtube, url: "#", label: "YouTube" },
+    { name: "Instagram", icon: Instagram, url: "#", label: "Instagram" },
+    { name: "Threads", icon: MessageCircle, url: "#", label: "Threads", isCustom: true },
+    { name: "Facebook", icon: Facebook, url: "#", label: "Facebook" },
+    { name: "Telegram", icon: Send, url: "#", label: "Telegram" },
+    { name: "TikTok", icon: Music, url: "#", label: "TikTok", isCustom: true },
+    { name: "Discord", icon: MessageCircle, url: "#", label: "Discord", isCustom: true },
+    { name: "Webbie Social", icon: Sparkles, url: "#", label: "Webbie Social", isCustom: true },
+  ]);
+
+  useEffect(() => {
     try {
       const saved = localStorage.getItem("social-links");
-      return saved ? JSON.parse(saved) : {};
-    } catch {
-      return {};
-    }
-  })();
+      const savedSocialLinks = saved ? JSON.parse(saved) : {};
 
-  const socialLinks = [
-    {
-      name: "X",
-      icon: X,
-      url: savedSocialLinks.twitter || "#",
-      label: "X (Twitter)",
-    },
-    {
-      name: "YouTube",
-      icon: Youtube,
-      url: savedSocialLinks.youtube || "#",
-      label: "YouTube",
-    },
-    {
-      name: "Instagram",
-      icon: Instagram,
-      url: savedSocialLinks.instagram || "#",
-      label: "Instagram",
-    },
-    {
-      name: "Threads",
-      icon: MessageCircle,
-      url: savedSocialLinks.threads || "#",
-      label: "Threads",
-      isCustom: true,
-    },
-    {
-      name: "Facebook",
-      icon: Facebook,
-      url: savedSocialLinks.facebook || "#",
-      label: "Facebook",
-    },
-    {
-      name: "Telegram",
-      icon: Send,
-      url: savedSocialLinks.telegram || "#",
-      label: "Telegram",
-    },
-    {
-      name: "TikTok",
-      icon: Music,
-      url: savedSocialLinks.tiktok || "#",
-      label: "TikTok",
-      isCustom: true,
-    },
-    {
-      name: "Discord",
-      icon: MessageCircle,
-      url: savedSocialLinks.discord || "#",
-      label: "Discord",
-      isCustom: true,
-    },
-    {
-      name: "Webbie Social",
-      icon: Sparkles,
-      url: savedSocialLinks.webbie || "#",
-      label: "Webbie Social",
-      isCustom: true,
-    },
-  ];
+      setSocialLinks(prevLinks =>
+        prevLinks.map(link => {
+          const key = link.name.toLowerCase().replace(/\s+/g, "");
+          const urlKey =
+            key === "x" ? "twitter" :
+            key === "youtube" ? "youtube" :
+            key === "instagram" ? "instagram" :
+            key === "threads" ? "threads" :
+            key === "facebook" ? "facebook" :
+            key === "telegram" ? "telegram" :
+            key === "tiktok" ? "tiktok" :
+            key === "discord" ? "discord" :
+            key === "webbie social" ? "webbie" :
+            key;
+
+          return {
+            ...link,
+            url: savedSocialLinks[urlKey] || "#",
+          };
+        })
+      );
+    } catch (error) {
+      console.error("Failed to load social links:", error);
+    }
+  }, []);
 
   return (
     <footer className="border-t border-cosmic-purple/20 bg-cosmic-dark/50 backdrop-blur-sm py-8">
