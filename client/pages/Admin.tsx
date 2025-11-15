@@ -717,6 +717,9 @@ export default function Admin() {
             <TabsTrigger value="social" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Social Links
             </TabsTrigger>
+            <TabsTrigger value="messages" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
+              Messages
+            </TabsTrigger>
             <TabsTrigger value="contact" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Contact
             </TabsTrigger>
