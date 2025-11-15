@@ -11,15 +11,10 @@ import {
   Briefcase,
 } from "lucide-react";
 
-const WebbieSocialIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
-    <path d="M6 3h3v9H6V3zm9 0h3v18h-3V3zm-6 6h3v12H9V9z" />
-  </svg>
+const WebbieSocialIcon = ({ className }: { className?: string }) => (
+  <div className={`flex items-center justify-center font-bold text-lg ${className}`}>
+    W
+  </div>
 );
 
 export default function Footer() {
