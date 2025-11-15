@@ -580,14 +580,37 @@ export default function Index() {
                       className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer"
                     >
                       {nftCollectionCustomImages[index] || nftCollectionImages[index] ? (
-                        <img
-                          src={nftCollectionCustomImages[index] || nftCollectionImages[index]}
-                          alt={`NFT Collection ${index + 1}`}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
-                          }}
-                        />
+                        (() => {
+                          const src = nftCollectionCustomImages[index] || nftCollectionImages[index];
+                          const isVideo = src.startsWith("data:video/") || src.endsWith(".mp4") || src.endsWith(".webm");
+                          const isGif = src.startsWith("data:image/gif") || src.endsWith(".gif");
+
+                          if (isVideo) {
+                            return (
+                              <video
+                                src={src}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                autoPlay
+                                muted
+                                loop
+                                onError={(e) => {
+                                  (e.target as HTMLVideoElement).style.display = 'none';
+                                }}
+                              />
+                            );
+                          }
+
+                          return (
+                            <img
+                              src={src}
+                              alt={`NFT Collection ${index + 1}`}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).style.display = 'none';
+                              }}
+                            />
+                          );
+                        })()
                       ) : null}
                       <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-6 px-4">
                         {nftCollectionNames[index] && (
