@@ -534,9 +534,9 @@ export default function Admin() {
       return;
     }
 
-    const maxSize = 20 * 1024 * 1024;
+    const maxSize = 5 * 1024 * 1024;
     if (file.size > maxSize) {
-      setUploadError("File is too large. Maximum file size is 20MB");
+      setUploadError(`File is too large (${(file.size / 1024 / 1024).toFixed(2)}MB). For large videos, use the URL field instead and paste a video link.`);
       setTimeout(() => setUploadError(""), 5000);
       return;
     }
