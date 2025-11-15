@@ -1154,15 +1154,19 @@ export default function Admin() {
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-xl font-bold text-cosmic-purple">Contact Form</h2>
                     <button
-                      onClick={toggleContactEnabled}
-                      className={`px-6 py-2 rounded-full text-sm font-bold transition ${
-                        isContactEnabled
-                          ? "bg-green-500/30 text-green-400 border border-green-500/50 hover:bg-green-500/40"
-                          : "bg-gray-700/50 text-gray-400 border border-gray-600/50 hover:bg-gray-700/70"
+                    onClick={toggleContactEnabled}
+                    className={`relative inline-flex items-center h-8 w-16 rounded-full transition-all duration-300 ${
+                      isContactEnabled
+                        ? "bg-gradient-to-r from-cosmic-purple to-cosmic-violet"
+                        : "bg-gray-600"
+                    }`}
+                  >
+                    <span
+                      className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-transform duration-300 ${
+                        isContactEnabled ? "translate-x-9" : "translate-x-1"
                       }`}
-                    >
-                      {isContactEnabled ? "ON" : "OFF"}
-                    </button>
+                    />
+                  </button>
                   </div>
                   <div className="max-w-md">
                     <div className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 ${!isContactEnabled ? "opacity-50" : ""}`}>
