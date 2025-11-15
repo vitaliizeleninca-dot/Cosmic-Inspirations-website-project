@@ -357,10 +357,12 @@ export default function Index() {
               <h3 className="text-5xl font-bold mb-4">
                 AI Art Podcast Videos
               </h3>
-              <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                "Where Art Speaks" — bringing legendary masters of the past to life through AI-powered conversations.
-                Listen as digital avatars of Leonardo da Vinci, Repin, Ghirlandaio, and other genius creators share their timeless wisdom.
-              </p>
+              <div className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                <p>
+                  "Where Art Speaks" — bringing legendary masters of the past to life through AI-powered conversations.
+                  Listen as digital avatars of Leonardo da Vinci, Repin, Ghirlandaio, and other genius creators share their timeless wisdom
+                </p>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
