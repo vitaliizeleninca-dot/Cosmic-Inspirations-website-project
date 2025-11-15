@@ -220,6 +220,11 @@ export default function Index() {
     if (savedBg) {
       setSelectedBackground(savedBg);
     }
+
+    const savedContactEnabled = localStorage.getItem("contact-enabled");
+    if (savedContactEnabled !== null) {
+      setIsContactEnabled(savedContactEnabled !== "false");
+    }
   }, []);
 
   useEffect(() => {
