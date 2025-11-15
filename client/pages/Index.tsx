@@ -571,12 +571,11 @@ export default function Index() {
                 {nftCollections.map((url, index) => {
                   const isValidUrl = url && (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("/"));
                   return isValidUrl && activeNftCollectionsList[index] ? (
-                    <a
+                    <button
                       key={index}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer"
+                      onClick={() => handleOpenNftCollection(url, `NFT Collection ${index + 1}`)}
+                      className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer text-left"
+                      type="button"
                     >
                       {nftCollectionCustomImages[index] || nftCollectionImages[index] ? (
                         <img
@@ -595,7 +594,7 @@ export default function Index() {
                       <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                         <span className="text-gray-100 font-semibold">View Collection</span>
                       </div>
-                    </a>
+                    </button>
                   ) : null;
                 })}
               </div>
