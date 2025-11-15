@@ -703,6 +703,7 @@ export default function Index() {
         {/* My AI Tools Videos Section */}
         {activeCosmicAmbientVideosList.some(v => v) && (
           <section
+            id="my-ai-tools"
             className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
           >
             <div className="absolute inset-0 opacity-20">
