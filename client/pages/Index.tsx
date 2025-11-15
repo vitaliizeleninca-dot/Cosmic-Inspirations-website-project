@@ -733,6 +733,10 @@ export default function Index() {
       <BackgroundModal
         isOpen={isBackgroundModalOpen}
         onClose={() => setIsBackgroundModalOpen(false)}
+        onSelectBackground={(imageUrl) => {
+          setSelectedBackground(imageUrl);
+          localStorage.setItem("selected-background", imageUrl);
+        }}
       />
 
       {/* Playlist Modal */}
