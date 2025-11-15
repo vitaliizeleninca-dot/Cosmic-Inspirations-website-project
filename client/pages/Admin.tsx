@@ -169,6 +169,8 @@ export default function Admin() {
       telegram: "",
       tiktok: "",
       discord: "",
+      linkedin: "",
+      contra: "",
       webbie: ""
     };
   });
