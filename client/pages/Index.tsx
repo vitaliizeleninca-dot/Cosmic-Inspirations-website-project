@@ -467,8 +467,12 @@ export default function Index() {
                   <p>40-Min Tracks</p>
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  Journey through AI-curated ambient soundscapes that evoke the vastness of space.
-                  Each composition is designed to elevate your consciousness and inspire creative flow.
+                  <p>
+                    Journey through AI-curated ambient soundscapes that evoke
+                    the vastness of space. Each composition is designed to
+                    elevate your consciousness and inspire creative flow. From
+                    Sleep &amp; Meditation to Deep Focus &amp; Productivity
+                  </p>
                 </p>
               </div>
 
