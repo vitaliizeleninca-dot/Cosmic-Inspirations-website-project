@@ -464,7 +464,12 @@ export default function Index() {
                   Cosmic Ambient
                 </h3>
                 <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  Music Player
+                  <span style={{ fontSize: "14px" }}>
+                    Explore a collection of AI-curated ambient soundscapes
+                    designed to reflect the vastness of the cosmos. Each
+                    40-minute track is crafted to elevate your mind, deepen
+                    focus, and inspire creative flow.
+                  </span>
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                   Journey through AI-curated ambient soundscapes that evoke the vastness of space.
