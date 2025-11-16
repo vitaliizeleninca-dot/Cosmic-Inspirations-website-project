@@ -98,7 +98,10 @@ export default function Footer() {
           {/* Footer Text */}
           <div className="text-center">
             <p className="text-gray-400 text-sm">
-              © 2026 Cosmic Hub. Journey through the cosmos responsibly.
+              <p>
+                © 2026 Cosmic Hub. Journey through the cosmos
+                responsibly
+              </p>
             </p>
             <p className="text-gray-500 text-xs mt-2">
               <p>Where art, music, and technology transcend reality</p>
