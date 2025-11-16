@@ -101,7 +101,11 @@ export default function Footer() {
               © 2026 Cosmic Hub. Journey through the cosmos responsibly.
             </p>
             <p className="text-gray-500 text-xs mt-2">
-              Where art, music, and technology transcend reality
+              <p>Where art, music, and technology transcend reality</p>
+              <p>
+                Artistic reconstructions • Educational &amp; cultural
+                purpose only • Historical tribute
+              </p>
             </p>
           </div>
         </div>
