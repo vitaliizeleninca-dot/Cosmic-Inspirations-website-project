@@ -533,8 +533,13 @@ export default function Index() {
                   <p style={{ textAlign: "center" }}>40-Min Tracks</p>
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  Step into an interactive universe where art, sound, and technology converge.
-                  Discover immersive experiences that blur the lines between digital and physical realms.
+                  <p>
+                    Step into an interactive universe where art, sound, and
+                    technology converge. Explore immersive AI-generated
+                    soundscapes inspired by the world's cultural centers.
+                    Young women in luxurious costumes appear against
+                    futuristic cosmic landscapes
+                  </p>
                 </p>
               </div>
 
