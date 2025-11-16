@@ -541,7 +541,6 @@ export default function Index() {
               {/* Feel the Cosmos Videos */}
               {activeFeelCosmosVideosList.some(v => v) && (
                 <div className="mb-12">
-                  <h4 className="text-2xl font-bold text-cosmic-purple mb-6">Featured Videos</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                     {feelCosmosVideos.map((url, index) => (
                       activeFeelCosmosVideosList[index] && (
