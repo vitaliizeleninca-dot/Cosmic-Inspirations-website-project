@@ -471,8 +471,8 @@ export default function Index() {
                     Journey through AI-curated ambient soundscapes that
                     evoke the vastness of space. Each composition is
                     designed to elevate your consciousness and inspire
-                    creative flow. From Deep Focus for Productivity to Sleep
-                    &amp; Meditation
+                    creative flow. From Deep Focus &amp; Productivity to
+                    Sleep &amp; Meditation
                   </p>
                 </p>
               </div>
