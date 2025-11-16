@@ -468,10 +468,11 @@ export default function Index() {
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                   <p>
-                    Journey through AI-curated ambient soundscapes that evoke
-                    the vastness of space. Each composition is designed to
-                    elevate your consciousness and inspire creative flow. From
-                    Sleep &amp; Meditation to Deep Focus &amp; Productivity
+                    Journey through AI-curated ambient soundscapes that
+                    evoke the vastness of space. Each composition is
+                    designed to elevate your consciousness and inspire
+                    creative flow. From Deep Focus for Productivity to Sleep
+                    &amp; Meditation
                   </p>
                 </p>
               </div>
