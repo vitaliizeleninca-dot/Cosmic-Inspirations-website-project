@@ -464,7 +464,7 @@ export default function Index() {
                   Cosmic Ambient
                 </h3>
                 <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  Music Player
+                  <p>40-Min Tracks</p>
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                   Journey through AI-curated ambient soundscapes that evoke the vastness of space.
