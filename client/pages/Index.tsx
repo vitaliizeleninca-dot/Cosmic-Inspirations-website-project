@@ -530,7 +530,7 @@ export default function Index() {
                   Feel the Cosmos
                 </h3>
                 <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  Interactive Experience
+                  <p style={{ textAlign: "center" }}>40-Min Tracks</p>
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                   Step into an interactive universe where art, sound, and technology converge.
