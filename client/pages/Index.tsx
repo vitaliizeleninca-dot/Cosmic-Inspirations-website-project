@@ -602,8 +602,11 @@ export default function Index() {
                     NFT Collections Videos
                   </h3>
                   <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                    Explore digital art collections and see the creative vision behind each piece.
-                    From concept to creation, witness the evolution of NFT art.
+                    <p>
+                      Explore digital art collections, where NFT art supports
+                      educational and cultural content, and AI meets cosmic
+                      imagination and human legacy
+                    </p>
                   </p>
                 </div>
 
