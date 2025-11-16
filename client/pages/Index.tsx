@@ -464,34 +464,12 @@ export default function Index() {
                   Cosmic Ambient
                 </h3>
                 <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  <span style={{ fontSize: "14px" }}>
-                    Explore a collection of AI-curated ambient soundscapes
-                    designed to reflect the vastness of the cosmos. Each
-                    40-minute track is crafted to elevate your mind, deepen
-                    focus, and inspire creative flow.
-                  </span>
+                  Music Player
                 </p>
-                <div className="text-gray-300 text-lg leading-relaxed mx-auto" style={{ maxWidth: "1098px" }}>
-                  <p>
-                    Explore a collection of AI-curated ambient soundscapes
-                    designed to reflect the vastness of the cosmos. Each
-                    40-minute track is crafted to elevate your mind, deepen
-                    focus, and inspire creative flow.
-                  </p>
-                  <p>
-                    My catalog spans a wide spectrum of ambient genres — from{" "}
-                    <strong>Relaxing Music for Sleep &amp; Meditation</strong>{" "}
-                    to{" "}
-                    <strong>Ambient for Productivity &amp; Deep Focus</strong>
-                    . Whether you need calming background music for rest and
-                    mindfulness, or immersive space ambient for study and deep
-                    work, you'll find the perfect sound environment here.
-                  </p>
-                  <p>
-                    Discover the harmony of space, sound, and AI-driven
-                    creativity.
-                  </p>
-                </div>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                  Journey through AI-curated ambient soundscapes that evoke the vastness of space.
+                  Each composition is designed to elevate your consciousness and inspire creative flow.
+                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
