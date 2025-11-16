@@ -645,11 +645,11 @@ export default function Index() {
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                   <p>
                     <p>
-                      Discover a portfolio of high-fidelity digital art
+                      Discover my portfolio of high-fidelity digital art
                       where AI and human imagination converge. Showcasing
                       diverse styles and aesthetics, open for potential
-                      commissions. For custom collaborations, send a message
-                      via Contact Me
+                      commissions. For custom collaborations, send a
+                      message via Contact Me
                     </p>
                   </p>
                 </p>
