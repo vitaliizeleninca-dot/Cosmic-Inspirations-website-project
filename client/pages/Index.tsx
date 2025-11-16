@@ -643,8 +643,13 @@ export default function Index() {
                   Legendary Digital Artifacts
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  Discover curated collections of digital art that capture the essence of cosmic creativity.
-                  Each NFT tells a story, from cutting-edge AI artwork to hand-crafted digital masterpieces.
+                  <p>
+                    Discover a portfolio of high-fidelity digital art where
+                    AI and human imagination converge. Showcasing diverse
+                    styles and aesthetics, open for potential commissions.
+                    For custom collaborations, send a message via Contact
+                    Me.
+                  </p>
                 </p>
               </div>
 
