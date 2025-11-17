@@ -371,7 +371,7 @@ export default function Index() {
             <div className="mb-6 inline-block">
               <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
                 <span className="text-cosmic-purple text-sm font-semibold">
-                  Welcome to the Cosmic Realm
+                  <p>Welcome to My Cosmic Realm</p>
                 </span>
               </div>
             </div>
