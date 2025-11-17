@@ -398,7 +398,7 @@ export default function Index() {
                 href="#experience"
                 className="btn-cosmic"
               >
-                Enter the Experience
+                <p>About Me</p>
               </a>
               <button className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300">
                 Learn More
