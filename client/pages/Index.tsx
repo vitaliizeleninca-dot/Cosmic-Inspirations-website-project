@@ -746,8 +746,11 @@ export default function Index() {
                   <p>Powerful solutions for creators</p>
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  Journey through AI-curated ambient soundscapes that evoke the vastness of space.
-                  Each composition is designed to elevate your consciousness and inspire creative flow.
+                  <p>
+                    Meet the tools I use daily to create content. They help
+                    creators, artists, and media professionals work faster and
+                    more creatively, from video editing to voice synthesis
+                  </p>
                 </p>
               </div>
 
