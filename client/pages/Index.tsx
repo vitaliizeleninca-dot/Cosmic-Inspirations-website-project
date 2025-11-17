@@ -231,6 +231,21 @@ export default function Index() {
     if (savedContactEnabled !== null) {
       setIsContactEnabled(savedContactEnabled !== "false");
     }
+
+    const savedAboutMe = localStorage.getItem("hero-about-me-text");
+    if (savedAboutMe) {
+      setAboutMeText(savedAboutMe);
+    }
+
+    const savedLearnMore = localStorage.getItem("hero-learn-more-text");
+    if (savedLearnMore) {
+      setLearnMoreText(savedLearnMore);
+    }
+
+    const savedHeroModalsEnabled = localStorage.getItem("hero-modals-enabled");
+    if (savedHeroModalsEnabled !== null) {
+      setIsHeroModalsEnabled(savedHeroModalsEnabled !== "false");
+    }
   }, []);
 
   useEffect(() => {
