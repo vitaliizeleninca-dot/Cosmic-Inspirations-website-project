@@ -4,6 +4,7 @@ import { Play, Pause, SkipForward, Music, Podcast, Sparkles, Zap } from "lucide-
 import Footer from "@/components/Footer";
 import ContactModal from "@/components/ContactModal";
 import PlaylistModal from "@/components/PlaylistModal";
+import HeroModal from "@/components/HeroModal";
 
 const DEFAULT_COSMIC_VIDEOS = [
   "https://www.youtube.com/embed/jgpJVI3tDT0",
