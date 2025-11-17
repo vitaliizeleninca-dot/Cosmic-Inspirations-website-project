@@ -623,6 +623,22 @@ export default function Admin() {
     localStorage.setItem("social-links", JSON.stringify(updated));
   };
 
+  const saveHeroAboutMeText = (text: string) => {
+    setHeroAboutMeText(text);
+    localStorage.setItem("hero-about-me-text", text);
+  };
+
+  const saveHeroLearnMoreText = (text: string) => {
+    setHeroLearnMoreText(text);
+    localStorage.setItem("hero-learn-more-text", text);
+  };
+
+  const toggleHeroModalsEnabled = () => {
+    const newValue = !isHeroModalsEnabled;
+    setIsHeroModalsEnabled(newValue);
+    localStorage.setItem("hero-modals-enabled", newValue.toString());
+  };
+
   const saveContactEmail = (email: string) => {
     setContactEmail(email);
     localStorage.setItem("contact-email", email);
