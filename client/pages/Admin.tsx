@@ -832,6 +832,51 @@ export default function Admin() {
                 ))}
               </div>
             </div>
+
+            {/* Hero Modals Section */}
+            <div className="pt-8 border-t border-cosmic-purple/20">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-cosmic-purple">Hero Modals (About Me & Learn More)</h2>
+                <button
+                  onClick={toggleHeroModalsEnabled}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                    isHeroModalsEnabled
+                      ? "text-cosmic-dark bg-gradient-to-r from-cosmic-purple to-cosmic-violet hover:from-cosmic-violet hover:to-cosmic-purple hover:cosmic-glow cursor-pointer"
+                      : "text-gray-400 bg-gray-600 cursor-not-allowed"
+                  }`}
+                >
+                  {isHeroModalsEnabled ? "ON" : "OFF"}
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 gap-6">
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-3">About Me Modal Text</label>
+                  <textarea
+                    value={heroAboutMeText}
+                    onChange={(e) => saveHeroAboutMeText(e.target.value)}
+                    placeholder="Enter the text for the About Me modal window..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition resize-none"
+                    rows={6}
+                    disabled={!isHeroModalsEnabled}
+                  />
+                  <p className="text-xs text-gray-500 mt-2">This text will be displayed when clicking the "About Me" button.</p>
+                </div>
+
+                <div className="bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6">
+                  <label className="block text-sm font-semibold text-cosmic-purple mb-3">Learn More Modal Text</label>
+                  <textarea
+                    value={heroLearnMoreText}
+                    onChange={(e) => saveHeroLearnMoreText(e.target.value)}
+                    placeholder="Enter the text for the Learn More modal window..."
+                    className="w-full px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition resize-none"
+                    rows={6}
+                    disabled={!isHeroModalsEnabled}
+                  />
+                  <p className="text-xs text-gray-500 mt-2">This text will be displayed when clicking the "Learn More" button.</p>
+                </div>
+              </div>
+            </div>
           </TabsContent>
 
           <TabsContent value="links" className="mt-8 space-y-8">
