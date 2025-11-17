@@ -743,7 +743,7 @@ export default function Index() {
                   My AI Tools
                 </h3>
                 <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  Soundscapes & Visualizations
+                  <p>Powerful solutions for creators</p>
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                   Journey through AI-curated ambient soundscapes that evoke the vastness of space.
