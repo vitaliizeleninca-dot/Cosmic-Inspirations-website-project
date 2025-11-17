@@ -422,8 +422,12 @@ export default function Index() {
                 <p>AI Art Podcast</p>
               </h3>
               <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                Explore conversations at the intersection of artificial intelligence and creative expression.
-                Discover how AI is transforming the world of digital art and visual innovation.
+                <p>
+                  Explore conversations at the intersection of artificial
+                  intelligence and creative expression, where legendary
+                  masters come to life with AI avatars, sharing their
+                  voices, ideas, and timeless wisdom
+                </p>
               </p>
             </div>
 
