@@ -415,13 +415,18 @@ export default function Index() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="#experience"
-                className="btn-cosmic"
+              <button
+                onClick={() => isHeroModalsEnabled && setIsAboutMeOpen(true)}
+                disabled={!isHeroModalsEnabled}
+                className="btn-cosmic disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <p>About Me</p>
-              </a>
-              <button className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300">
+              </button>
+              <button
+                onClick={() => isHeroModalsEnabled && setIsLearnMoreOpen(true)}
+                disabled={!isHeroModalsEnabled}
+                className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Learn More
               </button>
             </div>
