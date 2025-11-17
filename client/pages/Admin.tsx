@@ -175,6 +175,21 @@ export default function Admin() {
     };
   });
 
+  const [heroAboutMeText, setHeroAboutMeText] = useState<string>(() => {
+    const saved = localStorage.getItem("hero-about-me-text");
+    return saved ? saved : "";
+  });
+
+  const [heroLearnMoreText, setHeroLearnMoreText] = useState<string>(() => {
+    const saved = localStorage.getItem("hero-learn-more-text");
+    return saved ? saved : "";
+  });
+
+  const [isHeroModalsEnabled, setIsHeroModalsEnabled] = useState<boolean>(() => {
+    const saved = localStorage.getItem("hero-modals-enabled");
+    return saved !== "false"; // Default is true
+  });
+
   const [contactMessages, setContactMessages] = useState<Array<{
     message: string;
     email: string;
