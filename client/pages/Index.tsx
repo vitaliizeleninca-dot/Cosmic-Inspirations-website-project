@@ -822,6 +822,20 @@ export default function Index() {
         playlistType={playlistType}
         playlistSongs={playlistType === "cosmic" ? [] : feelCosmosSongs}
       />
+
+      {/* Hero Modals */}
+      <HeroModal
+        isOpen={isAboutMeOpen}
+        title="About Me"
+        content={aboutMeText}
+        onClose={() => setIsAboutMeOpen(false)}
+      />
+      <HeroModal
+        isOpen={isLearnMoreOpen}
+        title="Learn More"
+        content={learnMoreText}
+        onClose={() => setIsLearnMoreOpen(false)}
+      />
     </div>
   );
 }
