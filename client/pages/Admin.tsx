@@ -1137,9 +1137,9 @@ export default function Admin() {
           </TabsContent>
 
           <TabsContent value="music" className="mt-8 space-y-8">
-            {/* Cosmic Ambient Music Videos Section */}
+            {/* My AI Tools Videos Section */}
             <div>
-              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">Cosmic Ambient Music Videos</h2>
+              <h2 className="text-xl font-bold mb-4 text-cosmic-purple">My AI Tools Videos</h2>
               <div className="grid grid-cols-2 gap-6">
                 {cosmicAmbientVideos.map((url, index) => (
                   <div key={index} className={`bg-cosmic-purple/5 border border-cosmic-purple/30 rounded-2xl p-6 flex flex-col ${activeCosmicAmbientVideosList[index] ? "" : "opacity-50"}`}>
