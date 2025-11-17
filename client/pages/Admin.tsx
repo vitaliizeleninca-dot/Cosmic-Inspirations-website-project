@@ -791,7 +791,7 @@ export default function Admin() {
               NFT Collections
             </TabsTrigger>
             <TabsTrigger value="music" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
-              Cosmic Ambient Music
+              My AI Tools
             </TabsTrigger>
             <TabsTrigger value="social" className="data-[state=active]:bg-cosmic-purple/30 data-[state=active]:text-cosmic-purple">
               Social Links
