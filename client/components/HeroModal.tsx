@@ -7,7 +7,12 @@ interface HeroModalProps {
   onClose: () => void;
 }
 
-export default function HeroModal({ isOpen, title, content, onClose }: HeroModalProps) {
+export default function HeroModal({
+  isOpen,
+  title,
+  content,
+  onClose,
+}: HeroModalProps) {
   if (!isOpen) return null;
 
   return (

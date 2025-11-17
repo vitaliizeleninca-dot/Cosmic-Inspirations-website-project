@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Play, Pause, SkipForward, Music, Podcast, Sparkles, Zap } from "lucide-react";
+import {
+  Play,
+  Pause,
+  SkipForward,
+  Music,
+  Podcast,
+  Sparkles,
+  Zap,
+} from "lucide-react";
 import Footer from "@/components/Footer";
 import ContactModal from "@/components/ContactModal";
 import PlaylistModal from "@/components/PlaylistModal";
@@ -10,7 +18,7 @@ const DEFAULT_COSMIC_VIDEOS = [
   "https://www.youtube.com/embed/jgpJVI3tDT0",
   "https://www.youtube.com/embed/1La4QzGeaaQ",
   "https://www.youtube.com/embed/TqOneWeDtFI",
-  "https://www.youtube.com/embed/lFcSrYw-ARY"
+  "https://www.youtube.com/embed/lFcSrYw-ARY",
 ];
 
 const DEFAULT_PLAYLIST_VIDEOS = ["", "", "", ""];
@@ -21,28 +29,82 @@ export default function Index() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isContactEnabled, setIsContactEnabled] = useState(true);
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
-  const [playlistType, setPlaylistType] = useState<"cosmic" | "feelCosmos">("cosmic");
+  const [playlistType, setPlaylistType] = useState<"cosmic" | "feelCosmos">(
+    "cosmic",
+  );
   const [selectedBackground, setSelectedBackground] = useState<string>("");
-  const [cosmicVideos, setCosmicVideos] = useState<string[]>(DEFAULT_COSMIC_VIDEOS);
-  const [playlistVideos, setPlaylistVideos] = useState<string[]>(DEFAULT_PLAYLIST_VIDEOS);
-  const [feelCosmosVideos, setFeelCosmosVideos] = useState<string[]>(DEFAULT_PLAYLIST_VIDEOS);
-  const [feelCosmosSongs, setFeelCosmosSongs] = useState<Array<{ title: string; url: string }>>([]);
-  const [activeCosmicVideosList, setActiveCosmicVideosList] = useState<boolean[]>([true, true, true, true]);
-  const [activePlaylistVideos, setActivePlaylistVideos] = useState<boolean>(true);
+  const [cosmicVideos, setCosmicVideos] = useState<string[]>(
+    DEFAULT_COSMIC_VIDEOS,
+  );
+  const [playlistVideos, setPlaylistVideos] = useState<string[]>(
+    DEFAULT_PLAYLIST_VIDEOS,
+  );
+  const [feelCosmosVideos, setFeelCosmosVideos] = useState<string[]>(
+    DEFAULT_PLAYLIST_VIDEOS,
+  );
+  const [feelCosmosSongs, setFeelCosmosSongs] = useState<
+    Array<{ title: string; url: string }>
+  >([]);
+  const [activeCosmicVideosList, setActiveCosmicVideosList] = useState<
+    boolean[]
+  >([true, true, true, true]);
+  const [activePlaylistVideos, setActivePlaylistVideos] =
+    useState<boolean>(true);
   const [activePlaylistSongs, setActivePlaylistSongs] = useState<boolean>(true);
-  const [activeFeelCosmosVideosList, setActiveFeelCosmosVideosList] = useState<boolean[]>([true, true, true, true]);
-  const [activeFeelCosmosSongs, setActiveFeelCosmosSongs] = useState<boolean>(true);
-  const [podcastVideos, setPodcastVideos] = useState<string[]>(["", "", "", ""]);
-  const [activePodcastVideosList, setActivePodcastVideosList] = useState<boolean[]>([true, true, true, true]);
+  const [activeFeelCosmosVideosList, setActiveFeelCosmosVideosList] = useState<
+    boolean[]
+  >([true, true, true, true]);
+  const [activeFeelCosmosSongs, setActiveFeelCosmosSongs] =
+    useState<boolean>(true);
+  const [podcastVideos, setPodcastVideos] = useState<string[]>([
+    "",
+    "",
+    "",
+    "",
+  ]);
+  const [activePodcastVideosList, setActivePodcastVideosList] = useState<
+    boolean[]
+  >([true, true, true, true]);
   const [nftVideos, setNftVideos] = useState<string[]>(["", "", "", ""]);
-  const [activeNftVideosList, setActiveNftVideosList] = useState<boolean[]>([true, true, true, true]);
-  const [nftCollections, setNftCollections] = useState<string[]>(["", "", "", "", "", ""]);
-  const [nftCollectionImages, setNftCollectionImages] = useState<(string | null)[]>([null, null, null, null, null, null]);
-  const [nftCollectionCustomImages, setNftCollectionCustomImages] = useState<string[]>(["", "", "", "", "", ""]);
-  const [nftCollectionNames, setNftCollectionNames] = useState<string[]>(["", "", "", "", "", ""]);
-  const [activeNftCollectionsList, setActiveNftCollectionsList] = useState<boolean[]>([true, true, true, true, true, true]);
-  const [cosmicAmbientVideos, setCosmicAmbientVideos] = useState<string[]>(["", "", "", ""]);
-  const [activeCosmicAmbientVideosList, setActiveCosmicAmbientVideosList] = useState<boolean[]>([false, false, false, false]);
+  const [activeNftVideosList, setActiveNftVideosList] = useState<boolean[]>([
+    true,
+    true,
+    true,
+    true,
+  ]);
+  const [nftCollections, setNftCollections] = useState<string[]>([
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  const [nftCollectionImages, setNftCollectionImages] = useState<
+    (string | null)[]
+  >([null, null, null, null, null, null]);
+  const [nftCollectionCustomImages, setNftCollectionCustomImages] = useState<
+    string[]
+  >(["", "", "", "", "", ""]);
+  const [nftCollectionNames, setNftCollectionNames] = useState<string[]>([
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  const [activeNftCollectionsList, setActiveNftCollectionsList] = useState<
+    boolean[]
+  >([true, true, true, true, true, true]);
+  const [cosmicAmbientVideos, setCosmicAmbientVideos] = useState<string[]>([
+    "",
+    "",
+    "",
+    "",
+  ]);
+  const [activeCosmicAmbientVideosList, setActiveCosmicAmbientVideosList] =
+    useState<boolean[]>([false, false, false, false]);
   const [aboutMeText, setAboutMeText] = useState<string>("");
   const [learnMoreText, setLearnMoreText] = useState<string>("");
   const [isAboutMeOpen, setIsAboutMeOpen] = useState<boolean>(false);
@@ -56,7 +118,7 @@ export default function Index() {
         const parsed = JSON.parse(saved);
         // Only use non-empty URLs, fallback to defaults for empty ones
         const videos = parsed.map((url: string, index: number) =>
-          url.trim() ? convertToEmbedUrl(url) : DEFAULT_COSMIC_VIDEOS[index]
+          url.trim() ? convertToEmbedUrl(url) : DEFAULT_COSMIC_VIDEOS[index],
         );
         setCosmicVideos(videos);
       } catch (e) {
@@ -68,9 +130,9 @@ export default function Index() {
     if (savedPlaylist) {
       try {
         const parsed = JSON.parse(savedPlaylist);
-        const videos = parsed.map((url: string) =>
-          url.trim() ? convertToEmbedUrl(url) : ""
-        ).filter((url: string) => url);
+        const videos = parsed
+          .map((url: string) => (url.trim() ? convertToEmbedUrl(url) : ""))
+          .filter((url: string) => url);
         setPlaylistVideos(videos);
       } catch (e) {
         setPlaylistVideos(DEFAULT_PLAYLIST_VIDEOS);
@@ -81,9 +143,9 @@ export default function Index() {
     if (savedFeelCosmosVideos) {
       try {
         const parsed = JSON.parse(savedFeelCosmosVideos);
-        const videos = parsed.map((url: string) =>
-          url.trim() ? convertToEmbedUrl(url) : ""
-        ).filter((url: string) => url);
+        const videos = parsed
+          .map((url: string) => (url.trim() ? convertToEmbedUrl(url) : ""))
+          .filter((url: string) => url);
         setFeelCosmosVideos(videos);
       } catch (e) {
         setFeelCosmosVideos(DEFAULT_PLAYLIST_VIDEOS);
@@ -100,27 +162,39 @@ export default function Index() {
       }
     }
 
-    const savedCosmicVideosListActive = localStorage.getItem("cosmic-videos-list-active");
+    const savedCosmicVideosListActive = localStorage.getItem(
+      "cosmic-videos-list-active",
+    );
     if (savedCosmicVideosListActive) {
       setActiveCosmicVideosList(JSON.parse(savedCosmicVideosListActive));
     }
 
-    const savedPlaylistVideosActive = localStorage.getItem("playlist-videos-active");
+    const savedPlaylistVideosActive = localStorage.getItem(
+      "playlist-videos-active",
+    );
     if (savedPlaylistVideosActive) {
       setActivePlaylistVideos(JSON.parse(savedPlaylistVideosActive));
     }
 
-    const savedPlaylistSongsActive = localStorage.getItem("playlist-songs-active");
+    const savedPlaylistSongsActive = localStorage.getItem(
+      "playlist-songs-active",
+    );
     if (savedPlaylistSongsActive) {
       setActivePlaylistSongs(JSON.parse(savedPlaylistSongsActive));
     }
 
-    const savedFeelCosmosVideosListActive = localStorage.getItem("feel-cosmos-videos-list-active");
+    const savedFeelCosmosVideosListActive = localStorage.getItem(
+      "feel-cosmos-videos-list-active",
+    );
     if (savedFeelCosmosVideosListActive) {
-      setActiveFeelCosmosVideosList(JSON.parse(savedFeelCosmosVideosListActive));
+      setActiveFeelCosmosVideosList(
+        JSON.parse(savedFeelCosmosVideosListActive),
+      );
     }
 
-    const savedFeelCosmosSongsActive = localStorage.getItem("feel-cosmos-songs-active");
+    const savedFeelCosmosSongsActive = localStorage.getItem(
+      "feel-cosmos-songs-active",
+    );
     if (savedFeelCosmosSongsActive) {
       setActiveFeelCosmosSongs(JSON.parse(savedFeelCosmosSongsActive));
     }
@@ -130,7 +204,7 @@ export default function Index() {
       try {
         const parsed = JSON.parse(savedPodcastVideos);
         const videos = parsed.map((url: string) =>
-          url.trim() ? convertToEmbedUrl(url) : ""
+          url.trim() ? convertToEmbedUrl(url) : "",
         );
         setPodcastVideos(videos);
       } catch (e) {
@@ -138,7 +212,9 @@ export default function Index() {
       }
     }
 
-    const savedPodcastVideosListActive = localStorage.getItem("podcast-videos-list-active");
+    const savedPodcastVideosListActive = localStorage.getItem(
+      "podcast-videos-list-active",
+    );
     if (savedPodcastVideosListActive) {
       setActivePodcastVideosList(JSON.parse(savedPodcastVideosListActive));
     }
@@ -148,7 +224,7 @@ export default function Index() {
       try {
         const parsed = JSON.parse(savedNftVideos);
         const videos = parsed.map((url: string) =>
-          url.trim() ? convertToEmbedUrl(url) : ""
+          url.trim() ? convertToEmbedUrl(url) : "",
         );
         setNftVideos(videos);
       } catch (e) {
@@ -156,7 +232,9 @@ export default function Index() {
       }
     }
 
-    const savedNftVideosListActive = localStorage.getItem("nft-videos-list-active");
+    const savedNftVideosListActive = localStorage.getItem(
+      "nft-videos-list-active",
+    );
     if (savedNftVideosListActive) {
       setActiveNftVideosList(JSON.parse(savedNftVideosListActive));
     }
@@ -173,7 +251,9 @@ export default function Index() {
       }
     }
 
-    const savedNftCollectionCustomImages = localStorage.getItem("nft-collection-custom-images");
+    const savedNftCollectionCustomImages = localStorage.getItem(
+      "nft-collection-custom-images",
+    );
     if (savedNftCollectionCustomImages) {
       try {
         const parsed = JSON.parse(savedNftCollectionCustomImages);
@@ -185,12 +265,16 @@ export default function Index() {
       }
     }
 
-    const savedActiveNftCollectionsList = localStorage.getItem("nft-collections-list-active");
+    const savedActiveNftCollectionsList = localStorage.getItem(
+      "nft-collections-list-active",
+    );
     if (savedActiveNftCollectionsList) {
       setActiveNftCollectionsList(JSON.parse(savedActiveNftCollectionsList));
     }
 
-    const savedNftCollectionNames = localStorage.getItem("nft-collection-names");
+    const savedNftCollectionNames = localStorage.getItem(
+      "nft-collection-names",
+    );
     if (savedNftCollectionNames) {
       try {
         const parsed = JSON.parse(savedNftCollectionNames);
@@ -202,13 +286,15 @@ export default function Index() {
       }
     }
 
-    const savedCosmicAmbientVideos = localStorage.getItem("cosmic-ambient-videos");
+    const savedCosmicAmbientVideos = localStorage.getItem(
+      "cosmic-ambient-videos",
+    );
     if (savedCosmicAmbientVideos) {
       try {
         const parsed = JSON.parse(savedCosmicAmbientVideos);
         if (Array.isArray(parsed) && parsed.length > 0) {
           const videos = parsed.map((url: string) =>
-            url.trim() ? convertToEmbedUrl(url) : ""
+            url.trim() ? convertToEmbedUrl(url) : "",
           );
           setCosmicAmbientVideos(videos);
         }
@@ -217,9 +303,13 @@ export default function Index() {
       }
     }
 
-    const savedCosmicAmbientActiveList = localStorage.getItem("cosmic-ambient-videos-list-active");
+    const savedCosmicAmbientActiveList = localStorage.getItem(
+      "cosmic-ambient-videos-list-active",
+    );
     if (savedCosmicAmbientActiveList) {
-      setActiveCosmicAmbientVideosList(JSON.parse(savedCosmicAmbientActiveList));
+      setActiveCosmicAmbientVideosList(
+        JSON.parse(savedCosmicAmbientActiveList),
+      );
     }
 
     const savedBg = localStorage.getItem("selected-background");
@@ -259,7 +349,9 @@ export default function Index() {
         }
 
         try {
-          const response = await fetch(`/api/opensea-collection?url=${encodeURIComponent(url)}`);
+          const response = await fetch(
+            `/api/opensea-collection?url=${encodeURIComponent(url)}`,
+          );
           if (response.ok) {
             const data = await response.json();
             images.push(data.imageUrl || null);
@@ -282,7 +374,7 @@ export default function Index() {
     if (selectedBackground) {
       document.documentElement.style.setProperty(
         "--bg-image-url",
-        `url('${selectedBackground}')`
+        `url('${selectedBackground}')`,
       );
       document.documentElement.style.backgroundImage = `url('${selectedBackground}')`;
       document.documentElement.style.backgroundSize = "cover";
@@ -361,7 +453,9 @@ export default function Index() {
               My AI Tools
             </a>
           </nav>
-          <div className={`flex items-center gap-4 transition-opacity duration-300 ${!isContactEnabled ? "opacity-40" : ""}`}>
+          <div
+            className={`flex items-center gap-4 transition-opacity duration-300 ${!isContactEnabled ? "opacity-40" : ""}`}
+          >
             <div className="w-px h-6 bg-cosmic-purple/20" />
             <button
               onClick={() => isContactEnabled && setIsContactModalOpen(true)}
@@ -408,9 +502,8 @@ export default function Index() {
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
               <p>
                 Where artificial intelligence meets creative vision. Explore
-                cutting-edge digital art, immersive experiences, and
-                exclusive NFT collections crafted at the frontier of
-                technology
+                cutting-edge digital art, immersive experiences, and exclusive
+                NFT collections crafted at the frontier of technology
               </p>
             </p>
 
@@ -450,40 +543,41 @@ export default function Index() {
               <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                 <p>
                   Explore conversations at the intersection of artificial
-                  intelligence and creative expression, where legendary
-                  masters come to life with AI avatars, sharing their
-                  voices, ideas, and timeless wisdom
+                  intelligence and creative expression, where legendary masters
+                  come to life with AI avatars, sharing their voices, ideas, and
+                  timeless wisdom
                 </p>
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              {podcastVideos.map((url, index) => (
-                activePodcastVideosList[index] && url && (
-                  <div
-                    key={index}
-                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={url}
-                      title={`AI Art Podcast Episode ${index + 1}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
-                )
-              ))}
+              {podcastVideos.map(
+                (url, index) =>
+                  activePodcastVideosList[index] &&
+                  url && (
+                    <div
+                      key={index}
+                      className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
+                    >
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={url}
+                        title={`AI Art Podcast Episode ${index + 1}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                      />
+                    </div>
+                  ),
+              )}
             </div>
-
           </div>
         </section>
 
         {/* Cosmic Ambient Music Player Section */}
-        {activeCosmicVideosList.some(v => v) && (
+        {activeCosmicVideosList.some((v) => v) && (
           <section
             id="music"
             className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
@@ -494,43 +588,41 @@ export default function Index() {
 
             <div className="relative z-10 w-full max-w-6xl">
               <div className="text-center mb-16">
-                <h3 className="text-5xl font-bold mb-4">
-                  Cosmic Ambient
-                </h3>
+                <h3 className="text-5xl font-bold mb-4">Cosmic Ambient</h3>
                 <p className="text-cosmic-purple text-lg font-semibold mb-4">
                   <p>40-Min Tracks</p>
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                   <p>
-                    Journey through AI-curated ambient soundscapes that
-                    evoke the vastness of space. Each composition is
-                    designed to elevate your consciousness and inspire
-                    creative flow. From Deep Focus &amp; Productivity to
-                    Sleep &amp; Meditation
+                    Journey through AI-curated ambient soundscapes that evoke
+                    the vastness of space. Each composition is designed to
+                    elevate your consciousness and inspire creative flow. From
+                    Deep Focus &amp; Productivity to Sleep &amp; Meditation
                   </p>
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                {cosmicVideos.map((url, index) => (
-                  activeCosmicVideosList[index] && (
-                    <div
-                      key={index}
-                      className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block"
-                    >
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={url}
-                        title={`Cosmic Ambient Visualization ${index + 1}`}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-full"
-                      />
-                    </div>
-                  )
-                ))}
+                {cosmicVideos.map(
+                  (url, index) =>
+                    activeCosmicVideosList[index] && (
+                      <div
+                        key={index}
+                        className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block"
+                      >
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={url}
+                          title={`Cosmic Ambient Visualization ${index + 1}`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                        />
+                      </div>
+                    ),
+                )}
               </div>
 
               <div className="text-center">
@@ -549,7 +641,8 @@ export default function Index() {
         )}
 
         {/* Feel the Cosmos Interactive Experience Section */}
-        {(activeFeelCosmosVideosList.some(v => v) || activeFeelCosmosSongs) && (
+        {(activeFeelCosmosVideosList.some((v) => v) ||
+          activeFeelCosmosSongs) && (
           <section
             id="experience"
             className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
@@ -560,9 +653,7 @@ export default function Index() {
 
             <div className="relative z-10 max-w-6xl w-full">
               <div className="text-center mb-16">
-                <h3 className="text-5xl font-bold mb-4">
-                  Feel the Cosmos
-                </h3>
+                <h3 className="text-5xl font-bold mb-4">Feel the Cosmos</h3>
                 <p className="text-cosmic-purple text-lg font-semibold mb-4">
                   <p style={{ textAlign: "center" }}>40-Min Tracks</p>
                 </p>
@@ -570,36 +661,37 @@ export default function Index() {
                   <p>
                     Step into an interactive universe where art, sound, and
                     technology converge. Explore immersive AI-generated
-                    soundscapes inspired by the world's cultural centers.
-                    Young women in luxurious costumes appear against
-                    futuristic cosmic landscapes
+                    soundscapes inspired by the world's cultural centers. Young
+                    women in luxurious costumes appear against futuristic cosmic
+                    landscapes
                   </p>
                 </p>
               </div>
 
               {/* Feel the Cosmos Videos */}
-              {activeFeelCosmosVideosList.some(v => v) && (
+              {activeFeelCosmosVideosList.some((v) => v) && (
                 <div className="mb-12">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                    {feelCosmosVideos.map((url, index) => (
-                      activeFeelCosmosVideosList[index] && (
-                        <div
-                          key={index}
-                          className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
-                        >
-                          <iframe
-                            width="100%"
-                            height="100%"
-                            src={url}
-                            title={`Feel the Cosmos Video ${index + 1}`}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            className="w-full h-full"
-                          />
-                        </div>
-                      )
-                    ))}
+                    {feelCosmosVideos.map(
+                      (url, index) =>
+                        activeFeelCosmosVideosList[index] && (
+                          <div
+                            key={index}
+                            className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
+                          >
+                            <iframe
+                              width="100%"
+                              height="100%"
+                              src={url}
+                              title={`Feel the Cosmos Video ${index + 1}`}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              className="w-full h-full"
+                            />
+                          </div>
+                        ),
+                    )}
                   </div>
                   <div className="text-center">
                     <button
@@ -614,7 +706,6 @@ export default function Index() {
                   </div>
                 </div>
               )}
-
             </div>
           </section>
         )}
@@ -629,7 +720,7 @@ export default function Index() {
           </div>
 
           <div className="relative z-10 max-w-6xl w-full">
-            {activeNftVideosList.some(v => v) && nftVideos.some(v => v) && (
+            {activeNftVideosList.some((v) => v) && nftVideos.some((v) => v) && (
               <div className="mb-16">
                 <div className="text-center mb-12">
                   <h3 className="text-5xl font-bold mb-4">
@@ -645,45 +736,44 @@ export default function Index() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                  {nftVideos.map((url, index) => (
-                    activeNftVideosList[index] && url && (
-                      <div
-                        key={index}
-                        className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
-                      >
-                        <iframe
-                          width="100%"
-                          height="100%"
-                          src={url}
-                          title={`NFT Collection Video ${index + 1}`}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          className="w-full h-full"
-                        />
-                      </div>
-                    )
-                  ))}
+                  {nftVideos.map(
+                    (url, index) =>
+                      activeNftVideosList[index] &&
+                      url && (
+                        <div
+                          key={index}
+                          className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
+                        >
+                          <iframe
+                            width="100%"
+                            height="100%"
+                            src={url}
+                            title={`NFT Collection Video ${index + 1}`}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="w-full h-full"
+                          />
+                        </div>
+                      ),
+                  )}
                 </div>
               </div>
             )}
 
             <div>
               <div className="text-center mb-16">
-                <h3 className="text-5xl font-bold mb-4">
-                  NFT Collections
-                </h3>
+                <h3 className="text-5xl font-bold mb-4">NFT Collections</h3>
                 <p className="text-cosmic-purple text-lg font-semibold mb-4">
                   Legendary Digital Artifacts
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
                   <p>
                     <p>
-                      Discover my portfolio of high-fidelity digital art
-                      where AI and human imagination converge. Showcasing
-                      diverse styles and aesthetics, open for potential
-                      commissions. For custom collaborations, send a
-                      message via Contact Me
+                      Discover my portfolio of high-fidelity digital art where
+                      AI and human imagination converge. Showcasing diverse
+                      styles and aesthetics, open for potential commissions. For
+                      custom collaborations, send a message via Contact Me
                     </p>
                   </p>
                 </p>
@@ -691,7 +781,11 @@ export default function Index() {
 
               <div className="grid grid-cols-2 gap-8">
                 {nftCollections.map((url, index) => {
-                  const isValidUrl = url && (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("/"));
+                  const isValidUrl =
+                    url &&
+                    (url.startsWith("http://") ||
+                      url.startsWith("https://") ||
+                      url.startsWith("/"));
                   return isValidUrl && activeNftCollectionsList[index] ? (
                     <a
                       key={index}
@@ -700,50 +794,65 @@ export default function Index() {
                       rel="noopener noreferrer"
                       className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer"
                     >
-                      {nftCollectionCustomImages[index] || nftCollectionImages[index] ? (
-                        (() => {
-                          const src = nftCollectionCustomImages[index] || nftCollectionImages[index];
-                          const isVideo = src && (
-                            src.startsWith("data:video/") ||
-                            src.startsWith("data:application/octet-stream") ||
-                            src.endsWith(".mp4") ||
-                            src.endsWith(".webm")
-                          );
-                          const isGif = src && (src.startsWith("data:image/gif") || src.endsWith(".gif"));
+                      {nftCollectionCustomImages[index] ||
+                      nftCollectionImages[index]
+                        ? (() => {
+                            const src =
+                              nftCollectionCustomImages[index] ||
+                              nftCollectionImages[index];
+                            const isVideo =
+                              src &&
+                              (src.startsWith("data:video/") ||
+                                src.startsWith(
+                                  "data:application/octet-stream",
+                                ) ||
+                                src.endsWith(".mp4") ||
+                                src.endsWith(".webm"));
+                            const isGif =
+                              src &&
+                              (src.startsWith("data:image/gif") ||
+                                src.endsWith(".gif"));
 
-                          if (isVideo) {
+                            if (isVideo) {
+                              return (
+                                <video
+                                  src={src}
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                  autoPlay
+                                  muted
+                                  loop
+                                  playsInline
+                                  onError={(e) => {
+                                    (
+                                      e.target as HTMLVideoElement
+                                    ).style.display = "none";
+                                  }}
+                                />
+                              );
+                            }
+
                             return (
-                              <video
+                              <img
                                 src={src}
+                                alt={`NFT Collection ${index + 1}`}
                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
                                 onError={(e) => {
-                                  (e.target as HTMLVideoElement).style.display = 'none';
+                                  (e.target as HTMLImageElement).style.display =
+                                    "none";
                                 }}
                               />
                             );
-                          }
-
-                          return (
-                            <img
-                              src={src}
-                              alt={`NFT Collection ${index + 1}`}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).style.display = 'none';
-                              }}
-                            />
-                          );
-                        })()
-                      ) : null}
+                          })()
+                        : null}
                       <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-6 px-4">
                         {nftCollectionNames[index] && (
-                          <p className="text-gray-100 font-semibold text-center mb-2">{nftCollectionNames[index]}</p>
+                          <p className="text-gray-100 font-semibold text-center mb-2">
+                            {nftCollectionNames[index]}
+                          </p>
                         )}
-                        <span className="text-gray-300 text-sm">View Collection</span>
+                        <span className="text-gray-300 text-sm">
+                          View Collection
+                        </span>
                       </div>
                     </a>
                   ) : null;
@@ -754,7 +863,7 @@ export default function Index() {
         </section>
 
         {/* My AI Tools Videos Section */}
-        {activeCosmicAmbientVideosList.some(v => v) && (
+        {activeCosmicAmbientVideosList.some((v) => v) && (
           <section
             id="my-ai-tools"
             className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
@@ -765,9 +874,7 @@ export default function Index() {
 
             <div className="relative z-10 w-full max-w-6xl">
               <div className="text-center mb-16">
-                <h3 className="text-5xl font-bold mb-4">
-                  My AI Tools
-                </h3>
+                <h3 className="text-5xl font-bold mb-4">My AI Tools</h3>
                 <p className="text-cosmic-purple text-lg font-semibold mb-4">
                   <p>Powerful solutions for creators</p>
                 </p>
@@ -781,25 +888,27 @@ export default function Index() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                {cosmicAmbientVideos.map((url, index) => (
-                  activeCosmicAmbientVideosList[index] && url && (
-                    <div
-                      key={index}
-                      className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block"
-                    >
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={url}
-                        title={`My AI Tools ${index + 1}`}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-full"
-                      />
-                    </div>
-                  )
-                ))}
+                {cosmicAmbientVideos.map(
+                  (url, index) =>
+                    activeCosmicAmbientVideosList[index] &&
+                    url && (
+                      <div
+                        key={index}
+                        className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow block"
+                      >
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={url}
+                          title={`My AI Tools ${index + 1}`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                        />
+                      </div>
+                    ),
+                )}
               </div>
             </div>
           </section>
