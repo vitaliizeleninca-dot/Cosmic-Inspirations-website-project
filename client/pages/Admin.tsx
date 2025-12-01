@@ -9,7 +9,7 @@ import {
   Music,
   Podcast,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import PasswordModal from "@/components/PasswordModal";
 
