@@ -1368,15 +1368,18 @@ export default function Admin() {
                           Custom Image (Upload or URL)
                         </label>
                         <div className="flex flex-col gap-3">
-                          <input
-                            type="file"
-                            accept="image/*,video/mp4,video/webm,.gif"
-                            onChange={(e) =>
-                              handleNftCollectionImageUpload(index, e)
-                            }
-                            className="px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 text-xs focus:outline-none focus:border-cosmic-purple transition cursor-pointer file:mr-3 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cosmic-purple/30 file:text-cosmic-purple file:cursor-pointer"
-                            disabled={!activeNftCollectionsList[index]}
-                          />
+                          <div className="relative">
+                            <label className="block text-xs text-gray-500 mb-1">Choose file</label>
+                            <input
+                              type="file"
+                              accept="image/*,video/mp4,video/webm,.gif"
+                              onChange={(e) =>
+                                handleNftCollectionImageUpload(index, e)
+                              }
+                              className="px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 text-xs focus:outline-none focus:border-cosmic-purple transition cursor-pointer file:mr-3 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cosmic-purple/30 file:text-cosmic-purple file:cursor-pointer"
+                              disabled={!activeNftCollectionsList[index]}
+                            />
+                          </div>
                           <input
                             type="text"
                             value={nftCollectionCustomImages[index]}
