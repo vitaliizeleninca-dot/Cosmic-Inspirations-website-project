@@ -1392,6 +1392,11 @@ export default function Admin() {
                               className="px-3 py-2 rounded bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 text-xs focus:outline-none focus:border-cosmic-purple transition cursor-pointer file:mr-3 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-cosmic-purple/30 file:text-cosmic-purple file:cursor-pointer"
                               disabled={!activeNftCollectionsList[index]}
                             />
+                            <p className="text-xs text-gray-600 mt-1">
+                              {nftCollectionSelectedFiles[index]
+                                ? `File selected: ${nftCollectionSelectedFiles[index]}`
+                                : "No file selected"}
+                            </p>
                           </div>
                           <input
                             type="text"
