@@ -857,7 +857,12 @@ export default function Admin() {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = event.target.files?.[0];
-    if (!file) return;
+    if (!file) {
+      const newSelectedFiles = [...nftCollectionSelectedFiles];
+      newSelectedFiles[index] = "";
+      setNftCollectionSelectedFiles(newSelectedFiles);
+      return;
+    }
 
     const isImage = file.type.startsWith("image/");
     const isVideo =
@@ -884,6 +889,10 @@ export default function Admin() {
     }
 
     setUploadError("");
+
+    const newSelectedFiles = [...nftCollectionSelectedFiles];
+    newSelectedFiles[index] = file.name;
+    setNftCollectionSelectedFiles(newSelectedFiles);
 
     const reader = new FileReader();
     reader.onload = (e) => {
