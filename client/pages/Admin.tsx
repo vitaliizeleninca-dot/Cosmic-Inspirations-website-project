@@ -1382,7 +1382,9 @@ export default function Admin() {
                         </label>
                         <div className="flex flex-col gap-3">
                           <div className="relative">
-                            <label className="block text-xs text-gray-500 mb-1">Choose file</label>
+                            <label className="block text-xs text-gray-500 mb-1">
+                              Choose file
+                            </label>
                             <input
                               type="file"
                               accept="image/*,video/mp4,video/webm,.gif"

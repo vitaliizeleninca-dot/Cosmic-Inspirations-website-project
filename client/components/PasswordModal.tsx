@@ -46,11 +46,11 @@ export default function PasswordModal({
               <Lock className="w-6 h-6 text-cosmic-purple" />
             </div>
           </div>
-          
+
           <h2 className="text-2xl font-bold text-center text-cosmic-purple mb-2">
             Welcome to Cosmic Hub
           </h2>
-          
+
           <p className="text-center text-gray-400 mb-6">
             Enter the password to access the Cosmic Hub
           </p>
