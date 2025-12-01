@@ -51,10 +51,38 @@ const DEFAULT_AMBIENT_TRACKS: AmbientTrack[] = [
 
 const STORAGE_KEY = "cosmic-playlist-tracks";
 const AMBIENT_STORAGE_KEY = "cosmic-ambient-tracks";
+const ADMIN_PASSWORD = "2986";
+const ADMIN_AUTH_KEY = "cosmic-admin-auth";
 
 interface AdminPageProps {}
 
 export default function Admin() {
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+  const [adminErrorMessage, setAdminErrorMessage] = useState("");
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    const savedAuth = localStorage.getItem(ADMIN_AUTH_KEY);
+    if (savedAuth === "true") {
+      setIsAdminAuthenticated(true);
+    }
+    setIsCheckingAuth(false);
+  }, []);
+
+  const handleAdminPasswordSubmit = (password: string) => {
+    if (password === ADMIN_PASSWORD) {
+      setIsAdminAuthenticated(true);
+      localStorage.setItem(ADMIN_AUTH_KEY, "true");
+      setAdminErrorMessage("");
+    } else {
+      setAdminErrorMessage("Incorrect password. Please try again.");
+    }
+  };
+
+  const handleAdminCancel = () => {
+    setAdminErrorMessage("");
+  };
+
   const [tracks, setTracks] = useState<Track[]>([]);
   const [bulkTracks, setBulkTracks] = useState<
     Array<{ title: string; url: string }>
