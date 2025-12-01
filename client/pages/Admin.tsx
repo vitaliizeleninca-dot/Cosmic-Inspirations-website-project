@@ -197,6 +197,10 @@ export default function Admin() {
     return saved ? JSON.parse(saved) : ["", "", "", "", "", ""];
   });
 
+  const [nftCollectionSelectedFiles, setNftCollectionSelectedFiles] = useState<
+    string[]
+  >(["", "", "", "", "", ""]);
+
   const [activeNftCollectionsList, setActiveNftCollectionsList] = useState<
     boolean[]
   >(() => {
