@@ -52,7 +52,6 @@ const DEFAULT_AMBIENT_TRACKS: AmbientTrack[] = [
 const STORAGE_KEY = "cosmic-playlist-tracks";
 const AMBIENT_STORAGE_KEY = "cosmic-ambient-tracks";
 const ADMIN_PASSWORD = "2986";
-const ADMIN_AUTH_KEY = "cosmic-admin-auth";
 
 interface AdminPageProps {}
 
