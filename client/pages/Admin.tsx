@@ -903,6 +903,21 @@ export default function Admin() {
     reader.readAsDataURL(file);
   };
 
+  if (isCheckingAuth) {
+    return null;
+  }
+
+  if (!isAdminAuthenticated) {
+    return (
+      <PasswordModal
+        isOpen={true}
+        onSubmit={handleAdminPasswordSubmit}
+        onCancel={handleAdminCancel}
+        errorMessage={adminErrorMessage}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-cosmic-dark text-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
