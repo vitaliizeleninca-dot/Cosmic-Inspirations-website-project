@@ -57,22 +57,13 @@ const ADMIN_AUTH_KEY = "cosmic-admin-auth";
 interface AdminPageProps {}
 
 export default function Admin() {
+  const navigate = useNavigate();
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
   const [adminErrorMessage, setAdminErrorMessage] = useState("");
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-
-  useEffect(() => {
-    const savedAuth = localStorage.getItem(ADMIN_AUTH_KEY);
-    if (savedAuth === "true") {
-      setIsAdminAuthenticated(true);
-    }
-    setIsCheckingAuth(false);
-  }, []);
 
   const handleAdminPasswordSubmit = (password: string) => {
     if (password === ADMIN_PASSWORD) {
       setIsAdminAuthenticated(true);
-      localStorage.setItem(ADMIN_AUTH_KEY, "true");
       setAdminErrorMessage("");
     } else {
       setAdminErrorMessage("Incorrect password. Please try again.");
@@ -80,7 +71,7 @@ export default function Admin() {
   };
 
   const handleAdminCancel = () => {
-    setAdminErrorMessage("");
+    navigate("/");
   };
 
   const [tracks, setTracks] = useState<Track[]>([]);
