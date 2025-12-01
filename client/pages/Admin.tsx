@@ -894,10 +894,6 @@ export default function Admin() {
     reader.readAsDataURL(file);
   };
 
-  if (isCheckingAuth) {
-    return null;
-  }
-
   if (!isAdminAuthenticated) {
     return (
       <PasswordModal
