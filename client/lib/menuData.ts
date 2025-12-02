@@ -36,28 +36,28 @@ export interface MenuData {
 // Simple YAML parser for our specific structure
 function parseYaml(yaml: string): MenuData {
   try {
-    const lines = yaml.split('\n').filter(l => l.trim());
+    const lines = yaml.split("\n").filter((l) => l.trim());
     let result: any = {
       podcast_videos: [],
       cosmic_ambient_videos: [],
       feel_cosmos_videos: [],
       nft_videos: [],
       nft_collections: [],
-      social_links: {}
+      social_links: {},
     };
 
-    let currentSection = '';
+    let currentSection = "";
     let currentItem: any = {};
     let currentList: any[] = [];
 
     for (const line of lines) {
       const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith('#')) continue;
+      if (!trimmed || trimmed.startsWith("#")) continue;
 
       const indent = line.length - line.trimStart().length;
 
       // Section headers (no indent)
-      if (indent === 0 && trimmed.endsWith(':')) {
+      if (indent === 0 && trimmed.endsWith(":")) {
         if (currentItem && currentList) {
           currentList.push(currentItem);
         }
@@ -71,22 +71,22 @@ function parseYaml(yaml: string): MenuData {
       }
 
       // List items (2 spaces)
-      if (indent === 2 && trimmed.startsWith('- ')) {
+      if (indent === 2 && trimmed.startsWith("- ")) {
         if (currentItem && Object.keys(currentItem).length > 0) {
           currentList.push(currentItem);
         }
         currentItem = {};
-        const kv = trimmed.slice(2).split(':');
+        const kv = trimmed.slice(2).split(":");
         const key = kv[0].trim();
-        const value = kv.slice(1).join(':').trim();
+        const value = kv.slice(1).join(":").trim();
         currentItem[key] = parseValue(value);
         continue;
       }
 
       // Object properties (4 spaces for list items, 2 spaces for objects)
-      if ((indent === 4 || indent === 2) && trimmed.includes(':')) {
-        const [key, ...valueParts] = trimmed.split(':');
-        const value = valueParts.join(':').trim();
+      if ((indent === 4 || indent === 2) && trimmed.includes(":")) {
+        const [key, ...valueParts] = trimmed.split(":");
+        const value = valueParts.join(":").trim();
         currentItem[key.trim()] = parseValue(value);
       }
     }
@@ -103,22 +103,22 @@ function parseYaml(yaml: string): MenuData {
 
     return result as MenuData;
   } catch (error) {
-    console.error('Error parsing YAML:', error);
+    console.error("Error parsing YAML:", error);
     return {
       podcast_videos: [],
       cosmic_ambient_videos: [],
       feel_cosmos_videos: [],
       nft_videos: [],
       nft_collections: [],
-      social_links: {}
+      social_links: {},
     };
   }
 }
 
 function parseValue(value: string): any {
-  if (value === 'true') return true;
-  if (value === 'false') return false;
-  if (value === '""' || value === "''") return '';
+  if (value === "true") return true;
+  if (value === "false") return false;
+  if (value === '""' || value === "''") return "";
   if (value.startsWith('"') && value.endsWith('"')) {
     return value.slice(1, -1);
   }
@@ -139,13 +139,13 @@ export async function loadMenuData(): Promise<MenuData> {
 
   try {
     // Try to load from the static file
-    const response = await fetch('/menu.json');
+    const response = await fetch("/menu.json");
     if (response.ok) {
       cachedMenuData = await response.json();
       return cachedMenuData;
     }
   } catch (error) {
-    console.error('Error loading menu data:', error);
+    console.error("Error loading menu data:", error);
   }
 
   // Return default/empty structure if loading fails
@@ -155,7 +155,7 @@ export async function loadMenuData(): Promise<MenuData> {
     feel_cosmos_videos: [],
     nft_videos: [],
     nft_collections: [],
-    social_links: {}
+    social_links: {},
   };
 }
 

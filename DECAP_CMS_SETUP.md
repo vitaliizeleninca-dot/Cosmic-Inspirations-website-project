@@ -35,10 +35,11 @@ Decap CMS is a headless CMS that allows you to manage your site's content throug
 ### 3. Update Decap CMS Config
 
 Edit `public/admin/config.yml` and update:
+
 ```yaml
 backend:
   name: github
-  repo: yourusername/repo-name  # Replace with your GitHub repo
+  repo: yourusername/repo-name # Replace with your GitHub repo
   branch: main
 ```
 
@@ -57,6 +58,7 @@ You'll be prompted to log in with GitHub. After authentication, you can manage m
 ### Menu Items
 
 The CMS allows you to edit:
+
 - **Podcast Videos** (YouTube URLs and titles)
 - **Cosmic Ambient Videos**
 - **Feel the Cosmos Videos**
@@ -75,33 +77,39 @@ The CMS allows you to edit:
 ## File Structure
 
 The CMS manages these files in your repository:
+
 - `data/menu.yml` - YAML version of menu content
 - `public/menu.json` - JSON version served by the frontend
 
 ## Frontend Integration
 
 Your site automatically fetches menu data from `/api/menu` endpoint, which reads from either:
+
 1. `public/menu.json` (production)
 2. `data/menu.yml` (git-based backup)
 
 ## Troubleshooting
 
 ### CMS Login Issues
+
 - Ensure GitHub OAuth app is correctly configured
 - Check that callback URL matches `https://api.netlify.com/auth/done`
 - Verify environment variables are set in Netlify
 
 ### Changes Not Appearing
+
 - Check Netlify deployment logs for build errors
 - Ensure you clicked "Publish" if using Editorial Workflow
 - Clear browser cache (Ctrl+Shift+Delete)
 
 ### File Not Updating
+
 - Check that the file path in config.yml matches your repository
 - Ensure your GitHub user has write access to the repo
 
 ## Support
 
 For more information, visit:
+
 - [Decap CMS Documentation](https://decapcms.org/docs/intro/)
 - [Netlify CMS/Decap GitHub Integration](https://decapcms.org/docs/backends-overview/#github)
