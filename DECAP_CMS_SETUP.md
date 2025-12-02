@@ -52,11 +52,13 @@ Push the code to GitHub. Netlify will automatically redeploy your site.
 Before deploying, update the CMS configuration in `client/pages/AdminCMS.tsx`:
 
 Find this line:
+
 ```javascript
 repo: "username/repo", // User needs to update this
 ```
 
 Replace with your GitHub repo, for example:
+
 ```javascript
 repo: "yourusername/cosmichub",
 ```

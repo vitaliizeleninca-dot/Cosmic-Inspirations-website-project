@@ -7,17 +7,17 @@ import { createServer } from "./server";
 // Copy public folder including admin files
 function copyPublicPlugin(): Plugin {
   return {
-    name: 'copy-public',
-    apply: 'build',
-    enforce: 'post',
+    name: "copy-public",
+    apply: "build",
+    enforce: "post",
     closeBundle: async () => {
-      const publicDir = path.resolve(__dirname, 'public');
-      const outDir = path.resolve(__dirname, 'dist/spa');
+      const publicDir = path.resolve(__dirname, "public");
+      const outDir = path.resolve(__dirname, "dist/spa");
 
       if (fs.existsSync(publicDir)) {
         fs.cpSync(publicDir, outDir, { recursive: true });
       }
-    }
+    },
   };
 }
 
