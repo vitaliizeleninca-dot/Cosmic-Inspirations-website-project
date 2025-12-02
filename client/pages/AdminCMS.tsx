@@ -267,6 +267,7 @@ export default function AdminCMS() {
         width: "100%",
         height: "100vh",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#f5f5f5",
@@ -276,6 +277,40 @@ export default function AdminCMS() {
       <div style={{ textAlign: "center" }}>
         <h2>Loading Decap CMS...</h2>
         <p>Please wait while the admin interface loads.</p>
+        {statusMessage && (
+          <div
+            style={{
+              marginTop: "20px",
+              padding: "10px 20px",
+              backgroundColor:
+                statusMessage.includes("❌") || statusMessage.includes("⚠️")
+                  ? "#fff3cd"
+                  : "#d4edda",
+              color: statusMessage.includes("❌") ? "#721c24" : "#155724",
+              borderRadius: "4px",
+              fontSize: "14px",
+            }}
+          >
+            {statusMessage}
+          </div>
+        )}
+        {!health.isPrimaryAvailable && !health.isBackupAvailable && (
+          <div
+            style={{
+              marginTop: "20px",
+              padding: "10px 20px",
+              backgroundColor: "#f8d7da",
+              color: "#721c24",
+              borderRadius: "4px",
+              fontSize: "14px",
+            }}
+          >
+            <p>
+              Unable to connect to CMS servers. Please check your internet
+              connection or try again later.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
