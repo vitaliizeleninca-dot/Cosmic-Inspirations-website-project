@@ -1,6 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useCMSHealthCheck } from "@/hooks/useCMSHealthCheck";
 
 export default function AdminCMS() {
+  const { health } = useCMSHealthCheck();
+  const [statusMessage, setStatusMessage] = useState<string>("");
+
+  useEffect(() => {
+    if (!health.lastChecked) return;
+
+    if (!health.isPrimaryAvailable && health.isBackupAvailable) {
+      setStatusMessage(
+        "⚠️ Primary server unavailable - Using backup CMS server"
+      );
+    } else if (!health.isBackupAvailable && health.isPrimaryAvailable) {
+      setStatusMessage("✓ CMS connected");
+    } else if (!health.isPrimaryAvailable && !health.isBackupAvailable) {
+      setStatusMessage("❌ Both CMS servers unavailable - Please try again later");
+    } else {
+      setStatusMessage("✓ CMS connected");
+    }
+  }, [health]);
+
   useEffect(() => {
     // Load Netlify Identity widget
     const script1 = document.createElement("script");
