@@ -5,6 +5,7 @@ import { handleDemo } from "./routes/demo";
 import { handleNFTCollection } from "./routes/nft-collection";
 import { handleYouTubeDuration } from "./routes/youtube-duration";
 import { handleOpenSeaCollection } from "./routes/opensea-collection";
+import menuRouter from "./routes/menu";
 
 export function createServer() {
   const app = express();
@@ -24,6 +25,7 @@ export function createServer() {
   app.get("/api/nft-collection", handleNFTCollection);
   app.get("/api/youtube-duration", handleYouTubeDuration);
   app.get("/api/opensea-collection", handleOpenSeaCollection);
+  app.use("/", menuRouter);
 
   return app;
 }
