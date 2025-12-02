@@ -47,9 +47,27 @@ backend:
 
 Push the code to GitHub. Netlify will automatically redeploy your site.
 
-### 5. Access the CMS
+### 5. Update CMS Configuration in Code
 
-Once deployed, visit: **https://www.alphaross.com/admin**
+Before deploying, update the CMS configuration in `client/pages/AdminCMS.tsx`:
+
+Find this line:
+```javascript
+repo: "username/repo", // User needs to update this
+```
+
+Replace with your GitHub repo, for example:
+```javascript
+repo: "yourusername/cosmichub",
+```
+
+### 6. Deploy Your Changes
+
+Push the code to GitHub. Netlify will automatically rebuild and deploy your site.
+
+### 7. Access the CMS
+
+Once deployed, visit: **https://www.alphaross.com/cms**
 
 You'll be prompted to log in with GitHub. After authentication, you can manage menu content.
 
