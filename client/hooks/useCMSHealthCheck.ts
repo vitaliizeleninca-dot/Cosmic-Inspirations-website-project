@@ -1,0 +1,91 @@
+import { useEffect, useState } from "react";
+
+const PRIMARY_CMS_URL = "https://www.alphaross.com/cms";
+const BACKUP_CMS_URL = "https://cms-backup.alphaross.com/cms";
+const HEALTH_CHECK_INTERVAL = 30000; // Check every 30 seconds
+const HEALTH_CHECK_TIMEOUT = 5000; // 5 second timeout
+
+export interface CMSHealth {
+  isPrimaryAvailable: boolean;
+  isBackupAvailable: boolean;
+  currentURL: string;
+  lastChecked: Date | null;
+  isChecking: boolean;
+}
+
+export function useCMSHealthCheck() {
+  const [health, setHealth] = useState<CMSHealth>({
+    isPrimaryAvailable: true,
+    isBackupAvailable: true,
+    currentURL: PRIMARY_CMS_URL,
+    lastChecked: null,
+    isChecking: false,
+  });
+
+  const checkURL = async (url: string): Promise<boolean> => {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), HEALTH_CHECK_TIMEOUT);
+
+      const response = await fetch(url, {
+        method: "HEAD",
+        mode: "no-cors",
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const performHealthCheck = async () => {
+    setHealth((prev) => ({ ...prev, isChecking: true }));
+
+    const primaryAvailable = await checkURL(PRIMARY_CMS_URL);
+    const backupAvailable = await checkURL(BACKUP_CMS_URL);
+
+    let currentURL = PRIMARY_CMS_URL;
+    if (!primaryAvailable && backupAvailable) {
+      currentURL = BACKUP_CMS_URL;
+      console.warn(
+        "[CMS Failover] Primary CMS unavailable, switching to backup:",
+        BACKUP_CMS_URL
+      );
+    }
+
+    setHealth({
+      isPrimaryAvailable: primaryAvailable,
+      isBackupAvailable: backupAvailable,
+      currentURL,
+      lastChecked: new Date(),
+      isChecking: false,
+    });
+  };
+
+  useEffect(() => {
+    // Initial check on mount
+    performHealthCheck();
+
+    // Set up interval for periodic checks
+    const interval = setInterval(performHealthCheck, HEALTH_CHECK_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return { health, performHealthCheck };
+}
+
+export function getCMSURL(): string {
+  // Store preference in sessionStorage to avoid redundant checks
+  const stored = sessionStorage.getItem("cms_url");
+  if (stored) {
+    return stored;
+  }
+  return PRIMARY_CMS_URL;
+}
+
+export function setCMSURL(url: string): void {
+  sessionStorage.setItem("cms_url", url);
+}
