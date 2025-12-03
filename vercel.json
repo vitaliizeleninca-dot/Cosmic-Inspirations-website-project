@@ -1,15 +1,5 @@
 {
-  "buildCommand": "pnpm run build",
+  "buildCommand": "pnpm run build:client",
   "outputDirectory": "dist/spa",
-  "framework": "vite",
-  "env": {
-    "OAUTH_CLIENT_ID": "@oauth_client_id",
-    "OAUTH_CLIENT_SECRET": "@oauth_client_secret"
-  },
-  "functions": {
-    "netlify/functions/api.ts": { 
-      "memory": 3008,
-      "maxDuration": 60
-    }
-  }
+  "framework": "vite"
 }
