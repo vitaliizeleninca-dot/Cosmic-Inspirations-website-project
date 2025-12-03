@@ -1,26 +1,17 @@
 {
-  // --- НАСТРОЙКИ СБОРКИ ---
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist/spa",
   "framework": "vite",
   
-  // --- ПЕРЕМЕННЫЕ ОКРУЖЕНИЯ (для настройки OAuth) ---
-  // В Vercel лучше использовать UI для продакшн-секретов, 
-  // но эта запись позволяет использовать @oauth_client_id.
   "env": {
     "OAUTH_CLIENT_ID": "@oauth_client_id",
     "OAUTH_CLIENT_SECRET": "@oauth_client_secret"
   },
   
-  // --- КОНФИГУРАЦИЯ ФУНКЦИЙ ---
   "functions": {
-    // ВНИМАНИЕ: Проверьте в DUAL_HOSTING_SETUP.md, какой путь к функции правильный. 
-    // 'netlify/functions/api.ts' выглядит как Netlify-конфигурация.
     "netlify/functions/api.ts": { 
       "memory": 3008,
       "maxDuration": 60
     }
   }
-  
-  // Поля "regions" и "redirects" (из предыдущего файла) УДАЛЕНЫ, чтобы избежать ошибок валидации.
 }
