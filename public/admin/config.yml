@@ -1,8 +1,10 @@
 backend:
-  name: github
-  repo: username/repo # Replace with your GitHub repo (e.g., "yourusername/cosmichub")
-  branch: main
-  auth_endpoint: api/auth
+ backend: {
+  name: "github",
+  repo: "vitaliizeleninca-dot/Cosmic-Inspirations-website-project",
+  branch: "main",
+  auth_scope: "repo"
+}
 
 media_folder: public/uploads
 public_path: /uploads
