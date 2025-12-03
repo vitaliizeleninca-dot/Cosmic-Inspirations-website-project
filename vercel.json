@@ -2,7 +2,7 @@
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist/spa",
   "framework": "vite",
-  "nodeVersion": "18.x",
+  "nodeVersion": "24.x",
   "env": {
     "OAUTH_CLIENT_ID": "@oauth_client_id",
     "OAUTH_CLIENT_SECRET": "@oauth_client_secret"
