@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function AdminCMS() {
-  const [status, setStatus] = useState<string>("Loading CMS...");
+  const [status, setStatus] = useState<string>("Loading Decap CMS...");
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
@@ -9,15 +9,6 @@ export default function AdminCMS() {
 
     const initializeCMS = async () => {
       try {
-        setStatus("Loading Decap CMS...");
-
-        // Load Netlify Identity widget first
-        const identityScript = document.createElement("script");
-        identityScript.src =
-          "https://identity.netlify.com/v1/netlify-identity-widget.js";
-        identityScript.async = true;
-        document.head.appendChild(identityScript);
-
         // Load Decap CMS
         const cmsScript = document.createElement("script");
         cmsScript.src = "https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js";
@@ -26,6 +17,8 @@ export default function AdminCMS() {
         cmsScript.onload = () => {
           if (!mounted) return;
 
+          setStatus("Configuring CMS...");
+
           // Wait for CMS to be available
           const waitForCMS = setInterval(() => {
             if (window.CMS) {
@@ -33,10 +26,8 @@ export default function AdminCMS() {
 
               if (!mounted) return;
 
-              setStatus("Configuring CMS...");
-
               try {
-                // Initialize with config
+                // Initialize CMS with inline config
                 window.CMS.init({
                   config: {
                     backend: {
@@ -262,7 +253,7 @@ export default function AdminCMS() {
               } catch (err) {
                 if (mounted) {
                   setError(
-                    `Failed to initialize CMS: ${err instanceof Error ? err.message : "Unknown error"}`,
+                    `Failed to initialize CMS: ${err instanceof Error ? err.message : "Unknown error"}`
                   );
                   console.error("CMS initialization error:", err);
                 }
@@ -295,7 +286,7 @@ export default function AdminCMS() {
       } catch (err) {
         if (mounted) {
           setError(
-            `Setup error: ${err instanceof Error ? err.message : "Unknown error"}`,
+            `Setup error: ${err instanceof Error ? err.message : "Unknown error"}`
           );
           console.error("CMS setup error:", err);
         }
@@ -345,12 +336,10 @@ export default function AdminCMS() {
               </summary>
               <ul style={{ fontSize: "12px", color: "#666" }}>
                 <li>Ensure GitHub OAuth credentials are set</li>
-                <li>
-                  Update repo name in code (should not be "username/repo")
-                </li>
                 <li>Check that admin/config.yml is accessible</li>
                 <li>Clear browser cache and reload</li>
                 <li>Try in incognito/private mode</li>
+                <li>Check Vercel deployment logs</li>
               </ul>
             </details>
           </>
