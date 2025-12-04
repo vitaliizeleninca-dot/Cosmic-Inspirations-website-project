@@ -6,6 +6,7 @@ import { handleNFTCollection } from "./routes/nft-collection";
 import { handleYouTubeDuration } from "./routes/youtube-duration";
 import { handleOpenSeaCollection } from "./routes/opensea-collection";
 import menuRouter from "./routes/menu";
+import cmsConfigRouter from "./routes/cms-config";
 
 export function createServer() {
   const app = express();
@@ -26,6 +27,7 @@ export function createServer() {
   app.get("/api/youtube-duration", handleYouTubeDuration);
   app.get("/api/opensea-collection", handleOpenSeaCollection);
   app.use("/", menuRouter);
+  app.use("/", cmsConfigRouter);
 
   return app;
 }
