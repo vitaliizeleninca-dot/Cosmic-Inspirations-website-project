@@ -28,6 +28,7 @@ www.alphaross.com
 ### 1.1 Go to GitHub OAuth Settings
 
 Navigate to:
+
 ```
 Settings → Developer settings → OAuth Apps → New OAuth App
 ```
@@ -45,6 +46,7 @@ Authorization callback:  https://api.netlify.com/auth/done
 ### 1.3 Save Your Credentials
 
 After registration, you'll see:
+
 - **Client ID** (public)
 - **Client Secret** (click "Generate" to create)
 
@@ -56,6 +58,7 @@ After registration, you'll see:
 
 1. Go to [vercel.com](https://vercel.com)
 2. Import your GitHub repository:
+
    ```
    Repository: vitaliizeleninca-dot/Cosmic-Inspirations-website-project
    ```
@@ -106,6 +109,7 @@ You need these for automatic deployments:
 ### 3.1 Add Secrets to GitHub
 
 Go to your repository:
+
 ```
 Settings → Secrets and variables → Actions → New repository secret
 ```
@@ -121,6 +125,7 @@ VERCEL_PROJECT_ID   = <from step 2.4>
 ### 3.2 Verify Workflow
 
 File `.github/workflows/deploy.yml` is already set up. It will:
+
 - Trigger on push to `main` branch
 - Build project
 - Deploy to Vercel automatically
@@ -172,6 +177,7 @@ git push origin main
 ### 5.2 Watch Deployment
 
 Go to your GitHub repository:
+
 ```
 Actions → Deploy to Vercel → [latest run]
 ```
@@ -181,12 +187,14 @@ Watch the build process. Should complete in 2-3 minutes.
 ### 5.3 Check Vercel Deployment
 
 Go to [vercel.com](https://vercel.com) and check:
+
 - Deployment status: ✓ Ready
 - Domain: `www.alphaross.com`
 
 ## Step 6: Access Decap CMS
 
 Once deployed, visit:
+
 ```
 https://www.alphaross.com/cms
 ```
@@ -200,6 +208,7 @@ https://www.alphaross.com/cms
 ### 6.2 Manage Content
 
 You can now edit:
+
 - **Podcast Videos** (YouTube URLs)
 - **Cosmic Ambient Videos**
 - **Feel the Cosmos Videos**
@@ -221,12 +230,14 @@ You can now edit:
 **Check these:**
 
 1. **GitHub OAuth not configured**
+
    ```
    Vercel Settings → Environment Variables
    Check OAUTH_CLIENT_ID and OAUTH_CLIENT_SECRET are set
    ```
 
 2. **config.yml returns 404**
+
    ```
    Browser Console (F12) → Network tab
    Look for /admin/config.yml
@@ -276,6 +287,7 @@ curl https://www.alphaross.com/admin/config.yml
 ```
 
 If it returns HTML or 404:
+
 1. Check Vite build output
 2. Verify public/admin/config.yml exists
 3. Rebuild and redeploy
@@ -357,11 +369,11 @@ dist/spa/
 
 ## Quick Reference
 
-| Task | URL |
-|------|-----|
-| Main Site | https://www.alphaross.com |
-| CMS Admin | https://www.alphaross.com/cms |
-| Vercel Dashboard | https://vercel.com/dashboard |
-| GitHub Repo | https://github.com/vitaliizeleninca-dot/Cosmic-Inspirations-website-project |
-| GitHub Actions | https://github.com/.../actions |
-| OAuth App | GitHub Settings → Developer settings → OAuth Apps |
+| Task             | URL                                                                         |
+| ---------------- | --------------------------------------------------------------------------- |
+| Main Site        | https://www.alphaross.com                                                   |
+| CMS Admin        | https://www.alphaross.com/cms                                               |
+| Vercel Dashboard | https://vercel.com/dashboard                                                |
+| GitHub Repo      | https://github.com/vitaliizeleninca-dot/Cosmic-Inspirations-website-project |
+| GitHub Actions   | https://github.com/.../actions                                              |
+| OAuth App        | GitHub Settings → Developer settings → OAuth Apps                           |

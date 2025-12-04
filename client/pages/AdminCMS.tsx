@@ -253,7 +253,7 @@ export default function AdminCMS() {
               } catch (err) {
                 if (mounted) {
                   setError(
-                    `Failed to initialize CMS: ${err instanceof Error ? err.message : "Unknown error"}`
+                    `Failed to initialize CMS: ${err instanceof Error ? err.message : "Unknown error"}`,
                   );
                   console.error("CMS initialization error:", err);
                 }
@@ -286,7 +286,7 @@ export default function AdminCMS() {
       } catch (err) {
         if (mounted) {
           setError(
-            `Setup error: ${err instanceof Error ? err.message : "Unknown error"}`
+            `Setup error: ${err instanceof Error ? err.message : "Unknown error"}`,
           );
           console.error("CMS setup error:", err);
         }

@@ -35,8 +35,17 @@ router.get("/admin/config.json", (req, res) => {
                 widget: "list",
                 fields: [
                   { label: "Title", name: "title", widget: "string" },
-                  { label: "YouTube URL", name: "youtube_url", widget: "string" },
-                  { label: "Active", name: "active", widget: "boolean", default: true },
+                  {
+                    label: "YouTube URL",
+                    name: "youtube_url",
+                    widget: "string",
+                  },
+                  {
+                    label: "Active",
+                    name: "active",
+                    widget: "boolean",
+                    default: true,
+                  },
                 ],
               },
               {
@@ -45,8 +54,17 @@ router.get("/admin/config.json", (req, res) => {
                 widget: "list",
                 fields: [
                   { label: "Title", name: "title", widget: "string" },
-                  { label: "YouTube URL", name: "youtube_url", widget: "string" },
-                  { label: "Active", name: "active", widget: "boolean", default: true },
+                  {
+                    label: "YouTube URL",
+                    name: "youtube_url",
+                    widget: "string",
+                  },
+                  {
+                    label: "Active",
+                    name: "active",
+                    widget: "boolean",
+                    default: true,
+                  },
                 ],
               },
               {
@@ -55,8 +73,17 @@ router.get("/admin/config.json", (req, res) => {
                 widget: "list",
                 fields: [
                   { label: "Title", name: "title", widget: "string" },
-                  { label: "YouTube URL", name: "youtube_url", widget: "string" },
-                  { label: "Active", name: "active", widget: "boolean", default: true },
+                  {
+                    label: "YouTube URL",
+                    name: "youtube_url",
+                    widget: "string",
+                  },
+                  {
+                    label: "Active",
+                    name: "active",
+                    widget: "boolean",
+                    default: true,
+                  },
                 ],
               },
               {
@@ -65,8 +92,17 @@ router.get("/admin/config.json", (req, res) => {
                 widget: "list",
                 fields: [
                   { label: "Title", name: "title", widget: "string" },
-                  { label: "YouTube URL", name: "youtube_url", widget: "string" },
-                  { label: "Active", name: "active", widget: "boolean", default: true },
+                  {
+                    label: "YouTube URL",
+                    name: "youtube_url",
+                    widget: "string",
+                  },
+                  {
+                    label: "Active",
+                    name: "active",
+                    widget: "boolean",
+                    default: true,
+                  },
                 ],
               },
               {
@@ -76,8 +112,18 @@ router.get("/admin/config.json", (req, res) => {
                 fields: [
                   { label: "Collection Name", name: "name", widget: "string" },
                   { label: "Collection URL", name: "url", widget: "string" },
-                  { label: "Image URL", name: "image_url", widget: "string", required: false },
-                  { label: "Active", name: "active", widget: "boolean", default: true },
+                  {
+                    label: "Image URL",
+                    name: "image_url",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "Active",
+                    name: "active",
+                    widget: "boolean",
+                    default: true,
+                  },
                 ],
               },
               {
@@ -85,16 +131,66 @@ router.get("/admin/config.json", (req, res) => {
                 name: "social_links",
                 widget: "object",
                 fields: [
-                  { label: "Twitter", name: "twitter", widget: "string", required: false },
-                  { label: "YouTube", name: "youtube", widget: "string", required: false },
-                  { label: "Threads", name: "threads", widget: "string", required: false },
-                  { label: "Facebook", name: "facebook", widget: "string", required: false },
-                  { label: "Telegram", name: "telegram", widget: "string", required: false },
-                  { label: "TikTok", name: "tiktok", widget: "string", required: false },
-                  { label: "Discord", name: "discord", widget: "string", required: false },
-                  { label: "LinkedIn", name: "linkedin", widget: "string", required: false },
-                  { label: "Contra", name: "contra", widget: "string", required: false },
-                  { label: "Webbie", name: "webbie", widget: "string", required: false },
+                  {
+                    label: "Twitter",
+                    name: "twitter",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "YouTube",
+                    name: "youtube",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "Threads",
+                    name: "threads",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "Facebook",
+                    name: "facebook",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "Telegram",
+                    name: "telegram",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "TikTok",
+                    name: "tiktok",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "Discord",
+                    name: "discord",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "LinkedIn",
+                    name: "linkedin",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "Contra",
+                    name: "contra",
+                    widget: "string",
+                    required: false,
+                  },
+                  {
+                    label: "Webbie",
+                    name: "webbie",
+                    widget: "string",
+                    required: false,
+                  },
                 ],
               },
             ],
