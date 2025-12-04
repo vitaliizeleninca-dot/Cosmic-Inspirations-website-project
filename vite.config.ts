@@ -14,8 +14,21 @@ function copyPublicPlugin(): Plugin {
       const publicDir = path.resolve(__dirname, "public");
       const outDir = path.resolve(__dirname, "dist/spa");
 
-      if (fs.existsSync(publicDir)) {
-        fs.cpSync(publicDir, outDir, { recursive: true });
+      try {
+        if (fs.existsSync(publicDir)) {
+          fs.cpSync(publicDir, outDir, { recursive: true, force: true });
+          console.log(`✓ Copied public folder to ${outDir}`);
+
+          // Verify admin files exist
+          const adminConfigPath = path.join(outDir, "admin", "config.yml");
+          if (fs.existsSync(adminConfigPath)) {
+            console.log(`✓ Verified admin/config.yml exists`);
+          } else {
+            console.warn(`✗ admin/config.yml not found after copy`);
+          }
+        }
+      } catch (err) {
+        console.error("Error copying public folder:", err);
       }
     },
   };
