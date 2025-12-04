@@ -46,6 +46,7 @@ Authorization callback URL: https://api.netlify.com/auth/done
 ### 1.3 Save Credentials
 
 After registering, copy:
+
 - **Client ID**
 - **Client Secret** (click "Generate" if not shown)
 
@@ -105,11 +106,13 @@ VERCEL_PROJECT_ID = <from Vercel>
 Edit `client/pages/AdminCMS.tsx`:
 
 Find this line (around line 42):
+
 ```javascript
 repo: "username/repo", // User must update this
 ```
 
 Replace with your GitHub repository:
+
 ```javascript
 repo: "yourusername/cosmichub",
 ```
@@ -130,6 +133,7 @@ Visit: `http://localhost:8080/cms`
 You should see the CMS loading indicator. If config loads correctly, it will prompt for GitHub login.
 
 **Troubleshooting if it doesn't load:**
+
 - Open browser DevTools (F12)
 - Check **Console** tab for errors
 - Check **Network** tab to see if `/admin/config.yml` loads
@@ -137,11 +141,12 @@ You should see the CMS loading indicator. If config loads correctly, it will pro
 ### 5.3 Manual CMS Test
 
 In browser console, test config loading:
+
 ```javascript
-fetch('/admin/config.yml')
-  .then(r => r.text())
-  .then(t => console.log(t))
-  .catch(e => console.error(e))
+fetch("/admin/config.yml")
+  .then((r) => r.text())
+  .then((t) => console.log(t))
+  .catch((e) => console.error(e));
 ```
 
 Should see YAML content, not HTML.
@@ -159,6 +164,7 @@ git push origin main
 ### 6.2 GitHub Actions Deploys Automatically
 
 Watch deployment:
+
 1. Go to **GitHub** → **Actions** tab
 2. Watch the **Deploy to Vercel** workflow
 3. Should complete in 2-3 minutes
@@ -166,6 +172,7 @@ Watch deployment:
 ### 6.3 Test Production CMS
 
 Once deployed, visit:
+
 ```
 https://www.alphaross.com/cms
 ```
@@ -235,6 +242,7 @@ Once everything is set up:
 Open browser DevTools (F12) → **Console** tab
 
 You should see messages like:
+
 ```
 "Loading Decap CMS..."
 "Configuring CMS..."
@@ -245,6 +253,7 @@ If you see errors, they'll be displayed here. Share these errors for support.
 ### Manual Config Test
 
 Test if YAML config is accessible:
+
 ```bash
 curl https://www.alphaross.com/admin/config.yml
 ```

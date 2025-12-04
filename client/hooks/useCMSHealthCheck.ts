@@ -22,7 +22,10 @@ export function useCMSHealthCheck() {
   const checkURL = async (url: string): Promise<boolean> => {
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), HEALTH_CHECK_TIMEOUT);
+      const timeoutId = setTimeout(
+        () => controller.abort(),
+        HEALTH_CHECK_TIMEOUT,
+      );
 
       const response = await fetch(url, {
         method: "HEAD",
