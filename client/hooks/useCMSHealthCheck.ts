@@ -51,7 +51,7 @@ export function useCMSHealthCheck() {
   };
 
   useEffect(() => {
-    // Initial check on mount
+    // Perform initial health check
     performHealthCheck();
 
     // Set up interval for periodic checks
@@ -61,6 +61,10 @@ export function useCMSHealthCheck() {
   }, []);
 
   return { health, performHealthCheck };
+}
+
+export function getCMSURL(): string {
+  return PRIMARY_CMS_URL;
 }
 
 export function getCMSURL(): string {
