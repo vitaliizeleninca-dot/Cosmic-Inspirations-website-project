@@ -6,6 +6,11 @@ backend:
 
 media_folder: public/uploads
 public_path: /uploads
+media_library:
+  name: uploadcare
+  config:
+    publickey: ''
+
 publish_mode: editorial_workflow
 
 collections:
