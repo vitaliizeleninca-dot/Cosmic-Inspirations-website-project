@@ -1,4 +1,4 @@
-name: Deploy to Vercel & Netlify
+name: Deploy to Vercel
 
 on:
   push:
@@ -10,9 +10,9 @@ on:
 
 jobs:
   deploy-vercel:
-    name: Deploy to Vercel (Primary)
+    name: Deploy to Vercel
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,38 +38,3 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_ORG_ID }}
-
-  deploy-netlify:
-    name: Deploy to Netlify (Backup)
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        env:
-          npm_config_registry: https://registry.npmjs.org/
-
-      - name: Build project
-        run: pnpm run build
-
-      - name: Deploy to Netlify
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: nwtgck/actions-netlify@v3.0
-        with:
-          publish-dir: './dist/spa'
-          production-branch: main
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Production Deploy from GitHub Actions"
-          enable-pull-request-comment: true
-          enable-commit-comment: true
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_BACKUP }}
