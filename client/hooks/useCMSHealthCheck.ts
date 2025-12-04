@@ -66,16 +66,3 @@ export function useCMSHealthCheck() {
 export function getCMSURL(): string {
   return PRIMARY_CMS_URL;
 }
-
-export function getCMSURL(): string {
-  // Store preference in sessionStorage to avoid redundant checks
-  const stored = sessionStorage.getItem("cms_url");
-  if (stored) {
-    return stored;
-  }
-  return PRIMARY_CMS_URL;
-}
-
-export function setCMSURL(url: string): void {
-  sessionStorage.setItem("cms_url", url);
-}
