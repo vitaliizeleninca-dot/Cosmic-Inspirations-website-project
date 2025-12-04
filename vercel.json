@@ -8,13 +8,35 @@
     "OAUTH_CLIENT_SECRET": "@oauth_client_secret"
   },
   "regions": ["iad1"],
-  "functions": {
-    "netlify/functions/api.ts": {
-      "memory": 3008,
-      "maxDuration": 60
+  "headers": [
+    {
+      "source": "/admin/config.yml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/yaml"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/menu.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
     }
-  },
-  "redirects": [
+  ],
+  "rewrites": [
     {
       "source": "/api/:path*",
       "destination": "/api/:path*"
