@@ -41,7 +41,7 @@ export default function AdminCMS() {
                   config: {
                     backend: {
                       name: "github",
-                      repo: "username/repo", // User must update this
+                      repo: "vitaliizeleninca-dot/Cosmic-Inspirations-website-project",
                       branch: "main",
                       auth_endpoint: "api/auth",
                     },
