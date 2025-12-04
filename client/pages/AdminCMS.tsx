@@ -1,263 +1,311 @@
 import { useEffect, useState } from "react";
-import { useCMSHealthCheck } from "@/hooks/useCMSHealthCheck";
 
 export default function AdminCMS() {
-  const { health } = useCMSHealthCheck();
-  const [statusMessage, setStatusMessage] = useState<string>("");
+  const [status, setStatus] = useState<string>("Loading CMS...");
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    if (!health.lastChecked) return;
+    let mounted = true;
 
-    if (!health.isPrimaryAvailable && health.isBackupAvailable) {
-      setStatusMessage(
-        "⚠️ Primary server unavailable - Using backup CMS server"
-      );
-    } else if (!health.isBackupAvailable && health.isPrimaryAvailable) {
-      setStatusMessage("✓ CMS connected");
-    } else if (!health.isPrimaryAvailable && !health.isBackupAvailable) {
-      setStatusMessage("❌ Both CMS servers unavailable - Please try again later");
-    } else {
-      setStatusMessage("✓ CMS connected");
-    }
-  }, [health]);
+    const initializeCMS = async () => {
+      try {
+        setStatus("Loading Decap CMS...");
 
-  useEffect(() => {
-    // Load Netlify Identity widget
-    const script1 = document.createElement("script");
-    script1.src = "https://identity.netlify.com/v1/netlify-identity-widget.js";
-    document.body.appendChild(script1);
+        // Load Netlify Identity widget first
+        const identityScript = document.createElement("script");
+        identityScript.src =
+          "https://identity.netlify.com/v1/netlify-identity-widget.js";
+        identityScript.async = true;
+        document.head.appendChild(identityScript);
 
-    // Load Decap CMS
-    const script2 = document.createElement("script");
-    script2.src = "https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js";
-    script2.onload = () => {
-      // Initialize CMS with inline config after it loads
-      if (window.CMS) {
-        window.CMS.init({
-          config: {
-            backend: {
-              name: "github",
-              repo: "username/repo", // User needs to update this
-              branch: "main",
-              auth_endpoint: "api/auth",
-            },
-            media_folder: "public/uploads",
-            public_path: "/uploads",
-            publish_mode: "editorial_workflow",
-            collections: [
-              {
-                name: "menu",
-                label: "Menu Content",
-                folder: "data",
-                create: false,
-                files: [
-                  {
-                    name: "menu",
-                    label: "Menu Items",
-                    file: "data/menu.yml",
-                    fields: [
+        // Load Decap CMS
+        const cmsScript = document.createElement("script");
+        cmsScript.src = "https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js";
+        cmsScript.async = true;
+
+        cmsScript.onload = () => {
+          if (!mounted) return;
+
+          // Wait for CMS to be available
+          const waitForCMS = setInterval(() => {
+            if (window.CMS) {
+              clearInterval(waitForCMS);
+
+              if (!mounted) return;
+
+              setStatus("Configuring CMS...");
+
+              try {
+                // Initialize with config
+                window.CMS.init({
+                  config: {
+                    backend: {
+                      name: "github",
+                      repo: "username/repo", // User must update this
+                      branch: "main",
+                      auth_endpoint: "api/auth",
+                    },
+                    media_folder: "public/uploads",
+                    public_path: "/uploads",
+                    publish_mode: "editorial_workflow",
+                    display_url: "https://www.alphaross.com",
+                    show_preview_links: true,
+                    collections: [
                       {
-                        label: "Podcast Videos",
-                        name: "podcast_videos",
-                        widget: "list",
-                        fields: [
+                        name: "menu",
+                        label: "Menu Content",
+                        folder: "data",
+                        create: false,
+                        files: [
                           {
-                            label: "Title",
-                            name: "title",
-                            widget: "string",
-                          },
-                          {
-                            label: "YouTube URL",
-                            name: "youtube_url",
-                            widget: "string",
-                          },
-                          {
-                            label: "Active",
-                            name: "active",
-                            widget: "boolean",
-                            default: true,
-                          },
-                        ],
-                      },
-                      {
-                        label: "Cosmic Ambient Videos",
-                        name: "cosmic_ambient_videos",
-                        widget: "list",
-                        fields: [
-                          {
-                            label: "Title",
-                            name: "title",
-                            widget: "string",
-                          },
-                          {
-                            label: "YouTube URL",
-                            name: "youtube_url",
-                            widget: "string",
-                          },
-                          {
-                            label: "Active",
-                            name: "active",
-                            widget: "boolean",
-                            default: true,
-                          },
-                        ],
-                      },
-                      {
-                        label: "Feel Cosmos Videos",
-                        name: "feel_cosmos_videos",
-                        widget: "list",
-                        fields: [
-                          {
-                            label: "Title",
-                            name: "title",
-                            widget: "string",
-                          },
-                          {
-                            label: "YouTube URL",
-                            name: "youtube_url",
-                            widget: "string",
-                          },
-                          {
-                            label: "Active",
-                            name: "active",
-                            widget: "boolean",
-                            default: true,
-                          },
-                        ],
-                      },
-                      {
-                        label: "NFT Collections Videos",
-                        name: "nft_videos",
-                        widget: "list",
-                        fields: [
-                          {
-                            label: "Title",
-                            name: "title",
-                            widget: "string",
-                          },
-                          {
-                            label: "YouTube URL",
-                            name: "youtube_url",
-                            widget: "string",
-                          },
-                          {
-                            label: "Active",
-                            name: "active",
-                            widget: "boolean",
-                            default: true,
-                          },
-                        ],
-                      },
-                      {
-                        label: "NFT Collections (Grid)",
-                        name: "nft_collections",
-                        widget: "list",
-                        fields: [
-                          {
-                            label: "Collection Name",
-                            name: "name",
-                            widget: "string",
-                          },
-                          {
-                            label: "Collection URL",
-                            name: "url",
-                            widget: "string",
-                          },
-                          {
-                            label: "Image URL",
-                            name: "image_url",
-                            widget: "string",
-                            required: false,
-                          },
-                          {
-                            label: "Active",
-                            name: "active",
-                            widget: "boolean",
-                            default: true,
-                          },
-                        ],
-                      },
-                      {
-                        label: "Social Links",
-                        name: "social_links",
-                        widget: "object",
-                        fields: [
-                          {
-                            label: "Twitter",
-                            name: "twitter",
-                            widget: "string",
-                            required: false,
-                          },
-                          {
-                            label: "YouTube",
-                            name: "youtube",
-                            widget: "string",
-                            required: false,
-                          },
-                          {
-                            label: "Threads",
-                            name: "threads",
-                            widget: "string",
-                            required: false,
-                          },
-                          {
-                            label: "Facebook",
-                            name: "facebook",
-                            widget: "string",
-                            required: false,
-                          },
-                          {
-                            label: "Telegram",
-                            name: "telegram",
-                            widget: "string",
-                            required: false,
-                          },
-                          {
-                            label: "TikTok",
-                            name: "tiktok",
-                            widget: "string",
-                            required: false,
-                          },
-                          {
-                            label: "Discord",
-                            name: "discord",
-                            widget: "string",
-                            required: false,
-                          },
-                          {
-                            label: "LinkedIn",
-                            name: "linkedin",
-                            widget: "string",
-                            required: false,
-                          },
-                          {
-                            label: "Contra",
-                            name: "contra",
-                            widget: "string",
-                            required: false,
-                          },
-                          {
-                            label: "Webbie",
-                            name: "webbie",
-                            widget: "string",
-                            required: false,
+                            name: "menu",
+                            label: "Menu Items",
+                            file: "data/menu.yml",
+                            fields: [
+                              {
+                                label: "Podcast Videos",
+                                name: "podcast_videos",
+                                widget: "list",
+                                fields: [
+                                  {
+                                    label: "Title",
+                                    name: "title",
+                                    widget: "string",
+                                  },
+                                  {
+                                    label: "YouTube URL",
+                                    name: "youtube_url",
+                                    widget: "string",
+                                  },
+                                  {
+                                    label: "Active",
+                                    name: "active",
+                                    widget: "boolean",
+                                    default: true,
+                                  },
+                                ],
+                              },
+                              {
+                                label: "Cosmic Ambient Videos",
+                                name: "cosmic_ambient_videos",
+                                widget: "list",
+                                fields: [
+                                  {
+                                    label: "Title",
+                                    name: "title",
+                                    widget: "string",
+                                  },
+                                  {
+                                    label: "YouTube URL",
+                                    name: "youtube_url",
+                                    widget: "string",
+                                  },
+                                  {
+                                    label: "Active",
+                                    name: "active",
+                                    widget: "boolean",
+                                    default: true,
+                                  },
+                                ],
+                              },
+                              {
+                                label: "Feel Cosmos Videos",
+                                name: "feel_cosmos_videos",
+                                widget: "list",
+                                fields: [
+                                  {
+                                    label: "Title",
+                                    name: "title",
+                                    widget: "string",
+                                  },
+                                  {
+                                    label: "YouTube URL",
+                                    name: "youtube_url",
+                                    widget: "string",
+                                  },
+                                  {
+                                    label: "Active",
+                                    name: "active",
+                                    widget: "boolean",
+                                    default: true,
+                                  },
+                                ],
+                              },
+                              {
+                                label: "NFT Collections Videos",
+                                name: "nft_videos",
+                                widget: "list",
+                                fields: [
+                                  {
+                                    label: "Title",
+                                    name: "title",
+                                    widget: "string",
+                                  },
+                                  {
+                                    label: "YouTube URL",
+                                    name: "youtube_url",
+                                    widget: "string",
+                                  },
+                                  {
+                                    label: "Active",
+                                    name: "active",
+                                    widget: "boolean",
+                                    default: true,
+                                  },
+                                ],
+                              },
+                              {
+                                label: "NFT Collections (Grid)",
+                                name: "nft_collections",
+                                widget: "list",
+                                fields: [
+                                  {
+                                    label: "Collection Name",
+                                    name: "name",
+                                    widget: "string",
+                                  },
+                                  {
+                                    label: "Collection URL",
+                                    name: "url",
+                                    widget: "string",
+                                  },
+                                  {
+                                    label: "Image URL",
+                                    name: "image_url",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                  {
+                                    label: "Active",
+                                    name: "active",
+                                    widget: "boolean",
+                                    default: true,
+                                  },
+                                ],
+                              },
+                              {
+                                label: "Social Links",
+                                name: "social_links",
+                                widget: "object",
+                                fields: [
+                                  {
+                                    label: "Twitter",
+                                    name: "twitter",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                  {
+                                    label: "YouTube",
+                                    name: "youtube",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                  {
+                                    label: "Threads",
+                                    name: "threads",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                  {
+                                    label: "Facebook",
+                                    name: "facebook",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                  {
+                                    label: "Telegram",
+                                    name: "telegram",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                  {
+                                    label: "TikTok",
+                                    name: "tiktok",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                  {
+                                    label: "Discord",
+                                    name: "discord",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                  {
+                                    label: "LinkedIn",
+                                    name: "linkedin",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                  {
+                                    label: "Contra",
+                                    name: "contra",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                  {
+                                    label: "Webbie",
+                                    name: "webbie",
+                                    widget: "string",
+                                    required: false,
+                                  },
+                                ],
+                              },
+                            ],
                           },
                         ],
                       },
                     ],
                   },
-                ],
-              },
-            ],
-          },
-        });
+                });
+
+                setStatus("");
+              } catch (err) {
+                if (mounted) {
+                  setError(
+                    `Failed to initialize CMS: ${err instanceof Error ? err.message : "Unknown error"}`
+                  );
+                  console.error("CMS initialization error:", err);
+                }
+              }
+            }
+          }, 100);
+
+          // Timeout after 10 seconds
+          const timeout = setTimeout(() => {
+            clearInterval(waitForCMS);
+            if (mounted) {
+              setError("CMS failed to load. Please check console for details.");
+            }
+          }, 10000);
+
+          return () => {
+            clearInterval(waitForCMS);
+            clearTimeout(timeout);
+          };
+        };
+
+        cmsScript.onerror = () => {
+          if (mounted) {
+            setError("Failed to load Decap CMS library");
+            console.error("Failed to load CMS script");
+          }
+        };
+
+        document.body.appendChild(cmsScript);
+      } catch (err) {
+        if (mounted) {
+          setError(
+            `Setup error: ${err instanceof Error ? err.message : "Unknown error"}`
+          );
+          console.error("CMS setup error:", err);
+        }
       }
     };
-    document.body.appendChild(script2);
+
+    initializeCMS();
 
     return () => {
-      if (document.body.contains(script1)) document.body.removeChild(script1);
-      if (document.body.contains(script2)) document.body.removeChild(script2);
+      mounted = false;
     };
   }, []);
 
@@ -274,43 +322,62 @@ export default function AdminCMS() {
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
-      <div style={{ textAlign: "center" }}>
-        <h2>Loading Decap CMS...</h2>
-        <p>Please wait while the admin interface loads.</p>
-        {statusMessage && (
-          <div
-            style={{
-              marginTop: "20px",
-              padding: "10px 20px",
-              backgroundColor:
-                statusMessage.includes("❌") || statusMessage.includes("⚠️")
-                  ? "#fff3cd"
-                  : "#d4edda",
-              color: statusMessage.includes("❌") ? "#721c24" : "#155724",
-              borderRadius: "4px",
-              fontSize: "14px",
-            }}
-          >
-            {statusMessage}
-          </div>
-        )}
-        {!health.isPrimaryAvailable && !health.isBackupAvailable && (
-          <div
-            style={{
-              marginTop: "20px",
-              padding: "10px 20px",
-              backgroundColor: "#f8d7da",
-              color: "#721c24",
-              borderRadius: "4px",
-              fontSize: "14px",
-            }}
-          >
-            <p>
-              Unable to connect to CMS servers. Please check your internet
-              connection or try again later.
+      <div style={{ textAlign: "center", maxWidth: "500px" }}>
+        {error ? (
+          <>
+            <div
+              style={{
+                fontSize: "32px",
+                marginBottom: "16px",
+                color: "#dc3545",
+              }}
+            >
+              ⚠️
+            </div>
+            <h2 style={{ color: "#dc3545" }}>CMS Error</h2>
+            <p style={{ color: "#666", marginBottom: "16px" }}>{error}</p>
+            <p style={{ fontSize: "14px", color: "#999" }}>
+              Check your browser console (F12) for more details.
             </p>
-          </div>
-        )}
+            <details style={{ marginTop: "20px", textAlign: "left" }}>
+              <summary style={{ cursor: "pointer", color: "#666" }}>
+                Troubleshooting Tips
+              </summary>
+              <ul style={{ fontSize: "12px", color: "#666" }}>
+                <li>Ensure GitHub OAuth credentials are set</li>
+                <li>
+                  Update repo name in code (should not be "username/repo")
+                </li>
+                <li>Check that admin/config.yml is accessible</li>
+                <li>Clear browser cache and reload</li>
+                <li>Try in incognito/private mode</li>
+              </ul>
+            </details>
+          </>
+        ) : status ? (
+          <>
+            <div
+              style={{
+                fontSize: "32px",
+                marginBottom: "16px",
+                animation: "spin 1s linear infinite",
+              }}
+            >
+              ⚙️
+            </div>
+            <h2>Loading Decap CMS</h2>
+            <p style={{ color: "#666" }}>{status}</p>
+            <p style={{ fontSize: "12px", color: "#999", marginTop: "16px" }}>
+              This may take a moment...
+            </p>
+            <style>{`
+              @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+            `}</style>
+          </>
+        ) : null}
       </div>
     </div>
   );
