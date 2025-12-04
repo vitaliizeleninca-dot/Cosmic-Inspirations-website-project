@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 
 const PRIMARY_CMS_URL = "https://www.alphaross.com/cms";
-const BACKUP_CMS_URL = "https://cms-backup.alphaross.com/cms";
 const HEALTH_CHECK_INTERVAL = 30000; // Check every 30 seconds
 const HEALTH_CHECK_TIMEOUT = 5000; // 5 second timeout
 
 export interface CMSHealth {
   isPrimaryAvailable: boolean;
-  isBackupAvailable: boolean;
   currentURL: string;
   lastChecked: Date | null;
   isChecking: boolean;
@@ -16,7 +14,6 @@ export interface CMSHealth {
 export function useCMSHealthCheck() {
   const [health, setHealth] = useState<CMSHealth>({
     isPrimaryAvailable: true,
-    isBackupAvailable: true,
     currentURL: PRIMARY_CMS_URL,
     lastChecked: null,
     isChecking: false,
@@ -44,21 +41,10 @@ export function useCMSHealthCheck() {
     setHealth((prev) => ({ ...prev, isChecking: true }));
 
     const primaryAvailable = await checkURL(PRIMARY_CMS_URL);
-    const backupAvailable = await checkURL(BACKUP_CMS_URL);
-
-    let currentURL = PRIMARY_CMS_URL;
-    if (!primaryAvailable && backupAvailable) {
-      currentURL = BACKUP_CMS_URL;
-      console.warn(
-        "[CMS Failover] Primary CMS unavailable, switching to backup:",
-        BACKUP_CMS_URL
-      );
-    }
 
     setHealth({
       isPrimaryAvailable: primaryAvailable,
-      isBackupAvailable: backupAvailable,
-      currentURL,
+      currentURL: PRIMARY_CMS_URL,
       lastChecked: new Date(),
       isChecking: false,
     });
