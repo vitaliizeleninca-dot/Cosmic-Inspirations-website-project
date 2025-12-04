@@ -27,13 +27,15 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     fs: {
-      allow: ["./client", "./shared"],
+      allow: ["./client", "./shared", "./public"],
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
     },
   },
   build: {
     outDir: "dist/spa",
   },
+  publicDir: "public",
+  assetsInclude: ["**/*.yml", "**/*.yaml"],
   plugins: [react(), copyPublicPlugin(), expressPlugin()],
   resolve: {
     alias: {
