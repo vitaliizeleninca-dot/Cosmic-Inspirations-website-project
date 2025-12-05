@@ -9,7 +9,7 @@
   
   "functions": {
     "api/index.js": {
-      "runtime": "nodejs20.x",
+      "runtime": "@vercel/node@20.2.0", // <--- Изменено для исправления ошибки рантайма
       "includeFiles": "dist/server/node-build.mjs"
     }
   },
