@@ -9,7 +9,7 @@
   
   "functions": {
     "api/index.js": {
-      "runtime": "node@20.x", // <--- ИСПРАВЛЕНИЕ СИНТАКСИСА
+      "runtime": "node@20.x",
       "includeFiles": "dist/server/node-build.mjs"
     }
   },
