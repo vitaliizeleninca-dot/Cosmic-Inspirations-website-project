@@ -7,6 +7,7 @@ import { handleYouTubeDuration } from "./routes/youtube-duration";
 import { handleOpenSeaCollection } from "./routes/opensea-collection";
 import menuRouter from "./routes/menu";
 import cmsConfigRouter from "./routes/cms-config";
+import sendMessageRouter from "./routes/send-message";
 
 export function createServer() {
   const app = express();
