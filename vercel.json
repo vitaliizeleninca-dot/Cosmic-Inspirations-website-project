@@ -6,14 +6,12 @@
     "OAUTH_CLIENT_ID": "OAUTH_CLIENT_ID",
     "OAUTH_CLIENT_SECRET": "OAUTH_CLIENT_SECRET"
   },
-  
   "functions": {
     "api/index.js": {
-      "runtime": "@now/node@20.x", // <--- ИСПРАВЛЕНИЕ СИНТАКСИСА
+      "runtime": "nodejs20.x",
       "includeFiles": "dist/server/node-build.mjs"
     }
   },
-
   "headers": [
     {
       "source": "/admin/config.yml",
