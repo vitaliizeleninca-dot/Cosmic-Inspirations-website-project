@@ -1,34 +1,7 @@
 {
-  "buildCommand": "pnpm run build",
-  "outputDirectory": "dist/spa",
   "framework": "vite",
-
-  "env": {
-    "OAUTH_CLIENT_ID": "OAUTH_CLIENT_ID",
-    "OAUTH_CLIENT_SECRET": "OAUTH_CLIENT_SECRET"
-  },
-
-  "headers": [
-    {
-      "source": "/admin/config.yml",
-      "headers": [
-        { "key": "Content-Type", "value": "application/yaml" },
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
-      ]
-    },
-    {
-      "source": "/menu.json",
-      "headers": [
-        { "key": "Content-Type", "value": "application/json" },
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
-      ]
-    }
-  ],
-
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://YOUR_BACKEND_DOMAIN/:path*"
-    }
-  ]
+  "buildCommand": "cd client && pnpm install && pnpm run build",
+  "outputDirectory": "client/dist",
+  "cleanUrls": true,
+  "ignoreCommand": "echo 'Skipping server folder'"
 }
