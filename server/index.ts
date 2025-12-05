@@ -8,6 +8,8 @@ import { handleOpenSeaCollection } from "./routes/opensea-collection";
 import menuRouter from "./routes/menu";
 import cmsConfigRouter from "./routes/cms-config";
 import sendMessageRouter from "./routes/send-message";
+import getLinksRouter from "./routes/get-links";
+import saveLinkRouter from "./routes/save-link";
 
 export function createServer() {
   const app = express();
@@ -30,6 +32,8 @@ export function createServer() {
   app.use("/", menuRouter);
   app.use("/", cmsConfigRouter);
   app.use("/", sendMessageRouter);
+  app.use("/", getLinksRouter);
+  app.use("/", saveLinkRouter);
 
   return app;
 }
