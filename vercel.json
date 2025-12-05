@@ -1,11 +1,19 @@
 {
-  "buildCommand": "pnpm run build",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist/spa",
   "framework": "vite",
-  "env": {
-    "OAUTH_CLIENT_ID": "@oauth_client_id",
-    "OAUTH_CLIENT_SECRET": "@oauth_client_secret"
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs20.x",
+      "maxDuration": 30
+    }
   },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/[...path]"
+    }
+  ],
   "headers": [
     {
       "source": "/admin/config.yml",
@@ -32,12 +40,6 @@
           "value": "public, max-age=3600"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
     }
   ]
 }

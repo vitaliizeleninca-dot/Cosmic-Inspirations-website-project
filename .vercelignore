@@ -1,0 +1,39 @@
+# Source files - not needed in production
+server/
+src/
+client/
+shared/
+.env
+.env.*
+!.env.local
+.git
+.gitignore
+node_modules/
+.pnpm-store/
+pnpm-lock.yaml
+package-lock.json
+.DS_Store
+*.log
+.turbo
+
+# Build artifacts we don't need
+dist/server
+.vite
+
+# Documentation
+*.md
+AGENTS.md
+CLAUDE.md
+CMS_SETUP_FIXED.md
+DECAP_CMS_SETUP.md
+DUAL_HOSTING_SETUP.md
+GITHUB_LINKS_SETUP.md
+VERCEL_ONLY_SETUP.md
+
+# Config files we don't need
+vite.config.ts
+vite.config.server.ts
+tsconfig.json
+tailwind.config.ts
+postcss.config.js
+components.json
