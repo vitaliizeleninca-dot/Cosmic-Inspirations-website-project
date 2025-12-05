@@ -6,6 +6,14 @@
     "OAUTH_CLIENT_ID": "@oauth_client_id",
     "OAUTH_CLIENT_SECRET": "@oauth_client_secret"
   },
+  
+  "functions": {
+    "api/index.js": {
+      "runtime": "nodejs20.x",
+      "includeFiles": "dist/server/node-build.mjs"
+    }
+  },
+
   "headers": [
     {
       "source": "/admin/config.yml",
@@ -37,7 +45,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "/api/:path*"
+      "destination": "/api/index.js"
     }
   ]
 }
