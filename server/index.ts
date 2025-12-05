@@ -29,6 +29,7 @@ export function createServer() {
   app.get("/api/opensea-collection", handleOpenSeaCollection);
   app.use("/", menuRouter);
   app.use("/", cmsConfigRouter);
+  app.use("/", sendMessageRouter);
 
   return app;
 }
