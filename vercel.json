@@ -9,7 +9,7 @@
   
   "functions": {
     "api/index.js": {
-      "runtime": "@vercel/node@20.2.0", // <--- Изменено для исправления ошибки рантайма
+      "runtime": "@vercel/node@20.2.0",
       "includeFiles": "dist/server/node-build.mjs"
     }
   },
