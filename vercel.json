@@ -1,7 +1,5 @@
 {
   "framework": "vite",
-  "buildCommand": "cd client && pnpm install && pnpm run build",
-  "outputDirectory": "client/dist",
-  "cleanUrls": true,
-  "ignoreCommand": "echo 'Skipping server folder'"
+  "buildCommand": "pnpm -C client install && pnpm -C client run build",
+  "outputDirectory": "client/dist"
 }
