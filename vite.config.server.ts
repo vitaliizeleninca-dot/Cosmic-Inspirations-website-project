@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import path from "path";
 
-// Server build configuration
+// Server build configuration for Vercel Serverless Functions
 export default defineConfig({
   build: {
     lib: {
@@ -11,7 +11,7 @@ export default defineConfig({
       formats: ["es"],
     },
     outDir: "dist/server",
-    target: "node22",
+    target: "node20", // Vercel Node.js 20.x runtime
     ssr: true,
     rollupOptions: {
       external: [
@@ -29,9 +29,30 @@ export default defineConfig({
         "buffer",
         "querystring",
         "child_process",
+        "events",
+        "util",
+        "net",
+        "tls",
+        "zlib",
+        "assert",
+        "async_hooks",
+        "module",
+        "vm",
+        "perf_hooks",
+        "v8",
+        "inspector",
+        "trace_events",
+        "repl",
+        "worker_threads",
+        "wasi",
+        "async_hooks",
         // External dependencies that should not be bundled
         "express",
         "cors",
+        "dotenv",
+        "js-yaml",
+        "zod",
+        "decap-cms-app",
       ],
       output: {
         format: "es",
