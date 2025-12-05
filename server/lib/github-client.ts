@@ -22,7 +22,7 @@ const getRepoInfo = () => {
 
   if (!owner || !repo) {
     throw new Error(
-      "GITHUB_OWNER and GITHUB_REPO environment variables are required"
+      "GITHUB_OWNER and GITHUB_REPO environment variables are required",
     );
   }
 
@@ -32,7 +32,7 @@ const getRepoInfo = () => {
 const makeGitHubRequest = async (
   path: string,
   method: string = "GET",
-  body?: object
+  body?: object,
 ) => {
   const token = getGitHubAuth();
   const { owner, repo } = getRepoInfo();
@@ -57,9 +57,7 @@ const makeGitHubRequest = async (
 
   if (!response.ok) {
     const errorData = await response.text();
-    throw new Error(
-      `GitHub API error: ${response.status} - ${errorData}`
-    );
+    throw new Error(`GitHub API error: ${response.status} - ${errorData}`);
   }
 
   return response.json();
@@ -77,11 +75,11 @@ export async function getLinksFromGitHub(): Promise<LinksData> {
 }
 
 export async function saveLinksToGitHub(
-  linksData: LinksData
+  linksData: LinksData,
 ): Promise<boolean> {
   try {
     const content = Buffer.from(JSON.stringify(linksData, null, 2)).toString(
-      "base64"
+      "base64",
     );
 
     // Try to get current file SHA
@@ -110,7 +108,9 @@ export async function saveLinksToGitHub(
   }
 }
 
-export function deduplicateLinks(links: LinksData["links"]): LinksData["links"] {
+export function deduplicateLinks(
+  links: LinksData["links"],
+): LinksData["links"] {
   const seen = new Set<string>();
   return links.filter((link) => {
     if (seen.has(link.url)) return false;
@@ -119,10 +119,8 @@ export function deduplicateLinks(links: LinksData["links"]): LinksData["links"] 
   });
 }
 
-export function sortLinksByDate(
-  links: LinksData["links"]
-): LinksData["links"] {
+export function sortLinksByDate(links: LinksData["links"]): LinksData["links"] {
   return [...links].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 }

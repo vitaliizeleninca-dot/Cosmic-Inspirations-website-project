@@ -104,18 +104,14 @@ export default function LinksManager() {
                 {saving ? "Saving..." : "Add Link"}
               </Button>
             </div>
-            {error && (
-              <p className="text-sm text-red-500">{error}</p>
-            )}
+            {error && <p className="text-sm text-red-500">{error}</p>}
           </form>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle>
-            Saved Links ({links.length})
-          </CardTitle>
+          <CardTitle>Saved Links ({links.length})</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (

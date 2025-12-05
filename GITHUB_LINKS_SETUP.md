@@ -5,6 +5,7 @@ This document explains how to set up and use the GitHub-based links storage syst
 ## Overview
 
 The links management system uses GitHub as a centralized data store, allowing you to:
+
 - Store links in a GitHub repository (not localStorage)
 - Access links from any device, browser, or application
 - Persist data without browser cache dependency
@@ -42,6 +43,7 @@ GitHub Repository (data/links.json)
 ### 2. Add Environment Variables to Vercel
 
 #### In Vercel Dashboard:
+
 1. Go to your project settings
 2. Navigate to **Settings → Environment Variables**
 3. Add the following variables:
@@ -53,6 +55,7 @@ GITHUB_REPO = <your-repository-name>
 ```
 
 **Example:**
+
 ```
 GITHUB_TOKEN = github_pat_11A...
 GITHUB_OWNER = vitalii-zelenin
@@ -60,6 +63,7 @@ GITHUB_REPO = Cosmic-Inspirations-website-project
 ```
 
 #### Or locally (development):
+
 Update your `.env` file:
 
 ```env
@@ -71,6 +75,7 @@ GITHUB_REPO=your_repository_name
 ### 3. Create Initial GitHub Structure
 
 The `/data/links.json` file has been created with:
+
 ```json
 {
   "links": []
@@ -86,11 +91,13 @@ Make sure this file exists in your repository's `data/` directory.
 Retrieves all saved links from GitHub.
 
 **Request:**
+
 ```bash
 curl https://your-domain.com/api/get-links
 ```
 
 **Response:**
+
 ```json
 {
   "links": [
@@ -108,6 +115,7 @@ curl https://your-domain.com/api/get-links
 Adds a new link to GitHub (auto-deduplicates, sorts by date).
 
 **Request:**
+
 ```bash
 curl -X POST https://your-domain.com/api/save-link \
   -H "Content-Type: application/json" \
@@ -115,6 +123,7 @@ curl -X POST https://your-domain.com/api/save-link \
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -148,12 +157,7 @@ export default function Admin() {
 ### Using the Utility Functions
 
 ```tsx
-import {
-  loadLinks,
-  saveLink,
-  formatDate,
-  type Link,
-} from "@/lib/github-links";
+import { loadLinks, saveLink, formatDate, type Link } from "@/lib/github-links";
 
 // Load all links
 const links = await loadLinks();
@@ -218,6 +222,7 @@ export function useGitHubLinks() {
 ## Security Considerations
 
 ⚠️ **Important:**
+
 - Never commit your `GITHUB_TOKEN` to version control
 - Use Vercel environment variables for production
 - Use `.env` files only for local development (add to `.gitignore`)
@@ -227,20 +232,24 @@ export function useGitHubLinks() {
 ## Troubleshooting
 
 ### "GITHUB_TOKEN environment variable is not set"
+
 - Check that environment variables are set in Vercel dashboard
 - Redeploy after adding environment variables
 - For local development, check `.env` file
 
 ### "Failed to fetch links"
+
 - Verify GitHub token has correct permissions (Contents: Read & Write)
 - Check that `data/links.json` exists in repository
 - Ensure `GITHUB_OWNER` and `GITHUB_REPO` are correctly set
 
 ### "Invalid URL format"
+
 - Ensure URLs start with `http://` or `https://`
 - Remove extra whitespace from URLs
 
 ### GitHub API Rate Limiting
+
 - Fine-grained tokens have generous rate limits (1000+ per hour)
 - If hit, wait before retrying
 - Monitor usage in GitHub token settings
@@ -266,6 +275,7 @@ localStorage.removeItem("your-links-key");
 ## Monitoring
 
 Check your links in GitHub:
+
 1. Navigate to your repository
 2. Open `data/links.json`
 3. Click "Raw" to view the JSON
@@ -276,6 +286,7 @@ Check your links in GitHub:
 ### Add Database Layer (Future)
 
 For higher traffic, consider:
+
 - Supabase for backup + faster queries
 - Caching with Redis
 - Database indexing for large link collections
@@ -299,6 +310,7 @@ Then update API to accept `?collection=favorites` parameter.
 ## Support
 
 For issues:
+
 1. Check GitHub token permissions
 2. Verify environment variables in Vercel
 3. Check GitHub API status
