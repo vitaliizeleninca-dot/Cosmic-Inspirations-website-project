@@ -2,48 +2,33 @@
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist/spa",
   "framework": "vite",
+
   "env": {
     "OAUTH_CLIENT_ID": "OAUTH_CLIENT_ID",
     "OAUTH_CLIENT_SECRET": "OAUTH_CLIENT_SECRET"
   },
-  "functions": {
-    "api/index.js": {
-      "runtime": "nodejs20.x",
-      "includeFiles": "dist/server/node-build.mjs"
-    }
-  },
+
   "headers": [
     {
       "source": "/admin/config.yml",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/yaml"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        }
+        { "key": "Content-Type", "value": "application/yaml" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
       ]
     },
     {
       "source": "/menu.json",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        }
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
       ]
     }
   ],
+
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "/api/index.js"
+      "destination": "https://YOUR_BACKEND_DOMAIN/:path*"
     }
   ]
 }
