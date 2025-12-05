@@ -31,7 +31,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
       // Send message (will attempt to email you)
       try {
-        await fetch("/.netlify/functions/send-message", {
+        await fetch("/api/send-message", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
