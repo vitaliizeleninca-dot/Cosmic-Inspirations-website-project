@@ -21,7 +21,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
     setIsLoading(true);
     try {
-      const contactEmail = localStorage.getItem("contact-email") || "noreply@cosmic-hub.com";
+      const contactEmail =
+        localStorage.getItem("contact-email") || "noreply@cosmic-hub.com";
 
       const messageData = {
         message: message.trim(),
@@ -86,7 +87,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <div className="bg-cosmic-dark/95 border border-cosmic-purple/30 rounded-2xl shadow-2xl cosmic-glow-lg w-full max-w-md overflow-hidden">
           {/* Header */}
           <div className="border-b border-cosmic-purple/20 p-6 flex items-center justify-between">
-            <h2 id="contact-modal-title" className="text-2xl font-bold text-cosmic-purple">
+            <h2
+              id="contact-modal-title"
+              className="text-2xl font-bold text-cosmic-purple"
+            >
               Contact Me
             </h2>
             <button
@@ -107,13 +111,20 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <Send className="w-8 h-8 text-cosmic-purple" />
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-cosmic-purple mb-2">Message Sent!</h3>
-                <p className="text-gray-400 text-sm">Thank you for reaching out. I'll get back to you soon.</p>
+                <h3 className="text-lg font-semibold text-cosmic-purple mb-2">
+                  Message Sent!
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  Thank you for reaching out. I'll get back to you soon.
+                </p>
               </div>
             ) : (
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-cosmic-purple mb-3">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-semibold text-cosmic-purple mb-3"
+                  >
                     Your Message
                   </label>
                   <textarea
@@ -129,13 +140,17 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     className="w-full h-32 px-4 py-3 rounded-lg bg-cosmic-dark border border-cosmic-purple/30 text-gray-100 placeholder-gray-600 text-sm focus:outline-none focus:border-cosmic-purple transition resize-none"
                   />
                   <div className="flex justify-between items-center mt-2">
-                    <span className={`text-xs ${
-                      remainingChars < 50 ? "text-red-400" : "text-gray-500"
-                    }`}>
+                    <span
+                      className={`text-xs ${
+                        remainingChars < 50 ? "text-red-400" : "text-gray-500"
+                      }`}
+                    >
                       {remainingChars} characters remaining
                     </span>
                     {remainingChars < 0 && (
-                      <span className="text-xs text-red-400">Message too long</span>
+                      <span className="text-xs text-red-400">
+                        Message too long
+                      </span>
                     )}
                   </div>
                 </div>

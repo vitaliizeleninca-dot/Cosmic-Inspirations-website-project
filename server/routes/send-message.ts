@@ -17,9 +17,7 @@ router.post("/api/send-message", async (req: Request, res: Response) => {
     }
 
     if (message.length > 500) {
-      return res
-        .status(400)
-        .json({ error: "Message exceeds 500 characters" });
+      return res.status(400).json({ error: "Message exceeds 500 characters" });
     }
 
     const messageData = {
@@ -35,19 +33,19 @@ router.post("/api/send-message", async (req: Request, res: Response) => {
       formData.append("message", messageData.message);
       formData.append("timestamp", messageData.timestamp);
 
-      const formspreeResponse = await fetch("https://formspree.io/f/xyzqwerty", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json",
+      const formspreeResponse = await fetch(
+        "https://formspree.io/f/xyzqwerty",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
         },
-      });
+      );
 
       if (!formspreeResponse.ok) {
-        console.warn(
-          "Formspree submission status:",
-          formspreeResponse.status
-        );
+        console.warn("Formspree submission status:", formspreeResponse.status);
         // Don't fail - Formspree might have rate limits
       }
     } catch (error) {
