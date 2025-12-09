@@ -4,7 +4,9 @@ import path from "path";
 import fs from "fs";
 import { createServer } from "./server";
 
-// Copy public folder including admin files
+// ---------------------
+// Plugin: копирование public после сборки
+// ---------------------
 function copyPublicPlugin(): Plugin {
   return {
     name: "copy-public",
@@ -19,7 +21,6 @@ function copyPublicPlugin(): Plugin {
           fs.cpSync(publicDir, outDir, { recursive: true, force: true });
           console.log(`✓ Copied public folder to ${outDir}`);
 
-          // Verify admin files exist
           const adminConfigPath = path.join(outDir, "admin", "config.yml");
           if (fs.existsSync(adminConfigPath)) {
             console.log(`✓ Verified admin/config.yml exists`);
@@ -34,39 +35,59 @@ function copyPublicPlugin(): Plugin {
   };
 }
 
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+// ---------------------
+// Plugin: Express middleware для dev
+// ---------------------
+function expressPlugin(): Plugin {
+  return {
+    name: "express-plugin",
+    apply: "serve",
+    configureServer(server) {
+      const app = createServer();
+      server.middlewares.use(app);
+    },
+  };
+}
+
+// ---------------------
+// Plugin: middleware для /canvas-data
+// ---------------------
+function canvasDataMiddleware(): Plugin {
+  return {
+    name: "canvas-data-middleware",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        if (req.url?.startsWith("/canvas-data")) {
+          // Проксируем в public, чтобы Vite мог отдавать файлы
+          req.url = req.url.replace("/canvas-data", "/public/canvas-data");
+        }
+        next();
+      });
+    },
+  };
+}
+
+// ---------------------
+// Vite config
+// ---------------------
+export default defineConfig({
   server: {
-    host: "::",
+    host: true, // "::" тоже можно, но host: true работает лучше в Tempo
     port: 8080,
     fs: {
-      allow: ["./client", "./shared", "./public"],
+      allow: [path.resolve(".")], // Разрешаем доступ ко всем файлам проекта
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
     },
   },
-  build: {
-    outDir: "dist/spa",
-  },
+  build: { outDir: "dist/spa" },
   publicDir: "public",
   assetsInclude: ["**/*.yml", "**/*.yaml"],
-  plugins: [react(), copyPublicPlugin(), expressPlugin()],
+  plugins: [react(), copyPublicPlugin(), expressPlugin(), canvasDataMiddleware()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./client"),
       "@shared": path.resolve(__dirname, "./shared"),
     },
   },
-}));
-
-function expressPlugin(): Plugin {
-  return {
-    name: "express-plugin",
-    apply: "serve", // Only apply during development (serve mode)
-    configureServer(server) {
-      const app = createServer();
-
-      // Add Express app as middleware to Vite dev server
-      server.middlewares.use(app);
-    },
-  };
-}
+});
