@@ -1,33 +1,5 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/spa",
-  "framework": "vite",
-  "headers": [
-    {
-      "source": "/admin/config.yml",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/yaml"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        }
-      ]
-    },
-    {
-      "source": "/menu.json",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        }
-      ]
-    }
-  ]
+  "outputDirectory": "dist",
+  "framework": "vite"
 }
