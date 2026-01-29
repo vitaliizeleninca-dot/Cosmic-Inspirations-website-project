@@ -1,7 +1,7 @@
-import { siteContent } from "../data/content"
+import { siteContent } from "../data/content";
 
 export default function Footer() {
-  const { footer } = siteContent
+  const { footer } = siteContent;
 
   return (
     <footer className="bg-cosmic-dark/50 border-t border-cosmic-purple/20 py-12 px-4">
@@ -52,5 +52,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

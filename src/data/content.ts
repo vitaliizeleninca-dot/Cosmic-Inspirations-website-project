@@ -88,4 +88,4 @@ export const siteContent = {
       { label: "Sitemap", href: "/sitemap" },
     ],
   },
-}
+};
