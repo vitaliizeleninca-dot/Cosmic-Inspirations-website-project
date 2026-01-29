@@ -1,7 +1,7 @@
-import { siteContent } from '../data/content'
+import { siteContent } from "../data/content";
 
 export default function Navbar() {
-  const { nav } = siteContent
+  const { nav } = siteContent;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-purple-500/20 bg-black/80">
@@ -26,5 +26,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

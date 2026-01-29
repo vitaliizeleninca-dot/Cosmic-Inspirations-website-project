@@ -1,7 +1,7 @@
-import { siteContent } from '../data/content'
+import { siteContent } from "../data/content";
 
 export default function Contact() {
-  const { contact } = siteContent
+  const { contact } = siteContent;
 
   return (
     <section id="contact" className="py-20 px-4 bg-black">
@@ -14,13 +14,19 @@ export default function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div className="p-8 bg-purple-500/10 border border-purple-500/20 rounded-lg text-center">
             <p className="text-gray-400 text-sm mb-2">Email</p>
-            <a href={`mailto:${contact.email}`} className="text-xl font-semibold text-purple-400 hover:text-purple-300">
+            <a
+              href={`mailto:${contact.email}`}
+              className="text-xl font-semibold text-purple-400 hover:text-purple-300"
+            >
               {contact.email}
             </a>
           </div>
           <div className="p-8 bg-purple-500/10 border border-purple-500/20 rounded-lg text-center">
             <p className="text-gray-400 text-sm mb-2">Phone</p>
-            <a href={`tel:${contact.phone}`} className="text-xl font-semibold text-purple-400 hover:text-purple-300">
+            <a
+              href={`tel:${contact.phone}`}
+              className="text-xl font-semibold text-purple-400 hover:text-purple-300"
+            >
               {contact.phone}
             </a>
           </div>
@@ -44,5 +50,5 @@ export default function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }

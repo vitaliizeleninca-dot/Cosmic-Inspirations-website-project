@@ -1,7 +1,7 @@
-import { siteContent } from '../data/content'
+import { siteContent } from "../data/content";
 
 export default function AboutMe() {
-  const { about } = siteContent
+  const { about } = siteContent;
 
   return (
     <section id="about" className="py-20 px-4 bg-black">
@@ -32,5 +32,5 @@ export default function AboutMe() {
         </div>
       </div>
     </section>
-  )
+  );
 }

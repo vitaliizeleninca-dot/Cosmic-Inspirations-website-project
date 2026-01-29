@@ -1,7 +1,7 @@
-import { siteContent } from '../data/content'
+import { siteContent } from "../data/content";
 
 export default function VideoShowcase() {
-  const { videos } = siteContent
+  const { videos } = siteContent;
 
   return (
     <section id="videos" className="py-20 px-4 bg-black">
@@ -13,11 +13,18 @@ export default function VideoShowcase() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {videos.items.map((video, idx) => (
-            <div key={idx} className="group rounded-lg overflow-hidden bg-purple-500/10 border border-purple-500/20 hover:border-purple-500/50 transition-all">
+            <div
+              key={idx}
+              className="group rounded-lg overflow-hidden bg-purple-500/10 border border-purple-500/20 hover:border-purple-500/50 transition-all"
+            >
               <div className="aspect-video bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center group-hover:bg-purple-600 transition-colors">
-                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   </div>
@@ -32,5 +39,5 @@ export default function VideoShowcase() {
         </div>
       </div>
     </section>
-  )
+  );
 }

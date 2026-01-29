@@ -1,7 +1,7 @@
-import { siteContent } from '../data/content'
+import { siteContent } from "../data/content";
 
 export default function PhotoGallery() {
-  const { gallery } = siteContent
+  const { gallery } = siteContent;
 
   return (
     <section id="gallery" className="py-20 px-4 bg-black">
@@ -19,7 +19,9 @@ export default function PhotoGallery() {
               <div className="w-full h-full bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center">
                 <div className="text-center">
                   <p className="text-sm text-gray-400 mb-2">{photo.alt}</p>
-                  <p className="text-lg font-semibold text-purple-400">{photo.title}</p>
+                  <p className="text-lg font-semibold text-purple-400">
+                    {photo.title}
+                  </p>
                 </div>
               </div>
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -30,5 +32,5 @@ export default function PhotoGallery() {
         </div>
       </div>
     </section>
-  )
+  );
 }

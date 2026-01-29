@@ -1,10 +1,13 @@
-import { siteContent } from '../data/content'
+import { siteContent } from "../data/content";
 
 export default function Hero() {
-  const { hero } = siteContent
+  const { hero } = siteContent;
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-4 pt-16 relative overflow-hidden">
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center px-4 pt-16 relative overflow-hidden"
+    >
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/20 rounded-full filter blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-600/20 rounded-full filter blur-3xl animate-pulse" />
@@ -13,7 +16,9 @@ export default function Hero() {
       <div className="relative z-10 text-center max-w-4xl mx-auto">
         <div className="mb-6 inline-block">
           <div className="px-4 py-2 rounded-full border border-purple-500/50 bg-purple-500/10 backdrop-blur">
-            <span className="text-purple-400 text-sm font-semibold">{hero.badge}</span>
+            <span className="text-purple-400 text-sm font-semibold">
+              {hero.badge}
+            </span>
           </div>
         </div>
 
@@ -34,5 +39,5 @@ export default function Hero() {
         </button>
       </div>
     </section>
-  )
+  );
 }

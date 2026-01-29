@@ -1,22 +1,29 @@
-import { siteContent } from '../data/content'
+import { siteContent } from "../data/content";
 
 export default function Footer() {
-  const { footer } = siteContent
+  const { footer } = siteContent;
 
   return (
     <footer className="bg-black border-t border-purple-500/20 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-bold text-purple-400 mb-4">Cosmic Hub</h3>
-            <p className="text-gray-400">Exploring the intersection of technology and creativity.</p>
+            <h3 className="text-xl font-bold text-purple-400 mb-4">
+              Cosmic Hub
+            </h3>
+            <p className="text-gray-400">
+              Exploring the intersection of technology and creativity.
+            </p>
           </div>
           <div>
             <h4 className="font-semibold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {footer.links.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-gray-400 hover:text-purple-400 transition-colors">
+                  <a
+                    href={link.href}
+                    className="text-gray-400 hover:text-purple-400 transition-colors"
+                  >
                     {link.label}
                   </a>
                 </li>
@@ -25,7 +32,9 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="font-semibold text-white mb-4">Newsletter</h4>
-            <p className="text-gray-400 text-sm mb-4">Subscribe to get updates on latest projects.</p>
+            <p className="text-gray-400 text-sm mb-4">
+              Subscribe to get updates on latest projects.
+            </p>
             <input
               type="email"
               placeholder="your@email.com"
@@ -39,5 +48,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
