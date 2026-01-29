@@ -1,5 +1,6 @@
-import app from "../dist/server/production.mjs";
+import serverless from "serverless-http";
+import { app } from "../dist/server/production.mjs";
 
-export default (req, res) => {
-  app(req, res);
-};
+const handler = serverless(app);
+
+export default handler;
