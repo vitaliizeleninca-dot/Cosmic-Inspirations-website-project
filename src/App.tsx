@@ -130,10 +130,8 @@ export default function Index() {
                   {winnerShowcase.title}
                 </h3>
                 <p className="text-gray-300 mb-8 leading-relaxed">
-                  Officially selected for the <strong>"Awakening Radiance"</strong> exhibit by 34 Gallery. 
-                  Featured in <strong>One Love Miami Art Week</strong> (referenced by Forbes as a "must-attend" event). 
-                  Recognized for contributions to <strong>#FCancer2025</strong> Art for Impact.
-                </p>
+  {winnerShowcase.description}
+</p>
                 <button
                   onClick={() => setIsGalleryOpen(true)}
                   className="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95"
