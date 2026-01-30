@@ -63,6 +63,18 @@ export const siteContent = {
      songs: [],
   },
 
+  // AI Art Podcast (Используем эту секцию для видео перед коллекциями)
+  aiArtPodcast: {
+    title: "Collection Showcases", // Переименовали заголовок
+    description:
+      "Watch these cinematic trailers showcasing the essence of my digital collections",
+    enabled: true,
+    videos: [
+      "https://www.youtube.com/embed/O7K1vqs3ZnA",
+      "https://www.youtube.com/embed/nn_Q2rsYtPs",
+    ],
+  },
+  
   // NFT Collections
   nftCollections: {
     title: "NFT Collections",
@@ -70,10 +82,6 @@ export const siteContent = {
     description:
       "Discover my portfolio of high-fidelity digital art where AI and human imagination converge. Showcasing diverse styles and aesthetics, open for potential commissions. For custom collaborations, send a message via Contact Me",
     enabled: true,
-   videos: [
-      "https://www.youtube.com/embed/O7K1vqs3ZnA",
-      "https://www.youtube.com/embed/nn_Q2rsYtPs"
-    ],
     
     collections: [
       {
