@@ -53,6 +53,14 @@ export default function Index() {
               href="#my-ai-tools"
               className="text-sm text-gray-300 hover:text-cosmic-purple transition"
             >
+
+              {/* ... другие компоненты ... */}
+
+<AiArtPodcast content={content.nftVideos} /> 
+<NFTCollections content={content.nftCollections} />
+
+{/* ... другие компоненты ... */}
+              
               My AI Tools
             </a>
           </nav>
