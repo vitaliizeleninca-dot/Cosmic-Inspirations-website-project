@@ -16,16 +16,20 @@ export default function Index() {
   const { hero, winnerShowcase, cosmicAmbient, feelCosmos, aiTools, nftCollections, contact } = siteContent;
 
   return (
+    
     <div className="min-h-screen overflow-x-hidden">
       {/* Header/Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-cosmic-purple/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition">
-            <Sparkles className="w-8 h-8 text-cosmic-purple animate-pulse" />
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
-              Cosmic Hub
-            </h1>
-          </div>
+          
+     <a href="#" className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition">
+  <Sparkles className="w-8 h-8 text-cosmic-purple animate-pulse" />
+  <h1 className="text-2xl font-bold bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
+    Cosmic Hub
+  </h1>
+</a>
+
+          
           <nav className="hidden sm:flex items-center gap-8">
             <a href="#podcast" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
               AI Art Podcast
@@ -37,7 +41,7 @@ export default function Index() {
               Feel the Cosmos
             </a>
             <a href="#nft" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
-              NFT Collections
+              Art Collections
             </a>
             <a href="#my-ai-tools" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
               My AI Tools
