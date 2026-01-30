@@ -56,15 +56,11 @@ export const siteContent = {
       "Step into an interactive universe where art, sound, and technology converge. Explore immersive AI-generated soundscapes inspired by the world's cultural centers. Young women in luxurious costumes appear against futuristic cosmic landscapes",
     enabled: true,
     videos: [
-      "https://www.youtube.com/embed/XHV8HmJsqyQ",
-      "https://www.youtube.com/embed/-0d3NsRwl9g",
+      "https://www.youtube.com/embed/XHV8HmJsqyQ",     
       "https://www.youtube.com/embed/u2SNVF_Scm0",
+       "https://www.youtube.com/embed/-0d3NsRwl9g",
                   ],
-     songs: [
-       "https://www.youtube.com/embed/XHV8HmJsqyQ",
-      "https://www.youtube.com/embed/-0d3NsRwl9g",
-      "https://www.youtube.com/embed/u2SNVF_Scm0",
-            ],
+     songs: [],
   },
 
   // NFT Collections
@@ -81,6 +77,28 @@ export const siteContent = {
       //   name: "Collection Name",
       //   image: "https://image-url.jpg"
       // }
+      collections: [
+      {
+        url: "https://objkt.com/collections/KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ",
+        name: "Cosmic Inspirations: Digital Echoes",
+        image: "https://objkt.com/tokens/KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ/36"
+      },
+      {
+        url: "https://opensea.io/collection/cosmic-inspirations-animated-edition",
+        name: "Cosmic Inspirations: Animated Edition",
+        image: "https://opensea.io/item/polygon/0x34ebf5c75420ca6c75299381493b9a877d10edc9/6"
+      },
+      {
+        url: "https://opensea.io/collection/cosmic-inspirations-master-study-sketches",
+        name: "Cosmic Inspirations: Retro Edition",
+        image: "https://opensea.io/item/polygon/0xce55e1b15e28894c41b0b84548f559b4819ffe61/18"
+      },
+      {
+        url: "https://opensea.io/collection/alphaross-season-1-cosmic-inspirations",
+        name: "Cosmic Inspirations: AI-Avatars of Great Artists",
+        image: "https://opensea.io/item/polygon/0xce55e1b15e28894c41b0b84548f559b4819ffe61/7"
+      }
+    ],
     ],
   },
 
@@ -92,8 +110,8 @@ export const siteContent = {
       "Meet the tools I use daily to create content. They help creators, artists, and media professionals work faster and more creatively, from video editing to voice synthesis",
     enabled: true,
     videos: [
-      "https://www.youtube.com/embed/d3Z15MAun6Q",
-      "https://www.youtube.com/embed/jrDZrU4NjXQ",
+     "https://www.youtube.com/embed/jrDZrU4NjXQ",
+      "https://www.youtube.com/embed/d3Z15MAun6Q",      
             ],
   },
 
