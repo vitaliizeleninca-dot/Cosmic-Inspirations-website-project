@@ -138,7 +138,7 @@ export const siteContent: SiteContent = {
  nftCollections: {
     title: "Art Collections",
     subtitle: "Artistic Vision & Technology",
-    description: "Curated digital series and immersive audiovisual works exploring cultural memory and future imaginaries.",
+    description: "Curated digital series and immersive audiovisual works exploring cultural memory and future imaginaries",
     enabled: true,
     collections: [ 
       {
