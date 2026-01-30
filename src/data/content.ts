@@ -45,13 +45,7 @@ export const siteContent = {
       "https://youtu.be/djwdPu3X3H0",
       "https://youtu.be/-NV3FIc7024",
     ],
-    songs: [ 
-      "https://youtu.be/TG3v7yBEH5E",
-      "https://youtu.be/EVfd34fKZYo",
-      "https://youtu.be/2GcTZP27IeM",
-      "https://youtu.be/djwdPu3X3H0",
-      "https://youtu.be/-NV3FIc7024",
-           ],
+    songs: [],
   },
 
   // Feel the Cosmos
@@ -66,11 +60,7 @@ export const siteContent = {
       "https://youtu.be/-0d3NsRwl9g",
       "https://youtu.be/u2SNVF_Scm0",
                   ],
-    songs: [
-      "https://youtu.be/XHV8HmJsqyQ",
-      "https://youtu.be/-0d3NsRwl9g",
-      "https://youtu.be/u2SNVF_Scm0",
-           ],
+     songs: [],
   },
 
   // NFT Collections
