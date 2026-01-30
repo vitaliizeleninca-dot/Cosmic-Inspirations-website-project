@@ -19,17 +19,17 @@ const WebbieSocialIcon = ({ className }: { className?: string }) => (
 
 export default function Footer() {
   const [socialLinks, setSocialLinks] = useState([
-    { name: "X", icon: X, url: "#", label: "X (Twitter)", storageKey: "twitter" },
-    { name: "YouTube", icon: Youtube, url: "#", label: "YouTube", storageKey: "youtube" },
-    { name: "Instagram", icon: Instagram, url: "#", label: "Instagram", storageKey: "instagram" },
-    { name: "Threads", icon: MessageCircle, url: "#", label: "Threads", storageKey: "threads", isCustom: true },
-    { name: "Facebook", icon: Facebook, url: "#", label: "Facebook", storageKey: "facebook" },
-    { name: "Telegram", icon: Send, url: "#", label: "Telegram", storageKey: "telegram" },
-    { name: "TikTok", icon: Music, url: "#", label: "TikTok", storageKey: "tiktok", isCustom: true },
-    { name: "Discord", icon: MessageCircle, url: "#", label: "Discord", storageKey: "discord", isCustom: true },
-    { name: "LinkedIn", icon: Linkedin, url: "#", label: "LinkedIn", storageKey: "linkedin", isCustom: true },
-    { name: "Contra", icon: Briefcase, url: "#", label: "Contra", storageKey: "contra", isCustom: true },
-    { name: "Webbie Social", icon: WebbieSocialIcon, url: "#", label: "Webbie Social", storageKey: "webbie", isCustom: true },
+    { name: "X", icon: X, url: "https://x.com/AlphaRoss78", label: "X (Twitter)", storageKey: "twitter" },
+    { name: "YouTube", icon: Youtube, url: "https://www.youtube.com/channel/UCS9eHWmzy_MVBVDj0JCyXxg", label: "YouTube", storageKey: "youtube" },
+    { name: "Instagram", icon: Instagram, url: "https://www.instagram.com/alphaross78/", label: "Instagram", storageKey: "instagram" },
+    { name: "Threads", icon: MessageCircle, url: "https://www.threads.com/@alphaross78", label: "Threads", storageKey: "threads", isCustom: true },
+    { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/profile.php?id=61557921170922", label: "Facebook", storageKey: "facebook" },
+    { name: "Telegram", icon: Send, url: "https://web.telegram.org/a/#-1002120712558", label: "Telegram", storageKey: "telegram" },
+    { name: "TikTok", icon: Music, url: "https://www.tiktok.com/@alpha_ross", label: "TikTok", storageKey: "tiktok", isCustom: true },
+    { name: "Discord", icon: MessageCircle, url: "https://discord.gg/JuknDXrs", label: "Discord", storageKey: "discord", isCustom: true },
+    { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/alpha-ross-678a66396/", label: "LinkedIn", storageKey: "linkedin", isCustom: true },
+    { name: "Contra", icon: Briefcase, url: "https://contra.com/vitalii_zelenin_x5ldj4ys/work?r=vitalii_zelenin_x5ldj4ys", label: "Contra", storageKey: "contra", isCustom: true },
+    { name: "Webbie Social", icon: WebbieSocialIcon, url: "https://studio.webbiesocial.com/dashboard/alphaross", label: "Webbie Social", storageKey: "webbie", isCustom: true },
   ]);
 
   useEffect(() => {
