@@ -26,6 +26,8 @@ export const siteContent = {
       // Add YouTube video IDs or embed URLs here
       // Examples:
       // "https://www.youtube.com/embed/jgpJVI3tDT0",
+      "https://www.youtube.com/embed/iMXTQt2tWko",
+      "https://www.youtube.com/embed/sMui14XvhjY",
     ],
   },
 
