@@ -1,8 +1,38 @@
-winnerShowcase: {
+// 1. Описание типов (Interface) - оставляем как есть
+export interface SiteContent {
+  winnerShowcase: {
+    title: string;
+    subtitle: string;
+    description: string;
+    video: string;
+    enabled: boolean;
+    gallery: Array<{ url: string; title: string; achievement: string }>;
+  };
+  hero: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    aboutMeText: string;
+    learnMoreText: string;
+  };
+  aiArtPodcast: { title: string; description: string; enabled: boolean; videos: string[] };
+  cosmicAmbient: { title: string; subtitle: string; description: string; enabled: boolean; videos: string[] };
+  feelCosmos: { title: string; subtitle: string; description: string; enabled: boolean; videos: string[] };
+  nftCollections: { title: string; subtitle: string; description: string; enabled: boolean; collections: any[] };
+  nftVideos: { title: string; description: string; enabled: boolean; videos: string[] };
+  aiTools: { title: string; subtitle: string; description: string; enabled: boolean; videos: string[] };
+  contact: { enabled: boolean };
+}
+
+// 2. ЕДИНЫЙ объект контента - теперь всё в одной "коробке"
+export const siteContent: SiteContent = {
+  // Твои новые достижения
+  winnerShowcase: {
     title: "International Open Call Selection",
     subtitle: "Exhibited at Art Basel Miami & Global Digital Galleries",
     description: "Officially selected artist for premier exhibitions including 'Awakening Radiance' by 34 Gallery, 'One Love Miami' (featured by Forbes), and the '#FCancer2025' Art for Impact initiative.",
-    video: "https://www.youtube.com/embed/ТВОЕ_ВИДЕО", // Ссылка на приоритетное видео
+    video: "https://www.youtube.com/embed/O7K1vqs3ZnA", 
     enabled: true,
     gallery: [
       { 
@@ -28,16 +58,12 @@ winnerShowcase: {
     ]
   },
 
-// Static content for Cosmic Hub - edit these to change site content
-
-export const siteContent = {
-  // Hero Section
+  // Hero Section - ТВОИ ТЕКСТЫ СОХРАНЕНЫ
   hero: {
     badge: "Welcome to My Cosmic Realm",
     title: "Immerse Yourself",
     subtitle: "in the Cosmos",
-    description:
-      "Where artificial intelligence meets creative vision. Explore cutting-edge digital art, immersive experiences, and exclusive NFT collections crafted at the frontier of technology",
+    description: "Where artificial intelligence meets creative vision. Explore cutting-edge digital art, immersive experiences, and exclusive NFT collections crafted at the frontier of technology",
     aboutMeText: `Discover the intersection of art, technology, and cosmic imagination. 
     I create immersive digital experiences using cutting-edge AI tools.
     My work explores the boundaries between human creativity and artificial intelligence.`,
@@ -46,27 +72,22 @@ export const siteContent = {
     AI art podcasts, and exclusive NFT collections.`,
   },
 
-  // AI Art Podcast
+  // AI Art Podcast - ТВОИ ВИДЕО СОХРАНЕНЫ
   aiArtPodcast: {
     title: "AI Art Podcast",
-    description:
-      "Explore conversations at the intersection of artificial intelligence and creative expression, where legendary masters come to life with AI avatars, sharing their voices, ideas, and timeless wisdom",
+    description: "Explore conversations at the intersection of artificial intelligence and creative expression, where legendary masters come to life with AI avatars, sharing their voices, ideas, and timeless wisdom",
     enabled: true,
     videos: [
-      // Add YouTube video IDs or embed URLs here
-      // Examples:
-      // "https://www.youtube.com/embed/jgpJVI3tDT0",
       "https://www.youtube.com/embed/iMXTQt2tWko",
       "https://www.youtube.com/embed/sMui14XvhjY",
     ],
   },
 
-  // Cosmic Ambient
+  // Cosmic Ambient - ТВОИ ВИДЕО СОХРАНЕНЫ
   cosmicAmbient: {
     title: "Cosmic Ambient",
     subtitle: "40-Min Tracks",
-    description:
-      "Journey through AI-curated ambient soundscapes that evoke the vastness of space. Each composition is designed to elevate your consciousness and inspire creative flow. From Deep Focus & Productivity to Sleep & Meditation",
+    description: "Journey through AI-curated ambient soundscapes that evoke the vastness of space. Each composition is designed to elevate your consciousness and inspire creative flow. From Deep Focus & Productivity to Sleep & Meditation",
     enabled: true,
     videos: [
       "https://www.youtube.com/embed/TG3v7yBEH5E",
@@ -75,32 +96,27 @@ export const siteContent = {
       "https://www.youtube.com/embed/djwdPu3X3H0",
       "https://www.youtube.com/embed/-NV3FIc7024",
     ],
-    songs: [],
   },
 
-  // Feel the Cosmos
+  // Feel the Cosmos - ТВОИ ВИДЕО СОХРАНЕНЫ
   feelCosmos: {
     title: "Feel the Cosmos",
     subtitle: "40-Min Tracks",
-    description:
-      "Step into an interactive universe where art, sound, and technology converge. Explore immersive AI-generated soundscapes inspired by the world's cultural centers. Young women in luxurious costumes appear against futuristic cosmic landscapes",
+    description: "Step into an interactive universe where art, sound, and technology converge. Explore immersive AI-generated soundscapes inspired by the world's cultural centers. Young women in luxurious costumes appear against futuristic cosmic landscapes",
     enabled: true,
     videos: [
       "https://www.youtube.com/embed/XHV8HmJsqyQ",     
       "https://www.youtube.com/embed/u2SNVF_Scm0",
        "https://www.youtube.com/embed/-0d3NsRwl9g",
-                  ],
-     songs: [],
+    ],
   },
  
-  // NFT Collections
+  // NFT Collections - ТВОИ ССЫЛКИ СОХРАНЕНЫ
   nftCollections: {
     title: "NFT Collections",
     subtitle: "Legendary Digital Artifacts",
-    description:
-      "Discover my portfolio of high-fidelity digital art where AI and human imagination converge. Showcasing diverse styles and aesthetics, open for potential commissions. For custom collaborations, send a message via Contact Me",
+    description: "Discover my portfolio of high-fidelity digital art where AI and human imagination converge. Showcasing diverse styles and aesthetics, open for potential commissions. For custom collaborations, send a message via Contact Me",
     enabled: true,
-    
     collections: [
       {
         url: "https://opensea.io/collection/cosmic-inspirations-animated-edition",
@@ -125,7 +141,6 @@ export const siteContent = {
     ],
   },
 
-  // New section for NFT Videos
   nftVideos: {
     title: "Collection Showcases",
     description: "Watch these cinematic trailers showcasing the essence of my digital collections",
@@ -136,20 +151,17 @@ export const siteContent = {
     ],
   },
 
-  // My AI Tools
   aiTools: {
     title: "My AI Tools",
     subtitle: "Powerful solutions for creators",
-    description:
-      "Meet the tools I use daily to create content. They help creators, artists, and media professionals work faster and more creatively, from video editing to voice synthesis",
+    description: "Meet the tools I use daily to create content. They help creators, artists, and media professionals work faster and more creatively, from video editing to voice synthesis",
     enabled: true,
     videos: [
      "https://www.youtube.com/embed/jrDZrU4NjXQ",
       "https://www.youtube.com/embed/d3Z15MAun6Q",      
-            ],
+    ],
   },
 
-  // Contact
   contact: {
     enabled: true,
   },
