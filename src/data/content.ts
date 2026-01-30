@@ -62,19 +62,7 @@ export const siteContent = {
                   ],
      songs: [],
   },
-
-  // AI Art Podcast (Используем эту секцию для видео перед коллекциями)
-  aiArtPodcast: {
-    title: "Collection Showcases", // Переименовали заголовок
-    description:
-      "Watch these cinematic trailers showcasing the essence of my digital collections",
-    enabled: true,
-    videos: [
-      "https://www.youtube.com/embed/O7K1vqs3ZnA",
-      "https://www.youtube.com/embed/nn_Q2rsYtPs",
-    ],
-  },
-  
+ 
   // NFT Collections
   nftCollections: {
     title: "NFT Collections",
@@ -104,6 +92,17 @@ export const siteContent = {
         name: "Cosmic Inspirations: AI-Avatars of Great Artists",
         image: "/Cosmic Inspirations by AlphaRoss in da Vinci Style.jpeg"
       }
+    ],
+  },
+
+  // New section for NFT Videos
+  nftVideos: {
+    title: "Collection Showcases",
+    description: "Watch these cinematic trailers showcasing the essence of my digital collections",
+    enabled: true,
+    videos: [
+      "https://www.youtube.com/embed/O7K1vqs3ZnA",
+      "https://www.youtube.com/embed/nn_Q2rsYtPs",
     ],
   },
 
