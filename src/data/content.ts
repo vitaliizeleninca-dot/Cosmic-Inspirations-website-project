@@ -98,14 +98,14 @@ hero: {
     subtitle: "in the Cosmos",
     description: "Where artificial intelligence meets creative vision. Explore cutting-edge digital art, immersive experiences, and curated digital collections crafted at the frontier of technology",
     
-    // Этот текст больше не будет открываться в окне, кнопка станет прямой ссылкой
+    // Оставляем текст для SEO, но кнопка теперь будет вести на файл
     aboutMeText: "Digital Artist | AI & Media Creator. Work exhibited during Miami Art Week and recognized by Forbes.",
 
-    // МЕНЯЕМ ГЛАВНУЮ КНОПКУ НА ССЫЛКУ К ФАЙЛУ
-    primaryButtonText: "View Full CV", 
+    // ВОТ ОНО: Делаем кнопку "About Me" активной ссылкой на файл
+    primaryButtonText: "About Me", 
     primaryButtonLink: "/CV_Alpha_Ross.png", 
     
-    // ВТОРАЯ КНОПКА ДЛЯ СКРОЛЛА ВНИЗ
+    // Вторая кнопка для прокрутки к коллекциям
     secondaryButtonText: "Learn More",
     secondaryButtonLink: "#collections",
   },
