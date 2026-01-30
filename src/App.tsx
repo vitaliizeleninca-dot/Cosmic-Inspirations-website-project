@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sparkles, X } from "lucide-react";
+import { Sparkles, X, PlayCircle } from "lucide-react"; // PlayCircle пригодится для видео
 import Footer from "./components/Footer";
 import ContactModal from "./components/ContactModal";
 import HeroModal from "./components/HeroModal";
@@ -7,14 +7,17 @@ import { siteContent } from "./data/content";
 
 export default function Index() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
+  // HeroModal для Learn More
+  const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false);
+
+  // Достаем блоки из контента
   const { hero, winnerShowcase, cosmicAmbient, feelCosmos, aiTools, nftCollections, contact } = siteContent;
 
   return (
     <div className="min-h-screen overflow-x-hidden">
-      {/* Header */}
+      {/* Header/Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-cosmic-purple/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition">
@@ -81,12 +84,11 @@ export default function Index() {
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">{hero.description}</p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {/* 🔹 ЗАМЕНА кнопки */}
+              {/* ВНИМАНИЕ: Кнопка VIEW MY CV HERE */}
               <a
                 href="/CV_Alpha_Ross.png"
                 target="_blank"
-                rel="noopener noreferrer"
-                className="btn-cosmic text-center"
+                className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
               >
                 VIEW MY CV HERE
               </a>
@@ -101,7 +103,7 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Winner Showcase Section */}
+        {/* Winner Showcase */}
         {winnerShowcase.enabled && (
           <section id="exhibitions" className="py-20 px-4 bg-black/50 border-y border-cosmic-purple/10">
             <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
@@ -124,8 +126,8 @@ export default function Index() {
                   {winnerShowcase.title}
                 </h3>
                 <p className="text-gray-300 mb-8 leading-relaxed">
-                  Officially selected for the <strong>"Awakening Radiance"</strong> exhibit by 34 Gallery.
-                  Featured in <strong>One Love Miami Art Week</strong> (referenced by Forbes as a "must-attend" event).
+                  Officially selected for the <strong>"Awakening Radiance"</strong> exhibit by 34 Gallery. 
+                  Featured in <strong>One Love Miami Art Week</strong> (referenced by Forbes as a "must-attend" event). 
                   Recognized for contributions to <strong>#FCancer2025</strong> Art for Impact.
                 </p>
                 <button
@@ -139,16 +141,216 @@ export default function Index() {
           </section>
         )}
 
-        {/* Остальные секции оставляем как есть */}
-        {/* Cosmic Ambient, Feel the Cosmos, NFT Collections, NFT Videos, AI Tools */}
-        {/* ... */}
+        {/* AI Art Podcast Section */}
+        {siteContent.aiArtPodcast.enabled && (
+          <section id="podcast" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative">
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-cosmic-purple/30 rounded-full filter blur-3xl" />
+            </div>
+
+            <div className="relative z-10 w-full max-w-6xl">
+              <div className="text-center mb-16">
+                <h3 className="text-5xl font-bold mb-4">{siteContent.aiArtPodcast.title}</h3>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                  {siteContent.aiArtPodcast.description}
+                </p>
+              </div>
+
+              {siteContent.aiArtPodcast.videos.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {siteContent.aiArtPodcast.videos.map((url, index) => (
+                    <div
+                      key={index}
+                      className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
+                    >
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={url}
+                        title={`AI Art Podcast Episode ${index + 1}`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Cosmic Ambient Section */}
+        {cosmicAmbient.enabled && cosmicAmbient.videos.length > 0 && (
+          <section id="music" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative">
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute bottom-0 left-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
+            </div>
+
+            <div className="relative z-10 w-full max-w-6xl">
+              <div className="text-center mb-16">
+                <h3 className="text-5xl font-bold mb-4">{cosmicAmbient.title}</h3>
+                <p className="text-cosmic-purple text-lg font-semibold mb-4">{cosmicAmbient.subtitle}</p>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                  {cosmicAmbient.description}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {cosmicAmbient.videos.map((url, index) => (
+                  <div key={index} className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={url}
+                      title={`Cosmic Ambient ${index + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Feel the Cosmos Section */}
+        {feelCosmos.enabled && feelCosmos.videos.length > 0 && (
+          <section id="experience" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative">
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cosmic-purple/30 rounded-full filter blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
+            </div>
+
+            <div className="relative z-10 max-w-6xl w-full">
+              <div className="text-center mb-16">
+                <h3 className="text-5xl font-bold mb-4">{feelCosmos.title}</h3>
+                <p className="text-cosmic-purple text-lg font-semibold mb-4">{feelCosmos.subtitle}</p>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">{feelCosmos.description}</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {feelCosmos.videos.map((url, index) => (
+                  <div key={index} className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={url}
+                      title={`Feel the Cosmos ${index + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* NFT Collections Section */}
+        {nftCollections.enabled && nftCollections.collections.length > 0 && (
+          <section id="nft" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative">
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
+            </div>
+
+            <div className="relative z-10 max-w-6xl w-full">
+              <div className="text-center mb-16">
+                <h3 className="text-5xl font-bold mb-4">{nftCollections.title}</h3>
+                <p className="text-cosmic-purple text-lg font-semibold mb-4">{nftCollections.subtitle}</p>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">{nftCollections.description}</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-8">
+                {nftCollections.collections.map((collection, index) => (
+                  <a
+                    key={index}
+                    href={collection.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer bg-cosmic-dark/50"
+                  >
+                    {collection.image && (
+                      <img
+                        src={collection.image}
+                        alt={collection.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-6 px-4">
+                      <p className="text-gray-100 font-semibold text-center">{collection.name}</p>
+                      <span className="text-gray-300 text-sm">View Collection</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* NFT Showcase Videos */}
+        {siteContent.nftVideos && siteContent.nftVideos.enabled && (
+          <section className="flex items-center justify-center px-4 py-10 relative">
+            <div className="relative z-10 w-full max-w-6xl text-center">
+              <h3 className="text-4xl font-bold mb-4">{siteContent.nftVideos.title}</h3>
+              <p className="text-gray-300 mb-8 max-w-2xl mx-auto">{siteContent.nftVideos.description}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {siteContent.nftVideos.videos.map((url, i) => (
+                  <div key={i} className="aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                    <iframe width="100%" height="100%" src={url} frameBorder="0" allowFullScreen />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* My AI Tools Section */}
+        {aiTools.enabled && aiTools.videos.length > 0 && (
+          <section id="my-ai-tools" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative">
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute bottom-0 left-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
+            </div>
+
+            <div className="relative z-10 w-full max-w-6xl">
+              <div className="text-center mb-16">
+                <h3 className="text-5xl font-bold mb-4">{aiTools.title}</h3>
+                <p className="text-cosmic-purple text-lg font-semibold mb-4">{aiTools.subtitle}</p>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">{aiTools.description}</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {aiTools.videos.map((url, index) => (
+                  <div key={index} className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={url}
+                      title={`My AI Tools ${index + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Footer */}
         <Footer />
       </main>
 
       {/* Contact Modal */}
       <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
 
-      {/* Hero Modals */}
+      {/* Hero Modal для Learn More */}
       <HeroModal
         isOpen={isLearnMoreOpen}
         title="Learn More"
@@ -156,7 +358,7 @@ export default function Index() {
         onClose={() => setIsLearnMoreOpen(false)}
       />
 
-      {/* Winner Gallery Modal */}
+      {/* Модальное окно галереи победителей */}
       {isGalleryOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl">
           <div className="relative w-full max-w-6xl max-h-[90vh] overflow-y-auto bg-cosmic-dark border border-cosmic-purple/30 rounded-3xl p-6 sm:p-10">
@@ -168,12 +370,8 @@ export default function Index() {
             </button>
 
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold text-white uppercase tracking-tighter">
-                Exhibition Masterpieces
-              </h2>
-              <p className="text-cosmic-purple text-sm font-semibold mt-2">
-                Official Selection - International Open Calls
-              </p>
+              <h2 className="text-3xl font-bold text-white uppercase tracking-tighter">Exhibition Masterpieces</h2>
+              <p className="text-cosmic-purple text-sm font-semibold mt-2">Official Selection - International Open Calls</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -188,9 +386,7 @@ export default function Index() {
                     className="w-full aspect-square object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                   />
                   <div className="p-4 border-t border-white/5 bg-black/20">
-                    <span className="text-yellow-500 text-[10px] font-bold uppercase tracking-widest">
-                      {item.achievement}
-                    </span>
+                    <span className="text-yellow-500 text-[10px] font-bold uppercase tracking-widest">{item.achievement}</span>
                     <p className="text-sm font-medium text-gray-200 mt-1">{item.title}</p>
                   </div>
                 </div>
