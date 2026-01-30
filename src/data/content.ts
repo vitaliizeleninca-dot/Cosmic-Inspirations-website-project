@@ -51,7 +51,7 @@ export const siteContent: SiteContent = {
   },
   { 
     url: "/Celestial Symphony.png", 
-    title: "Selected for 'Radiance' Exhibit",
+    title: "Selected for 'Radiance' Exhibit by 34 Gallery",
     achievement: "Winner Gallery Representation"
   },
   { 
