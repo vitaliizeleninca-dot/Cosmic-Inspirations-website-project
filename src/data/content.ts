@@ -39,11 +39,11 @@ export const siteContent = {
       "Journey through AI-curated ambient soundscapes that evoke the vastness of space. Each composition is designed to elevate your consciousness and inspire creative flow. From Deep Focus & Productivity to Sleep & Meditation",
     enabled: true,
     videos: [
-      "https://youtu.be/TG3v7yBEH5E",
-      "https://youtu.be/EVfd34fKZYo",
-      "https://youtu.be/2GcTZP27IeM",
-      "https://youtu.be/djwdPu3X3H0",
-      "https://youtu.be/-NV3FIc7024",
+      "https://www.youtube.com/embed/TG3v7yBEH5E",
+      "https://www.youtube.com/embed/EVfd34fKZYo",
+      "https://www.youtube.com/embed/2GcTZP27IeM",
+      "https://www.youtube.com/embed/djwdPu3X3H0",
+      "https://www.youtube.com/embed/-NV3FIc7024",
     ],
     songs: [],
   },
@@ -56,11 +56,15 @@ export const siteContent = {
       "Step into an interactive universe where art, sound, and technology converge. Explore immersive AI-generated soundscapes inspired by the world's cultural centers. Young women in luxurious costumes appear against futuristic cosmic landscapes",
     enabled: true,
     videos: [
-      "https://youtu.be/XHV8HmJsqyQ",
-      "https://youtu.be/-0d3NsRwl9g",
-      "https://youtu.be/u2SNVF_Scm0",
+      "https://www.youtube.com/embed/XHV8HmJsqyQ",
+      "https://www.youtube.com/embed/-0d3NsRwl9g",
+      "https://www.youtube.com/embed/u2SNVF_Scm0",
                   ],
-     songs: [],
+     songs: [
+       "https://www.youtube.com/embed/XHV8HmJsqyQ",
+      "https://www.youtube.com/embed/-0d3NsRwl9g",
+      "https://www.youtube.com/embed/u2SNVF_Scm0",
+            ],
   },
 
   // NFT Collections
@@ -88,8 +92,8 @@ export const siteContent = {
       "Meet the tools I use daily to create content. They help creators, artists, and media professionals work faster and more creatively, from video editing to voice synthesis",
     enabled: true,
     videos: [
-      "https://youtu.be/d3Z15MAun6Q",
-      "https://youtu.be/jrDZrU4NjXQ",
+      "https://www.youtube.com/embed/d3Z15MAun6Q",
+      "https://www.youtube.com/embed/jrDZrU4NjXQ",
             ],
   },
 
