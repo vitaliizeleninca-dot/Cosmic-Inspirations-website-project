@@ -98,22 +98,20 @@ export const siteContent: SiteContent = {
     subtitle: "in the Cosmos",
     description: "Where artificial intelligence meets creative vision. Explore cutting-edge digital art, immersive experiences, and curated digital collections crafted at the frontier of technology",
     
-    // Текст в черном окне "About Me"
+    // Мы оставляем этот текст на всякий случай, но сейчас он не будет мешать
     aboutMeText: `Discover the intersection of art, technology, and cosmic imagination. 
-    I create immersive digital experiences using cutting-edge AI tools.
-    My work explores the boundaries between human creativity and artificial intelligence.`,
+    I create immersive digital experiences using cutting-edge AI tools.`,
 
-    // ПАРАМЕТРЫ КНОПКИ CV
-    showCvButton: true,
-    cvButtonText: "View Full CV",
-    cvFileUrl: "/CV_Alpha_Ross.png",
-
-    // Текст для кнопки "Learn More"
-    learnMoreText: `This is a portfolio of AI-generated art and digital experiences.
-    Explore the different sections to see my latest works in cosmic ambient music,
-    AI art podcasts, and exclusive digital collections.`,
+    // === ГЛАВНЫЙ ФИНТ ===
+    // Меняем текст кнопки и ставим прямую ссылку на файл
+    primaryButtonText: "View Full CV", 
+    primaryButtonLink: "/CV_Alpha_Ross.png", //
+    
+    // Вторая кнопка остается для навигации
+    secondaryButtonText: "Learn More",
+    secondaryButtonLink: "#collections",
   },
-
+  
   // AI Art Podcast - ТВОИ ВИДЕО СОХРАНЕНЫ
   aiArtPodcast: {
     title: "AI Art Podcast",
