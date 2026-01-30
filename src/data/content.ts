@@ -87,7 +87,7 @@ export const siteContent: SiteContent = {
     badge: "Welcome to My Cosmic Realm",
     title: "Immerse Yourself",
     subtitle: "in the Cosmos",
-    description: "Where artificial intelligence meets creative vision. Explore cutting-edge digital art, immersive experiences, and Curated Digital Collections crafted at the frontier of technology",
+    description: "Where artificial intelligence meets creative vision. Explore cutting-edge digital art, immersive experiences, and curated digital collections crafted at the frontier of technology",
     aboutMeText: `Discover the intersection of art, technology, and cosmic imagination. 
     I create immersive digital experiences using cutting-edge AI tools.
     My work explores the boundaries between human creativity and artificial intelligence.`,
