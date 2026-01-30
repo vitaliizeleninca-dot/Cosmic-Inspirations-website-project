@@ -102,20 +102,24 @@ export default function Index() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => setIsAboutMeOpen(true)}
-                className="btn-cosmic"
-              >
-                About Me
-              </button>
-              <button
-                onClick={() => setIsLearnMoreOpen(true)}
-                className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
-              >
-                Learn More
-              </button>
-            </div>
-          </div>
+                    
+  {/* Эта кнопка теперь работает как ссылка на файл, а не как открывашка окна */}
+  <a
+    href="/CV_Alpha_Ross.png"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="btn-cosmic inline-flex items-center justify-center text-center cursor-pointer"
+  >
+    About Me (CV)
+  </a>
+
+  <button
+    onClick={() => setIsLearnMoreOpen(true)}
+    className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300 cursor-pointer"
+  >
+    Learn More
+  </button>
+</div>
         </section>
 
 {/* Winner Showcase - Официальные достижения */}
