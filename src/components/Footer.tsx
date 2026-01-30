@@ -32,21 +32,7 @@ export default function Footer() {
     { name: "Webbie Social", icon: WebbieSocialIcon, url: "https://studio.webbiesocial.com/dashboard/alphaross", label: "Webbie Social", storageKey: "webbie", isCustom: true },
   ]);
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("social-links");
-      const savedSocialLinks = saved ? JSON.parse(saved) : {};
-
-      setSocialLinks(prevLinks =>
-        prevLinks.map(link => ({
-          ...link,
-          url: savedSocialLinks[link.storageKey] || "#",
-        }))
-      );
-    } catch (error) {
-      console.error("Failed to load social links:", error);
-    }
-  }, []);
+ ;
 
   return (
     <footer className="border-t border-cosmic-purple/20 bg-cosmic-dark/50 backdrop-blur-sm py-8">
