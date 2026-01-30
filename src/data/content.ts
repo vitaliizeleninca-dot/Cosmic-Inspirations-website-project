@@ -92,7 +92,7 @@ export const siteContent: SiteContent = {
     cvLink: "/CV_Alpha_Ross.png" 
   },
   
- hero: {
+hero: {
     badge: "Welcome to My Cosmic Realm",
     title: "Immerse Yourself",
     subtitle: "in the Cosmos",
