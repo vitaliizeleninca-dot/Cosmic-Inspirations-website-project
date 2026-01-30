@@ -33,29 +33,53 @@ export const siteContent: SiteContent = {
     description: "Selected Artist: Curated by 34 Gallery, an organization promoting creative arts advocacy in alignment with UN SDG 3.4. Miami Art Week: Exhibited in One Love Miami (event featured by Forbes). Recognition: Contributor to #FCancer2025 Art for Impact",
     video: "https://www.youtube.com/embed/XHV8HmJsqyQ", 
     enabled: true,
-    gallery: [
-      { 
-        url: "/Cosmic Serenity.png", 
-        title: "Selected for 'New Horizons: Art for a Fresh Start'",
-        achievement: "Selected Artist - Webbie Social"
-      },
-      { 
-        url: "/Aquarelle Cosmic Metropolis.png", 
-        title: "Selected for 'Urban Echoes: Capturing the City's Soul'",
-        achievement: "International Selection"
-      },
-      { 
-        url: "/Celestial Symphony.png", 
-        title: "Selected for 'Awakening Radiance' Exhibit",
-        achievement: "34 Gallery Representation"
-      },
-      { 
-        url: "/Cosmic Doodle First Contact.png", 
-        title: "Selected for 'Nostalgia' by 34 Gallery",
-        achievement: "Exhibition Winner"
-      }
-    ]
+   gallery: [
+  { 
+    url: "/Klee Cosmic Geometry.png", 
+    title: "Featured in Abstract Ambience Magazine Issue #2",
+    achievement: "Spotlight Artist Selection - VAVortex"
   },
+  { 
+    url: "/Cosmic Muse Miami.png", 
+    title: "Tribute to the Digital Art Revolution in Miami",
+    achievement: "Miami Art Week Spotlight"
+  },
+  { 
+    url: "/In the Spirit of Picasso.png", 
+    title: "Recognized for #FCancer Humanitarian Initiative",
+    achievement: "Selected Impact Artist"
+  },
+  { 
+    url: "/Celestial Symphony.png", 
+    title: "Selected for 'Radiance' Exhibit",
+    achievement: "Winner Gallery Representation"
+  },
+  { 
+    url: "/Aquarelle Cosmic Metropolis.png", 
+    title: "Selected for 'Urban Echoes: Capturing the City's Soul'",
+    achievement: "International Selection"
+  },
+  { 
+    url: "/The Synthetic Observer.png", 
+    title: "Selected for 'AICanvas' Innovation Showcase",
+    achievement: "Digital Excellence Award"
+  },
+  { 
+    url: "/Celestial Builders.png", 
+    title: "Selected for 'Gratitude' Digital Open Call",
+    achievement: "Selected Artist Showcase"
+  },
+  { 
+    url: "/Cosmic Serenity.png", 
+    title: "Selected for 'New Horizons: Art for a Fresh Start'",
+    achievement: "Selected Artist - Webbie Social"
+  },
+  { 
+    url: "/Cosmic Doodle First Contact.png", 
+    title: "Selected for 'Nostalgia' by 34 Gallery",
+    achievement: "Exhibition Winner"
+  }
+]
 
   // Hero Section - ТВОИ ТЕКСТЫ СОХРАНЕНЫ
   hero: {
