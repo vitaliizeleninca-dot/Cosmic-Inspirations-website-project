@@ -7,6 +7,9 @@ export interface SiteContent {
     enabled: boolean;
     gallery: Array<{ url: string; title: string; achievement: string }>;
   };
+  
+aboutMe: { enabled: boolean; title: string; subtitle: string; description: string; cvImage: string; buttonText: string; cvLink: string };
+  
   hero: {
     badge: string;
     title: string;
