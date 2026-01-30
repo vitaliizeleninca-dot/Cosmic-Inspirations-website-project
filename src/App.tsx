@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, X, PlayCircle } from "lucide-react"; // PlayCircle пригодится для красоты видео
 import Footer from "./components/Footer";
 import ContactModal from "./components/ContactModal";
 import HeroModal from "./components/HeroModal";
-import { siteContent } from "./data/content";
+import { siteContent } from "./data/content";;
 
 export default function Index() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
   const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false);
+        const [isGalleryOpen, setIsGalleryOpen] = useState(false); // Теперь на месте!
 
-  const { hero, cosmicAmbient, feelCosmos, aiTools, nftCollections, contact } =
-    siteContent;
+ // Достаем новый блок из контента
+  const { hero, winnerShowcase, cosmicAmbient, feelCosmos, aiTools, nftCollections, contact } = siteContent;
 
   return (
     <div className="min-h-screen overflow-x-hidden">
@@ -116,6 +117,47 @@ export default function Index() {
             </div>
           </div>
         </section>
+
+{/* Winner Showcase - Официальные достижения */}
+{winnerShowcase.enabled && (
+  <section id="exhibitions" className="py-20 px-4 bg-black/50 border-y border-cosmic-purple/10">
+    <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
+      {/* Видео */}
+      <div className="w-full lg:w-1/2 aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-cosmic-purple/20 border border-cosmic-purple/30">
+        <iframe 
+          width="100%" height="100%" 
+          src={winnerShowcase.video} 
+          title="Exhibition Showcase"
+          frameBorder="0" allowFullScreen 
+        />
+      </div>
+      
+      {/* Текст на основе писем */}
+      <div className="w-full lg:w-1/2 text-left">
+        <div className="inline-block px-3 py-1 rounded-full border border-yellow-500/50 text-yellow-500 text-xs font-bold uppercase tracking-wider mb-4">
+          Selected Artist 2025-2026
+        </div>
+        <h3 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+          {winnerShowcase.title}
+        </h3>
+        <p className="text-gray-300 mb-8 leading-relaxed">
+          Officially selected for the <strong>"Awakening Radiance"</strong> exhibit by 34 Gallery. 
+          Featured in <strong>One Love Miami Art Week</strong> (referenced by Forbes as a "must-attend" event). 
+          Recognized for contributions to <strong>#FCancer2025</strong> Art for Impact.
+        </p>
+        <button 
+          onClick={() => setIsGalleryOpen(true)}
+          className="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95"
+        >
+          Open Winner Gallery
+        </button>
+      </div>
+    </div>
+  </section>
+)}
+
+
+              
 
         {/* AI Art Podcast Section */}
         {siteContent.aiArtPodcast.enabled && (
@@ -390,6 +432,39 @@ export default function Index() {
         content={hero.learnMoreText}
         onClose={() => setIsLearnMoreOpen(false)}
       />
+
+            {/* Модальное окно галереи победителей */}
+{isGalleryOpen && (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl">
+    <div className="relative w-full max-w-6xl max-h-[90vh] overflow-y-auto bg-cosmic-dark border border-cosmic-purple/30 rounded-3xl p-6 sm:p-10">
+      <button 
+        onClick={() => setIsGalleryOpen(false)}
+        className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors"
+      >
+        <X className="w-8 h-8" />
+      </button>
+      
+      <div className="text-center mb-10">
+        <h2 className="text-3xl font-bold text-white uppercase tracking-tighter">Exhibition Masterpieces</h2>
+        <p className="text-cosmic-purple text-sm font-semibold mt-2">Official Selection - International Open Calls</p>
+      </div>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {winnerShowcase.gallery.map((item, idx) => (
+          <div key={idx} className="group relative rounded-xl overflow-hidden border border-white/5 bg-white/5 hover:border-cosmic-purple/50 transition-all">
+            <img src={item.url} alt={item.title} className="w-full aspect-square object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+            <div className="p-4 border-t border-white/5 bg-black/20">
+              <span className="text-yellow-500 text-[10px] font-bold uppercase tracking-widest">{item.achievement}</span>
+              <p className="text-sm font-medium text-gray-200 mt-1">{item.title}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+
+            
     </div>
   );
 }
