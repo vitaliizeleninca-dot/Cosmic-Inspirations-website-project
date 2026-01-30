@@ -39,11 +39,19 @@ export const siteContent = {
       "Journey through AI-curated ambient soundscapes that evoke the vastness of space. Each composition is designed to elevate your consciousness and inspire creative flow. From Deep Focus & Productivity to Sleep & Meditation",
     enabled: true,
     videos: [
-      "https://www.youtube.com/embed/jgpJVI3tDT0",
-      "https://www.youtube.com/embed/1La4QzGeaaQ",
-      "https://www.youtube.com/embed/TqOneWeDtFI",
-      "https://www.youtube.com/embed/lFcSrYw-ARY",
+      "https://youtu.be/TG3v7yBEH5E",
+      "https://youtu.be/EVfd34fKZYo",
+      "https://youtu.be/2GcTZP27IeM",
+      "https://youtu.be/djwdPu3X3H0",
+      "https://youtu.be/-NV3FIc7024",
     ],
+    songs: [ 
+      "https://youtu.be/TG3v7yBEH5E",
+      "https://youtu.be/EVfd34fKZYo",
+      "https://youtu.be/2GcTZP27IeM",
+      "https://youtu.be/djwdPu3X3H0",
+      "https://youtu.be/-NV3FIc7024",
+           ],
   },
 
   // Feel the Cosmos
@@ -53,8 +61,16 @@ export const siteContent = {
     description:
       "Step into an interactive universe where art, sound, and technology converge. Explore immersive AI-generated soundscapes inspired by the world's cultural centers. Young women in luxurious costumes appear against futuristic cosmic landscapes",
     enabled: true,
-    videos: [],
-    songs: [],
+    videos: [
+      "https://youtu.be/XHV8HmJsqyQ",
+      "https://youtu.be/-0d3NsRwl9g",
+      "https://youtu.be/u2SNVF_Scm0",
+                  ],
+    songs: [
+      "https://youtu.be/XHV8HmJsqyQ",
+      "https://youtu.be/-0d3NsRwl9g",
+      "https://youtu.be/u2SNVF_Scm0",
+           ],
   },
 
   // NFT Collections
@@ -81,7 +97,10 @@ export const siteContent = {
     description:
       "Meet the tools I use daily to create content. They help creators, artists, and media professionals work faster and more creatively, from video editing to voice synthesis",
     enabled: true,
-    videos: [],
+    videos: [
+      "https://youtu.be/d3Z15MAun6Q",
+      "https://youtu.be/jrDZrU4NjXQ",
+            ],
   },
 
   // Contact
