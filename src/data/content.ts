@@ -71,34 +71,26 @@ export const siteContent = {
       "Discover my portfolio of high-fidelity digital art where AI and human imagination converge. Showcasing diverse styles and aesthetics, open for potential commissions. For custom collaborations, send a message via Contact Me",
     enabled: true,
     collections: [
-      // Format: { url: "link to collection", name: "Collection Name", image: "optional image url" }
-      // {
-      //   url: "https://opensea.io/collection/...",
-      //   name: "Collection Name",
-      //   image: "https://image-url.jpg"
-      // }
-      collections: [
       {
         url: "https://objkt.com/collections/KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ",
         name: "Cosmic Inspirations: Digital Echoes",
-        image: "https://objkt.com/tokens/KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ/36"
+        image: "https://assets.objkt.com/file/assets-003/KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ/thumb"
       },
       {
         url: "https://opensea.io/collection/cosmic-inspirations-animated-edition",
         name: "Cosmic Inspirations: Animated Edition",
-        image: "https://opensea.io/item/polygon/0x34ebf5c75420ca6c75299381493b9a877d10edc9/6"
+        image: "https://i.seadn.io/collection/gcs/cosmic-inspirations-animated-edition/image.png" 
       },
       {
         url: "https://opensea.io/collection/cosmic-inspirations-master-study-sketches",
         name: "Cosmic Inspirations: Retro Edition",
-        image: "https://opensea.io/item/polygon/0xce55e1b15e28894c41b0b84548f559b4819ffe61/18"
+        image: "https://i.seadn.io/collection/gcs/cosmic-inspirations-master-study-sketches/image.png"
       },
       {
         url: "https://opensea.io/collection/alphaross-season-1-cosmic-inspirations",
         name: "Cosmic Inspirations: AI-Avatars of Great Artists",
-        image: "https://opensea.io/item/polygon/0xce55e1b15e28894c41b0b84548f559b4819ffe61/7"
+        image: "https://i.seadn.io/collection/gcs/alphaross-season-1-cosmic-inspirations/image.png"
       }
-    ],
     ],
   },
 
