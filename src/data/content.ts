@@ -70,14 +70,11 @@ export const siteContent = {
     description:
       "Discover my portfolio of high-fidelity digital art where AI and human imagination converge. Showcasing diverse styles and aesthetics, open for potential commissions. For custom collaborations, send a message via Contact Me",
     enabled: true,
-    videos: [
-      // Add YouTube video IDs or embed URLs here
-      // Examples:
-      // "https://www.youtube.com/embed/jgpJVI3tDT0",
+   videos: [
       "https://www.youtube.com/embed/O7K1vqs3ZnA",
-      "https://www.youtube.com/embed/nn_Q2rsYtPs",
+      "https://www.youtube.com/embed/nn_Q2rsYtPs"
     ],
-  },
+    
     collections: [
       {
         url: "https://opensea.io/collection/cosmic-inspirations-animated-edition",
