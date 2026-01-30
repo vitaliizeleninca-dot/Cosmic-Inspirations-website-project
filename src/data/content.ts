@@ -31,7 +31,7 @@ export const siteContent: SiteContent = {
   winnerShowcase: {
     title: "International Open Call Selection",
     subtitle: "Exhibited at Art Basel Miami & Global Digital Galleries",
-    description: "Officially selected artist for premier exhibitions including 'Awakening Radiance' by 34 Gallery, 'One Love Miami' (featured by Forbes), and the '#FCancer2025' Art for Impact initiative.",
+    description: "Selected Artist: Curated by 34 Gallery, an organization promoting creative arts advocacy in alignment with UN SDG 3.4. Miami Art Week: Exhibited in One Love Miami (event featured by Forbes). Recognition: Contributor to #FCancer2025 Art for Impact. More in the About Me section",
     video: "https://www.youtube.com/embed/O7K1vqs3ZnA", 
     enabled: true,
     gallery: [
