@@ -31,7 +31,7 @@ export const siteContent: SiteContent = {
     title: "International Open Call Selection",
     subtitle: "Exhibited at Art Basel Miami & Global Digital Galleries",
     description: "Selected Artist: Curated by 34 Gallery, an organization promoting creative arts advocacy in alignment with UN SDG 3.4. Miami Art Week: Exhibited in One Love Miami (event featured by Forbes). Recognition: Contributor to #FCancer2025 Art for Impact. More in the About Me section",
-    video: "https://www.youtube.com/embed/O7K1vqs3ZnA", 
+    video: "https://www.youtube.com/embed/XHV8HmJsqyQ", 
     enabled: true,
     gallery: [
       { 
