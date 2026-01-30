@@ -72,19 +72,19 @@ export const siteContent = {
     enabled: true,
     collections: [
       {
-        url: "https://objkt.com/collections/KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ",
-        name: "Cosmic Inspirations: Digital Echoes",
-        image: "/Cosmic Cube Realm.png"
-      },
-      {
         url: "https://opensea.io/collection/cosmic-inspirations-animated-edition",
         name: "Cosmic Inspirations: Animated Edition",
         image: "/Animated Edition In the Spirit of Gustav Klimt.png" 
       },
       {
+        url: "https://objkt.com/collections/KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ",
+        name: "Cosmic Inspirations: Digital Echoes",
+        image: "/Cosmic Cube Realm.png"
+      },
+      {
         url: "https://opensea.io/collection/cosmic-inspirations-master-study-sketches",
         name: "Cosmic Inspirations: Retro Edition",
-        image: "/Cosmic Inspirations by AlphaRoss in the Style Alexander Golovin.png"
+        image: "/Cosmic Inspirations by AlphaRoss in the Style Alexander Golovin.jpeg"
       },
       {
         url: "https://opensea.io/collection/alphaross-season-1-cosmic-inspirations",
