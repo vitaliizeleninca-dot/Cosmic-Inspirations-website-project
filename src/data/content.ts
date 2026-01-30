@@ -82,6 +82,16 @@ export const siteContent: SiteContent = {
 ]
      },
 
+  aboutMe: {
+    enabled: true,
+    title: "About Me",
+    subtitle: "Digital Artist | AI & Media Creator",
+    description: "Vitalii Zelenin (Alpha Ross) is a creative technologist whose work has been exhibited during Miami Art Week and recognized by Forbes. Selected by 34 Gallery for projects aligned with UN SDG 3.4.",
+    cvImage: "/CV_Alpha_Ross.png", // Твое стильное резюме
+    buttonText: "View Full CV",
+    cvLink: "/CV_Alpha_Ross.png" 
+  },
+
   // Hero Section - ТВОИ ТЕКСТЫ СОХРАНЕНЫ
   hero: {
     badge: "Welcome to My Cosmic Realm",
