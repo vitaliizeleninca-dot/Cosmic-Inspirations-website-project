@@ -80,6 +80,7 @@ export const siteContent: SiteContent = {
     achievement: "Exhibition Winner"
   }
 ]
+     },
 
   // Hero Section - ТВОИ ТЕКСТЫ СОХРАНЕНЫ
   hero: {
