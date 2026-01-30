@@ -98,19 +98,18 @@ hero: {
     subtitle: "in the Cosmos",
     description: "Where artificial intelligence meets creative vision. Explore cutting-edge digital art, immersive experiences, and curated digital collections crafted at the frontier of technology",
     
-    // Мы оставляем этот текст на всякий случай, но сейчас он не будет мешать
-    aboutMeText: `Discover the intersection of art, technology, and cosmic imagination. 
-    I create immersive digital experiences using cutting-edge AI tools.`,
+    // Этот текст больше не будет открываться в окне, кнопка станет прямой ссылкой
+    aboutMeText: "Digital Artist | AI & Media Creator. Work exhibited during Miami Art Week and recognized by Forbes.",
 
-    // === ГЛАВНЫЙ ФИНТ ===
-    // Меняем текст кнопки и ставим прямую ссылку на файл
+    // МЕНЯЕМ ГЛАВНУЮ КНОПКУ НА ССЫЛКУ К ФАЙЛУ
     primaryButtonText: "View Full CV", 
-    primaryButtonLink: "/CV_Alpha_Ross.png", //
+    primaryButtonLink: "/CV_Alpha_Ross.png", 
     
-    // Вторая кнопка остается для навигации
+    // ВТОРАЯ КНОПКА ДЛЯ СКРОЛЛА ВНИЗ
     secondaryButtonText: "Learn More",
     secondaryButtonLink: "#collections",
   },
+  
   
   // AI Art Podcast - ТВОИ ВИДЕО СОХРАНЕНЫ
   aiArtPodcast: {
