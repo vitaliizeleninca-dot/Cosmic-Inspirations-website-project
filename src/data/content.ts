@@ -135,15 +135,13 @@ export const siteContent: SiteContent = {
     ],
   },
  
-  nftCollections: {
-    title: "Art Collections", // Убрали NFT
+ nftCollections: {
+    title: "Art Collections",
     subtitle: "Artistic Vision & Technology",
     description: "Curated digital series and immersive audiovisual works exploring cultural memory and future imaginaries.",
     enabled: true,
     collections: [ 
-       // оставляем твои работы здесь
-    ]
-  },
+      {
         url: "https://opensea.io/collection/cosmic-inspirations-animated-edition",
         name: "Cosmic Inspirations: Animated Edition",
         image: "/Animated Edition In the Spirit of Gustav Klimt.png" 
