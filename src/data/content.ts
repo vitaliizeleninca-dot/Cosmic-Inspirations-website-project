@@ -1,3 +1,33 @@
+winnerShowcase: {
+    title: "International Open Call Selection",
+    subtitle: "Exhibited at Art Basel Miami & Global Digital Galleries",
+    description: "Officially selected artist for premier exhibitions including 'Awakening Radiance' by 34 Gallery, 'One Love Miami' (featured by Forbes), and the '#FCancer2025' Art for Impact initiative.",
+    video: "https://www.youtube.com/embed/ТВОЕ_ВИДЕО", // Ссылка на приоритетное видео
+    enabled: true,
+    gallery: [
+      { 
+        url: "/Cosmic Serenity.png", 
+        title: "Selected for 'New Horizons: Art for a Fresh Start'",
+        achievement: "Selected Artist - Webbie Social"
+      },
+      { 
+        url: "/Aquarelle Cosmic Metropolis.png", 
+        title: "Selected for 'Urban Echoes: Capturing the City's Soul'",
+        achievement: "International Selection"
+      },
+      { 
+        url: "/Celestial Symphony.png", 
+        title: "Selected for 'Awakening Radiance' Exhibit",
+        achievement: "34 Gallery Representation"
+      },
+      { 
+        url: "/Cosmic Doodle First Contact.png", 
+        title: "Selected for 'Nostalgia' by 34 Gallery",
+        achievement: "Exhibition Winner"
+      }
+    ]
+  },
+
 // Static content for Cosmic Hub - edit these to change site content
 
 export const siteContent = {
