@@ -10,8 +10,7 @@ export default function Index() {
   const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
   const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false);
 
-  const { hero, cosmicAmbient, feelCosmos, aiTools, nftCollections, contact } =
-    siteContent;
+  const { hero, cosmicAmbient, feelCosmos, aiTools, nftCollections, contact, aiArtPodcast, nftVideos } = siteContent;
 
   return (
     <div className="min-h-screen overflow-x-hidden">
@@ -25,44 +24,11 @@ export default function Index() {
             </h1>
           </div>
           <nav className="hidden sm:flex items-center gap-8">
-            <a
-              href="#podcast"
-              className="text-sm text-gray-300 hover:text-cosmic-purple transition"
-            >
-              AI Art Podcast
-            </a>
-            <a
-              href="#music"
-              className="text-sm text-gray-300 hover:text-cosmic-purple transition"
-            >
-              Cosmic Ambient
-            </a>
-            <a
-              href="#experience"
-              className="text-sm text-gray-300 hover:text-cosmic-purple transition"
-            >
-              Feel the Cosmos
-            </a>
-            <a
-              href="#nft"
-              className="text-sm text-gray-300 hover:text-cosmic-purple transition"
-            >
-              NFT Collections
-            </a>
-            <a
-              href="#my-ai-tools"
-              className="text-sm text-gray-300 hover:text-cosmic-purple transition"
-            >
-
-              {/* ... другие компоненты ... */}
-
-<AiArtPodcast content={content.nftVideos} /> 
-<NFTCollections content={content.nftCollections} />
-
-{/* ... другие компоненты ... */}
-              
-              My AI Tools
-            </a>
+            <a href="#podcast" className="text-sm text-gray-300 hover:text-cosmic-purple transition">AI Art Podcast</a>
+            <a href="#music" className="text-sm text-gray-300 hover:text-cosmic-purple transition">Cosmic Ambient</a>
+            <a href="#experience" className="text-sm text-gray-300 hover:text-cosmic-purple transition">Feel the Cosmos</a>
+            <a href="#nft" className="text-sm text-gray-300 hover:text-cosmic-purple transition">NFT Collections</a>
+            <a href="#my-ai-tools" className="text-sm text-gray-300 hover:text-cosmic-purple transition">My AI Tools</a>
           </nav>
           <div className="flex items-center gap-4">
             <div className="w-px h-6 bg-cosmic-purple/20" />
@@ -90,125 +56,32 @@ export default function Index() {
           <div className="relative z-10 text-center max-w-4xl mx-auto">
             <div className="mb-6 inline-block">
               <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
-                <span className="text-cosmic-purple text-sm font-semibold">
-                  {hero.badge}
-                </span>
+                <span className="text-cosmic-purple text-sm font-semibold">{hero.badge}</span>
               </div>
             </div>
-
             <h2 className="text-5xl sm:text-7xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
-                {hero.title}
-              </span>
+              <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">{hero.title}</span>
               <br />
               <span className="text-gray-100">{hero.subtitle}</span>
             </h2>
-
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
-              {hero.description}
-            </p>
-
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">{hero.description}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => setIsAboutMeOpen(true)}
-                className="btn-cosmic"
-              >
-                About Me
-              </button>
-              <button
-                onClick={() => setIsLearnMoreOpen(true)}
-                className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
-              >
-                Learn More
-              </button>
+              <button onClick={() => setIsAboutMeOpen(true)} className="btn-cosmic">About Me</button>
+              <button onClick={() => setIsLearnMoreOpen(true)} className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300">Learn More</button>
             </div>
           </div>
         </section>
 
-        {/* AI Art Podcast Section */}
-        {siteContent.aiArtPodcast.enabled && (
-          <section
-            id="podcast"
-            className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
-          >
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-cosmic-purple/30 rounded-full filter blur-3xl" />
-            </div>
-
-            <div className="relative z-10 w-full max-w-6xl">
-              <div className="text-center mb-16">
-                <h3 className="text-5xl font-bold mb-4">
-                  {siteContent.aiArtPodcast.title}
-                </h3>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  {siteContent.aiArtPodcast.description}
-                </p>
-              </div>
-
-              {siteContent.aiArtPodcast.videos.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {siteContent.aiArtPodcast.videos.map((url, index) => (
-                    <div
-                      key={index}
-                      className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
-                    >
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={url}
-                        title={`AI Art Podcast Episode ${index + 1}`}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-full"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </section>
-        )}
-
-        {/* Cosmic Ambient Section */}
-        {cosmicAmbient.enabled && cosmicAmbient.videos.length > 0 && (
-          <section
-            id="music"
-            className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
-          >
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute bottom-0 left-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
-            </div>
-
-            <div className="relative z-10 w-full max-w-6xl">
-              <div className="text-center mb-16">
-                <h3 className="text-5xl font-bold mb-4">
-                  {cosmicAmbient.title}
-                </h3>
-                <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  {cosmicAmbient.subtitle}
-                </p>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  {cosmicAmbient.description}
-                </p>
-              </div>
-
+        {/* AI Art Podcast */}
+        {aiArtPodcast.enabled && (
+          <section id="podcast" className="flex items-center justify-center px-4 py-20 relative">
+            <div className="relative z-10 w-full max-w-6xl text-center">
+              <h3 className="text-5xl font-bold mb-4">{aiArtPodcast.title}</h3>
+              <p className="text-gray-300 mb-12 max-w-2xl mx-auto">{aiArtPodcast.description}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {cosmicAmbient.videos.map((url, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={url}
-                      title={`Cosmic Ambient ${index + 1}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
+                {aiArtPodcast.videos.map((url, i) => (
+                  <div key={i} className="aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                    <iframe width="100%" height="100%" src={url} frameBorder="0" allowFullScreen />
                   </div>
                 ))}
               </div>
@@ -216,43 +89,16 @@ export default function Index() {
           </section>
         )}
 
-        {/* Feel the Cosmos Section */}
-        {feelCosmos.enabled && feelCosmos.videos.length > 0 && (
-          <section
-            id="experience"
-            className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
-          >
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-cosmic-purple/30 rounded-full filter blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
-            </div>
-
-            <div className="relative z-10 max-w-6xl w-full">
-              <div className="text-center mb-16">
-                <h3 className="text-5xl font-bold mb-4">{feelCosmos.title}</h3>
-                <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  {feelCosmos.subtitle}
-                </p>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  {feelCosmos.description}
-                </p>
-              </div>
-
+        {/* NFT Showcase Videos (НОВЫЙ БЛОК ПЕРЕД КОЛЛЕКЦИЯМИ) */}
+        {nftVideos && nftVideos.enabled && (
+          <section className="flex items-center justify-center px-4 py-20 relative">
+             <div className="relative z-10 w-full max-w-6xl text-center">
+              <h3 className="text-5xl font-bold mb-4">{nftVideos.title}</h3>
+              <p className="text-gray-300 mb-12 max-w-2xl mx-auto">{nftVideos.description}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {feelCosmos.videos.map((url, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={url}
-                      title={`Feel the Cosmos ${index + 1}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
+                {nftVideos.videos.map((url, i) => (
+                  <div key={i} className="aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                    <iframe width="100%" height="100%" src={url} frameBorder="0" allowFullScreen />
                   </div>
                 ))}
               </div>
@@ -261,51 +107,18 @@ export default function Index() {
         )}
 
         {/* NFT Collections Section */}
-        {nftCollections.enabled && nftCollections.collections.length > 0 && (
-          <section
-            id="nft"
-            className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
-          >
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
-            </div>
-
-            <div className="relative z-10 max-w-6xl w-full">
-              <div className="text-center mb-16">
-                <h3 className="text-5xl font-bold mb-4">
-                  {nftCollections.title}
-                </h3>
-                <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  {nftCollections.subtitle}
-                </p>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  {nftCollections.description}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-8">
+        {nftCollections.enabled && (
+          <section id="nft" className="flex items-center justify-center px-4 py-20 relative">
+            <div className="relative z-10 max-w-6xl w-full text-center">
+              <h3 className="text-5xl font-bold mb-4">{nftCollections.title}</h3>
+              <p className="text-cosmic-purple text-lg font-semibold mb-12">{nftCollections.subtitle}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 {nftCollections.collections.map((collection, index) => (
-                  <a
-                    key={index}
-                    href={collection.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer bg-cosmic-dark/50"
-                  >
-                    {collection.image && (
-                      <img
-                        src={collection.image}
-                        alt={collection.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-6 px-4">
-                      <p className="text-gray-100 font-semibold text-center">
-                        {collection.name}
-                      </p>
-                      <span className="text-gray-300 text-sm">
-                        View Collection
-                      </span>
+                  <a key={index} href={collection.url} target="_blank" rel="noopener noreferrer" className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow bg-cosmic-dark/50">
+                    {collection.image && <img src={collection.image} alt={collection.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />}
+                    <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent flex flex-col items-center justify-end pb-6 px-4">
+                      <p className="text-gray-100 font-semibold">{collection.name}</p>
+                      <span className="text-gray-300 text-sm">View Collection</span>
                     </div>
                   </a>
                 ))}
@@ -315,42 +128,15 @@ export default function Index() {
         )}
 
         {/* My AI Tools Section */}
-        {aiTools.enabled && aiTools.videos.length > 0 && (
-          <section
-            id="my-ai-tools"
-            className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 relative"
-          >
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute bottom-0 left-0 w-96 h-96 bg-cosmic-violet/30 rounded-full filter blur-3xl" />
-            </div>
-
-            <div className="relative z-10 w-full max-w-6xl">
-              <div className="text-center mb-16">
-                <h3 className="text-5xl font-bold mb-4">{aiTools.title}</h3>
-                <p className="text-cosmic-purple text-lg font-semibold mb-4">
-                  {aiTools.subtitle}
-                </p>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                  {aiTools.description}
-                </p>
-              </div>
-
+        {aiTools.enabled && (
+          <section id="my-ai-tools" className="flex items-center justify-center px-4 py-20 relative">
+            <div className="relative z-10 w-full max-w-6xl text-center">
+              <h3 className="text-5xl font-bold mb-4">{aiTools.title}</h3>
+              <p className="text-cosmic-purple font-semibold mb-12">{aiTools.subtitle}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {aiTools.videos.map((url, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-video rounded-2xl overflow-hidden cosmic-glow"
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={url}
-                      title={`My AI Tools ${index + 1}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
+                  <div key={index} className="aspect-video rounded-2xl overflow-hidden cosmic-glow">
+                    <iframe width="100%" height="100%" src={url} frameBorder="0" allowFullScreen />
                   </div>
                 ))}
               </div>
@@ -358,29 +144,12 @@ export default function Index() {
           </section>
         )}
 
-        {/* Footer */}
         <Footer />
       </main>
 
-      {/* Contact Modal */}
-      <ContactModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-      />
-
-      {/* Hero Modals */}
-      <HeroModal
-        isOpen={isAboutMeOpen}
-        title="About Me"
-        content={hero.aboutMeText}
-        onClose={() => setIsAboutMeOpen(false)}
-      />
-      <HeroModal
-        isOpen={isLearnMoreOpen}
-        title="Learn More"
-        content={hero.learnMoreText}
-        onClose={() => setIsLearnMoreOpen(false)}
-      />
+      <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
+      <HeroModal isOpen={isAboutMeOpen} title="About Me" content={hero.aboutMeText} onClose={() => setIsAboutMeOpen(false)} />
+      <HeroModal isOpen={isLearnMoreOpen} title="Learn More" content={hero.learnMoreText} onClose={() => setIsLearnMoreOpen(false)} />
     </div>
   );
 }
