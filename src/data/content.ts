@@ -87,23 +87,31 @@ export const siteContent: SiteContent = {
     title: "About Me",
     subtitle: "Digital Artist | AI & Media Creator",
     description: "Vitalii Zelenin (Alpha Ross) is a creative technologist whose work has been exhibited during Miami Art Week and recognized by Forbes. Selected by 34 Gallery for projects aligned with UN SDG 3.4.",
-    cvImage: "/CV_Alpha_Ross.png", // Твое стильное резюме
+    cvImage: "/CV_Alpha_Ross.png",
     buttonText: "View Full CV",
     cvLink: "/CV_Alpha_Ross.png" 
   },
-
-  // Hero Section - ТВОИ ТЕКСТЫ СОХРАНЕНЫ
-  hero: {
+  
+ hero: {
     badge: "Welcome to My Cosmic Realm",
     title: "Immerse Yourself",
     subtitle: "in the Cosmos",
     description: "Where artificial intelligence meets creative vision. Explore cutting-edge digital art, immersive experiences, and curated digital collections crafted at the frontier of technology",
+    
+    // Текст в черном окне "About Me"
     aboutMeText: `Discover the intersection of art, technology, and cosmic imagination. 
     I create immersive digital experiences using cutting-edge AI tools.
     My work explores the boundaries between human creativity and artificial intelligence.`,
+
+    // ПАРАМЕТРЫ КНОПКИ CV
+    showCvButton: true,
+    cvButtonText: "View Full CV",
+    cvFileUrl: "/CV_Alpha_Ross.png",
+
+    // Текст для кнопки "Learn More"
     learnMoreText: `This is a portfolio of AI-generated art and digital experiences.
     Explore the different sections to see my latest works in cosmic ambient music,
-    AI art podcasts, and exclusive NFT collections.`,
+    AI art podcasts, and exclusive digital collections.`,
   },
 
   // AI Art Podcast - ТВОИ ВИДЕО СОХРАНЕНЫ
