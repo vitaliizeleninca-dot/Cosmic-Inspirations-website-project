@@ -101,12 +101,16 @@ hero: {
     // Текст для SEO
     aboutMeText: "Digital Artist | AI & Media Creator. Work exhibited during Miami Art Week and recognized by Forbes.",
 
-    // ТВОЙ НОВЫЙ ТЕКСТ ДЛЯ КНОПКИ LEARN MORE
-    learnMoreText: "Alpha Ross — AI & Media Artist | Creative Technology Practice
+    // Текст для модального окна Learn More (с обратными кавычками)
+    learnMoreText: `Alpha Ross — AI & Media Artist | Creative Technology Practice
+
 I am an AI and media artist working at the intersection of artificial intelligence, sound, visual media, and cultural heritage. My practice explores how creative technologies can be used to reflect on the past, present, and possible futures through audiovisual forms.
+
 My work includes AI-generated podcast formats with artistic reconstructions of historical figures, generative media art projects, and ambient cinematic soundscapes. I approach cultural storytelling with a critical and ethical perspective on the use of artificial intelligence.
+
 My projects focus on future imagination, collective memory, and cultural responsibility, using sound, image, and narrative as tools for reflection and dialogue.
-Based in Finland, I work within Nordic and international cultural contexts and engage with themes aligned with the UN Sustainable Development Goal 3.4, with particular attention to mental well-being and human-centered innovation.",
+
+Based in Finland, I work within Nordic and international cultural contexts and engage with themes aligned with the UN Sustainable Development Goal 3.4, with particular attention to mental well-being and human-centered innovation.`,
   },
   
   
