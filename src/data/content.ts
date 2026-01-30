@@ -1,4 +1,3 @@
-// 1. Описание типов (Interface) - оставляем как есть
 export interface SiteContent {
   winnerShowcase: {
     title: string;
