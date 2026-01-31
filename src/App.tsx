@@ -285,7 +285,7 @@ export default function Index() {
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-6 px-4">
                       <p className="text-gray-100 font-semibold text-center">{collection.name}</p>
-                      <span className="text-gray-300 text-sm">View Collection</span>
+                   
                     </div>
                   </a>
                 ))}
