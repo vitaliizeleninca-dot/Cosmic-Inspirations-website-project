@@ -270,24 +270,26 @@ export default function Index() {
               <div className="grid grid-cols-2 gap-8">
                 {nftCollections.collections.map((collection, index) => (
                   <a
-                    key={index}
-                    href={collection.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer bg-cosmic-dark/50"
-                  >
-                    {collection.image && (
-                      <img
-                        src={collection.image}
-                        alt={collection.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-6 px-4">
-                      <p className="text-gray-100 font-semibold text-center">{collection.name}</p>
-                   
-                    </div>
-                  </a>
+  key={index}
+  href={collection.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="group relative aspect-square rounded-2xl overflow-hidden cosmic-glow cursor-pointer bg-cosmic-dark/50"
+>
+  {collection.image && (
+    <img
+      src={collection.image}
+      alt={collection.name}
+      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+    />
+  )}
+  {/* Оставляем только один этот блок */}
+  <div className="absolute inset-0 bg-gradient-to-t from-cosmic-dark/90 to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-6 px-4">
+    <p className="text-gray-100 font-semibold text-center whitespace-pre-line">
+      {collection.name}
+    </p>
+  </div>
+</a>
                 ))}
               </div>
             </div>
