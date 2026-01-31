@@ -164,22 +164,26 @@ Based in Finland, I work within Nordic and international cultural contexts and e
     collections: [ 
       {
         url: "https://opensea.io/collection/cosmic-inspirations-animated-edition",
-        name: "Cosmic Inspirations: Animated Edition",
+        name: "Cosmic Inspirations:
+          Animated Edition",
         image: "/Animated Edition In the Spirit of Gustav Klimt.png" 
       },
       {
         url: "https://objkt.com/collections/KT1KS9HczgmgFuqkSSe3AeZsbu7eyH9MeRXZ",
-        name: "Cosmic Inspirations: Digital Echoes",
+        name: "Cosmic Inspirations:
+          Digital Echoes",
         image: "/Cosmic Cube Realm.png"
       },
       {
         url: "https://opensea.io/collection/cosmic-inspirations-master-study-sketches",
-        name: "Cosmic Inspirations: Retro Edition",
+        name: "Cosmic Inspirations:
+          Retro Edition",
         image: "/Cosmic Inspirations by AlphaRoss in the Style Alexander Golovin.jpeg"
       },
       {
         url: "https://opensea.io/collection/alphaross-season-1-cosmic-inspirations",
-        name: "Cosmic Inspirations: AI-Avatars of Great Artists",
+        name: "Cosmic Inspirations:
+          AI-Avatars of Great Artists",
         image: "/Cosmic Inspirations by AlphaRoss in da Vinci Style.jpeg"
       }
     ],
