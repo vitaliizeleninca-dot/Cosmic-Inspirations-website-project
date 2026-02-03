@@ -45,13 +45,13 @@ export const siteContent: SiteContent = {
   },
 { 
     url: "/Quantum Entanglement.png", 
-    achievement: "Selected Artist — Generate Love: Generative Art & AI",
+    achievement: "Selected Artist — Generate Love",
     title: "Selected through 'Generate Love: Generative Art & AI' Open Call",
     date: "February 2026"
   },
   { 
     url: "/Cosmic Life.png",
-    achievement: "Selected Artist — Love Letters to Myself: A Typography Art Challenge",
+    achievement: "Selected Artist — Love Letters to Myself",
     title: "Selected through 'Love Letters to Myself: A Typography Art Challenge' Open Call by 34 Gallery",
     date: "February 2026"
   },    
