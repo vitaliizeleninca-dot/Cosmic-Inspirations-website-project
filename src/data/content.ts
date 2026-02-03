@@ -37,62 +37,73 @@ export const siteContent: SiteContent = {
     video: "https://www.youtube.com/embed/XHV8HmJsqyQ", 
     enabled: true,
   gallery: [
-    {
-      url: "/Astral Couture.png",
-      title: "Selected for 'Digital Fashion Forward' Open Call",
-      achievement: "Digital Fashion Selection"
-    },
-    {
-      url: "/Rebirth from Stardust.png",
-      title: "Selected for 'Spirit Animal' Open Call",
-      achievement: "Selected Artist — Spirit Animal"
-    },
-    { 
-      url: "/Klee Cosmic Geometry.png", 
-      title: "Featured in Abstract Ambience Magazine Issue #2",
-      achievement: "Spotlight Artist Selection - VAVortex"
-    },
-    { 
-      url: "/Cosmic Muse Miami.png", 
-      title: "Featured in 'One Love Art' Exhibition",
-      achievement: "Miami Art Week — Exhibitor"
-    },
-    { 
-      url: "/In the Spirit of Picasso.png", 
-      title: "Recognized for #FCancer Humanitarian Initiative",
-      achievement: "Selected Impact Artist"
-    },
-    { 
-      url: "/Celestial Symphony.png", 
-      title: "Selected for 'Radiance' Exhibit by 34 Gallery",
-      achievement: "Winner Gallery Representation"
-    },
-    { 
-      url: "/Aquarelle Cosmic Metropolis.png", 
-      title: "Selected for 'Urban Echoes: Capturing the City's Soul'",
-      achievement: "International Selection"
-    },
-    { 
-      url: "/The Synthetic Observer.png", 
-      title: "Selected for 'AICanvas' Innovation Showcase",
-      achievement: "Digital Excellence Award"
-    },
-    { 
-      url: "/Celestial Builders.png", 
-      title: "Selected for 'Gratitude' Digital Open Call",
-      achievement: "Selected Artist Showcase"
-    },
-    { 
-      url: "/Cosmic Serenity.png", 
-      title: "Selected for 'New Horizons: Art for a Fresh Start'",
-      achievement: "Selected Artist - Webbie Social"
-    },
-    { 
-      url: "/Cosmic Doodle First Contact.png", 
-      title: "Selected for 'Nostalgia' by 34 Gallery",
-      achievement: "Exhibition Winner"
-    }
-  ]
+  {
+    url: "/Astral Couture.png",
+    achievement: "Selected Artist — Digital Fashion",
+    title: "Selected through the 'Digital Fashion Forward' Open Call",
+    date: "January 2026" //
+  },
+  {
+    url: "/Rebirth from Stardust.png",
+    achievement: "Selected Artist — Spirit Animal",
+    title: "Selected through the 'Spirit Animal' Open Call",
+    date: "January 2026" //
+  },
+  { 
+    url: "/Klee Cosmic Geometry.png", 
+    achievement: "Featured Artist — Abstract Ambience",
+    title: "Selected for the Abstract Ambience Magazine Issue #2",
+    date: "December 2025" //
+  },
+  { 
+    url: "/Cosmic Muse Miami.png", 
+    achievement: "Exhibiting Artist — One Love Art",
+    title: "Featured in 'One Love Art' Exhibition, Miami Art Week",
+    date: "December 2025" //
+  },
+  { 
+    url: "/In the Spirit of Picasso.png", 
+    achievement: "Selected Artist — #FCancer",
+    title: "Selected through the '#FCancer' Humanitarian Open Call",
+    date: "October 2025" //
+  },
+  { 
+    url: "/Celestial Symphony.png", 
+    achievement: "Selected Artist — Radiance",
+    title: "Selected through the 'Radiance' Open Call by 34 Gallery",
+    date: "January 2026" //
+  },
+  { 
+    url: "/Aquarelle Cosmic Metropolis.png", 
+    achievement: "Selected Artist — Urban Echoes",
+    title: "Selected through the 'Urban Echoes: Capturing the City’s Soul' Open Call",
+    date: "January 2026" //
+  },
+  { 
+    url: "/The Synthetic Observer.png", 
+    achievement: "Selected Artist — AICanvas",
+    title: "Selected through the 'AICanvas' Innovation Showcase Open Call",
+    date: "January 2026" //
+  },
+  { 
+    url: "/Celestial Builders.png", 
+    achievement: "Selected Artist — Gratitude",
+    title: "Selected through the 'Gratitude' Digital Open Call",
+    date: "November 2025" //
+  },
+  { 
+    url: "/Cosmic Serenity.png", 
+    achievement: "Selected Artist — New Horizons",
+    title: "Selected through the 'New Horizons: Art for a Fresh Start' Open Call",
+    date: "January 2026" //
+  },
+  { 
+    url: "/Cosmic Doodle First Contact.png", 
+    achievement: "Selected Artist — Nostalgia",
+    title: "Selected through the 'Nostalgia' Open Call by 34 Gallery",
+    date: "December 2025" //
+  }
+]
 },
 
   aboutMe: {
