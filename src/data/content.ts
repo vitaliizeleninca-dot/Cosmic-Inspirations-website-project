@@ -36,54 +36,64 @@ export const siteContent: SiteContent = {
     description: `Selected by 34 Gallery. The organization contributes to UN SDG 3.4 through creative arts. Shown at One Love Miami Art Week, an event described by Forbes as a “must-see.” Featured in #FCancer2025, linked to nonprofit LetsFCancer, which supports cancer prevention`,
     video: "https://www.youtube.com/embed/XHV8HmJsqyQ", 
     enabled: true,
-   gallery: [
-  { 
-    url: "/Klee Cosmic Geometry.png", 
-    title: "Featured in Abstract Ambience Magazine Issue #2",
-    achievement: "Spotlight Artist Selection - VAVortex"
-  },
-  { 
-    url: "/Cosmic Muse Miami.png", 
-    title: "Tribute to the Digital Art Revolution in Miami",
-    achievement: "Miami Art Week Spotlight"
-  },
-  { 
-    url: "/In the Spirit of Picasso.png", 
-    title: "Recognized for #FCancer Humanitarian Initiative",
-    achievement: "Selected Impact Artist"
-  },
-  { 
-    url: "/Celestial Symphony.png", 
-    title: "Selected for 'Radiance' Exhibit by 34 Gallery",
-    achievement: "Winner Gallery Representation"
-  },
-  { 
-    url: "/Aquarelle Cosmic Metropolis.png", 
-    title: "Selected for 'Urban Echoes: Capturing the City's Soul'",
-    achievement: "International Selection"
-  },
-  { 
-    url: "/The Synthetic Observer.png", 
-    title: "Selected for 'AICanvas' Innovation Showcase",
-    achievement: "Digital Excellence Award"
-  },
-  { 
-    url: "/Celestial Builders.png", 
-    title: "Selected for 'Gratitude' Digital Open Call",
-    achievement: "Selected Artist Showcase"
-  },
-  { 
-    url: "/Cosmic Serenity.png", 
-    title: "Selected for 'New Horizons: Art for a Fresh Start'",
-    achievement: "Selected Artist - Webbie Social"
-  },
-  { 
-    url: "/Cosmic Doodle First Contact.png", 
-    title: "Selected for 'Nostalgia' by 34 Gallery",
-    achievement: "Exhibition Winner"
-  }
-]
-     },
+  gallery: [
+    {
+      url: "/Astral Couture.png",
+      title: "Selected for 'Digital Fashion Forward' Open Call",
+      achievement: "Digital Fashion Selection"
+    },
+    {
+      url: "/Rebirth from Stardust.png",
+      title: "Selected for 'Spirit Animal' Open Call",
+      achievement: "Selected Artist — Spirit Animal"
+    },
+    { 
+      url: "/Klee Cosmic Geometry.png", 
+      title: "Featured in Abstract Ambience Magazine Issue #2",
+      achievement: "Spotlight Artist Selection - VAVortex"
+    },
+    { 
+      url: "/Cosmic Muse Miami.png", 
+      title: "Featured in 'One Love Art' Exhibition",
+      achievement: "Miami Art Week — Exhibitor"
+    },
+    { 
+      url: "/In the Spirit of Picasso.png", 
+      title: "Recognized for #FCancer Humanitarian Initiative",
+      achievement: "Selected Impact Artist"
+    },
+    { 
+      url: "/Celestial Symphony.png", 
+      title: "Selected for 'Radiance' Exhibit by 34 Gallery",
+      achievement: "Winner Gallery Representation"
+    },
+    { 
+      url: "/Aquarelle Cosmic Metropolis.png", 
+      title: "Selected for 'Urban Echoes: Capturing the City's Soul'",
+      achievement: "International Selection"
+    },
+    { 
+      url: "/The Synthetic Observer.png", 
+      title: "Selected for 'AICanvas' Innovation Showcase",
+      achievement: "Digital Excellence Award"
+    },
+    { 
+      url: "/Celestial Builders.png", 
+      title: "Selected for 'Gratitude' Digital Open Call",
+      achievement: "Selected Artist Showcase"
+    },
+    { 
+      url: "/Cosmic Serenity.png", 
+      title: "Selected for 'New Horizons: Art for a Fresh Start'",
+      achievement: "Selected Artist - Webbie Social"
+    },
+    { 
+      url: "/Cosmic Doodle First Contact.png", 
+      title: "Selected for 'Nostalgia' by 34 Gallery",
+      achievement: "Exhibition Winner"
+    }
+  ]
+},
 
   aboutMe: {
     enabled: true,
