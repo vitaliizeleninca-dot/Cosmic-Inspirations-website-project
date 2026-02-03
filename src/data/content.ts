@@ -48,19 +48,19 @@ export const siteContent: SiteContent = {
     achievement: "Selected Artist — Generate Love",
     title: "Selected through 'Generate Love: Generative Art & AI' Open Call",
     date: "February 2026"
-  },
-  { 
-    url: "/Cosmic Life.png",
-    achievement: "Selected Artist — Love Letters to Myself",
-    title: "Selected through 'Love Letters to Myself: A Typography Art Challenge' Open Call by 34 Gallery",
-    date: "February 2026"
-  },    
+  }, 
   {
     url: "/Rebirth from Stardust.png",
     achievement: "Selected Artist — Spirit Animal",
     title: "Selected through the 'Spirit Animal' Open Call",
     date: "January 2026" //
   },
+      { 
+    url: "/Cosmic Life.png",
+    achievement: "Selected Artist — Love Letters to Myself",
+    title: "Selected through 'Love Letters to Myself: A Typography Art Challenge' Open Call by 34 Gallery",
+    date: "February 2026"
+  }, 
   { 
     url: "/Klee Cosmic Geometry.png", 
     achievement: "Featured Artist — Abstract Ambience",
