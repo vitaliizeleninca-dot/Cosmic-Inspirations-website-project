@@ -104,17 +104,17 @@ export const siteContent: SiteContent = {
     date: "January 2026" //
   },
      { 
-    url: "/The Synthetic Observer.png", 
-    achievement: "Selected Artist — AICanvas",
-    title: "Selected through the 'AICanvas' Innovation Showcase Open Call",
-    date: "January 2026" //
-  },
-    { 
     url: "/Cosmic Doodle First Contact.png", 
     achievement: "Selected Artist — Nostalgia",
     title: "Selected through the 'Nostalgia' Open Call by 34 Gallery",
     date: "December 2025" //
-  }
+  },
+     { 
+    url: "/The Synthetic Observer.png", 
+    achievement: "Selected Artist — AICanvas",
+    title: "Selected through the 'AICanvas' Innovation Showcase Open Call",
+    date: "January 2026" //
+  }   
 ]
 },
 
