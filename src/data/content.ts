@@ -79,22 +79,28 @@ export const siteContent: SiteContent = {
     title: "Selected through the '#FCancer' Humanitarian Open Call",
     date: "October 2025" //
   },
-  { 
-    url: "/Celestial Symphony.png", 
-    achievement: "Selected Artist — Radiance",
-    title: "Selected through the 'Radiance' Open Call by 34 Gallery",
-    date: "January 2026" //
-  },
-  { 
+    { 
     url: "/Aquarelle Cosmic Metropolis.png", 
     achievement: "Selected Artist — Urban Echoes",
     title: "Selected through the 'Urban Echoes: Capturing the City’s Soul' Open Call",
     date: "January 2026" //
   },
   { 
+    url: "/Celestial Symphony.png", 
+    achievement: "Selected Artist — Radiance",
+    title: "Selected through the 'Radiance' Open Call by 34 Gallery",
+    date: "January 2026" //
+  },
+    { 
     url: "/The Synthetic Observer.png", 
     achievement: "Selected Artist — AICanvas",
     title: "Selected through the 'AICanvas' Innovation Showcase Open Call",
+    date: "January 2026" //
+  },
+      { 
+    url: "/Cosmic Serenity.png", 
+    achievement: "Selected Artist — New Horizons",
+    title: "Selected through the 'New Horizons: Art for a Fresh Start' Open Call",
     date: "January 2026" //
   },
   { 
@@ -102,12 +108,6 @@ export const siteContent: SiteContent = {
     achievement: "Selected Artist — Gratitude",
     title: "Selected through the 'Gratitude' Digital Open Call",
     date: "November 2025" //
-  },
-  { 
-    url: "/Cosmic Serenity.png", 
-    achievement: "Selected Artist — New Horizons",
-    title: "Selected through the 'New Horizons: Art for a Fresh Start' Open Call",
-    date: "January 2026" //
   },
   { 
     url: "/Cosmic Doodle First Contact.png", 
