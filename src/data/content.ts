@@ -92,24 +92,24 @@ export const siteContent: SiteContent = {
     date: "January 2026" //
   },
     { 
-    url: "/The Synthetic Observer.png", 
-    achievement: "Selected Artist — AICanvas",
-    title: "Selected through the 'AICanvas' Innovation Showcase Open Call",
-    date: "January 2026" //
-  },
-      { 
-    url: "/Cosmic Serenity.png", 
-    achievement: "Selected Artist — New Horizons",
-    title: "Selected through the 'New Horizons: Art for a Fresh Start' Open Call",
-    date: "January 2026" //
-  },
-  { 
     url: "/Celestial Builders.png", 
     achievement: "Selected Artist — Gratitude",
     title: "Selected through the 'Gratitude' Digital Open Call",
     date: "November 2025" //
   },
-  { 
+         { 
+    url: "/Cosmic Serenity.png", 
+    achievement: "Selected Artist — New Horizons",
+    title: "Selected through the 'New Horizons: Art for a Fresh Start' Open Call",
+    date: "January 2026" //
+  },
+     { 
+    url: "/The Synthetic Observer.png", 
+    achievement: "Selected Artist — AICanvas",
+    title: "Selected through the 'AICanvas' Innovation Showcase Open Call",
+    date: "January 2026" //
+  },
+    { 
     url: "/Cosmic Doodle First Contact.png", 
     achievement: "Selected Artist — Nostalgia",
     title: "Selected through the 'Nostalgia' Open Call by 34 Gallery",
