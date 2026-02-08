@@ -170,9 +170,9 @@ Based in Finland, I work within Nordic and international cultural contexts and e
     videos: [
       "https://www.youtube.com/embed/NnM23TP2Gjg",
       "https://www.youtube.com/embed/TG3v7yBEH5E",
-      "https://www.youtube.com/embed/EVfd34fKZYo",
-      "https://www.youtube.com/embed/2GcTZP27IeM",      
-      "https://www.youtube.com/embed/-NV3FIc7024",
+      "https://www.youtube.com/embed/-NV3FIc7024",      
+      "https://www.youtube.com/embed/2GcTZP27IeM",     
+      "https://www.youtube.com/embed/EVfd34fKZYo",      
       "https://www.youtube.com/embed/djwdPu3X3H0",
       
     ],
