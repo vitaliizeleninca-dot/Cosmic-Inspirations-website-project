@@ -168,10 +168,11 @@ Based in Finland, I work within Nordic and international cultural contexts and e
     description: "Journey through AI-curated ambient soundscapes that evoke the vastness of space. Each composition is designed to elevate your consciousness and inspire creative flow. From Deep Focus & Productivity to Sleep & Meditation",
     enabled: true,
     videos: [
+      "https://www.youtube.com/embed/NnM23TP2Gjg",
       "https://www.youtube.com/embed/TG3v7yBEH5E",
       "https://www.youtube.com/embed/EVfd34fKZYo",
-      "https://www.youtube.com/embed/2GcTZP27IeM",
       "https://www.youtube.com/embed/djwdPu3X3H0",
+      "https://www.youtube.com/embed/2GcTZP27IeM",      
       "https://www.youtube.com/embed/-NV3FIc7024",
     ],
   },
