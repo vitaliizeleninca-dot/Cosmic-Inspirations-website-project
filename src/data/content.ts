@@ -73,17 +73,17 @@ export const siteContent: SiteContent = {
     title: "Featured in 'One Love Art' Exhibition, Miami Art Week",
     date: "December 2025" //
   },
+      { 
+    url: "/In the Spirit of Picasso.png", 
+    achievement: "Selected Artist — #FCancer",
+    title: "Selected through the '#FCancer' Humanitarian Open Call",
+    date: "October 2025" //
+  },
     {
     url: "/The Overview Effect.png",
     achievement: "Selected Artist — Hope",
     title: "Selected through the 'Hope' Open Call by 34 Gallery",
     date: "March 2026" //
-  },
-  { 
-    url: "/In the Spirit of Picasso.png", 
-    achievement: "Selected Artist — #FCancer",
-    title: "Selected through the '#FCancer' Humanitarian Open Call",
-    date: "October 2025" //
   },
     { 
     url: "/Aquarelle Cosmic Metropolis.png", 
@@ -109,17 +109,17 @@ export const siteContent: SiteContent = {
     title: "Selected through the 'New Horizons: Art for a Fresh Start' Open Call",
     date: "January 2026" //
   },
+      {
+    url: "/My Universe at Age 5.png",
+    achievement: "Selected Artist — Inner Child",
+    title: "Selected through the 'Inner Child' a Visual Exploration Open Call by 34 Gallery",
+    date: "March 2026" //
+  },
      { 
     url: "/Cosmic Doodle First Contact.png", 
     achievement: "Selected Artist — Nostalgia",
     title: "Selected through the 'Nostalgia' Open Call by 34 Gallery",
     date: "December 2025" //
-  },
-    {
-    url: "/My Universe at Age 5.png",
-    achievement: "Selected Artist — Inner Child",
-    title: "Selected through the 'Inner Child' a Visual Exploration Open Call by 34 Gallery",
-    date: "March 2026" //
   },
      { 
     url: "/The Synthetic Observer.png", 
