@@ -73,6 +73,12 @@ export const siteContent: SiteContent = {
     title: "Featured in 'One Love Art' Exhibition, Miami Art Week",
     date: "December 2025" //
   },
+    {
+    url: "/The Overview Effect.png",
+    achievement: "Selected Artist — Hope",
+    title: "Selected through the 'Hope' Open Call by 34 Gallery",
+    date: "March 2026" //
+  },
   { 
     url: "/In the Spirit of Picasso.png", 
     achievement: "Selected Artist — #FCancer",
@@ -108,6 +114,12 @@ export const siteContent: SiteContent = {
     achievement: "Selected Artist — Nostalgia",
     title: "Selected through the 'Nostalgia' Open Call by 34 Gallery",
     date: "December 2025" //
+  },
+    {
+    url: "/My Universe at Age 5.png",
+    achievement: "Selected Artist — Inner Child",
+    title: "Selected through the 'Inner Child' a Visual Exploration Open Call by 34 Gallery",
+    date: "March 2026" //
   },
      { 
     url: "/The Synthetic Observer.png", 
