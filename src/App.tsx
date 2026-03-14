@@ -150,6 +150,7 @@ export default function Index() {
         <img src={art.src} className="w-full h-auto object-cover" alt="Art" />
       </a>
     </div>
+    </div>
   );
 })}
 
