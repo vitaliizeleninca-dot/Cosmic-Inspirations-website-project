@@ -176,40 +176,49 @@ export default function Index() {
   </div>
 </section>
 
-        {/* Winner Showcase */}
-        {winnerShowcase.enabled && (
-          <section id="exhibitions" className="py-20 px-4 bg-black/50 border-y border-cosmic-purple/10">
-            <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
-              <div className="w-full lg:w-1/2 aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-cosmic-purple/20 border border-cosmic-purple/30">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={winnerShowcase.video}
-                  title="Exhibition Showcase"
-                  frameBorder="0"
-                  allowFullScreen
-                />
-              </div>
+        {/* Winner Showcase Section */}
+<section id="exhibitions" className="py-24 px-4 bg-black/40 border-y border-white/5">
+  <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+    
+    {/* 1. Видео/Изображение СЛЕВА (на мобильных сверху) */}
+    <div className="w-full lg:w-1/2 aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+      <iframe 
+        width="100%" 
+        height="100%" 
+        src={winnerShowcase.video} 
+        frameBorder="0" 
+        allowFullScreen 
+      />
+    </div>
 
-              <div className="w-full lg:w-1/2 text-left">
-                <div className="inline-block px-3 py-1 rounded-full border border-yellow-500/50 text-yellow-500 text-xs font-bold uppercase tracking-wider mb-4">
-                  Selected Artist 2025-2026
-                </div>
-                <h3 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                  {winnerShowcase.title}
-                </h3>
-                <p className="text-gray-300 mb-8 leading-relaxed">
-  {winnerShowcase.description}
-</p>
-                <button
-                  onClick={() => setIsGalleryOpen(true)}
-                  className="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95"
-                >
-                  Open Winner Gallery
-                </button>
-              </div>
-            </div>
-          </section>
+    {/* 2. Текстовый блок СПРАВА, но текст внутри выровнен ПО ЦЕНТРУ */}
+    <div className="w-full lg:w-1/2 text-center">
+      <div className="mb-4 inline-block">
+        <span className="px-3 py-1 rounded-full border border-yellow-500/50 bg-yellow-500/10 text-yellow-500 text-[10px] font-bold uppercase tracking-widest">
+          Selected Artist 2025-2026
+        </span>
+      </div>
+      
+      <h3 className="text-4xl font-bold mb-6 text-white leading-tight">
+        International Open Call Selection
+      </h3>
+      
+      <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+        Selected by 34 Gallery. The organization contributes to UN SDG 3.4 through creative arts. 
+        Shown at One Love Miami Art Week, an event described by Forbes as a “must-see.” 
+        Featured in #FCancer2025, linked to nonprofit LetsFCancer, which supports cancer prevention.
+      </p>
+      
+      <button 
+        onClick={() => setIsGalleryOpen(true)}
+        className="px-10 py-4 bg-white text-black rounded-full font-bold hover:bg-cosmic-purple hover:text-white transition-all shadow-lg"
+      >
+        Open Winner Gallery
+      </button>
+    </div>
+
+  </div>
+</section>
         )}
 
         {/* AI Art Podcast Section */}
