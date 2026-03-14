@@ -52,9 +52,7 @@ export default function Index() {
   animation:rotate-3d 35s linear infinite;
 }
 
-.cosmic-spinner:hover{
-  animation-play-state:paused;
-}
+
 
 .carousel-card{
   position:absolute;
