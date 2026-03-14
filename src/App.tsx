@@ -221,27 +221,6 @@ Learn More
 
 </section>
 
-<Footer/>
-
-</main>
-
-<ContactModal
-isOpen={isContactModalOpen}
-onClose={()=>setIsContactModalOpen(false)}
-/>
-
-<HeroModal
-isOpen={isLearnMoreOpen}
-title="Learn More"
-content={hero.learnMoreText}
-onClose={()=>setIsLearnMoreOpen(false)}
-/>
-
-</div>
-
-)
-}
-
 
 
 
