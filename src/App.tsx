@@ -106,34 +106,29 @@ export default function Index() {
 
         
       {/* Hero Section */}
-<section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+<section className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
   
-  {/* Фон с пульсацией */}
-  <div className="absolute inset-0 opacity-30">
-    <div className="absolute top-20 left-10 w-72 h-72 bg-cosmic-purple/20 rounded-full filter blur-3xl animate-pulse" />
-    <div className="absolute bottom-20 right-10 w-96 h-96 bg-cosmic-violet/20 rounded-full filter blur-3xl animate-pulse" />
-  </div>
-
-  {/* ОБЩИЙ КОНТЕЙНЕР ДЛЯ КАРУСЕЛИ И ТЕКСТА */}
-  <div className="relative w-full max-w-7xl h-[600px] flex items-center justify-center">
+  {/* Контейнер, который на мобилках становится вертикальным стеком */}
+  <div className="relative w-full max-w-7xl flex flex-col items-center justify-center gap-8 sm:gap-0">
     
-    {/* 1. КАРУСЕЛЬ (на заднем плане или вокруг) */}
-    <div className="cosmic-perspective absolute inset-0 flex items-center justify-center pointer-events-none">
+    {/* 1. КАРУСЕЛЬ - уменьшаем высоту для мобильных */}
+    <div className="cosmic-perspective w-full h-[250px] sm:h-[500px] relative flex items-center justify-center order-2 sm:order-1">
       <div className="cosmic-spinner">
         {artworks.map((art, index) => {
-          const radius = window.innerWidth < 640 ? 250 : 500; // Уменьшил радиус для мобилок
+          // Уменьшаем радиус вращения для узких экранов
+          const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 160 : 450;
           const angle = (index / artworks.length) * 360;
 
           return (
             <div
               key={art.id}
-              className="carousel-card w-[250px] sm:w-[400px] pointer-events-auto"
+              className="carousel-card w-[180px] sm:w-[420px]"
               style={{
                 transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
               }}
             >
-              <div className="rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl shadow-cosmic-purple/20 transition-transform hover:scale-105 duration-500">
-                <img src={art.src} className="w-full h-auto object-cover" alt="Art" />
+              <div className="rounded-xl sm:rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-xl">
+                <img src={art.src} className="w-full h-auto" alt="Art" />
               </div>
             </div>
           );
@@ -141,44 +136,39 @@ export default function Index() {
       </div>
     </div>
 
-    {/* 2. ТЕКСТ В ЦЕНТРЕ (z-10 чтобы быть поверх задних карточек) */}
-    <div className="relative z-10 text-center max-w-3xl mx-auto pointer-events-none">
-      <div className="mb-6 inline-block pointer-events-auto">
-        <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
-          <span className="text-cosmic-purple text-sm font-semibold">{hero.badge}</span>
+    {/* 2. ТЕКСТОВЫЙ БЛОК - теперь он выше карусели на мобильных (order-1) */}
+    <div className="relative z-20 text-center max-w-4xl mx-auto order-1 sm:order-2 sm:absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
+      <div className="mb-4 sm:mb-6 inline-block">
+        <div className="px-3 py-1 sm:px-4 sm:py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
+          <span className="text-cosmic-purple text-xs sm:text-sm font-semibold">{hero.badge}</span>
         </div>
       </div>
 
-      <h2 className="text-5xl sm:text-7xl font-bold mb-6 leading-tight pointer-events-auto">
-        <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
+      <h2 className="text-3xl sm:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+        <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent uppercase italic">
           {hero.title}
         </span>
         <br />
         <span className="text-gray-100">{hero.subtitle}</span>
       </h2>
 
-      {/* <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto pointer-events-auto">
-  {hero.description}
-</p> 
-*/}
-
-      <div className="flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
+      {/* Кнопки теперь будут доступны для нажатия */}
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6 sm:mt-10">
         <a
           href="/CV_Alpha_Ross.png"
           target="_blank"
-          className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
+          className="w-full sm:w-auto px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:bg-cosmic-purple hover:text-white transition-all text-center"
         >
           VIEW MY CV HERE
         </a>
         <button
           onClick={() => setIsLearnMoreOpen(true)}
-          className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
+          className="w-full sm:w-auto px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/30 transition-all"
         >
           Learn More
         </button>
       </div>
     </div>
-
   </div>
 </section>
 
