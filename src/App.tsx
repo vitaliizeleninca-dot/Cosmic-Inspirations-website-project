@@ -146,11 +146,9 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Вернул Footer на место */}
         <Footer />
       </main>
 
-      {/* Вернул модалки, чтобы кнопки работали */}
       <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
       <HeroModal isOpen={isLearnMoreOpen} onClose={() => setIsLearnMoreOpen(false)} />
     </div>
