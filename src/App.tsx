@@ -157,23 +157,35 @@ export default function Index() {
         <span className="text-gray-100">{hero.subtitle}</span>
       </h2>
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto">
-        <a
-          href="/CV_Alpha_Ross.png"
-          target="_blank"
-          className="px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:bg-cosmic-purple hover:text-white transition-all duration-300 shadow-xl"
-        >
-          VIEW MY CV HERE
-        </a>
-        <button
-          onClick={() => setIsLearnMoreOpen(true)}
-          className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/30 transition-all duration-300"
-        >
-          Learn More
-        </button>
-      </div>
-    </div>
-  </div>
+ {/* Блок кнопок в секции Hero */}
+<div className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto mt-10">
+  
+  {/* Кнопка CV */}
+  <a
+    href="/CV_Alpha_Ross.png"
+    target="_blank"
+    className="px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:bg-cosmic-purple hover:text-white hover:shadow-[0_0_20px_rgba(147,51,234,0.5)] transition-all duration-300 shadow-xl"
+  >
+    VIEW MY CV HERE
+  </a>
+  
+  {/* Новая кнопка Show Me (YouTube Shorts) */}
+  <a
+    href="https://youtube.com/shorts/dB_wdhRoTpw"
+    target="_blank"
+    className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+  >
+    Show Me
+  </a>
+
+  {/* Кнопка Learn More (Модальное окно) */}
+  <button
+    onClick={() => setIsLearnMoreOpen(true)}
+    className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+  >
+    Learn More
+  </button>
+</div>
 </section>
 
         {/* Winner Showcase Section */}
