@@ -6,7 +6,7 @@ import HeroModal from "./components/HeroModal";
 import { siteContent } from "./data/content";
 
 const artworks = [
-  { id: 1, src: "/Future Couture 2.png" },
+  { id: 1, src: "/Future Couture.jpg" },
   { id: 2, src: "/northern_pulse_2.png" }
 ];
 
