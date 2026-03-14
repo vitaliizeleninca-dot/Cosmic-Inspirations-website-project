@@ -105,35 +105,34 @@ export default function Index() {
       <main className="pt-20">
 
         
-     {/* Hero Section */}
-<section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    {/* Hero Section */}
+<section className="relative flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden py-12 sm:py-20">
   
-  {/* Фоновое свечение (декорация) */}
+  {/* Фоновое свечение */}
   <div className="absolute inset-0 opacity-30 pointer-events-none">
-    <div className="absolute top-20 left-10 w-72 h-72 bg-cosmic-purple/20 rounded-full filter blur-3xl animate-pulse" />
-    <div className="absolute bottom-20 right-10 w-96 h-96 bg-cosmic-violet/20 rounded-full filter blur-3xl animate-pulse" />
+    <div className="absolute top-10 left-10 w-64 h-64 bg-cosmic-purple/20 rounded-full filter blur-3xl animate-pulse" />
+    <div className="absolute bottom-10 right-10 w-80 h-80 bg-cosmic-violet/20 rounded-full filter blur-3xl animate-pulse" />
   </div>
 
-  {/* Основной контейнер, который держит и текст, и карусель */}
-  <div className="relative w-full max-w-7xl h-[500px] sm:h-[600px] flex items-center justify-center">
+  {/* Контейнер: уменьшена высота с [600px] до [400px/500px] */}
+  <div className="relative w-full max-w-7xl h-[400px] sm:h-[500px] flex items-center justify-center">
     
-    {/* 1. КАРУСЕЛЬ (Слой z-10) */}
+    {/* 1. КАРУСЕЛЬ (z-10) */}
     <div className="cosmic-perspective absolute inset-0 flex items-center justify-center pointer-events-none z-10">
       <div className="cosmic-spinner">
         {artworks.map((art, index) => {
-          // Адаптивный радиус: на мобилках меньше, чтобы не вылетало, на десктопе стандарт
-          const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 180 : 450;
+          const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 180 : 400;
           const angle = (index / artworks.length) * 360;
 
           return (
             <div
               key={art.id}
-              className="carousel-card w-[220px] sm:w-[420px]"
+              className="carousel-card w-[200px] sm:w-[380px]"
               style={{
                 transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
               }}
             >
-              <div className="rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl shadow-cosmic-purple/20">
+              <div className="rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl">
                 <img src={art.src} className="w-full h-auto object-cover" alt="Art" />
               </div>
             </div>
@@ -142,15 +141,15 @@ export default function Index() {
       </div>
     </div>
 
-    {/* 2. ТЕКСТ (Слой z-20 — всегда поверх) */}
+    {/* 2. ТЕКСТ (z-20) */}
     <div className="relative z-20 text-center max-w-4xl mx-auto pointer-events-none">
-      <div className="mb-6 inline-block pointer-events-auto">
+      <div className="mb-4 sm:mb-6 inline-block pointer-events-auto">
         <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
           <span className="text-cosmic-purple text-sm font-semibold">{hero.badge}</span>
         </div>
       </div>
 
-      <h2 className="text-5xl sm:text-7xl font-bold mb-10 leading-tight pointer-events-auto">
+      <h2 className="text-4xl sm:text-7xl font-bold mb-8 leading-tight pointer-events-auto">
         <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
           {hero.title}
         </span>
@@ -158,7 +157,6 @@ export default function Index() {
         <span className="text-gray-100">{hero.subtitle}</span>
       </h2>
 
-      {/* Кнопки */}
       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto">
         <a
           href="/CV_Alpha_Ross.png"
@@ -175,7 +173,6 @@ export default function Index() {
         </button>
       </div>
     </div>
-
   </div>
 </section>
 
