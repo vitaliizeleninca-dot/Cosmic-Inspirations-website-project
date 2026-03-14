@@ -157,33 +157,34 @@ export default function Index() {
         <span className="text-gray-100">{hero.subtitle}</span>
       </h2>
 
- <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto mt-10">
-  <a
-    href="/CV_Alpha_Ross.png"
-    target="_blank"
-    className="px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:bg-cosmic-purple hover:text-white transition-all duration-300 shadow-xl"
-  >
-    VIEW MY CV HERE
-  </a>
-  
-  <a
-    href="https://youtube.com/shorts/dB_wdhRoTpw"
-    target="_blank"
-    className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
-  >
-    Show Me
-  </a>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto mt-10">
+        <a
+          href="/CV_Alpha_Ross.png"
+          target="_blank"
+          className="px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:bg-cosmic-purple hover:text-white transition-all duration-300 shadow-xl"
+        >
+          VIEW MY CV HERE
+        </a>
+        
+        <a
+          href="https://youtube.com/shorts/dB_wdhRoTpw"
+          target="_blank"
+          className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+        >
+          Show Me
+        </a>
 
-  <button
-    onClick={() => setIsLearnMoreOpen(true)}
-    className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
-  >
-    Learn More
-  </button>
-</div>
-</div> 
-</section>
-
+        <button
+          onClick={() => setIsLearnMoreOpen(true)}
+          className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+        >
+          Learn More
+        </button>
+      </div> {/* Конец блока кнопок */}
+    </div> {/* Конец контейнера с текстом (Hero Text Content) */}
+  </div> {/* Конец относительного контейнера (relative w-full max-w-7xl) */}
+</section> {/* Конец Hero Section */}
+        
         {/* Winner Showcase Section */}
 <section id="exhibitions" className="py-24 px-4 bg-black/40 border-y border-white/5">
   <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
