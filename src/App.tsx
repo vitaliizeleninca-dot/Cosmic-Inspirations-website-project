@@ -105,30 +105,69 @@ export default function Index() {
       <main className="pt-20">
 
         
-      {/* Hero Section */}
-<section className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-  
-  {/* Контейнер, который на мобилках становится вертикальным стеком */}
-  <div className="relative w-full max-w-7xl flex flex-col items-center justify-center gap-8 sm:gap-0">
+     {/* Hero Section */}
+<section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+  <div className="absolute inset-0 opacity-30">
+    <div className="absolute top-20 left-10 w-72 h-72 bg-cosmic-purple/20 rounded-full filter blur-3xl animate-pulse" />
+    <div className="absolute bottom-20 right-10 w-96 h-96 bg-cosmic-violet/20 rounded-full filter blur-3xl animate-pulse" />
+  </div>
+
+  {/* Контейнер: на мобильных (flex-col) карусель уходит под текст, на десктопе всё в центре */}
+  <div className="relative w-full max-w-4xl mx-auto flex flex-col sm:block items-center">
     
-    {/* 1. КАРУСЕЛЬ - уменьшаем высоту для мобильных */}
-    <div className="cosmic-perspective w-full h-[250px] sm:h-[500px] relative flex items-center justify-center order-2 sm:order-1">
+    {/* 1. ТЕКСТ (Центральный слой) */}
+    <div className="relative z-20 text-center mb-8 sm:mb-0">
+      <div className="mb-6 inline-block">
+        <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
+          <span className="text-cosmic-purple text-sm font-semibold">{hero.badge}</span>
+        </div>
+      </div>
+
+      <h2 className="text-5xl sm:text-7xl font-bold mb-6 leading-tight">
+        <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
+          {hero.title}
+        </span>
+        <br />
+        <span className="text-gray-100">{hero.subtitle}</span>
+      </h2>
+
+      {/* Описание скрыто по твоему прошлому запросу */}
+
+      <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-30">
+        <a
+          href="/CV_Alpha_Ross.png"
+          target="_blank"
+          className="px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
+        >
+          VIEW MY CV HERE
+        </a>
+        <button
+          onClick={() => setIsLearnMoreOpen(true)}
+          className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/30 transition-all duration-300"
+        >
+          Learn More
+        </button>
+      </div>
+    </div>
+
+    {/* 2. КАРУСЕЛЬ (Слой под текстом или вокруг него) */}
+    <div className="cosmic-perspective w-full h-[300px] sm:h-[500px] absolute sm:fixed inset-0 flex items-center justify-center pointer-events-none z-10">
       <div className="cosmic-spinner">
         {artworks.map((art, index) => {
-          // Уменьшаем радиус вращения для узких экранов
-          const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 160 : 450;
+          // Адаптивный радиус: на мобилках меньше, чтобы не вылетало за экран
+          const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 200 : 450;
           const angle = (index / artworks.length) * 360;
 
           return (
             <div
               key={art.id}
-              className="carousel-card w-[180px] sm:w-[420px]"
+              className="carousel-card w-[250px] sm:w-[420px]"
               style={{
                 transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
               }}
             >
-              <div className="rounded-xl sm:rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-xl">
-                <img src={art.src} className="w-full h-auto" alt="Art" />
+              <div className="rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl shadow-cosmic-purple/20">
+                <img src={art.src} className="w-full h-auto object-cover" />
               </div>
             </div>
           );
@@ -136,39 +175,6 @@ export default function Index() {
       </div>
     </div>
 
-    {/* 2. ТЕКСТОВЫЙ БЛОК - теперь он выше карусели на мобильных (order-1) */}
-    <div className="relative z-20 text-center max-w-4xl mx-auto order-1 sm:order-2 sm:absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
-      <div className="mb-4 sm:mb-6 inline-block">
-        <div className="px-3 py-1 sm:px-4 sm:py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
-          <span className="text-cosmic-purple text-xs sm:text-sm font-semibold">{hero.badge}</span>
-        </div>
-      </div>
-
-      <h2 className="text-3xl sm:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
-        <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent uppercase italic">
-          {hero.title}
-        </span>
-        <br />
-        <span className="text-gray-100">{hero.subtitle}</span>
-      </h2>
-
-      {/* Кнопки теперь будут доступны для нажатия */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6 sm:mt-10">
-        <a
-          href="/CV_Alpha_Ross.png"
-          target="_blank"
-          className="w-full sm:w-auto px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:bg-cosmic-purple hover:text-white transition-all text-center"
-        >
-          VIEW MY CV HERE
-        </a>
-        <button
-          onClick={() => setIsLearnMoreOpen(true)}
-          className="w-full sm:w-auto px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/30 transition-all"
-        >
-          Learn More
-        </button>
-      </div>
-    </div>
   </div>
 </section>
 
