@@ -181,6 +181,7 @@ export default function Index() {
     Learn More
   </button>
 </div>
+      </div>
 </section>
 
         {/* Winner Showcase Section */}
