@@ -107,23 +107,50 @@ export default function Index() {
         
      {/* Hero Section */}
 <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-  <div className="absolute inset-0 opacity-30">
+  
+  {/* Фоновое свечение (декорация) */}
+  <div className="absolute inset-0 opacity-30 pointer-events-none">
     <div className="absolute top-20 left-10 w-72 h-72 bg-cosmic-purple/20 rounded-full filter blur-3xl animate-pulse" />
     <div className="absolute bottom-20 right-10 w-96 h-96 bg-cosmic-violet/20 rounded-full filter blur-3xl animate-pulse" />
   </div>
 
-  {/* Контейнер: на мобильных (flex-col) карусель уходит под текст, на десктопе всё в центре */}
-  <div className="relative w-full max-w-4xl mx-auto flex flex-col sm:block items-center">
+  {/* Основной контейнер, который держит и текст, и карусель */}
+  <div className="relative w-full max-w-7xl h-[500px] sm:h-[600px] flex items-center justify-center">
     
-    {/* 1. ТЕКСТ (Центральный слой) */}
-    <div className="relative z-20 text-center mb-8 sm:mb-0">
-      <div className="mb-6 inline-block">
+    {/* 1. КАРУСЕЛЬ (Слой z-10) */}
+    <div className="cosmic-perspective absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+      <div className="cosmic-spinner">
+        {artworks.map((art, index) => {
+          // Адаптивный радиус: на мобилках меньше, чтобы не вылетало, на десктопе стандарт
+          const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 180 : 450;
+          const angle = (index / artworks.length) * 360;
+
+          return (
+            <div
+              key={art.id}
+              className="carousel-card w-[220px] sm:w-[420px]"
+              style={{
+                transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
+              }}
+            >
+              <div className="rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl shadow-cosmic-purple/20">
+                <img src={art.src} className="w-full h-auto object-cover" alt="Art" />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    {/* 2. ТЕКСТ (Слой z-20 — всегда поверх) */}
+    <div className="relative z-20 text-center max-w-4xl mx-auto pointer-events-none">
+      <div className="mb-6 inline-block pointer-events-auto">
         <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
           <span className="text-cosmic-purple text-sm font-semibold">{hero.badge}</span>
         </div>
       </div>
 
-      <h2 className="text-5xl sm:text-7xl font-bold mb-6 leading-tight">
+      <h2 className="text-5xl sm:text-7xl font-bold mb-10 leading-tight pointer-events-auto">
         <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
           {hero.title}
         </span>
@@ -131,13 +158,12 @@ export default function Index() {
         <span className="text-gray-100">{hero.subtitle}</span>
       </h2>
 
-      {/* Описание скрыто по твоему прошлому запросу */}
-
-      <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-30">
+      {/* Кнопки */}
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto">
         <a
           href="/CV_Alpha_Ross.png"
           target="_blank"
-          className="px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
+          className="px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:bg-cosmic-purple hover:text-white transition-all duration-300 shadow-xl"
         >
           VIEW MY CV HERE
         </a>
@@ -147,31 +173,6 @@ export default function Index() {
         >
           Learn More
         </button>
-      </div>
-    </div>
-
-    {/* 2. КАРУСЕЛЬ (Слой под текстом или вокруг него) */}
-    <div className="cosmic-perspective w-full h-[300px] sm:h-[500px] absolute sm:fixed inset-0 flex items-center justify-center pointer-events-none z-10">
-      <div className="cosmic-spinner">
-        {artworks.map((art, index) => {
-          // Адаптивный радиус: на мобилках меньше, чтобы не вылетало за экран
-          const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 200 : 450;
-          const angle = (index / artworks.length) * 360;
-
-          return (
-            <div
-              key={art.id}
-              className="carousel-card w-[250px] sm:w-[420px]"
-              style={{
-                transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
-              }}
-            >
-              <div className="rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl shadow-cosmic-purple/20">
-                <img src={art.src} className="w-full h-auto object-cover" />
-              </div>
-            </div>
-          );
-        })}
       </div>
     </div>
 
