@@ -249,19 +249,19 @@ export default function Index() {
 
         <Footer />
 
-      </main>
+        </main>
 
-      {/* Modals */}
+      {/* Contact Modal */}
       <ContactModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
       />
 
+      {/* Hero Modal */}
       <HeroModal
         isOpen={isLearnMoreOpen}
         onClose={() => setIsLearnMoreOpen(false)}
       />
-
     </div>
   );
 }
