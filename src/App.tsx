@@ -157,9 +157,10 @@ export default function Index() {
         <span className="text-gray-100">{hero.subtitle}</span>
       </h2>
 
-      <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto pointer-events-auto">
-        {hero.description}
-      </p>
+      {/* <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto pointer-events-auto">
+  {hero.description}
+</p> 
+*/}
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
         <a
