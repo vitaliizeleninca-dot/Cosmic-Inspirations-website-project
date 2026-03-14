@@ -206,7 +206,7 @@ export default function Index() {
       <p className="text-gray-400 text-lg mb-8 leading-relaxed">
         Selected by 34 Gallery. The organization contributes to UN SDG 3.4 through creative arts. 
         Shown at One Love Miami Art Week, an event described by Forbes as a “must-see.” 
-        Featured in #FCancer2025, linked to nonprofit LetsFCancer, which supports cancer prevention.
+        Featured in #FCancer2025, linked to nonprofit LetsFCancer, which supports cancer prevention
       </p>
       
       <button 
