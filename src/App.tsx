@@ -5,129 +5,327 @@ import ContactModal from "./components/ContactModal";
 import HeroModal from "./components/HeroModal";
 import { siteContent } from "./data/content";
 
+
+
 const artworks = [
+
   { id: 1, src: "/Future Couture.jpg" },
+
   { id: 2, src: "/northern_pulse_2.png" }
+
 ];
 
+
+
+
+
 export default function Index() {
+
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
+
+
+  // HeroModal для Learn More
+
   const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false);
-  
-  const { hero, contact } = siteContent;
+
+
+
+  // Достаем блоки из контента
+
+  const { hero, winnerShowcase, cosmicAmbient, feelCosmos, aiTools, nftCollections, contact } = siteContent;
+
+
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-black text-white">
-      <style>{`
-        @keyframes rotate-3d {
-          from { transform: rotateY(0deg); }
-          to { transform: rotateY(-360deg); }
-        }
-        .cosmic-perspective { perspective: 1500px; }
-        .cosmic-spinner {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          transform-style: preserve-3d;
-          animation: rotate-3d 35s linear infinite;
-        }
-        .cosmic-spinner:hover { animation-play-state: paused; }
-        .carousel-card {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform-style: preserve-3d;
-        }
-      `}</style>
 
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3">
-            <Sparkles className="w-8 h-8 text-purple-500" />
-            <h1 className="text-2xl font-bold">Cosmic Hub</h1>
-          </a>
+    
+
+    <div className="min-h-screen overflow-x-hidden">
+
+
+
+<style>{`
+
+
+
+@keyframes rotate-3d {
+
+  from { transform: rotateY(0deg); }
+
+  to { transform: rotateY(-360deg); }
+
+}
+
+
+
+.cosmic-perspective{
+
+  perspective:1500px;
+
+}
+
+
+
+.cosmic-spinner{
+
+  position:relative;
+
+  width:100%;
+
+  height:100%;
+
+  transform-style:preserve-3d;
+
+  animation:rotate-3d 35s linear infinite;
+
+}
+
+
+
+.cosmic-spinner:hover{
+
+  animation-play-state:paused;
+
+}
+
+
+
+.carousel-card{
+
+  position:absolute;
+
+  left:50%;
+
+  top:50%;
+
+  transform-style:preserve-3d;
+
+}
+
+
+
+`}</style>
+
+
+
+      
+
+      {/* Header/Navigation */}
+
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-cosmic-purple/20">
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+
           
-          {contact.enabled && (
-            <button 
-              onClick={() => setIsContactModalOpen(true)}
-              className="px-4 py-2 bg-purple-600 rounded-lg text-sm"
-            >
-              Contact Me
-            </button>
-          )}
+
+     <a href="#" className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition">
+
+  <Sparkles className="w-8 h-8 text-cosmic-purple animate-pulse" />
+
+  <h1 className="text-2xl font-bold bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
+
+    Cosmic Hub
+
+  </h1>
+
+</a>
+
+
+
+          
+
+          <nav className="hidden sm:flex items-center gap-8">
+
+            <a href="#podcast" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
+
+              AI Art Podcast
+
+            </a>
+
+            <a href="#music" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
+
+              Cosmic Ambient
+
+            </a>
+
+            <a href="#experience" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
+
+              Feel the Cosmos
+
+            </a>
+
+            <a href="#nft" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
+
+              Art Collections
+
+            </a>
+
+            <a href="#my-ai-tools" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
+
+              My AI Tools
+
+            </a>
+
+          </nav>
+
+          <div className="flex items-center gap-4">
+
+            <div className="w-px h-6 bg-cosmic-purple/20" />
+
+            {contact.enabled && (
+
+              <button
+
+                onClick={() => setIsContactModalOpen(true)}
+
+                className="hidden sm:inline-flex px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 text-cosmic-dark bg-gradient-to-r from-cosmic-purple to-cosmic-violet hover:from-cosmic-violet hover:to-cosmic-purple hover:cosmic-glow cursor-pointer"
+
+              >
+
+                Contact Me
+
+              </button>
+
+            )}
+
+          </div>
+
         </div>
+
       </header>
 
+
+
+      {/* Main Content */}
+
       <main className="pt-20">
-        <section className="relative py-20 px-4">
-          <div className="relative w-full max-w-7xl h-[500px] mx-auto flex items-center justify-center">
-            
-            <div className="cosmic-perspective absolute inset-0 z-10">
-              <div className="cosmic-spinner">
-                {artworks.map((art) => (
-                  <div key={art.id} className="carousel-card w-[200px] sm:w-[380px]" style={{ transform: "translate(-50%, -50%)" }}>
-                    <img src={art.src} className="rounded-2xl border border-white/10" alt="Art" />
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            <div className="relative z-20 text-center pointer-events-auto">
-              <h2 className="text-4xl sm:text-7xl font-bold mb-8">{hero.title}</h2>
-              <button onClick={() => setIsLearnMoreOpen(true)} className="px-8 py-3 border border-white/20 rounded-lg">
-                Learn More
-              </button>
-            </div>
-          </div>
-        </section>
 
-        <Footer />
-      </main>
 
-      <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
-      <HeroModal isOpen={isLearnMoreOpen} onClose={() => setIsLearnMoreOpen(false)} />
-    </div>
-  );
-}
         
-        {/* Winner Showcase Section */}
-<section id="exhibitions" className="py-24 px-4 bg-black/40 border-y border-white/5">
-  <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+
+    {/* Hero Section */}
+
+<section className="relative flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden py-12 sm:py-20">
+
+  
+
+  {/* Фоновое свечение */}
+
+  <div className="absolute inset-0 opacity-30 pointer-events-none">
+
+    <div className="absolute top-10 left-10 w-64 h-64 bg-cosmic-purple/20 rounded-full filter blur-3xl animate-pulse" />
+
+    <div className="absolute bottom-10 right-10 w-80 h-80 bg-cosmic-violet/20 rounded-full filter blur-3xl animate-pulse" />
+
+  </div>
+
+
+
+  {/* Контейнер: уменьшена высота с [600px] до [400px/500px] */}
+
+  <div className="relative w-full max-w-7xl h-[400px] sm:h-[500px] flex items-center justify-center">
+
     
-    {/* 1. Видео/Изображение СЛЕВА (на мобильных сверху) */}
-    <div className="w-full lg:w-1/2 aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-      <iframe 
-        width="100%" 
-        height="100%" 
-        src={winnerShowcase.video} 
-        frameBorder="0" 
-        allowFullScreen 
-      />
+
+    {/* 1. КАРУСЕЛЬ (z-10) */}
+
+    <div className="cosmic-perspective absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+
+      <div className="cosmic-spinner">
+
+        {artworks.map((art, index) => {
+
+          const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 180 : 400;
+
+          const angle = (index / artworks.length) * 360;
+
+
+
+          return (
+
+            <div
+
+              key={art.id}
+
+              className="carousel-card w-[200px] sm:w-[380px]"
+
+              style={{
+
+                transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
+
+              }}
+
+            >
+
+              <div className="rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl">
+
+                <img src={art.src} className="w-full h-auto object-cover" alt="Art" />
+
+              </div>
+
+            </div>
+
+          );
+
+        })}
+
+      </div>
+
     </div>
 
-    {/* 2. Текстовый блок СПРАВА, но текст внутри выровнен ПО ЦЕНТРУ */}
-    <div className="w-full lg:w-1/2 text-center">
-      <div className="mb-4 inline-block">
-        <span className="px-3 py-1 rounded-full border border-yellow-500/50 bg-yellow-500/10 text-yellow-500 text-[10px] font-bold uppercase tracking-widest">
-          Selected Artist 2025-2026
-        </span>
-      </div>
-      
-      <h3 className="text-4xl font-bold mb-6 text-white leading-tight">
-        International Open Call Selection
-      </h3>
-      
-      <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-        Selected by 34 Gallery. The organization contributes to UN SDG 3.4 through creative arts. 
-        Shown at One Love Miami Art Week, an event described by Forbes as a “must-see.” 
-        Featured in #FCancer2025, linked to nonprofit LetsFCancer, which supports cancer prevention
-      </p>
-      
-      <button 
-        onClick={() => setIsGalleryOpen(true)}
-        className="px-10 py-4 bg-white text-black rounded-full font-bold hover:bg-cosmic-purple hover:text-white transition-all shadow-lg"
-      >
+
+
+   {/* 2. ТЕКСТ (z-20) */}
+            <div className="relative z-20 text-center max-w-4xl mx-auto pointer-events-none">
+              <div className="mb-4 sm:mb-6 inline-block pointer-events-auto">
+                <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
+                  <span className="text-cosmic-purple text-sm font-semibold">{hero.badge}</span>
+                </div>
+              </div>
+
+              <h2 className="text-4xl sm:text-7xl font-bold mb-8 leading-tight pointer-events-auto">
+                <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
+                  {hero.title}
+                </span>
+                <br />
+                <span className="text-gray-100">{hero.subtitle}</span>
+              </h2>
+
+              {/* Блок основных кнопок */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto mt-10">
+                <a
+                  href="/CV_Alpha_Ross.png"
+                  target="_blank"
+                  className="px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:bg-cosmic-purple hover:text-white transition-all duration-300 shadow-xl"
+                >
+                  VIEW MY CV HERE
+                </a>
+                
+                <a
+                  href="https://youtube.com/shorts/dB_wdhRoTpw"
+                  target="_blank"
+                  className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+                >
+                  Show Me
+                </a>
+
+                <button
+                  onClick={() => setIsLearnMoreOpen(true)}
+                  className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+                >
+                  Learn More
+                </button>
+              </div>
+
+
+
+
+
+    
         Open Winner Gallery
       </button>
     </div>
