@@ -6,8 +6,16 @@ import HeroModal from "./components/HeroModal";
 import { siteContent } from "./data/content";
 
 const artworks = [
-  { id: 1, src: "/Future Couture.jpg" },
-  { id: 2, src: "/northern_pulse_2.png" }
+  { 
+    id: 1, 
+    src: "/Future Couture.jpg", 
+    link: "https://youtu.be/_ckn-2JPQfU" 
+  },
+  { 
+    id: 2, 
+    src: "/northern_pulse_2.png", 
+    link: "https://youtu.be/fnwpdHiQy9Y" 
+  }
 ];
 
 
