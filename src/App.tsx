@@ -219,7 +219,6 @@ export default function Index() {
 
   </div>
 </section>
-        )}
 
         {/* AI Art Podcast Section */}
         {siteContent.aiArtPodcast.enabled && (
