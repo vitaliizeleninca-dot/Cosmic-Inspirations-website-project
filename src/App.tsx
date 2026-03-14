@@ -5,6 +5,12 @@ import ContactModal from "./components/ContactModal";
 import HeroModal from "./components/HeroModal";
 import { siteContent } from "./data/content";
 
+const artworks = [
+  { id: 1, src: "/Future Couture 2.png" },
+  { id: 2, src: "/northern_pulse_2.png" }
+];
+
+
 export default function Index() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -18,6 +24,40 @@ export default function Index() {
   return (
     
     <div className="min-h-screen overflow-x-hidden">
+
+<style>{`
+
+@keyframes rotate-3d {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(-360deg); }
+}
+
+.cosmic-perspective{
+  perspective:1500px;
+}
+
+.cosmic-spinner{
+  position:relative;
+  width:100%;
+  height:100%;
+  transform-style:preserve-3d;
+  animation:rotate-3d 35s linear infinite;
+}
+
+.cosmic-spinner:hover{
+  animation-play-state:paused;
+}
+
+.carousel-card{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform-style:preserve-3d;
+}
+
+`}</style>
+
+      
       {/* Header/Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-cosmic-purple/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -86,6 +126,46 @@ export default function Index() {
             </h2>
 
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">{hero.description}</p>
+
+            {/* HERO CAROUSEL */}
+
+<div className="cosmic-perspective w-full h-[420px] sm:h-[520px] mb-16 relative flex items-center justify-center">
+
+  <div className="cosmic-spinner">
+
+    {artworks.map((art, index) => {
+
+      const radius = 450
+      const angle = (index / artworks.length) * 360
+
+      return (
+
+        <div
+          key={art.id}
+          className="carousel-card w-[280px] sm:w-[420px]"
+          style={{
+            transform:`translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
+          }}
+        >
+
+          <div className="rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl shadow-cosmic-purple/20">
+
+            <img
+              src={art.src}
+              className="w-full h-auto object-cover"
+            />
+
+          </div>
+
+        </div>
+
+      )
+
+    })}
+
+  </div>
+
+</div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               {/* ВНИМАНИЕ: Кнопка VIEW MY CV HERE */}
