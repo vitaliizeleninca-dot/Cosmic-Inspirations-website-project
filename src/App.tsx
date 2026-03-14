@@ -320,6 +320,8 @@ export default function Index() {
                   Learn More
                 </button>
               </div>
+              </div>
+</section>
 
 
 
