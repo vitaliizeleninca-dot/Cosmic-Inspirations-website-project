@@ -103,90 +103,83 @@ export default function Index() {
 
       {/* Main Content */}
       <main className="pt-20">
-        {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-cosmic-purple/20 rounded-full filter blur-3xl animate-pulse" />
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-cosmic-violet/20 rounded-full filter blur-3xl animate-pulse" />
-          </div>
 
- {/* HERO CAROUSEL */}
-
-<div className="cosmic-perspective w-full h-[420px] sm:h-[520px] mb-16 relative flex items-center justify-center">
-
-  <div className="cosmic-spinner">
-
-    {artworks.map((art, index) => {
-
-      const radius = 450
-      const angle = (index / artworks.length) * 360
-
-      return (
-
-        <div
-          key={art.id}
-          className="carousel-card w-[280px] sm:w-[420px]"
-          style={{
-            transform:`translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
-          }}
-        >
-
-          <div className="rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl shadow-cosmic-purple/20">
-
-            <img
-              src={art.src}
-              className="w-full h-auto object-cover"
-            />
-
-          </div>
-
-        </div>
-
-      )
-
-    })}
-
+        
+      {/* Hero Section */}
+<section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+  
+  {/* Фон с пульсацией */}
+  <div className="absolute inset-0 opacity-30">
+    <div className="absolute top-20 left-10 w-72 h-72 bg-cosmic-purple/20 rounded-full filter blur-3xl animate-pulse" />
+    <div className="absolute bottom-20 right-10 w-96 h-96 bg-cosmic-violet/20 rounded-full filter blur-3xl animate-pulse" />
   </div>
 
-</div>
-          
+  {/* ОБЩИЙ КОНТЕЙНЕР ДЛЯ КАРУСЕЛИ И ТЕКСТА */}
+  <div className="relative w-full max-w-7xl h-[600px] flex items-center justify-center">
+    
+    {/* 1. КАРУСЕЛЬ (на заднем плане или вокруг) */}
+    <div className="cosmic-perspective absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="cosmic-spinner">
+        {artworks.map((art, index) => {
+          const radius = window.innerWidth < 640 ? 250 : 500; // Уменьшил радиус для мобилок
+          const angle = (index / artworks.length) * 360;
 
-          <div className="relative z-10 text-center max-w-4xl mx-auto">
-            <div className="mb-6 inline-block">
-              <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
-                <span className="text-cosmic-purple text-sm font-semibold">{hero.badge}</span>
+          return (
+            <div
+              key={art.id}
+              className="carousel-card w-[250px] sm:w-[400px] pointer-events-auto"
+              style={{
+                transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
+              }}
+            >
+              <div className="rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl shadow-cosmic-purple/20 transition-transform hover:scale-105 duration-500">
+                <img src={art.src} className="w-full h-auto object-cover" alt="Art" />
               </div>
             </div>
+          );
+        })}
+      </div>
+    </div>
 
-            <h2 className="text-5xl sm:text-7xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
-                {hero.title}
-              </span>
-              <br />
-              <span className="text-gray-100">{hero.subtitle}</span>
-            </h2>
+    {/* 2. ТЕКСТ В ЦЕНТРЕ (z-10 чтобы быть поверх задних карточек) */}
+    <div className="relative z-10 text-center max-w-3xl mx-auto pointer-events-none">
+      <div className="mb-6 inline-block pointer-events-auto">
+        <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
+          <span className="text-cosmic-purple text-sm font-semibold">{hero.badge}</span>
+        </div>
+      </div>
 
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">{hero.description}</p>
+      <h2 className="text-5xl sm:text-7xl font-bold mb-6 leading-tight pointer-events-auto">
+        <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
+          {hero.title}
+        </span>
+        <br />
+        <span className="text-gray-100">{hero.subtitle}</span>
+      </h2>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {/* ВНИМАНИЕ: Кнопка VIEW MY CV HERE */}
-              <a
-                href="/CV_Alpha_Ross.png"
-                target="_blank"
-                className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
-              >
-                VIEW MY CV HERE
-              </a>
+      <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto pointer-events-auto">
+        {hero.description}
+      </p>
 
-              <button
-                onClick={() => setIsLearnMoreOpen(true)}
-                className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
-              >
-                Learn More
-              </button>
-            </div>
-          </div>
-        </section>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
+        <a
+          href="/CV_Alpha_Ross.png"
+          target="_blank"
+          className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
+        >
+          VIEW MY CV HERE
+        </a>
+        <button
+          onClick={() => setIsLearnMoreOpen(true)}
+          className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
+        >
+          Learn More
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
 
         {/* Winner Showcase */}
         {winnerShowcase.enabled && (
