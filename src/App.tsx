@@ -18,55 +18,62 @@ export default function App() {
   const [scrollY, setScrollY] = useState(0)
 
   const { hero, contact } = siteContent
-
   const radius = 450
 
   useEffect(() => {
+
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+
+    // Inject CSS safely
+    const style = document.createElement("style")
+    style.innerHTML = `
+    @keyframes rotate3d {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(-360deg); }
+    }
+
+    .cosmicPerspective {
+      perspective: 2000px;
+      perspective-origin: center -10%;
+    }
+
+    .cosmicSpinner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      animation: rotate3d 40s linear infinite;
+    }
+
+    .cosmicSpinner:hover {
+      animation-play-state: paused;
+    }
+
+    .carouselCard {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      backface-visibility: hidden;
+      transition: transform .6s ease;
+    }
+
+    .heroFade {
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    `
+    document.head.appendChild(style)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      document.head.removeChild(style)
+    }
+
   }, [])
 
   return (
 
 <div className="min-h-screen overflow-x-hidden bg-[#030014] text-gray-100">
-
-<style>{`
-@keyframes rotate3d {
-0% { transform: rotateY(0deg); }
-100% { transform: rotateY(-360deg); }
-}
-
-.cosmicPerspective {
-perspective:2000px;
-perspective-origin:center -10%;
-}
-
-.cosmicSpinner {
-position:relative;
-width:100%;
-height:100%;
-transform-style:preserve-3d;
-animation:rotate3d 40s linear infinite;
-}
-
-.cosmicSpinner:hover{
-animation-play-state:paused;
-}
-
-.carouselCard{
-position:absolute;
-left:50%;
-top:50%;
-backface-visibility:hidden;
-transition:transform .6s ease;
-}
-
-.heroFade{
-transition:opacity .6s ease, transform .6s ease;
-}
-`}</style>
-
 
 <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-cosmic-purple/20">
 
@@ -99,17 +106,15 @@ Contact Me
 
 </header>
 
-
 <main className="pt-20">
 
 <section className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
 
-
 <div
 className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none"
 style={{
-opacity:Math.max(0.03,0.08-scrollY/3000),
-transform:`translateY(${scrollY*0.2}px)`
+opacity: Math.max(0.03, 0.08 - scrollY / 3000),
+transform: `translateY(${scrollY * 0.2}px)`
 }}
 >
 
@@ -129,17 +134,16 @@ transform:`translateY(${scrollY*0.2}px)`
 
 </div>
 
-
 <div className="cosmicPerspective w-full h-[420px] mb-16 flex items-center justify-center z-20 relative">
 
 <div
 className="cosmicSpinner"
-style={{transform:`rotateX(${scrollY*0.02}deg)`}}
+style={{ transform: `rotateX(${scrollY * 0.02}deg)` }}
 >
 
 {artworks.map((art,index)=>{
 
-const angle = artworks.length>1 ? (index/artworks.length)*360 : 0
+const angle = artworks.length > 1 ? (index / artworks.length) * 360 : 0
 
 return(
 
@@ -185,12 +189,11 @@ Selected Masterpiece
 
 </div>
 
-
 <div
 className="heroFade flex flex-col sm:flex-row gap-4 justify-center"
 style={{
-opacity:1-scrollY/600,
-transform:`translateY(${scrollY*0.2}px)`
+opacity: 1 - scrollY / 600,
+transform: `translateY(${scrollY * 0.2}px)`
 }}
 >
 
@@ -206,7 +209,7 @@ View My CV
 </a>
 
 <button
-onClick={()=>setIsLearnMoreOpen(true)}
+onClick={() => setIsLearnMoreOpen(true)}
 className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300"
 >
 
@@ -218,11 +221,9 @@ Learn More
 
 </section>
 
-
 <Footer/>
 
 </main>
-
 
 <ContactModal
 isOpen={isContactModalOpen}
