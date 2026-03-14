@@ -10,14 +10,13 @@ const artworks = [
   { id: 2, src: "/northern_pulse_2.png" }
 ];
 
-
 export default function Index() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
   // HeroModal для Learn More
   const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false);
-
+  
   // Достаем блоки из контента
   const { hero, winnerShowcase, cosmicAmbient, feelCosmos, aiTools, nftCollections, contact } = siteContent;
 
@@ -172,18 +171,43 @@ export default function Index() {
           className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
         >
           Show Me
-        </a>
+                </a>
 
-        <button
-          onClick={() => setIsLearnMoreOpen(true)}
-          className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
-        >
-          Learn More
-        </button>
-      </div> {/* Конец блока кнопок */}
-    </div> {/* Конец контейнера с текстом (Hero Text Content) */}
-  </div> {/* Конец относительного контейнера (relative w-full max-w-7xl) */}
-</section> {/* Конец Hero Section */}
+                <button
+                  onClick={() => setIsLearnMoreOpen(true)}
+                  className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
+                >
+                  Learn More
+                </button>
+              </div>
+
+              {/* ИНТЕРАКТИВНЫЕ ССЫЛКИ НА YOUTUBE */}
+              <div className="mt-8 flex flex-col gap-3 items-center pointer-events-auto">
+                <a 
+                  href="https://youtu.be/fnwpdHiQy9Y" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm sm:text-base text-gray-400 hover:text-cosmic-purple transition-colors flex items-center gap-2"
+                >
+                  United by Vision. Born for the Frontier. 🌊🚀
+                </a>
+                <a 
+                  href="https://youtu.be/_ckn-2JPQfU" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm sm:text-base text-gray-400 hover:text-cosmic-purple transition-colors flex items-center gap-2 text-center px-4"
+                >
+                  Echoes of Tomorrow — Astral Couture | Alpha Ross Future Memory Teaser
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
         
         {/* Winner Showcase Section */}
 <section id="exhibitions" className="py-24 px-4 bg-black/40 border-y border-white/5">
