@@ -1,244 +1,292 @@
-```tsx
-import { useState, useEffect } from "react"
-import { Sparkles } from "lucide-react"
-import Footer from "./components/Footer"
-import ContactModal from "./components/ContactModal"
-import HeroModal from "./components/HeroModal"
-import { siteContent } from "./data/content"
+import { useState } from "react";
+import { Sparkles, X, PlayCircle } from "lucide-react";
+import Footer from "./components/Footer";
+import ContactModal from "./components/ContactModal";
+import HeroModal from "./components/HeroModal";
+import { siteContent } from "./data/content";
 
+/* ARTWORKS FOR HERO CAROUSEL */
 const artworks = [
   { id: 1, src: "/Future Couture 2.png", title: "Future Couture" },
-  { id: 2, src: "/northern_pulse_2.png", title: "Northern Pulse" }
-]
+  { id: 2, src: "/northern_pulse_2.png", title: "Northern Pulse" },
+];
 
-export default function App() {
+export default function Index() {
 
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
-  const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false);
 
-  const { hero, contact } = siteContent
-  const radius = 450
+  const {
+    hero,
+    winnerShowcase,
+    cosmicAmbient,
+    feelCosmos,
+    aiTools,
+    nftCollections,
+    contact
+  } = siteContent;
 
-  useEffect(() => {
-
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener("scroll", handleScroll)
-
-    // Inject CSS safely
-    const style = document.createElement("style")
-    style.innerHTML = `
-    @keyframes rotate3d {
-      0% { transform: rotateY(0deg); }
-      100% { transform: rotateY(-360deg); }
-    }
-
-    .cosmicPerspective {
-      perspective: 2000px;
-      perspective-origin: center -10%;
-    }
-
-    .cosmicSpinner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      animation: rotate3d 40s linear infinite;
-    }
-
-    .cosmicSpinner:hover {
-      animation-play-state: paused;
-    }
-
-    .carouselCard {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      backface-visibility: hidden;
-      transition: transform .6s ease;
-    }
-
-    .heroFade {
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    `
-    document.head.appendChild(style)
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-      document.head.removeChild(style)
-    }
-
-  }, [])
+  const radius = 450;
 
   return (
 
-<div className="min-h-screen overflow-x-hidden bg-[#030014] text-gray-100">
+    <div className="min-h-screen overflow-x-hidden">
 
-<header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-cosmic-purple/20">
+      {/* CAROUSEL CSS */}
+      <style>{`
 
-<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      @keyframes rotate-3d {
+        from { transform: rotateY(0deg); }
+        to { transform: rotateY(-360deg); }
+      }
 
-<a href="#" className="flex items-center gap-3">
+      .cosmic-perspective{
+        perspective:1500px;
+        perspective-origin:center -10%;
+      }
 
-<Sparkles className="w-8 h-8 text-cosmic-purple animate-pulse"/>
+      .cosmic-spinner{
+        position:relative;
+        width:100%;
+        height:100%;
+        transform-style:preserve-3d;
+        animation:rotate-3d 35s linear infinite;
+      }
 
-<h1 className="text-2xl font-bold bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
-Cosmic Hub
-</h1>
+      .cosmic-spinner:hover{
+        animation-play-state:paused;
+      }
 
-</a>
+      .carousel-card{
+        position:absolute;
+        left:50%;
+        top:50%;
+        backface-visibility:hidden;
+      }
 
-{contact.enabled && (
+      `}</style>
 
-<button
-onClick={() => setIsContactModalOpen(true)}
-className="px-4 py-2 rounded-lg text-sm font-semibold text-cosmic-dark bg-gradient-to-r from-cosmic-purple to-cosmic-violet"
->
 
-Contact Me
+      {/* HEADER */}
 
-</button>
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-cosmic-purple/20">
 
-)}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
 
-</div>
+          <a href="#" className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition">
+            <Sparkles className="w-8 h-8 text-cosmic-purple animate-pulse" />
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-cosmic-purple to-cosmic-violet bg-clip-text text-transparent">
+              Cosmic Hub
+            </h1>
+          </a>
 
-</header>
+          <nav className="hidden sm:flex items-center gap-8">
+            <a href="#podcast" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
+              AI Art Podcast
+            </a>
+            <a href="#music" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
+              Cosmic Ambient
+            </a>
+            <a href="#experience" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
+              Feel the Cosmos
+            </a>
+            <a href="#nft" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
+              Art Collections
+            </a>
+            <a href="#my-ai-tools" className="text-sm text-gray-300 hover:text-cosmic-purple transition">
+              My AI Tools
+            </a>
+          </nav>
 
-<main className="pt-20">
+          <div className="flex items-center gap-4">
 
-<section className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
+            <div className="w-px h-6 bg-cosmic-purple/20" />
 
-<div
-className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none"
-style={{
-opacity: Math.max(0.03, 0.08 - scrollY / 3000),
-transform: `translateY(${scrollY * 0.2}px)`
-}}
->
+            {contact.enabled && (
+              <button
+                onClick={() => setIsContactModalOpen(true)}
+                className="hidden sm:inline-flex px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 text-cosmic-dark bg-gradient-to-r from-cosmic-purple to-cosmic-violet hover:from-cosmic-violet hover:to-cosmic-purple hover:cosmic-glow cursor-pointer"
+              >
+                Contact Me
+              </button>
+            )}
 
-<h2 className="text-[12vw] font-bold leading-none text-center">
+          </div>
 
-<span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
-{hero.title}
-</span>
+        </div>
 
-<br/>
+      </header>
 
-<span className="text-gray-200">
-{hero.subtitle}
-</span>
 
-</h2>
+      {/* MAIN */}
 
-</div>
+      <main className="pt-20">
 
-<div className="cosmicPerspective w-full h-[420px] mb-16 flex items-center justify-center z-20 relative">
+        {/* HERO */}
 
-<div
-className="cosmicSpinner"
-style={{ transform: `rotateX(${scrollY * 0.02}deg)` }}
->
+        <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
 
-{artworks.map((art,index)=>{
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-cosmic-purple/20 rounded-full filter blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-cosmic-violet/20 rounded-full filter blur-3xl animate-pulse" />
+          </div>
 
-const angle = artworks.length > 1 ? (index / artworks.length) * 360 : 0
 
-return(
+          <div className="relative z-10 text-center max-w-4xl mx-auto opacity-30">
 
-<div
-key={art.id}
-className="carouselCard w-[280px] sm:w-[460px]"
-style={{
-transform:`translate(-50%,-50%) rotateY(${angle}deg) translateZ(${radius}px)`
-}}
->
+            <div className="mb-6 inline-block">
+              <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
+                <span className="text-cosmic-purple text-sm font-semibold">
+                  {hero.badge}
+                </span>
+              </div>
+            </div>
 
-<div className="relative rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 shadow-2xl shadow-cosmic-purple/20 backdrop-blur-md">
 
-<img
-src={art.src}
-alt={art.title}
-className="w-full object-cover transition-transform duration-[1200ms] hover:scale-105"
-/>
+            <h2 className="text-5xl sm:text-7xl font-bold mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
+                {hero.title}
+              </span>
+              <br />
+              <span className="text-gray-100">
+                {hero.subtitle}
+              </span>
+            </h2>
 
-<div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent p-6 flex flex-col justify-end text-left">
 
-<p className="text-white text-lg font-bold">
-{art.title}
-</p>
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
+              {hero.description}
+            </p>
 
-<p className="text-cosmic-purple text-[10px] uppercase font-bold tracking-widest">
-Selected Masterpiece
-</p>
 
-</div>
+            {/* 3D HERO CAROUSEL */}
 
-</div>
+            <div className="cosmic-perspective w-full h-[420px] sm:h-[520px] mb-16 relative flex items-center justify-center">
 
-</div>
+              <div className="cosmic-spinner">
 
-)
+                {artworks.map((art, index) => {
 
-})}
+                  const angle = (index / artworks.length) * 360;
 
-</div>
+                  return (
 
-<div className="absolute w-64 h-64 bg-cosmic-purple/20 blur-[120px] rounded-full -z-10"/>
+                    <div
+                      key={art.id}
+                      className="carousel-card w-[280px] sm:w-[420px]"
+                      style={{
+                        transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
+                      }}
+                    >
 
-</div>
+                      <div className="relative rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl shadow-cosmic-purple/20">
 
-<div
-className="heroFade flex flex-col sm:flex-row gap-4 justify-center"
-style={{
-opacity: 1 - scrollY / 600,
-transform: `translateY(${scrollY * 0.2}px)`
-}}
->
+                        <img
+                          src={art.src}
+                          alt={art.title}
+                          className="w-full h-auto object-cover"
+                        />
 
-<a
-href="/CV_Alpha_Ross.png"
-target="_blank"
-rel="noopener noreferrer"
-className="px-8 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple"
->
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent p-6 flex flex-col justify-end text-left">
 
-View My CV
+                          <p className="text-white text-lg font-bold">
+                            {art.title}
+                          </p>
 
-</a>
+                          <p className="text-cosmic-purple text-[10px] uppercase font-bold tracking-widest">
+                            Selected Masterpiece
+                          </p>
 
-<button
-onClick={() => setIsLearnMoreOpen(true)}
-className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300"
->
+                        </div>
 
-Learn More
+                      </div>
 
-</button>
+                    </div>
 
-</div>
+                  );
 
-</section>
+                })}
 
-<Footer/>
+              </div>
 
-</main>
+              <div className="absolute w-64 h-64 bg-cosmic-purple/10 blur-[100px] rounded-full -z-10" />
 
-<ContactModal
-isOpen={isContactModalOpen}
-onClose={()=>setIsContactModalOpen(false)}
-/>
+            </div>
 
-<HeroModal
-isOpen={isLearnMoreOpen}
-title="Learn More"
-content={hero.learnMoreText}
-onClose={()=>setIsLearnMoreOpen(false)}
-/>
 
-</div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
 
-)
+              <a
+                href="/CV_Alpha_Ross.png"
+                target="_blank"
+                className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
+              >
+                VIEW MY CV HERE
+              </a>
+
+              <button
+                onClick={() => setIsLearnMoreOpen(true)}
+                className="px-6 py-3 rounded-lg font-semibold border-2 border-cosmic-purple/50 text-cosmic-purple hover:border-cosmic-purple hover:cosmic-glow transition-all duration-300"
+              >
+                Learn More
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* ДАЛЬШЕ ИДЕТ ОРИГИНАЛЬНЫЙ КОД СЕКЦИЙ */}
+
+        {/* Winner Showcase */}
+
+        {winnerShowcase.enabled && (
+          <section id="exhibitions" className="py-20 px-4 bg-black/50 border-y border-cosmic-purple/10">
+            ...
+          </section>
+        )}
+
+
+        <Footer />
+
+      </main>
+
+
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
+
+      <HeroModal
+        isOpen={isLearnMoreOpen}
+        title="Learn More"
+        content={hero.learnMoreText}
+        onClose={() => setIsLearnMoreOpen(false)}
+      />
+
+
+      {isGalleryOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl">
+
+          <div className="relative w-full max-w-6xl max-h-[90vh] overflow-y-auto bg-cosmic-dark border border-cosmic-purple/30 rounded-3xl p-6 sm:p-10">
+
+            <button
+              onClick={() => setIsGalleryOpen(false)}
+              className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
+    </div>
+
+  );
+
 }
-```
