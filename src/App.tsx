@@ -165,23 +165,23 @@ export default function Index() {
   >
     VIEW MY CV HERE
   </a>
-
+  
   <a
     href="https://youtube.com/shorts/dB_wdhRoTpw"
     target="_blank"
-    className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/30 transition-all duration-300"
+    className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
   >
     Show Me
   </a>
 
   <button
     onClick={() => setIsLearnMoreOpen(true)}
-    className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/30 transition-all duration-300"
+    className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
   >
     Learn More
   </button>
 </div>
-      </div>
+</div> 
 </section>
 
         {/* Winner Showcase Section */}
