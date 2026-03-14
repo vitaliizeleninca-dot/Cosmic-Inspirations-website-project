@@ -132,16 +132,6 @@ export default function Index() {
                   Learn More
                 </button>
               </div>
-
-              {/* ИНТЕРАКТИВНЫЕ ССЫЛКИ */}
-              <div className="mt-8 flex flex-col gap-3 items-center pointer-events-auto">
-                <a href="https://youtu.be/fnwpdHiQy9Y" target="_blank" rel="noopener noreferrer" className="text-sm sm:text-base text-gray-400 hover:text-cosmic-purple transition-colors flex items-center gap-2">
-                   United by Vision. Born for the Frontier. 🌊🚀
-                </a>
-                <a href="https://youtu.be/_ckn-2JPQfU" target="_blank" rel="noopener noreferrer" className="text-sm sm:text-base text-gray-400 hover:text-cosmic-purple transition-colors flex items-center gap-2 text-center px-4">
-                   Echoes of Tomorrow — Astral Couture
-                </a>
-              </div>
             </div>
           </div>
         </section>
