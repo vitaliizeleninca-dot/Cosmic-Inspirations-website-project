@@ -125,34 +125,34 @@ export default function Index() {
   {/* Контейнер: уменьшена высота с [600px] до [400px/500px] */}
   <div className="relative w-full max-w-7xl h-[400px] sm:h-[500px] flex items-center justify-center">
     
-    {/* 1. КАРУСЕЛЬ (z-10) */}
+   {/* 1. КАРУСЕЛЬ (z-10) */}
     <div className="cosmic-perspective absolute inset-0 flex items-center justify-center pointer-events-none z-10">
       <div className="cosmic-spinner">
-       {artworks.map((art, index) => {
-  const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 180 : 400;
-  const angle = (index / artworks.length) * 360;
+        {artworks.map((art, index) => {
+          const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 180 : 400;
+          const angle = (index / artworks.length) * 360;
 
-  return (
-    <div
-      key={art.id}
-      className="carousel-card w-[200px] sm:w-[380px]"
-      style={{
-        transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
-      }}
-    >
-      {/* Оборачиваем в ссылку */}
-      <a 
-        href={art.link} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="block rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl hover:scale-105 transition-transform duration-300"
-      >
-        <img src={art.src} className="w-full h-auto object-cover" alt="Art" />
-      </a>
+          return (
+            <div
+              key={art.id}
+              className="carousel-card w-[200px] sm:w-[380px]"
+              style={{
+                transform: `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`
+              }}
+            >
+              <a 
+                href={art.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block rounded-2xl overflow-hidden border border-cosmic-purple/30 bg-black/40 backdrop-blur-md shadow-2xl hover:scale-105 transition-transform duration-300"
+              >
+                <img src={art.src} className="w-full h-auto object-cover" alt="Art" />
+              </a>
+            </div>
+          );
+        })}
+      </div> 
     </div>
-    </div>
-  );
-})}
 
     {/* 2. ТЕКСТ (z-20) */}
     <div className="relative z-20 text-center max-w-4xl mx-auto pointer-events-none">
