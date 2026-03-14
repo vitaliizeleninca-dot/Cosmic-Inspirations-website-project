@@ -110,24 +110,7 @@ export default function Index() {
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-cosmic-violet/20 rounded-full filter blur-3xl animate-pulse" />
           </div>
 
-          <div className="relative z-10 text-center max-w-4xl mx-auto">
-            <div className="mb-6 inline-block">
-              <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
-                <span className="text-cosmic-purple text-sm font-semibold">{hero.badge}</span>
-              </div>
-            </div>
-
-            <h2 className="text-5xl sm:text-7xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
-                {hero.title}
-              </span>
-              <br />
-              <span className="text-gray-100">{hero.subtitle}</span>
-            </h2>
-
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">{hero.description}</p>
-
-            {/* HERO CAROUSEL */}
+ {/* HERO CAROUSEL */}
 
 <div className="cosmic-perspective w-full h-[420px] sm:h-[520px] mb-16 relative flex items-center justify-center">
 
@@ -166,6 +149,24 @@ export default function Index() {
   </div>
 
 </div>
+          
+
+          <div className="relative z-10 text-center max-w-4xl mx-auto">
+            <div className="mb-6 inline-block">
+              <div className="px-4 py-2 rounded-full border border-cosmic-purple/50 bg-cosmic-purple/10 backdrop-blur">
+                <span className="text-cosmic-purple text-sm font-semibold">{hero.badge}</span>
+              </div>
+            </div>
+
+            <h2 className="text-5xl sm:text-7xl font-bold mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-cosmic-purple via-cosmic-violet to-cosmic-purple bg-clip-text text-transparent">
+                {hero.title}
+              </span>
+              <br />
+              <span className="text-gray-100">{hero.subtitle}</span>
+            </h2>
+
+            <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">{hero.description}</p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               {/* ВНИМАНИЕ: Кнопка VIEW MY CV HERE */}
