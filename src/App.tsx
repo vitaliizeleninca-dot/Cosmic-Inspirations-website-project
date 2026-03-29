@@ -18,8 +18,8 @@ const artworks = [
   },
   { 
     id: 3, 
-    src: "/northern_pulse_2.png", 
-    link: "https://youtu.be/fnwpdHiQy9Y" 
+    src: "/The List of 3000.jpg", 
+    link: "https://youtu.be/fKKs_nmpK44" 
   }
 ];
 
