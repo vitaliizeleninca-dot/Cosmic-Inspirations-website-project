@@ -15,7 +15,7 @@ const artworks = [
     id: 2, 
     src: "/northern_pulse_2.png", 
     link: "https://youtu.be/fnwpdHiQy9Y" 
-  }
+  },
   { 
     id: 3, 
     src: "/northern_pulse_2.png", 
