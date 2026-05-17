@@ -181,7 +181,7 @@ export default function Index() {
         
         {/* Кнопка Show Me теперь первая */}
         <a
-          href="https://youtube.com/shorts/dB_wdhRoTpw"
+          href="https://youtu.be/Xy5Q4dwcjxw"
           target="_blank"
           rel="noopener noreferrer"
           className="px-8 py-3 rounded-lg font-semibold border-2 border-white/10 text-gray-300 hover:border-white/40 hover:bg-white/5 transition-all duration-300"
