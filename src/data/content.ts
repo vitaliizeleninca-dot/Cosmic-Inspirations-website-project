@@ -38,6 +38,12 @@ export const siteContent: SiteContent = {
     enabled: true,
   gallery: [
   {
+    url: "/i still think of her.png",
+    achievement: "Selected Artist — More is More",
+    title: "Selected through the 'More is More' Open Call",
+    date: "April 2026" //
+  },
+    {
     url: "/Astral Couture.png",
     achievement: "Selected Artist — Digital Fashion",
     title: "Selected through the 'Digital Fashion Forward' Open Call",
